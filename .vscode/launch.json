@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Comp",
+            "request": "launch",
+            "mainClass": "comp.Comp",
+            "projectName": "Compilador"
+        }
+    ]
+}
