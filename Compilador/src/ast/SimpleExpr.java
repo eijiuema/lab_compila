@@ -5,7 +5,7 @@ public class SimpleExpr{
     
     private List<SumSubExpr> sumSubExprList;
 
-    public SimpleExpr( String sumSubExprList){
+    public SimpleExpr( List<SumSubExpr> sumSubExprList){
         this.sumSubExprList = sumSubExprList;
     }
 

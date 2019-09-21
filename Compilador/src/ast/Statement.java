@@ -1,6 +1,6 @@
 package ast;
 
-abstract public class Statement {
+abstract public class Stat {
 
 	abstract public void genC(PW pw);
 

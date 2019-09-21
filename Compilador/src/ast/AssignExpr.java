@@ -1,7 +1,7 @@
 package ast;
 import java.util.*;
 
-public class AssignExpr{
+public class AssignExpr extends Stat{
     private Expr leftExpr;
     private Expr rightExpr;    
 
