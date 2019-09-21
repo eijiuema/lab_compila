@@ -446,11 +446,7 @@ public class Compiler {
 	 * uncomment it
 	 * implement the methods it calls
 	 */
-<<<<<<< HEAD
 	private Stat assertStat() {
-=======
-	public Stat assertStat() {
->>>>>>> 04a12239ca94ec0268cfc5d0e8514e7c909f13a7
 
 		lexer.nextToken();
 		int lineNumber = lexer.getLineNumber();
@@ -473,11 +469,7 @@ public class Compiler {
 
 
 
-<<<<<<< HEAD
-	private IntValue literalInt() {
-=======
 	private IntValue intValue() {
->>>>>>> 04a12239ca94ec0268cfc5d0e8514e7c909f13a7
 
 		IntValue e = null;
 
@@ -486,11 +478,7 @@ public class Compiler {
 		// Method intValue returns that value as an value of type int.
 		int value = lexer.getNumberValue();
 		lexer.nextToken();
-<<<<<<< HEAD
 		return new IntValue(value);
-=======
-		return new intValue(value);
->>>>>>> 04a12239ca94ec0268cfc5d0e8514e7c909f13a7
 	}
 
 	private static boolean startExpr(Token token) {
@@ -525,11 +513,11 @@ public class Compiler {
 
 
 
-	private ReadExpr readExpr() {
+	// private ReadExpr readExpr() {
 
-		if lexer.token != Token.
+	// 	if lexer.token != Token.
 
-	}
+	// }
 
 	private SymbolTable		symbolTable;
 	private Lexer			lexer;
