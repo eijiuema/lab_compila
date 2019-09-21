@@ -21,13 +21,13 @@ public class Expr{
 
     public void genJava(PW pw){
 
-        leftSimpleExpr.genJava();
+        leftSimpleExpr.genJava(pw);
         
-        if(relation != ' ')
-            pw.print(signal);
+        // if(relation != ' ')
+        //     pw.print(signal);
         
         if(rightSimpleExpr != null)
-            rightSimpleExpr.genJava();
+            rightSimpleExpr.genJava(pw);
 	}
 
 	public Type getType() {

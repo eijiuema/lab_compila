@@ -1,8 +1,8 @@
 package ast;
-import java.util.*;
-import java.util.Scanner;
 
-public class ReadInt extends ReadExpr(){
+public class ReadInt extends ReadExpr {
+
+    private Type type;
 
     public ReadInt(){
         this.type = Type.intType;

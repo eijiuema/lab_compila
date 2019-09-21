@@ -17,12 +17,12 @@ public class AssignExpr{
 
     public void genJava(PW pw){
 
-        leftExpr.genJava();
+        leftExpr.genJava(pw);
 
         pw.print("=");
         
         if(rightExpr != null)
-            rightExpr.genJava();
+            rightExpr.genJava(pw);
     }
     
 }
