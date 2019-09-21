@@ -7,7 +7,7 @@ public class BooleanValue extends BasicValue{
     
     public BooleanValue( boolean value ){
         this.value = value;
-        this.type = Type.BooleanType;
+        this.type = Type.booleanType;
     }
 
     @Override
