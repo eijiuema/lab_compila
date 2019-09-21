@@ -2,11 +2,8 @@ package comp;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import ast.LiteralInt;
-import ast.MetaobjectAnnotation;
-import ast.Program;
 import ast.Stat;
-import ast.TypeCianetoClass;
+import ast.*;
 import lexer.Lexer;
 import lexer.Token;
 
@@ -445,7 +442,7 @@ public class Compiler {
 	 * uncomment it
 	 * implement the methods it calls
 	 */
-	public Statement assertStat() {
+	public Stat assertStat() {
 
 		lexer.nextToken();
 		int lineNumber = lexer.getLineNumber();
@@ -468,16 +465,16 @@ public class Compiler {
 
 
 
-	private LiteralInt literalInt() {
+	private IntValue intValue() {
 
-		LiteralInt e = null;
+		IntValue e = null;
 
 		// the number value is stored in lexer.getToken().value as an object of
 		// Integer.
 		// Method intValue returns that value as an value of type int.
 		int value = lexer.getNumberValue();
 		lexer.nextToken();
-		return new LiteralInt(value);
+		return new intValue(value);
 	}
 
 	private static boolean startExpr(Token token) {

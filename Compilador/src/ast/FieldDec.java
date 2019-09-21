@@ -7,7 +7,7 @@ public class FieldDec extends Member{
     private List<Id> idList;
 
     public FieldDec(Type type, List<Id> idList){
-        this.formalParamDec = formalParamDec;
+        this.type = type;
         this.idList = idList;
     }
 

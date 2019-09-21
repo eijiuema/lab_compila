@@ -17,10 +17,10 @@ public class WriteStat extends Stat {
         pw.print(")");
         
     }
-
+/*
     @Override
     public void genC(PW pw) {
         // TODO Auto-generated method stub
     }
-    
+*/    
 }
