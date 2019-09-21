@@ -1,7 +1,6 @@
 package ast;
-import java.util.*;
 
-public class StringValue{
+public class StringValue {
     
     private String value;
 

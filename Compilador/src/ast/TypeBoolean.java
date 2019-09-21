@@ -9,4 +9,9 @@ public class TypeBoolean extends Type {
       return "int";
    }
 
+   @Override
+   public String getJavaName() {
+      return "int";
+   }
+
 }

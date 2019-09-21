@@ -10,4 +10,9 @@ public class TypeInt extends Type {
       return "int";
    }
 
+    @Override
+    public String getJavaName() {
+        return "int";
+    }
+
 }

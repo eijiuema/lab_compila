@@ -1,7 +1,8 @@
 package ast;
-import java.util.*;
 
-public class ReadString extends ReadExpr{
+public class ReadString extends ReadExpr {
+
+    private Type type;
 
     public ReadString(){
         this.type = Type.stringType;

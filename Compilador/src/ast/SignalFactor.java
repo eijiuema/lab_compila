@@ -1,5 +1,4 @@
 package ast;
-import java.util.*;
 
 public class SignalFactor{
     private char signal;
@@ -17,8 +16,8 @@ public class SignalFactor{
 
     public void genJava(PW pw){
         if(signal != ' ')
-            pw.print(signal);
+            pw.print(signal+"");
         
-            factor.genJava(pw)
+            factor.genJava(pw);
     } 
 }
