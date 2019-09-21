@@ -24,11 +24,11 @@ public class AssignExpr extends Stat {
         if(rightExpr != null)
             rightExpr.genJava(pw);
     }
-
+/*
     @Override
     public void genC(PW pw) {
         // TODO Auto-generated method stub
 
     }
-    
+*/    
 }

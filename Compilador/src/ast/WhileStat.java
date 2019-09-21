@@ -13,10 +13,10 @@ public class WhileStat extends Stat {
     public void genJava(PW pw){
         //...
     }
-
+/*
     @Override
     public void genC(PW pw) {
         
     }
-    
+*/    
 }
