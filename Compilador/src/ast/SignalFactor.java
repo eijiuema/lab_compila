@@ -19,5 +19,9 @@ public class SignalFactor{
             pw.print(signal+"");
         
             factor.genJava(pw);
-    } 
+    }
+     
+    public Type getType() {
+        return this.factor.getType();
+    }
 }

@@ -474,7 +474,7 @@ public class Compiler {
 		// Method intValue returns that value as an value of type int.
 		int value = lexer.getNumberValue();
 		lexer.nextToken();
-		return new intValue(value);
+		return new IntValue(value);
 	}
 
 	private static boolean startExpr(Token token) {
@@ -482,7 +482,7 @@ public class Compiler {
 		return token == Token.FALSE || token == Token.TRUE
 				|| token == Token.NOT || token == Token.SELF
 				|| token == Token.LITERALINT || token == Token.SUPER
-				|| token == Token.LEFTPAR || token == Token.NULL
+				|| token == Token.LEFTPAR || token == Token.NIL
 				|| token == Token.ID || token == Token.LITERALSTRING;
 
 	}

@@ -19,4 +19,8 @@ public class PrimaryExprId extends PrimaryExpr{
     public void genJava(PW pw){
         
     }
+
+    public Type getType() {
+        return Type.undefinedType;
+    }
 }
