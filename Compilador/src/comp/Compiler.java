@@ -2,11 +2,8 @@ package comp;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import ast.IntValue;
-import ast.MetaobjectAnnotation;
-import ast.Program;
-import ast.ReadExpr;
-import ast.Stat;
+import java.util.Hashtable;
+
 import ast.*;
 import lexer.Lexer;
 import lexer.Token;
@@ -158,33 +155,57 @@ public class Compiler {
 		if ( getNextToken ) lexer.nextToken();
 	}
 
-	private void classDec() {
-		if ( lexer.token == Token.ID && lexer.getStringValue().equals("open") ) {
-			// open class
+	private ClassDec classDec() {
+
+		Id classNameId = null;
+		Id superclassNameId = null;
+		MemberList memberList = null;
+		boolean open = false;
+		ClassDec classDec = null;
+		
+		if (lexer.token == Token.ID && lexer.getStringValue().equals("open")) {
+			open = true;
+			lexer.nextToken();
 		}
-		if ( lexer.token != Token.CLASS ) error("'class' expected");
+
+		check(Token.CLASS, "'class' expected");
 		lexer.nextToken();
-		if ( lexer.token != Token.ID )
-			error("Identifier expected");
+
+		check(Token.ID, "'Identifier' expected");
+
 		String className = lexer.getStringValue();
+		
+		if (classTable.containsKey(className)) {
+			error("a class named " + className + " already exists");
+		}
+
+		classTable.put(className, classDec);
+
 		lexer.nextToken();
+
 		if ( lexer.token == Token.EXTENDS ) {
 			lexer.nextToken();
-			if ( lexer.token != Token.ID )
-				error("Identifier expected");
+			check(Token.ID, "'identifier' expected");
 			String superclassName = lexer.getStringValue();
-
+			if (!classTable.containsKey(superclassName)) {
+				error("a class named " + superclassName + " doesn't exist");
+			}
 			lexer.nextToken();
 		}
 
-		memberList();
-		if ( lexer.token != Token.END)
-			error("'end' expected");
+		memberList = memberList();
+
+		check(Token.END, "'end' expected");
+
 		lexer.nextToken();
+
+		classDec = new ClassDec(classNameId, superclassNameId, memberList, open);
+
+		return classDec;
 
 	}
 
-	private void memberList() {
+	private MemberList memberList() {
 		while ( true ) {
 			qualifier();
 			if ( lexer.token == Token.VAR ) {
@@ -491,36 +512,9 @@ public class Compiler {
 
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	// private ReadExpr readExpr() {
-
-	// 	if lexer.token != Token.
-
-	// }
-
-	private SymbolTable		symbolTable;
-	private Lexer			lexer;
-	private ErrorSignaller	signalError;
+	private SymbolTable						symbolTable = new SymbolTable();
+	private Hashtable<String, ClassDec>		classTable = new Hashtable<String, ClassDec>();
+	private Lexer							lexer;
+	private ErrorSignaller					signalError;
 
 }
