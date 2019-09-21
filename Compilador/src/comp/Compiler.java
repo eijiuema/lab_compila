@@ -2,9 +2,10 @@ package comp;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import ast.LiteralInt;
+import ast.IntValue;
 import ast.MetaobjectAnnotation;
 import ast.Program;
+import ast.ReadExpr;
 import ast.Stat;
 import ast.TypeCianetoClass;
 import lexer.Lexer;
@@ -445,7 +446,7 @@ public class Compiler {
 	 * uncomment it
 	 * implement the methods it calls
 	 */
-	public Statement assertStat() {
+	private Stat assertStat() {
 
 		lexer.nextToken();
 		int lineNumber = lexer.getLineNumber();
@@ -468,16 +469,16 @@ public class Compiler {
 
 
 
-	private LiteralInt literalInt() {
+	private IntValue literalInt() {
 
-		LiteralInt e = null;
+		IntValue e = null;
 
 		// the number value is stored in lexer.getToken().value as an object of
 		// Integer.
 		// Method intValue returns that value as an value of type int.
 		int value = lexer.getNumberValue();
 		lexer.nextToken();
-		return new LiteralInt(value);
+		return new IntValue(value);
 	}
 
 	private static boolean startExpr(Token token) {
@@ -485,8 +486,36 @@ public class Compiler {
 		return token == Token.FALSE || token == Token.TRUE
 				|| token == Token.NOT || token == Token.SELF
 				|| token == Token.LITERALINT || token == Token.SUPER
-				|| token == Token.LEFTPAR || token == Token.NULL
+				|| token == Token.LEFTPAR || token == Token.NIL
 				|| token == Token.ID || token == Token.LITERALSTRING;
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	private ReadExpr readExpr() {
+
+		if lexer.token != Token.
 
 	}
 

@@ -60,7 +60,11 @@ public enum Token {
     VOID("void"),
     WHILE("while"),
     WRITE("write"),
-    WRITELN("writeln");
+    WRITELN("writeln"),
+    
+
+    READINT("In.readInt"),
+    READSTRING("In.readString")
 
 	Token(String name) {
 		this.name = name;
