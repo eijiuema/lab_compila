@@ -1,12 +1,37 @@
 package ast;
+import java.util.*;
 
-abstract public class Expr extends Statement {
-    abstract public void genC( PW pw, boolean putParenthesis );
-	@Override
-	public void genC(PW pw) {
-		this.genC(pw, false);
+public class Expr{
+    private SimpleExpr leftSimpleExpr;
+    private char relation;
+    private SimpleExpr rightSimpleExpr;    
+    private Type type;
+
+    public Expr(SimpleExpr leftSimpleExpr, char relation, SimpleExpr rightSimpleExpr) {
+        this.leftSimpleExpr = leftSimpleExpr;
+        this.relation = relation;
+        this.rightSimpleExpr = rightSimpleExpr;        
+    }
+
+    public Expr(SimpleExpr leftSimpleExpr) {
+        this.leftSimpleExpr = leftSimpleExpr;
+        this.relation = ' ';
+        this.rightSimpleExpr = null;        
+    }
+
+    public void genJava(PW pw){
+
+        leftSimpleExpr.genJava();
+        
+        if(relation != ' ')
+            pw.print(signal);
+        
+        if(rightSimpleExpr != null)
+            rightSimpleExpr.genJava();
 	}
 
-      // new method: the type of the expression
-    abstract public Type getType();
+	public Type getType() {
+		return this.type;
+	}
+
 }

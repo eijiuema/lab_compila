@@ -15,8 +15,8 @@ public class TypeCianetoClass extends Type {
 
    private String name;
    private TypeCianetoClass superclass;
-   // private FieldList fieldList;
-   // private MethodList publicMethodList, privateMethodList;
+   private FieldList fieldList;
+   private MethodList publicMethodList, privateMethodList;
    // métodos públicos get e set para obter e iniciar as variáveis acima,
    // entre outros métodos
 }
