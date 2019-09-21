@@ -71,7 +71,7 @@ public class Lexer {
              }
              if ( ch == '\0' )
                 error.showError( "Comment opened and not closed",
-                      getLine(posStartComment), lineNumberStartComment);
+                      getLine(posStarPLUS("+"),tComment), lineNumberStartComment);
              else
                 tokenPos += 2;
              nextToken();
@@ -122,7 +122,13 @@ public class Lexer {
                 tokenPos++;
                 switch ( ch ) {
                     case '+' :
-                      token = Token.PLUS;
+                      if ( input[tokenPos] == '+' ) {
+                        tokenPos++;
+                        token = Token.PLUSPLUS;
+                      }
+                      else {
+                        token = Token.PLUS;
+                      }
                       break;
                     case '-' :
                       if ( input[tokenPos] == '>' ) {
