@@ -23,5 +23,9 @@ public class SumSubExpr{
         
         if(rightTerm != null)
             rightTerm.genJava(pw);
-    } 
+    }
+
+    public Type getType() {
+        return this.leftTerm.getType();
+    }
 }

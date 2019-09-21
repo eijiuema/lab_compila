@@ -11,5 +11,9 @@ public class NegationFactor extends Factor{
     public void genJava(PW pw){
         pw.print("! ");
         factor.genJava(pw);
-    }    
+    }
+
+    public Type getType() {
+        return this.factor.getType();
+    }
 }

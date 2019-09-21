@@ -12,5 +12,9 @@ public class ExprFactor extends Factor{
         pw.print("{");
         expr.genJava(pw);
         pw.print("}");
-    }    
+    }
+    
+    public Type getType() {
+        return this.expr.getType();
+    }
 }

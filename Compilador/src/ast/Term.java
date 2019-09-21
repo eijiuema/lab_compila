@@ -26,5 +26,9 @@ public class Term{
         
         if(rightSignalFactor != null)
             rightSignalFactor.genJava(pw);
-    } 
+    }
+
+    public Type getType() {
+        return this.leftSignalFactor.getType();
+    }
 }
