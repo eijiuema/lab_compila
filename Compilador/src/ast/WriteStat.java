@@ -1,7 +1,7 @@
 package ast;
-import java.util.*;
 
-public class WriteStat extends Stat{
+public class WriteStat extends Stat {
+
     private Expr expr;    
 
     public WriteStat(Expr expr) {
@@ -16,6 +16,11 @@ public class WriteStat extends Stat{
 
         pw.print(")");
         
+    }
+
+    @Override
+    public void genC(PW pw) {
+        // TODO Auto-generated method stub
     }
     
 }

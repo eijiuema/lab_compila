@@ -10,4 +10,10 @@ public class TypeString extends Type {
       return "char *";
    }
 
+    @Override
+    public String getJavaName() {
+        // TODO Auto-generated method stub
+        return "String";
+    }
+
 }

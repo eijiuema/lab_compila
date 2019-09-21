@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import ast.LiteralInt;
 import ast.MetaobjectAnnotation;
 import ast.Program;
-import ast.Statement;
+import ast.Stat;
 import ast.TypeCianetoClass;
 import lexer.Lexer;
 import lexer.Token;

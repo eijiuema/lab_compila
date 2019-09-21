@@ -18,5 +18,7 @@ abstract public class Type {
 
     abstract public String getCname();
 
+    abstract public String getJavaName();
+
     private String name;
 }

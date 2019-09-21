@@ -1,14 +1,15 @@
 package ast;
-import java.util.*;
 
 public class NilFactor extends Factor{
+
+    private Type type;
 
     public NilFactor() {
         this.type = Type.nilType;
     }
 
     public void genJava(PW pw){
-        pw.print("null");
+        pw.print(type.getJavaName());
     }
 
 }

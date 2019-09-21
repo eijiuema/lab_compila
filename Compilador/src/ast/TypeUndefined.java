@@ -8,5 +8,10 @@ public class TypeUndefined extends Type {
    public String getCname() {
       return "int";
    }
+
+   @Override
+   public String getJavaName() {
+      return "int";
+   }
    
 }

@@ -1,7 +1,7 @@
 package ast;
-import java.util.*;
 
-public class AssertStat extends Stat{
+public class AssertStat extends Stat {
+    
     private StringValue stringvalue;
     private Expr expr;    
 
@@ -12,6 +12,12 @@ public class AssertStat extends Stat{
 
     public void genJava(PW pw){
         //...
+    }
+
+    @Override
+    public void genC(PW pw) {
+        // TODO Auto-generated method stub
+
     }
     
 }

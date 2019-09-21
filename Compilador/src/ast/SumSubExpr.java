@@ -1,5 +1,4 @@
 package ast;
-import java.util.*;
 
 public class SumSubExpr{
     private Term leftTerm;
@@ -22,10 +21,7 @@ public class SumSubExpr{
 
         leftTerm.genJava(pw);
         
-        if(lowOp != ' ')
-            pw.print(signal);
-        
         if(rightTerm != null)
-            rightTerm.genJava();
+            rightTerm.genJava(pw);
     } 
 }

@@ -1,5 +1,4 @@
 package ast;
-import java.util.*;
 
 public abstract class PrimaryExpr extends Factor{
 

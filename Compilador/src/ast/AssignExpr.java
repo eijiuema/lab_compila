@@ -1,7 +1,7 @@
 package ast;
-import java.util.*;
 
-public class AssignExpr extends Stat{
+public class AssignExpr extends Stat {
+
     private Expr leftExpr;
     private Expr rightExpr;    
 
@@ -17,12 +17,18 @@ public class AssignExpr extends Stat{
 
     public void genJava(PW pw){
 
-        leftExpr.genJava();
+        leftExpr.genJava(pw);
 
         pw.print("=");
         
         if(rightExpr != null)
-            rightExpr.genJava();
+            rightExpr.genJava(pw);
+    }
+
+    @Override
+    public void genC(PW pw) {
+        // TODO Auto-generated method stub
+
     }
     
 }

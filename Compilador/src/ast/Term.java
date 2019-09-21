@@ -1,5 +1,4 @@
 package ast;
-import java.util.*;
 
 public class Term{
     private SignalFactor leftSignalFactor;
@@ -14,18 +13,18 @@ public class Term{
 
     public Term(SignalFactor leftSignalFactor) {
         this.leftSignalFactor = leftSignalFactor;
-        this.highop = ' ';
+        this.highOp = ' ';
         this.rightSignalFactor = null;        
     }
     
     public void genJava(PW pw){
 
-        leftSignalFactor.genJava();
+        leftSignalFactor.genJava(pw);
         
-        if(highop != ' ')
-            pw.print(highop);
+        if(highOp != ' ')
+            pw.print(highOp+"");
         
         if(rightSignalFactor != null)
-            rightSignalFactor.genJava();
+            rightSignalFactor.genJava(pw);
     } 
 }
