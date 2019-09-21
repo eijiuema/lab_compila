@@ -1,6 +1,6 @@
 package ast;
 
-public class StringValue {
+public class StringValue extends BasicValue{
     
     private String value;
 
@@ -13,4 +13,10 @@ public class StringValue {
         pw.print(value);
         pw.print("\" ");
     }
+
+
+    public Type getType() {
+        return Type.stringType;
+    }
+
 }

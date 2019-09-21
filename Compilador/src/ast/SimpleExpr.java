@@ -12,4 +12,7 @@ public class SimpleExpr{
     public void genJava(PW pw){
     }
 
+    public Type getType() {
+        return this.sumSubExprList.get(0).getType();
+    }
 }

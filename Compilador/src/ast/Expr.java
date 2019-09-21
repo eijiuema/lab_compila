@@ -29,8 +29,11 @@ public class Expr{
             rightSimpleExpr.genJava(pw);
 	}
 
-	public Type getType() {
-		return this.type;
+	public Type getType() {        
+        if(relation != ' ')
+            return Type.booleanType;
+        else
+            return this.leftSimpleExpr.getType();
 	}
 
 }
