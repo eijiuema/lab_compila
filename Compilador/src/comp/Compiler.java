@@ -1,12 +1,10 @@
 package comp;
 
 import java.io.PrintWriter;
+import java.util.AbstractMap;
 import java.util.ArrayList;
-import ast.IntValue;
-import ast.MetaobjectAnnotation;
-import ast.Program;
-import ast.ReadExpr;
-import ast.Stat;
+import java.util.List;
+
 import ast.*;
 import lexer.Lexer;
 import lexer.Token;
@@ -43,7 +41,10 @@ public class Compiler {
 				while ( lexer.token == Token.ANNOT ) {
 					metaobjectAnnotation(metaobjectCallList);
 				}
-				classDec();
+
+				ClassDec c = classDec();
+
+				program.addClass(c.getTypeCianetoClass(program.getClassList()));
 			}
 			catch( CompilerError e) {
 				// if there was an exception, there is a compilation error
@@ -158,45 +159,64 @@ public class Compiler {
 		if ( getNextToken ) lexer.nextToken();
 	}
 
-	private void classDec() {
+	private ClassDec classDec() {
+		boolean open = false;
+		Id id = null;
+		Id extendsId = null;
+		MemberList memberList = null;
+
 		if ( lexer.token == Token.ID && lexer.getStringValue().equals("open") ) {
-			// open class
+			open = true;
 		}
 		if ( lexer.token != Token.CLASS ) error("'class' expected");
 		lexer.nextToken();
 		if ( lexer.token != Token.ID )
 			error("Identifier expected");
 		String className = lexer.getStringValue();
+		id = new Id(className, Type.undefinedType);
+		//symbolTable.putInGlobal(className, id);
+
 		lexer.nextToken();
 		if ( lexer.token == Token.EXTENDS ) {
 			lexer.nextToken();
 			if ( lexer.token != Token.ID )
 				error("Identifier expected");
 			String superclassName = lexer.getStringValue();
+			extendsId = new Id(superclassName, Type.undefinedType);
+			//symbolTable.putInGlobal(superclassName, extendsId);
 
 			lexer.nextToken();
 		}
 
-		memberList();
+		memberList = memberList();
+
 		if ( lexer.token != Token.END)
 			error("'end' expected");
 		lexer.nextToken();
 
+		return new ClassDec(id, extendsId, memberList, open);
 	}
 
-	private void memberList() {
+	private MemberList memberList() {
+		String qualifier = "";
+		List<AbstractMap.SimpleEntry<String, Member>> members = new ArrayList<AbstractMap.SimpleEntry<String, Member>>(); 
+		
 		while ( true ) {
+			//qualifier = qualifier();
 			qualifier();
 			if ( lexer.token == Token.VAR ) {
-				fieldDec();
+				if(qualifier != "private" && qualifier != "")
+					error("Invalid qualifier");
+				members.add( new AbstractMap.SimpleEntry<String, Member>(qualifier,fieldDec()));
 			}
 			else if ( lexer.token == Token.FUNC ) {
-				methodDec();
+				members.add( new AbstractMap.SimpleEntry<String, Member>(qualifier,methodDec()));
 			}
 			else {
 				break;
 			}
 		}
+		return new MemberList(members);
 	}
 
 	private void error(String msg) {
@@ -214,7 +234,7 @@ public class Compiler {
 		}
 	}
 
-	private void methodDec() {
+	private MethodDec methodDec() {
 		lexer.nextToken();
 		if ( lexer.token == Token.ID ) {
 			// unary method
@@ -242,6 +262,7 @@ public class Compiler {
 			error("'{' expected");
 		}
 		next();
+		return null;
 
 	}
 
@@ -381,7 +402,7 @@ public class Compiler {
 
 	}
 
-	private void fieldDec() {
+	private FieldDec fieldDec() {
 		lexer.nextToken();
 		type();
 		if ( lexer.token != Token.ID ) {
@@ -398,6 +419,7 @@ public class Compiler {
 				}
 			}
 		}
+		return null;
 
 	}
 

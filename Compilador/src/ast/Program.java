@@ -23,6 +23,9 @@ public class Program {
 		return classList;
 	}
 
+	public void addClass(TypeCianetoClass c) {
+		classList.add(c);
+	}
 
 	public ArrayList<MetaobjectAnnotation> getMetaobjectCallList() {
 		return metaobjectCallList;
