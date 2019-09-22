@@ -2,15 +2,19 @@ package ast;
 
 public class WriteStat extends Stat {
 
-    private Expr expr;    
+    private Expr expr; 
+    private String printName;   
 
-    public WriteStat(Expr expr) {
-        this.expr = expr;      
+    public WriteStat(Expr expr, String printName) {
+        this.expr = expr;
+        this.printName = printName;      
     }
 
     public void genJava(PW pw){
 
-        pw.print("System.out.print(");
+        pw.print("System.out.");
+        pw.print(this.printName);
+        pw.print("(");
 
         expr.genJava(pw);
 
