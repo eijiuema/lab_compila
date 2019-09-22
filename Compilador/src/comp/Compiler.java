@@ -1,8 +1,13 @@
 package comp;
 
 import java.io.PrintWriter;
+import java.util.AbstractMap;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.Hashtable;
+=======
+import java.util.List;
+>>>>>>> a9563696444b450a99ef9314c5db5e5c103a17c9
 
 import ast.*;
 import lexer.Lexer;
@@ -40,7 +45,10 @@ public class Compiler {
 				while ( lexer.token == Token.ANNOT ) {
 					metaobjectAnnotation(metaobjectCallList);
 				}
-				classDec();
+
+				ClassDec c = classDec();
+
+				program.addClass(c.getTypeCianetoClass(program.getClassList()));
 			}
 			catch( CompilerError e) {
 				// if there was an exception, there is a compilation error
@@ -156,6 +164,7 @@ public class Compiler {
 	}
 
 	private ClassDec classDec() {
+<<<<<<< HEAD
 
 		Id classNameId = null;
 		Id superclassNameId = null;
@@ -166,6 +175,15 @@ public class Compiler {
 		if (lexer.token == Token.ID && lexer.getStringValue().equals("open")) {
 			open = true;
 			lexer.nextToken();
+=======
+		boolean open = false;
+		Id id = null;
+		Id extendsId = null;
+		MemberList memberList = null;
+
+		if ( lexer.token == Token.ID && lexer.getStringValue().equals("open") ) {
+			open = true;
+>>>>>>> a9563696444b450a99ef9314c5db5e5c103a17c9
 		}
 
 		check(Token.CLASS, "'class' expected");
@@ -174,12 +192,17 @@ public class Compiler {
 		check(Token.ID, "'Identifier' expected");
 
 		String className = lexer.getStringValue();
+<<<<<<< HEAD
 		
 		if (classTable.containsKey(className)) {
 			error("a class named " + className + " already exists");
 		}
 
 		classTable.put(className, classDec);
+=======
+		id = new Id(className, Type.undefinedType);
+		//symbolTable.putInGlobal(className, id);
+>>>>>>> a9563696444b450a99ef9314c5db5e5c103a17c9
 
 		lexer.nextToken();
 
@@ -187,14 +210,21 @@ public class Compiler {
 			lexer.nextToken();
 			check(Token.ID, "'identifier' expected");
 			String superclassName = lexer.getStringValue();
+<<<<<<< HEAD
 			if (!classTable.containsKey(superclassName)) {
 				error("a class named " + superclassName + " doesn't exist");
 			}
+=======
+			extendsId = new Id(superclassName, Type.undefinedType);
+			//symbolTable.putInGlobal(superclassName, extendsId);
+
+>>>>>>> a9563696444b450a99ef9314c5db5e5c103a17c9
 			lexer.nextToken();
 		}
 
 		memberList = memberList();
 
+<<<<<<< HEAD
 		check(Token.END, "'end' expected");
 
 		lexer.nextToken();
@@ -206,18 +236,35 @@ public class Compiler {
 	}
 
 	private MemberList memberList() {
+=======
+		if ( lexer.token != Token.END)
+			error("'end' expected");
+		lexer.nextToken();
+
+		return new ClassDec(id, extendsId, memberList, open);
+	}
+
+	private MemberList memberList() {
+		String qualifier = "";
+		List<AbstractMap.SimpleEntry<String, Member>> members = new ArrayList<AbstractMap.SimpleEntry<String, Member>>(); 
+		
+>>>>>>> a9563696444b450a99ef9314c5db5e5c103a17c9
 		while ( true ) {
+			//qualifier = qualifier();
 			qualifier();
 			if ( lexer.token == Token.VAR ) {
-				fieldDec();
+				if(qualifier != "private" && qualifier != "")
+					error("Invalid qualifier");
+				members.add( new AbstractMap.SimpleEntry<String, Member>(qualifier,fieldDec()));
 			}
 			else if ( lexer.token == Token.FUNC ) {
-				methodDec();
+				members.add( new AbstractMap.SimpleEntry<String, Member>(qualifier,methodDec()));
 			}
 			else {
 				break;
 			}
 		}
+		return new MemberList(members);
 	}
 
 	private void error(String msg) {
@@ -235,7 +282,7 @@ public class Compiler {
 		}
 	}
 
-	private void methodDec() {
+	private MethodDec methodDec() {
 		lexer.nextToken();
 		if ( lexer.token == Token.ID ) {
 			// unary method
@@ -263,6 +310,7 @@ public class Compiler {
 			error("'{' expected");
 		}
 		next();
+		return null;
 
 	}
 
@@ -402,7 +450,7 @@ public class Compiler {
 
 	}
 
-	private void fieldDec() {
+	private FieldDec fieldDec() {
 		lexer.nextToken();
 		type();
 		if ( lexer.token != Token.ID ) {
@@ -419,6 +467,7 @@ public class Compiler {
 				}
 			}
 		}
+		return null;
 
 	}
 

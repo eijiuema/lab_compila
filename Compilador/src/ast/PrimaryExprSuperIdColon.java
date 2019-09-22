@@ -16,6 +16,6 @@ public class PrimaryExprSuperIdColon extends PrimaryExpr{
     }
 
     public Type getType() {
-        return secondId.getType();
+        return id.getType();
     }
 }

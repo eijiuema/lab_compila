@@ -1,11 +1,11 @@
 package ast;
 import java.util.*;
 
-public class PrimaryExprSuperId extends PrimaryExpr{
+public class PrimaryExprSelfId extends PrimaryExpr{
 
     private Id firstId, secondId;
-    public PrimaryExprSuperId(Id supeId, Id id){
-        this.firstId = superId;
+    public PrimaryExprSelfId(Id selfId, Id id){
+        this.firstId = selfId;
         this.secondId = id;
     }
 
