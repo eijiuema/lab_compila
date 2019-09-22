@@ -833,9 +833,9 @@ public class Compiler {
 		return new Id(lexer.getStringValue(), type);
 	}
 
-	/*private Id id() {
+	private Id id() {
 		return id(Type.undefinedType);
-	}*/
+	}
 
 	private SymbolTable symbolTable = new SymbolTable();
 	private Lexer lexer;

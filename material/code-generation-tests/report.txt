@@ -97,21 +97,21 @@ _________________________________________________________________________
 ######################################################
 Erros que foram sinalizados mas n�o deveriam ter sido:
 
-OK_GER01.ci, 42, 'super', 'Id' or 'self' was expected
+OK_GER01.ci, 39, 'end' expected
 
-OK_GER02.ci, 19, 'super', 'Id' or 'self' was expected
+OK_GER02.ci, 16, 'end' expected
 
-OK_GER03.ci, 21, 'super', 'Id' or 'self' was expected
+OK_GER03.ci, 17, 'end' expected
 
-OK_GER04.ci, 18, ';' expected
+OK_GER04.ci, 15, 'end' expected
 
-OK_GER05.ci, 20, ';' expected
+OK_GER05.ci, 16, 'end' expected
 
-OK_GER06.ci, 23, ';' expected
+OK_GER06.ci, 19, 'end' expected
 
-OK_GER07.ci, 17, 'super', 'Id' or 'self' was expected
+OK_GER07.ci, 15, 'end' expected
 
-OK_GER08.ci, 20, A type was expected
+OK_GER08.ci, 19, 'end' expected
 
 OK_GER09.ci, 18, 'class' expected
 
@@ -129,9 +129,9 @@ OK_GER15.ci, 17, 'class' expected
 
 OK_GER16.ci, 17, 'class' expected
 
-OK_GER21.ci, 17, 'end' expected
+OK_GER21.ci, 16, 'end' expected
 
-OK_GER22.ci, 19, 'super', 'Id' or 'self' was expected
+OK_GER22.ci, 16, 'end' expected
 
 
 List of Java files with compilation errors: 
@@ -139,23 +139,23 @@ List of Java files with compilation errors:
 List of files with correct Java code: 
 
 List of files Java code that compiles but was generated incorrectly: 
-   material/code-generation-tests/\OK_GER01.java
-   material/code-generation-tests/\OK_GER02.java
-   material/code-generation-tests/\OK_GER03.java
-   material/code-generation-tests/\OK_GER04.java
-   material/code-generation-tests/\OK_GER05.java
-   material/code-generation-tests/\OK_GER06.java
-   material/code-generation-tests/\OK_GER07.java
-   material/code-generation-tests/\OK_GER08.java
-   material/code-generation-tests/\OK_GER09.java
-   material/code-generation-tests/\OK_GER10.java
-   material/code-generation-tests/\OK_GER11.java
-   material/code-generation-tests/\OK_GER12.java
-   material/code-generation-tests/\OK_GER13.java
-   material/code-generation-tests/\OK_GER14.java
-   material/code-generation-tests/\OK_GER15.java
-   material/code-generation-tests/\OK_GER16.java
-   material/code-generation-tests/\OK_GER21.java
-   material/code-generation-tests/\OK_GER22.java
+   material\code-generation-tests\OK_GER01.java
+   material\code-generation-tests\OK_GER02.java
+   material\code-generation-tests\OK_GER03.java
+   material\code-generation-tests\OK_GER04.java
+   material\code-generation-tests\OK_GER05.java
+   material\code-generation-tests\OK_GER06.java
+   material\code-generation-tests\OK_GER07.java
+   material\code-generation-tests\OK_GER08.java
+   material\code-generation-tests\OK_GER09.java
+   material\code-generation-tests\OK_GER10.java
+   material\code-generation-tests\OK_GER11.java
+   material\code-generation-tests\OK_GER12.java
+   material\code-generation-tests\OK_GER13.java
+   material\code-generation-tests\OK_GER14.java
+   material\code-generation-tests\OK_GER15.java
+   material\code-generation-tests\OK_GER16.java
+   material\code-generation-tests\OK_GER21.java
+   material\code-generation-tests\OK_GER22.java
 
 The compiler could not create the following .java files:

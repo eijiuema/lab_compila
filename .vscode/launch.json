@@ -5,7 +5,7 @@
             "name": "Relatório",
             "request": "launch",
             "mainClass": "comp.Comp",
-            "args": "material\\code-generation-tests\\ -genjava"
+            "args": "material\\code-generation-tests\\ -genjava material\\code-generation-tests\\"
         },
         {
             "type": "java",
