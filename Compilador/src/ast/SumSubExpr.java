@@ -9,7 +9,7 @@ public class SumSubExpr{
 
     public SumSubExpr(Term leftTerm) {
         this.leftTerm = leftTerm;
-        this.lowOpTermList = new ArrayList<>()   
+        this.lowOpTermList = new ArrayList<>();
     }
 
     public boolean addLowOpTerm(String lowOp, Term term) {

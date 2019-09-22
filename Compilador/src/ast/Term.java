@@ -18,7 +18,7 @@ public class Term {
     }
 
     public boolean addHighOpSignalFactor(String highOp, SignalFactor signalFactor) {
-        return this.highOpSignalFactorList.add(new Pair<String,SignalFactor>(highOp, signalFactor))
+        return this.highOpSignalFactorList.add(new Pair<String,SignalFactor>(highOp, signalFactor));
     }
     
     public void genJava(PW pw){
