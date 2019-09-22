@@ -133,3 +133,29 @@ OK_GER21.ci, 17, 'end' expected
 
 OK_GER22.ci, 19, 'super', 'Id' or 'self' was expected
 
+
+List of Java files with compilation errors: 
+
+List of files with correct Java code: 
+
+List of files Java code that compiles but was generated incorrectly: 
+   material/code-generation-tests/\OK_GER01.java
+   material/code-generation-tests/\OK_GER02.java
+   material/code-generation-tests/\OK_GER03.java
+   material/code-generation-tests/\OK_GER04.java
+   material/code-generation-tests/\OK_GER05.java
+   material/code-generation-tests/\OK_GER06.java
+   material/code-generation-tests/\OK_GER07.java
+   material/code-generation-tests/\OK_GER08.java
+   material/code-generation-tests/\OK_GER09.java
+   material/code-generation-tests/\OK_GER10.java
+   material/code-generation-tests/\OK_GER11.java
+   material/code-generation-tests/\OK_GER12.java
+   material/code-generation-tests/\OK_GER13.java
+   material/code-generation-tests/\OK_GER14.java
+   material/code-generation-tests/\OK_GER15.java
+   material/code-generation-tests/\OK_GER16.java
+   material/code-generation-tests/\OK_GER21.java
+   material/code-generation-tests/\OK_GER22.java
+
+The compiler could not create the following .java files:

@@ -14,6 +14,9 @@ public class Program {
 
 
 	public void genJava(PW pw) {
+		for (TypeCianetoClass typeCianetoClass : classList) {
+			pw.print(typeCianetoClass.getName());
+		}
 	}
 
 	public void genC(PW pw) {
@@ -31,7 +34,6 @@ public class Program {
 		return metaobjectCallList;
 	}
 	
-
 	public boolean hasCompilationErrors() {
 		return compilationErrorList != null && compilationErrorList.size() > 0 ;
 	}

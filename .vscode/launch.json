@@ -2,10 +2,10 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Debug (Launch) with Arguments Prompt",
+            "name": "Relatório",
             "request": "launch",
-            "mainClass": "",
-            "args": "${command:SpecifyProgramArgs}"
+            "mainClass": "comp.Comp",
+            "args": "material\\code-generation-tests\\ -genjava"
         },
         {
             "type": "java",
