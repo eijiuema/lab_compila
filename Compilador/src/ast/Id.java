@@ -18,11 +18,8 @@ public class Id {
         return name;
     }
 
-<<<<<<< HEAD
-=======
     public void setName(String name) {
         this.name = name;
     }
 
->>>>>>> a9563696444b450a99ef9314c5db5e5c103a17c9
 }

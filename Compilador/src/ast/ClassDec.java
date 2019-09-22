@@ -1,5 +1,9 @@
 package ast;
 
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.List;
+
 public class ClassDec {
     
     private Id id, extendsId;
@@ -21,7 +25,7 @@ public class ClassDec {
         TypeCianetoClass cClass = new TypeCianetoClass(id.getName());
 
         if(this.extendsId != null){
-        //Procurando a classe mãe na lista de classes declaradas
+        //Procurando a classe mï¿½e na lista de classes declaradas
             for (TypeCianetoClass declaredClass : classList) {
                 if(declaredClass.getName() == extendsId.getName()){
                     cClass.setSuperclass(declaredClass);
@@ -36,7 +40,7 @@ public class ClassDec {
             if( m.getValue().getClass() == FieldDec.class ){
                 cClass.addField(m.getKey(), (FieldDec) m.getValue());
             }
-            else{//Senão, é um MethodDec
+            else{//Senï¿½o, ï¿½ um MethodDec
                 if(m.getKey().contains("private")){
                     cClass.addPrivateMethodList(m.getKey(), (MethodDec) m.getValue());
                 }

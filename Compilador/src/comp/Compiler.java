@@ -3,11 +3,8 @@ package comp;
 import java.io.PrintWriter;
 import java.util.AbstractMap;
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.Hashtable;
-=======
 import java.util.List;
->>>>>>> a9563696444b450a99ef9314c5db5e5c103a17c9
 
 import ast.*;
 import lexer.Lexer;
@@ -164,18 +161,6 @@ public class Compiler {
 	}
 
 	private ClassDec classDec() {
-<<<<<<< HEAD
-
-		Id classNameId = null;
-		Id superclassNameId = null;
-		MemberList memberList = null;
-		boolean open = false;
-		ClassDec classDec = null;
-		
-		if (lexer.token == Token.ID && lexer.getStringValue().equals("open")) {
-			open = true;
-			lexer.nextToken();
-=======
 		boolean open = false;
 		Id id = null;
 		Id extendsId = null;
@@ -183,7 +168,6 @@ public class Compiler {
 
 		if ( lexer.token == Token.ID && lexer.getStringValue().equals("open") ) {
 			open = true;
->>>>>>> a9563696444b450a99ef9314c5db5e5c103a17c9
 		}
 
 		check(Token.CLASS, "'class' expected");
@@ -192,17 +176,8 @@ public class Compiler {
 		check(Token.ID, "'Identifier' expected");
 
 		String className = lexer.getStringValue();
-<<<<<<< HEAD
-		
-		if (classTable.containsKey(className)) {
-			error("a class named " + className + " already exists");
-		}
-
-		classTable.put(className, classDec);
-=======
 		id = new Id(className, Type.undefinedType);
 		//symbolTable.putInGlobal(className, id);
->>>>>>> a9563696444b450a99ef9314c5db5e5c103a17c9
 
 		lexer.nextToken();
 
@@ -210,33 +185,14 @@ public class Compiler {
 			lexer.nextToken();
 			check(Token.ID, "'identifier' expected");
 			String superclassName = lexer.getStringValue();
-<<<<<<< HEAD
-			if (!classTable.containsKey(superclassName)) {
-				error("a class named " + superclassName + " doesn't exist");
-			}
-=======
 			extendsId = new Id(superclassName, Type.undefinedType);
 			//symbolTable.putInGlobal(superclassName, extendsId);
 
->>>>>>> a9563696444b450a99ef9314c5db5e5c103a17c9
 			lexer.nextToken();
 		}
 
 		memberList = memberList();
 
-<<<<<<< HEAD
-		check(Token.END, "'end' expected");
-
-		lexer.nextToken();
-
-		classDec = new ClassDec(classNameId, superclassNameId, memberList, open);
-
-		return classDec;
-
-	}
-
-	private MemberList memberList() {
-=======
 		if ( lexer.token != Token.END)
 			error("'end' expected");
 		lexer.nextToken();
@@ -248,7 +204,6 @@ public class Compiler {
 		String qualifier = "";
 		List<AbstractMap.SimpleEntry<String, Member>> members = new ArrayList<AbstractMap.SimpleEntry<String, Member>>(); 
 		
->>>>>>> a9563696444b450a99ef9314c5db5e5c103a17c9
 		while ( true ) {
 			//qualifier = qualifier();
 			qualifier();
