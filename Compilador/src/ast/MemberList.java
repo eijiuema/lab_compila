@@ -8,4 +8,13 @@ public abstract class MemberList{
         this.memberList = memberList;
     }
 
+    public List<AbstractMap.SimpleEntry<String, Member>> getMemberList() {
+        return memberList;
+    }
+
+    public void setMemberList(List<AbstractMap.SimpleEntry<String, Member>> memberList) {
+        this.memberList = memberList;
+    }
+
+
 }

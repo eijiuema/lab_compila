@@ -17,10 +17,49 @@ public class TypeCianetoClass extends Type {
    private TypeCianetoClass superclass;
    private FieldList fieldList;
    private MethodList publicMethodList, privateMethodList;
-   // m�todos p�blicos get e set para obter e iniciar as vari�veis acima,
-   // entre outros m�todos
+   
    @Override
    public String getJavaName() {
       return null;
+   }
+
+   public String getName() {
+      return name;
+   }
+
+   public void setName(String name) {
+      this.name = name;
+   }
+
+   public TypeCianetoClass getSuperclass() {
+      return superclass;
+   }
+
+   public void setSuperclass(TypeCianetoClass superclass) {
+      this.superclass = superclass;
+   }
+
+   public FieldList getFieldList() {
+      return fieldList;
+   }
+
+   public void addField(String qualifier, FieldDec field) {
+      this.fieldList.addField(qualifier, field);
+   }
+
+   public MethodList getPublicMethodList() {
+      return publicMethodList;
+   }
+
+   public void addPublicMethodList(String qualifier, MethodDec method) {
+      this.publicMethodList.addMethod(qualifier, method);
+   }
+
+   public MethodList getPrivateMethodList() {
+      return privateMethodList;
+   }
+
+   public void addPrivateMethodList(String qualifier, MethodDec method) {
+      this.privateMethodList.addMethod(qualifier, method);
    }
 }
