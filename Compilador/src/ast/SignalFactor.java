@@ -1,22 +1,22 @@
 package ast;
 
 public class SignalFactor{
-    private char signal;
+    private String signal;
     private Factor factor;
 
-    public SignalFactor(char signal, Factor factor) {
+    public SignalFactor(String signal, Factor factor) {
         this.signal = signal;
         this.factor = factor;
     }
 
     public SignalFactor(Factor factor) {
-        this.signal = ' ';
+        this.signal = null;
         this.factor = factor;
     }
 
     public void genJava(PW pw){
-        if(signal != ' ')
-            pw.print(signal+"");
+        if(signal != null)
+            pw.print(signal);
         
             factor.genJava(pw);
     }

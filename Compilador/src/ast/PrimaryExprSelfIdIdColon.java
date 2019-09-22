@@ -5,6 +5,7 @@ public class PrimaryExprSelfIdIdColon extends PrimaryExpr{
 
     private Id selfId, id, idColon;
     List<Expr> exprList;
+
     public PrimaryExprSelfIdIdColon(Id selfId, Id id, Id idColon, List<Expr> exprList){
         this.selfId = selfId;
         this.id = id;

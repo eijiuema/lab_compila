@@ -1,28 +1,29 @@
 package ast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SumSubExpr{
     private Term leftTerm;
-    private char lowOp;
-    private Term rightTerm;    
-
-    public SumSubExpr(Term leftTerm, char lowOp, Term rightTerm) {
-        this.leftTerm = leftTerm;
-        this.lowOp = lowOp;
-        this.rightTerm = rightTerm;        
-    }
+    private List<Pair<String, Term>> lowOpTermList;
 
     public SumSubExpr(Term leftTerm) {
         this.leftTerm = leftTerm;
-        this.lowOp = ' ';
-        this.rightTerm = null;        
+        this.lowOpTermList = new ArrayList<>()   
+    }
+
+    public boolean addLowOpTerm(String lowOp, Term term) {
+        return this.lowOpTermList.add(new Pair<String, Term>(lowOp, term));
     }
 
     public void genJava(PW pw){
-
         leftTerm.genJava(pw);
-        
-        if(rightTerm != null)
-            rightTerm.genJava(pw);
+
+        for (Pair<String, Term> lowOpTerm : lowOpTermList) {
+            pw.print(" " + lowOpTerm.getFirst() + " ");
+            lowOpTerm.getSecond().genJava(pw);
+        }
+
     }
 
     public Type getType() {

@@ -5,8 +5,13 @@ public class SimpleExpr{
     
     private List<SumSubExpr> sumSubExprList;
 
-    public SimpleExpr( List<SumSubExpr> sumSubExprList){
-        this.sumSubExprList = sumSubExprList;
+    public SimpleExpr(SumSubExpr sumSubExpr) {
+        this.sumSubExprList = new ArrayList<>();
+        this.sumSubExprList.add(sumSubExpr);
+    }
+
+    public boolean addSumSubExpr(SumSubExpr sumSubExpr) {
+        return this.sumSubExprList.add(sumSubExpr);
     }
 
     public void genJava(PW pw){

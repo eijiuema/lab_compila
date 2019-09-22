@@ -1,12 +1,12 @@
 package ast;
 
-public class Expr{
+public class Expr extends Factor {
     private SimpleExpr leftSimpleExpr;
-    private char relation;
+    private String relation;
     private SimpleExpr rightSimpleExpr;    
     private Type type;
 
-    public Expr(SimpleExpr leftSimpleExpr, char relation, SimpleExpr rightSimpleExpr) {
+    public Expr(SimpleExpr leftSimpleExpr, String relation, SimpleExpr rightSimpleExpr) {
         this.leftSimpleExpr = leftSimpleExpr;
         this.relation = relation;
         this.rightSimpleExpr = rightSimpleExpr;        
@@ -14,7 +14,7 @@ public class Expr{
 
     public Expr(SimpleExpr leftSimpleExpr) {
         this.leftSimpleExpr = leftSimpleExpr;
-        this.relation = ' ';
+        this.relation = null;
         this.rightSimpleExpr = null;        
     }
 
@@ -22,7 +22,7 @@ public class Expr{
 
         leftSimpleExpr.genJava(pw);
         
-        // if(relation != ' ')
+        // if(relation != null)
         //     pw.print(signal);
         
         if(rightSimpleExpr != null)
@@ -30,10 +30,10 @@ public class Expr{
 	}
 
 	public Type getType() {        
-        if(relation != ' ')
-            return Type.booleanType;
-        else
+        if(relation == null)
             return this.leftSimpleExpr.getType();
+        else
+            return Type.booleanType;
 	}
 
 }

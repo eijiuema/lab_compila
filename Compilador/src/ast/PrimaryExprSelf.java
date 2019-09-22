@@ -4,6 +4,10 @@ import java.util.*;
 public class PrimaryExprSelf extends PrimaryExpr{
 
     private Id selfId;
+
+    public PrimaryExprSelf() {
+        
+    }
     
     public PrimaryExprSelf(Id selfId){
         this.selfId = selfId;

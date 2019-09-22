@@ -1,12 +1,12 @@
 package ast;
-import java.util.*;
 
 public class PrimaryExprSuperId extends PrimaryExpr{
 
-    private Id firstId, secondId;
+    private Id superId, id;
+    
     public PrimaryExprSuperId(Id superId, Id id){
-        this.firstId = superId;
-        this.secondId = id;
+        this.superId = superId;
+        this.id = id;
     }
 
     public void genJava(PW pw){
@@ -14,6 +14,6 @@ public class PrimaryExprSuperId extends PrimaryExpr{
     }
 
     public Type getType() {
-        return secondId.getType();
+        return id.getType();
     }
 }

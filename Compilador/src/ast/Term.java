@@ -1,31 +1,35 @@
 package ast;
 
-public class Term{
-    private SignalFactor leftSignalFactor;
-    private char highOp;
-    private SignalFactor rightSignalFactor;    
+import java.util.ArrayList;
+import java.util.List;
 
-    public Term(SignalFactor leftSignalFactor, char highop, SignalFactor rightSignalFactor) {
+public class Term {
+    private SignalFactor leftSignalFactor;
+    private List<Pair<String, SignalFactor>> highOpSignalFactorList;
+
+    public Term(SignalFactor leftSignalFactor, List<Pair<String, SignalFactor>> signalFactorList) {
         this.leftSignalFactor = leftSignalFactor;
-        this.highOp = highop;
-        this.rightSignalFactor = rightSignalFactor;        
+        this.highOpSignalFactorList = signalFactorList; 
     }
 
     public Term(SignalFactor leftSignalFactor) {
         this.leftSignalFactor = leftSignalFactor;
-        this.highOp = ' ';
-        this.rightSignalFactor = null;        
+        this.highOpSignalFactorList = new ArrayList<>();  
+    }
+
+    public boolean addHighOpSignalFactor(String highOp, SignalFactor signalFactor) {
+        return this.highOpSignalFactorList.add(new Pair<String,SignalFactor>(highOp, signalFactor))
     }
     
     public void genJava(PW pw){
 
         leftSignalFactor.genJava(pw);
+
+        for (Pair<String, SignalFactor> pair : highOpSignalFactorList) {
+            pw.print(" " + pair.getFirst() + " ");
+            pair.getSecond().genJava(pw);
+        }
         
-        if(highOp != ' ')
-            pw.print(highOp+"");
-        
-        if(rightSignalFactor != null)
-            rightSignalFactor.genJava(pw);
     }
 
     public Type getType() {
