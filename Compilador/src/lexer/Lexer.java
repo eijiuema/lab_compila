@@ -1,3 +1,7 @@
+/*
+*	Anderson Pinheiro Garrote
+*	Gabriel Eiji Uema Martin
+*/
 package lexer;
 
 import java.util.Hashtable;

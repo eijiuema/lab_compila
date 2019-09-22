@@ -1,3 +1,7 @@
+/*
+*	Anderson Pinheiro Garrote
+*	Gabriel Eiji Uema Martin
+*/
 package ast;
 
 public abstract class ReadExpr extends PrimaryExpr {
