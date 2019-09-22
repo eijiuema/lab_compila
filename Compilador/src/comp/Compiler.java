@@ -1,3 +1,7 @@
+/*
+*	Anderson Pinheiro Garrote
+*	Gabriel Eiji Uema Martin
+*/
 package comp;
 
 import java.beans.Expression;
@@ -173,17 +177,15 @@ public class Compiler {
 		check(Token.ID, "'Identifier' expected");
 
 		String className = lexer.getStringValue();
-		id = new Id(className, Type.undefinedType);
+		id = id(Type.undefinedType);
 		// symbolTable.putInGlobal(className, id);
-
-		lexer.nextToken();
 
 		if (lexer.token == Token.EXTENDS) {
 			lexer.nextToken();
 			check(Token.ID, "'identifier' expected");
 			String superclassName = lexer.getStringValue();
 			extendsId = new Id(superclassName, Type.undefinedType);
-			// symbolTable.putInGlobal(superclassName, extendsId);
+			// symbolTable.get(superclassName, extendsId);
 
 			lexer.nextToken();
 		}
@@ -381,7 +383,6 @@ public class Compiler {
 
 			idList.add(id());
 
-			next();
 			if (lexer.token == Token.COMMA) {
 				next();
 			} else {
@@ -832,9 +833,9 @@ public class Compiler {
 		return new Id(lexer.getStringValue(), type);
 	}
 
-	private Id id() {
+	/*private Id id() {
 		return id(Type.undefinedType);
-	}
+	}*/
 
 	private SymbolTable symbolTable = new SymbolTable();
 	private Lexer lexer;

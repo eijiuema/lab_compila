@@ -1,3 +1,7 @@
+/*
+*	Anderson Pinheiro Garrote
+*	Gabriel Eiji Uema Martin
+*/
 package ast;
 
 public class Expr extends Factor {
@@ -22,8 +26,8 @@ public class Expr extends Factor {
 
         leftSimpleExpr.genJava(pw);
         
-        // if(relation != null)
-        //     pw.print(signal);
+        if(relation != null)
+            pw.print(relation);
         
         if(rightSimpleExpr != null)
             rightSimpleExpr.genJava(pw);
