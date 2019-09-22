@@ -1,3 +1,7 @@
+/*
+*	Anderson Pinheiro Garrote
+*	Gabriel Eiji Uema Martin
+*/
 package ast;
 
 public class Expr{
@@ -23,7 +27,7 @@ public class Expr{
         leftSimpleExpr.genJava(pw);
         
         // if(relation != ' ')
-        //     pw.print(signal);
+        //     pw.print(relation);
         
         if(rightSimpleExpr != null)
             rightSimpleExpr.genJava(pw);

@@ -1,3 +1,7 @@
+/*
+*	Anderson Pinheiro Garrote
+*	Gabriel Eiji Uema Martin
+*/
 package comp;
 
 import java.io.PrintWriter;
