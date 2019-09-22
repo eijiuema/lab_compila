@@ -1,6 +1,7 @@
 @annot("check", "comparisonOperators", "if")
 @nce
 
+
 class Program
    
    public func run {

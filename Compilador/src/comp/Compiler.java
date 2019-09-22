@@ -329,12 +329,12 @@ public class Compiler {
 		case ASSERT:
 			st = assertStat();
 			break;
-		default:
+		default:/*
 			if (lexer.token == Token.ID && lexer.getStringValue().equals("Out")) {
 				st = writeStat();
-			} else {
+			} else {*/
 				st = assignExpr();
-			}
+			//}
 
 		}
 
@@ -688,8 +688,6 @@ public class Compiler {
 
 		Factor factor = null;
 
-		error("");
-
 		if (lexer.token == Token.LITERALINT) {
 			factor = new IntValue(lexer.getNumberValue());
 			lexer.nextToken();
@@ -745,7 +743,7 @@ public class Compiler {
 			if (lexer.token == Token.ID) {
 				primaryExpr = new PrimaryExprIdId(id, id());
 			} else if (lexer.token == Token.IDCOLON) {
-				primaryExpr = new PrimaryExprIdIdColon(id, id(), exprList());
+				primaryExpr = new PrimaryExprIdIdColon(id, idColon(), exprList());
 			} else {
 				error("'Id' was expected");
 			}
@@ -767,7 +765,7 @@ public class Compiler {
 			if (lexer.token == Token.ID) {
 				primaryExpr = new PrimaryExprSuperId(null, id());
 			} else if (lexer.token == Token.IDCOLON) {
-				primaryExpr = new PrimaryExprSuperIdColon(null, id(), exprList());
+				primaryExpr = new PrimaryExprSuperIdColon(null, idColon(), exprList());
 			} else {
 				error("'Id' was expected");
 			}
@@ -781,7 +779,7 @@ public class Compiler {
 					if (lexer.token == Token.ID) {
 						primaryExpr = new PrimaryExprSelfIdId(null, id, id());
 					} else if (lexer.token == Token.IDCOLON) {
-						primaryExpr = new PrimaryExprSelfIdIdColon(null, id, id(), exprList());
+						primaryExpr = new PrimaryExprSelfIdIdColon(null, id, idColon(), exprList());
 					} else {
 						error("'Id' was expected");
 					}
@@ -811,6 +809,14 @@ public class Compiler {
 		return exprList;
 	}
 
+	
+	private Id idColon(Type type) {
+		check(Token.IDCOLON, "a identifier with colon was expected");
+		String id = lexer.getStringValue().substring(0,lexer.getStringValue().length() -1);
+		lexer.nextToken();
+		return new Id(id, type);
+	}
+
 	private Id id(Type type) {
 		check(Token.ID, "a identifier was expected");
 		String id = lexer.getStringValue();
@@ -821,6 +827,11 @@ public class Compiler {
 	private Id id() {
 		return id(Type.undefinedType);
 	}
+
+	private Id idColon() {
+		return idColon(Type.undefinedType);
+	}
+
 
 	private SymbolTable symbolTable = new SymbolTable();
 	private Lexer lexer;
