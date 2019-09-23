@@ -18,8 +18,13 @@ public class Program {
 
 
 	public void genJava(PW pw) {
+		System.out.println(	classList.size() );
 		for (TypeCianetoClass typeCianetoClass : classList) {
+			pw.print("class ")
 			pw.print(typeCianetoClass.getName());
+			pw.println("{");
+			pw.print("");
+			pw.println("}");
 		}
 	}
 

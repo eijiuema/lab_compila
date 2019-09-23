@@ -10,11 +10,14 @@ public class TypeCianetoClass extends Type {
 
    public TypeCianetoClass( String name ) {
       super(name);
+      this.publicMethodList = new MethodList();
+      this.privateMethodList = new MethodList();
+      this.fieldList = new FieldList();
    }
 
    @Override
    public String getCname() {
-      return getName();
+      return super.getName();
    }
 
    private String name;
@@ -28,11 +31,7 @@ public class TypeCianetoClass extends Type {
    }
 
    public String getName() {
-      return name;
-   }
-
-   public void setName(String name) {
-      this.name = name;
+      return super.getName();
    }
 
    public TypeCianetoClass getSuperclass() {

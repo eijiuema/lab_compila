@@ -1,6 +1,9 @@
 @annot("check", "comparisonOperators", "if")
 @nce
 
+class A
+
+end
 
 class Program
    

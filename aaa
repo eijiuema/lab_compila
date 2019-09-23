@@ -9,6 +9,9 @@
 ~annotation
 class
 ~ident
+end
+class
+~ident
 public
 func
 ~ident
@@ -20,8 +23,22 @@ var
 ~ident
 .
 ~ident:
-->println
 ~literalString
+;
+~ident
+=
+~ident
+.
+new
+;
+~ident
+.
+~ident
+;
+}
+end
+~eof
+2
 Executing the Java code of file './material/code-generation-tests/OK_GER01.java'
 Erro: Não foi possível localizar nem carregar a classe principal OK_GER01
 Causada por: java.lang.ClassNotFoundException: OK_GER01

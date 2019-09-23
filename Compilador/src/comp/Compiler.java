@@ -51,7 +51,7 @@ public class Compiler {
 				ClassDec c = classDec();
 
 				program.addClass(c.getTypeCianetoClass(program.getClassList()));
-				// program.addClass(new TypeCianetoClass("test"));
+				//program.addClass(new TypeCianetoClass("test"));
 			} catch (CompilerError e) {
 				// if there was an exception, there is a compilation error
 				e.printStackTrace();
@@ -693,8 +693,10 @@ public class Compiler {
 			lexer.nextToken();
 		} else if (lexer.token == Token.TRUE || lexer.token == Token.FALSE) {
 			factor = new BooleanValue(lexer.token == Token.TRUE);
+			lexer.nextToken();
 		} else if (lexer.token == Token.LITERALSTRING) {
 			factor = new StringValue(lexer.getStringValue());
+			lexer.nextToken();
 		} else if (lexer.token == Token.LEFTPAR) {
 			lexer.nextToken();
 			factor = expr();
@@ -714,6 +716,7 @@ public class Compiler {
 				lexer.nextToken();
 
 				if (lexer.token == Token.NEW) {
+					lexer.nextToken();
 					factor = new ObjectCreation(id);
 				} else {
 					factor = primaryExpr(id, true);
