@@ -9,6 +9,8 @@ import comp.CompilationError;
 
 public class Program {
 
+	private String filename;
+
 	public Program(ArrayList<TypeCianetoClass> classList, ArrayList<MetaobjectAnnotation> metaobjectCallList, 
 			       ArrayList<CompilationError> compilationErrorList) {
 		this.classList = classList;
@@ -16,10 +18,13 @@ public class Program {
 		this.compilationErrorList = compilationErrorList;
 	}
 
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 
 	public void genJava(PW pw) {
 
-		//pw.print("class OK_GER01{ public static void main(String args[]){}}");
+		pw.print("class " + filename + "{ public static void main(String args[]){}}");
 
 		for (TypeCianetoClass typeCianetoClass : classList) {
 			pw.print("class ");
@@ -27,8 +32,8 @@ public class Program {
 			pw.println("{");
 			pw.add();
 			typeCianetoClass.getFieldList().genJava(pw);
-			//typeCianetoClass.getPublicMethodList().genJava(pw);
-			//typeCianetoClass.getPrivateMethodList().genJava(pw);
+			// typeCianetoClass.getPublicMethodList().genJava(pw);
+			// typeCianetoClass.getPrivateMethodList().genJava(pw);
 			pw.sub();
 			pw.println("}");
 		}

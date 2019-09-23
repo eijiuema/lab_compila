@@ -251,7 +251,7 @@ public class Compiler {
 		next();
 		stLst = statementList();
 		if (lexer.token != Token.RIGHTCURBRACKET) {
-			error("'{' expected");
+			error("'}' expected");
 		}
 		next();
 		return new MethodDec(i, t, forParDec, stLst);
@@ -444,6 +444,7 @@ public class Compiler {
 			ifStList.add(statement());
 		}
 		check(Token.RIGHTCURBRACKET, "'}' was expected");
+		lexer.nextToken();
 		if (lexer.token == Token.ELSE) {
 			next();
 			check(Token.LEFTCURBRACKET, "'{' expected after 'else'");
@@ -793,6 +794,7 @@ public class Compiler {
 				primaryExpr = new PrimaryExprSelf();
 			}
 		} else {
+			System.out.println(lexer.token);
 			error("'super', 'Id' or 'self' was expected");
 		}
 
