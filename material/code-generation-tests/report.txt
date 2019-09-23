@@ -40,6 +40,5 @@ List of files with correct Java code:
    ./material/code-generation-tests/OK_GER01.java
 
 List of files Java code that compiles but was generated incorrectly: 
-   ./material/code-generation-tests/OK_GER01.java
 
 The compiler could not create the following .java files:

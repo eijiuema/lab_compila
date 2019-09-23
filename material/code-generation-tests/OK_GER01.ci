@@ -1,12 +1,8 @@
 @annot("check", "comparisonOperators", "if")
 @nce
 
-class A
-
-end
-
 class Program
-   
+  
    public func run {
       var A a;
       

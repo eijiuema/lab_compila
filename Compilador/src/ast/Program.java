@@ -18,12 +18,18 @@ public class Program {
 
 
 	public void genJava(PW pw) {
-		System.out.println(	classList.size() );
+
+		//pw.print("class OK_GER01{ public static void main(String args[]){}}");
+
 		for (TypeCianetoClass typeCianetoClass : classList) {
-			pw.print("class ")
+			pw.print("class ");
 			pw.print(typeCianetoClass.getName());
 			pw.println("{");
-			pw.print("");
+			pw.add();
+			typeCianetoClass.getFieldList().genJava(pw);
+			//typeCianetoClass.getPublicMethodList().genJava(pw);
+			//typeCianetoClass.getPrivateMethodList().genJava(pw);
+			pw.sub();
 			pw.println("}");
 		}
 	}

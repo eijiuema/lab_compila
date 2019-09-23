@@ -26,6 +26,15 @@ public class FieldList {
     public void setFieldList(List<AbstractMap.SimpleEntry<String, FieldDec>> fieldList) {
         this.fieldList = fieldList;
     }
+
+	public void genJava(PW pw) {
+        for (AbstractMap.SimpleEntry<String, FieldDec> fd : fieldList ){
+            pw.printIdent(fd.getKey());
+            pw.print(" ");
+            fd.getValue().genJava(pw);
+            pw.print(";\n");
+        }
+	}
     
     
     
