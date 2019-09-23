@@ -23,7 +23,8 @@ public class Lexer {
       }
 
 
-    private static final int MaxValueInteger = 32767;
+    private static final int MaxValueInteger = 2147483647;
+    private static final int MinValueInteger = 0;
       // contains the keywords
     static private Hashtable<String, Token> keywordsTable;
 
@@ -118,7 +119,7 @@ public class Lexer {
                 } catch ( NumberFormatException e ) {
                    error.showError("Number out of limits");
                 }
-                if ( numberValue > MaxValueInteger )
+                if ( numberValue > MaxValueInteger  || numberValue < MinValueInteger)
                    error.showError("Number out of limits");
             }
             else {
@@ -269,7 +270,7 @@ public class Lexer {
             }
           }
         beforeLastTokenPos = lastTokenPos;
-        System.out.println(token);
+        // System.out.println(token);
     }
 
       // return the line number of the last token got with getToken()
