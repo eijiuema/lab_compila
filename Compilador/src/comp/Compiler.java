@@ -52,7 +52,7 @@ public class Compiler {
 				// program.addClass(new TypeCianetoClass("test"));
 			} catch (CompilerError e) {
 				// if there was an exception, there is a compilation error
-				e.printStackTrace();
+				// e.printStackTrace();
 				thereWasAnError = true;
 			} catch (RuntimeException e) {
 				e.printStackTrace();
