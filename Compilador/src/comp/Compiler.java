@@ -5,7 +5,6 @@
 package comp;
 
 import java.io.PrintWriter;
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,13 +45,13 @@ public class Compiler {
 					metaobjectAnnotation(metaobjectCallList);
 				}
 
-				ClassDec c = classDec();
+				TypeCianetoClass typeCianetoClass = classDec();
 
-				program.addClass(c.getTypeCianetoClass(program.getClassList()));
+				program.addClass(typeCianetoClass);
 				// program.addClass(new TypeCianetoClass("test"));
 			} catch (CompilerError e) {
 				// if there was an exception, there is a compilation error
-				// e.printStackTrace();
+				e.printStackTrace();
 				thereWasAnError = true;
 			} catch (RuntimeException e) {
 				e.printStackTrace();
@@ -154,11 +153,10 @@ public class Compiler {
 			lexer.nextToken();
 	}
 
-	private ClassDec classDec() {
+	private TypeCianetoClass classDec() {
+
+		TypeCianetoClass typeCianetoClass = null;
 		boolean open = false;
-		Id id = null;
-		Id extendsId = null;
-		MemberList memberList = null;
 
 		if (lexer.token == Token.ID && lexer.getStringValue().equals("open")) {
 			open = true;
@@ -170,42 +168,54 @@ public class Compiler {
 
 		check(Token.ID, "'Identifier' expected");
 
-		id = id(Type.undefinedType);
-		// symbolTable.putInGlobal(className, id);
+		Id id = id(Type.undefinedType);
+
+		typeCianetoClass = new TypeCianetoClass(id.getName(), open);
+
+		self = typeCianetoClass;
+
+		symbolTable.classTable.put(id, typeCianetoClass);
 
 		if (lexer.token == Token.EXTENDS) {
 			lexer.nextToken();
 			check(Token.ID, "'identifier' expected");
-			extendsId = id();
-			// symbolTable.get(superclassName, extendsId);
+			Id idSuper = id();
+			TypeCianetoClass superTypeCianetoClass = symbolTable.classTable.get(idSuper);
+			if (null == superTypeCianetoClass) {
+				error("There's no class named " + idSuper.getName());
+			} else {
+				self.setSuperclass(superTypeCianetoClass);
+			}
 		}
 
-		memberList = memberList();
+		memberList();
 
 		check(Token.END, "'end' was expected");
 		lexer.nextToken();
 
-		return new ClassDec(id, extendsId, memberList, open);
+		return typeCianetoClass;
 	}
 
-	private MemberList memberList() {
-		String qualif = "";
-		List<AbstractMap.SimpleEntry<String, Member>> members = new ArrayList<AbstractMap.SimpleEntry<String, Member>>();
+	private void memberList() {
 
 		while (true) {
-			qualif = qualifier();
+			String qualifier = qualifier();
 			if (lexer.token == Token.VAR) {
-				if (!(qualif.equals("private") || qualif.equals(""))) {
+				if (!(qualifier.equals("private") || qualifier.equals(""))) {
 					error("Invalid qualifier");
 				}
-				members.add(new AbstractMap.SimpleEntry<String, Member>(qualif, fieldDec()));
+				self.addField(qualifier, fieldDec());
 			} else if (lexer.token == Token.FUNC) {
-				members.add(new AbstractMap.SimpleEntry<String, Member>(qualif, methodDec()));
+				if (qualifier.equals("private")) {
+					self.addPrivateMethodList(qualifier, methodDec());
+				} else {
+					self.addPublicMethodList(qualifier, methodDec());
+				}
 			} else {
 				break;
 			}
 		}
-		return new MemberList(members);
+
 	}
 
 	private void error(String msg) {
@@ -224,72 +234,69 @@ public class Compiler {
 
 	private MethodDec methodDec() {
 		Id id = null;
-		Type t = Type.undefinedType;
-		List<Stat> stLst = null;
-		List<ParamDec> forParDec = null;
+		MethodDec methodDec = null;
 
 		lexer.nextToken();
 		if (lexer.token == Token.ID) {
-			// TODO porcurar na symboltable (local) e inserir se n�o existir SymbolTable
-			lexer.nextToken();
-
+			id = id();
+			if (symbolTable.localTable.contains(id)) {
+				error("There's already a method named " + id.getName());
+			}
+			methodDec = new MethodDec(id);
 		} else if (lexer.token == Token.IDCOLON) {
-			// keyword method. It has parameters
 			id = idColon();
-			forParDec = formalParamDec();
+			methodDec = new MethodDec(id);
+			formalParamDec(methodDec);
 		} else {
 			error("An identifier or identifer: was expected after 'func'");
 		}
+
 		if (lexer.token == Token.MINUS_GT) {
-			// method declared a return type
 			lexer.nextToken();
-			t = type();
+			methodDec.setType(type());
 		}
+
 		check(Token.LEFTCURBRACKET, "'{' expected");
 		next();
-		stLst = statementList();
+		
+		statementList(methodDec);
+
 		check(Token.RIGHTCURBRACKET, "'}' expected");
 		next();
-		return new MethodDec(id, t, forParDec, stLst);
+
+		return methodDec;
 
 	}
 
-	private List<ParamDec> formalParamDec() {
-		List<ParamDec> lst = new ArrayList<ParamDec>();
+	private void formalParamDec(MethodDec methodDec) {
 
-		lst.add(paramDec());
+		methodDec.addParamDec(paramDec());
 
 		while (lexer.token == Token.COMMA) {
 			next();
-			lst.add(paramDec());
+			methodDec.addParamDec(paramDec());
 		}
 
 		if ((lexer.token != Token.MINUS_GT) && (lexer.token != Token.LEFTCURBRACKET))
 			error("',' expected");
 
-		return lst;
 	}
 
 	private ParamDec paramDec() {
-		Type t = Type.undefinedType;
-		Id id = null;
+		Type t = type();
+		Id id = id(t);
 
-		t = type();
-
-		id = id(t);
-
-		// TODO Adicionar na SymbolTable ou dar erro
+		if (symbolTable.localTable.contains(id)) {
+			error("There's already a param named " + id.getName());
+		}
 
 		return new ParamDec(t, id);
 	}
 
-	private List<Stat> statementList() {
-		List<Stat> lst = new ArrayList<Stat>();
-		// only '}' is necessary in this test
+	private void statementList(MethodDec methodDec) {
 		while (lexer.token != Token.RIGHTCURBRACKET && lexer.token != Token.END) {
-			lst.add(statement());
+			methodDec.addStat(statement());
 		}
-		return lst;
 	}
 
 	private Stat statement() {
@@ -796,6 +803,7 @@ public class Compiler {
 	}
 
 	private SymbolTable symbolTable = new SymbolTable();
+	private TypeCianetoClass self = null;
 	private Lexer lexer;
 	private ErrorSignaller signalError;
 }

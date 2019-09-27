@@ -36,3 +36,12 @@ Erros que deveriam ser sinalizados mas n?o foram:
 .\material\student-made-tests\ER_SEM01.ci, 18, Missing 'return' statement in method 'm' (comp.Compiler.methodDec())
 
 Um ou mais arquivos de teste tinham erros, mas estes foram sinalizados nos n?meros de linhas corretos
+
+List of Java files with compilation errors: 
+
+List of files with correct Java code: 
+   .\material\ER_SEM01.java
+
+List of files Java code that compiles but was generated incorrectly: 
+
+The compiler could not create the following .java files:

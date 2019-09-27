@@ -5,7 +5,7 @@
 package ast;
 import java.util.*;
 
-public class ParamDec{
+public class ParamDec {
     private Id id;
     private Type type;    
 

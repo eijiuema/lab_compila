@@ -5,7 +5,7 @@
 package ast;
 import java.util.*;
 
-public class LocalDec extends Stat{
+public class LocalDec extends Stat {
     private Type decType;
     private List<Id> idList;
     private Expr expr;    

@@ -5,7 +5,7 @@
 package ast;
 import java.util.*;
 
-public class FieldDec extends Member{
+public class FieldDec extends Member {
     
     private Type type;
     private List<Id> idList;

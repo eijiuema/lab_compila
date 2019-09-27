@@ -8,11 +8,12 @@ package ast;
  */
 public class TypeCianetoClass extends Type {
 
-   public TypeCianetoClass( String name ) {
+   public TypeCianetoClass( String name, boolean open ) {
       super(name);
       this.publicMethodList = new MethodList();
       this.privateMethodList = new MethodList();
       this.fieldList = new FieldList();
+      this.open = open;
    }
 
    @Override
@@ -24,6 +25,7 @@ public class TypeCianetoClass extends Type {
    private TypeCianetoClass superclass;
    private FieldList fieldList;
    private MethodList publicMethodList, privateMethodList;
+   private boolean open;
    
    @Override
    public String getJavaName() {
@@ -64,5 +66,13 @@ public class TypeCianetoClass extends Type {
 
    public void addPrivateMethodList(String qualifier, MethodDec method) {
       this.privateMethodList.addMethod(qualifier, method);
+   }
+
+   public boolean getOpen() {
+      return open;
+   }
+
+   public void setOpen(boolean open) {
+      this.open = open;
    }
 }
