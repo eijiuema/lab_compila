@@ -359,6 +359,9 @@ public class Compiler {
 			next();
 			rightExpr = expr();
 
+			if( ! (leftExpr.getType().canConvertFrom(rightExpr.getType())))
+				error(rightExpr.getType().toString() + " expression isn't convertible to " + leftExpr.getType().toString() + "expression.");
+
 			return new AssignExpr(leftExpr, rightExpr);
 		} else {
 			return new AssignExpr(leftExpr);
