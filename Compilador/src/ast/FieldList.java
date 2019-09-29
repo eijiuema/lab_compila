@@ -29,7 +29,8 @@ public class FieldList {
 
 	public void genJava(PW pw) {
         for (AbstractMap.SimpleEntry<String, FieldDec> fd : fieldList ){
-            pw.printIdent(fd.getKey());
+            pw.printIdent("private");
+            pw.print(fd.getKey());
             pw.print(" ");
             fd.getValue().genJava(pw);
             pw.print(";\n");

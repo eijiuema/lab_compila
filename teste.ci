@@ -1,0 +1,11 @@
+class Program
+
+    var A a;
+    var Int b;
+
+    public func run {
+        var A a;
+        var Int b;
+    }
+
+end
