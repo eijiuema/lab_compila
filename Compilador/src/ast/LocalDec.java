@@ -17,6 +17,21 @@ public class LocalDec extends Stat {
     }
 
     public void genJava(PW pw){
+        pw.printIdent(this.decType.getJavaName());
+        pw.print(" ");
+
+        for(Id id: this.idList){
+            pw.print(id.getName());;
+            if( !id.equals(this.idList.get(this.idList.size()-1)) ){
+                pw.print(", ");
+            }
+        }
+
+        if(this.expr != null){
+            this.expr.genJava(pw);
+        }
+
+        pw.println(";");
     }
     
 }

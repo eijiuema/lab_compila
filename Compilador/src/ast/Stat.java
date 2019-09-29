@@ -6,6 +6,9 @@ package ast;
 
 abstract public class Stat {
 
+	abstract public void genJava(PW pw);
+	
+
 	//abstract public void genC(PW pw);
 
 }

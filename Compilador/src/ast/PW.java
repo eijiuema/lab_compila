@@ -52,7 +52,7 @@ public class PW {
 
 
 	int currentIndent = 0;
-	public int step = 3;
+	public int step = 4;
 	private PrintWriter out;
 
 

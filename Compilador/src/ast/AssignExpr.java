@@ -20,13 +20,15 @@ public class AssignExpr extends Stat {
     }
 
     public void genJava(PW pw){
-
+        pw.printIdent("");
         leftExpr.genJava(pw);
-
-        pw.print("=");
         
-        if(rightExpr != null)
+        if(rightExpr != null){
+            pw.print(" = ");
             rightExpr.genJava(pw);
+        }
+        
+        pw.println(";");
     }
 /*
     @Override

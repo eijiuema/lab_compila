@@ -14,6 +14,9 @@ public class PrimaryExprSuperId extends PrimaryExpr{
     }
 
     public void genJava(PW pw){
+        pw.print("super");
+        pw.print(".");
+        pw.print(this.id.getName());
         
     }
 

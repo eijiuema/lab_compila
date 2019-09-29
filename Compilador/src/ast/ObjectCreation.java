@@ -14,7 +14,8 @@ public class ObjectCreation extends Factor{
 
     public void genJava(PW pw){
         pw.print("new ");
-        //...
+        pw.print(this.id.getName());
+        pw.print("()");
     }
 
     public Type getType() {

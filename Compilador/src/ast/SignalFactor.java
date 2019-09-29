@@ -22,7 +22,7 @@ public class SignalFactor{
         if(signal != null)
             pw.print(signal);
         
-            factor.genJava(pw);
+        factor.genJava(pw);
     }
      
     public Type getType() {

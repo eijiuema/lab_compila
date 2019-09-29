@@ -18,7 +18,7 @@ public class PrimaryExprSelf extends PrimaryExpr{
     }
 
     public void genJava(PW pw){
-        
+        pw.print("this");
     }
 
     public Type getType() {

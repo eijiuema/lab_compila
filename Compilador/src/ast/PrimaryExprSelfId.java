@@ -14,7 +14,9 @@ public class PrimaryExprSelfId extends PrimaryExpr{
     }
 
     public void genJava(PW pw){
-        
+        pw.print("this");
+        pw.print(".");
+        pw.print(this.secondId.getName());
     }
 
     public Type getType() {

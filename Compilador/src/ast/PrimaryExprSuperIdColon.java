@@ -19,7 +19,18 @@ public class PrimaryExprSuperIdColon extends PrimaryExpr {
     }
 
     public void genJava(PW pw) {
+        pw.print("super");
+        pw.print(".");
+        pw.print(this.id.getName());
+        pw.print("(");
+        for(Expr expr: this.exprList){
+            expr.genJava(pw);
+            if( !expr.equals(this.exprList.get(this.exprList.size()-1)) ){
+                pw.print(", ");
+            }
 
+        }
+        pw.print(")");
     }
 
     public Type getType() {

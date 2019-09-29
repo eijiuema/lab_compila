@@ -27,9 +27,13 @@ public class Program {
 		pw.println("class " + mainClassName + "{");
 		pw.add();
 		pw.printlnIdent("public static void main(String args[]){");
+		pw.add();
+		pw.printlnIdent("new Program().run();");
+		pw.sub();
 		pw.printlnIdent("}");
 		pw.sub();
 		pw.println("}");
+		pw.println();
 
 		for (TypeCianetoClass typeCianetoClass : classList) {
 			pw.print("class ");
@@ -41,6 +45,7 @@ public class Program {
 			typeCianetoClass.getPrivateMethodList().genJava(pw);
 			pw.sub();
 			pw.println("}");
+			pw.println();
 		}
 	}
 
@@ -74,6 +79,7 @@ public class Program {
 	ArrayList<CompilationError> compilationErrorList;
 
 	public void setMainJavaClassName(String className) {
+		this.mainClassName = className;
 	}
 
 	

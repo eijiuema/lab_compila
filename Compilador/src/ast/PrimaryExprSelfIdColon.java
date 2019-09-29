@@ -16,7 +16,9 @@ public class PrimaryExprSelfIdColon extends PrimaryExpr{
     }
 
     public void genJava(PW pw){
-        
+        pw.print("this");
+        pw.print(".");
+        pw.print(this.idColon.getName());
     }
 
     public Type getType() {
