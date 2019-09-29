@@ -6,48 +6,48 @@ class OK_GER01{
 
 class A{
     public long m(){
-        Out.print(7, "print:" );
-        if(1>0) {
-            Out.print(0, "print:" );
+        Out.print(7, " " );
+        if(1 > 0) {
+            Out.print(0, " " );
         }
-        if(1>=0) {
-            Out.print(1, "print:" );
+        if(1 >= 0) {
+            Out.print(1, " " );
         }
-        if(1!=0) {
-            Out.print(2, "print:" );
+        if(1 != 0) {
+            Out.print(2, " " );
         }
-        if(0<1) {
-            Out.print(3, "print:" );
+        if(0 < 1) {
+            Out.print(3, " " );
         }
-        if(0<=1) {
-            Out.print(4, "print:" );
+        if(0 <= 1) {
+            Out.print(4, " " );
         }
-        if(0==0) {
-            Out.print(5, "print:" );
+        if(0 == 0) {
+            Out.print(5, " " );
         }
-        if(0>=0) {
-            Out.print(6, "print:" );
+        if(0 >= 0) {
+            Out.print(6, " " );
         }
-        if(0<=0) {
-            Out.print(7, "print:" );
+        if(0 <= 0) {
+            Out.print(7, " " );
         }
-        if(1==0) {
-            Out.print(18, "print:" );
+        if(1 == 0) {
+            Out.print(18, " " );
         }
-        if(0>1) {
-            Out.print(10, "print:" );
+        if(0 > 1) {
+            Out.print(10, " " );
         }
-        if(0>=1) {
-            Out.print(11, "print:" );
+        if(0 >= 1) {
+            Out.print(11, " " );
         }
-        if(0!=0) {
-            Out.print(12, "print:" );
+        if(0 != 0) {
+            Out.print(12, " " );
         }
-        if(1<0) {
-            Out.print(13, "print:" );
+        if(1 < 0) {
+            Out.print(13, " " );
         }
-        if(1<=0) {
-            Out.print(14, "print:" );
+        if(1 <= 0) {
+            Out.print(14, " " );
         }
     }
 }
@@ -55,7 +55,7 @@ class A{
 class Program{
     public long run(){
         long a;
-        Out.println("println:" );
+        Out.println("7 0 1 2 3 4 5 6 7" );
         a = new A();
         a.m;
     }

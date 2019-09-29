@@ -27,7 +27,7 @@ public class Expr extends Factor {
         leftSimpleExpr.genJava(pw);
         
         if(relation != null)
-            pw.print(relation);
+            pw.print(" " + relation + " ");
         
         if(rightSimpleExpr != null)
             rightSimpleExpr.genJava(pw);

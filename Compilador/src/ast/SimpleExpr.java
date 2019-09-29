@@ -22,7 +22,7 @@ public class SimpleExpr{
         for(SumSubExpr sse : this.sumSubExprList ){
             sse.genJava(pw);
             if( !sse.equals(this.sumSubExprList.get(this.sumSubExprList.size()-1)) ){
-                pw.print(" ++ ");
+                pw.print(" + ");
             }
         }
     }

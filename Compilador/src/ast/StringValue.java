@@ -15,7 +15,7 @@ public class StringValue extends BasicValue{
     public void genJava(PW pw){
         pw.print("\"");
         pw.print(value);
-        pw.print("\" ");
+        pw.print("\"");
     }
 
 

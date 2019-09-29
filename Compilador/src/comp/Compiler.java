@@ -661,7 +661,7 @@ public class Compiler {
 			lexer.nextToken();
 		} else if (lexer.token == Token.LITERALSTRING) {
 			
-			factor = new StringValue(lexer.getStringValue());
+			factor = new StringValue(lexer.getLiteralStringValue());
 			lexer.nextToken();
 		} else if (lexer.token == Token.LEFTPAR) {
 			lexer.nextToken();
