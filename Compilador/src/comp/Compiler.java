@@ -406,7 +406,8 @@ public class Compiler {
 		check(Token.UNTIL, "missing keyword 'until'");
 		next();
 		expr = expr();
-
+		checkType(expr,Type.booleanType,"expected Boolean expression");
+		
 		return new RepeatStat(statList, expr);
 	}
 
@@ -430,6 +431,8 @@ public class Compiler {
 		Expr expr = null;
 		next();
 		expr = expr();
+		checkType(expr,Type.booleanType,"expected Boolean expression");
+		
 		check(Token.LEFTCURBRACKET, "missing '{' after the 'while' expression");
 		next();
 		while (lexer.token != Token.RIGHTCURBRACKET && lexer.token != Token.END) {
@@ -446,6 +449,8 @@ public class Compiler {
 		List<Stat> elseStList = new ArrayList<Stat>();
 		next();
 		expr = expr();
+		checkType(expr,Type.booleanType,"expected Boolean expression");
+		
 		check(Token.LEFTCURBRACKET, "'{' expected after the 'if' expression");
 		next();
 		while (lexer.token != Token.RIGHTCURBRACKET && lexer.token != Token.END && lexer.token != Token.ELSE) {
@@ -464,6 +469,11 @@ public class Compiler {
 			next();
 		}
 		return new IfStat(expr, ifStList, elseStList);
+	}
+
+	private void checkType(Expr expr, Type shouldBe, String msg) {
+		if(expr.getType() != shouldBe)
+			error(msg);
 	}
 
 	private FieldDec fieldDec() {
@@ -556,6 +566,7 @@ public class Compiler {
 
 		lexer.nextToken();
 		Expr expr = expr();
+		checkType(expr,Type.booleanType,"expected Boolean expression");
 		check(Token.COMMA, "',' expected after the expression of the 'assert' statement");
 		next();
 		check(Token.LITERALSTRING, "A literal string expected after the ',' of the 'assert' statement");
