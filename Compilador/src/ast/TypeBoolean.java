@@ -6,7 +6,9 @@ package ast;
 
 public class TypeBoolean extends Type {
 
-   public TypeBoolean() { super("boolean"); }
+   public TypeBoolean() {
+      super("boolean");
+   }
 
    @Override
    public String getCname() {
@@ -16,6 +18,14 @@ public class TypeBoolean extends Type {
    @Override
    public String getJavaName() {
       return "boolean";
+   }
+
+   @Override
+   public boolean canConvertFrom(Type right) {
+      if (right == Type.booleanType)
+         return true;
+      else
+         return false;
    }
 
 }

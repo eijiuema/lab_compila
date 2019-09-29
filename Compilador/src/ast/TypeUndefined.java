@@ -17,5 +17,10 @@ public class TypeUndefined extends Type {
    public String getJavaName() {
       return "long";
    }
+
+   @Override
+   public boolean canConvertFrom(Type right) {  
+      return false;
+   }
    
 }

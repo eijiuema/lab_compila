@@ -20,4 +20,9 @@ public class TypeNil extends Type {
 		return "null";
 	}
 
+	@Override
+   public boolean canConvertFrom(Type right) {
+		return false;
+   }
+
 }

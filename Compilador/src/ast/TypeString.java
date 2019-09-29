@@ -16,8 +16,14 @@ public class TypeString extends Type {
 
     @Override
     public String getJavaName() {
-        // TODO Auto-generated method stub
         return "String";
     }
+    @Override
+    public boolean canConvertFrom(Type right) {  
+      if( right == Type.stringType || right == Type.nilType)
+         return true;
+      else
+         return false;
+   }
 
 }

@@ -20,6 +20,8 @@ abstract public class Type {
         return name;
     }
 
+    abstract public boolean canConvertFrom(Type right);
+
     abstract public String getCname();
 
     abstract public String getJavaName();

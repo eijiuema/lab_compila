@@ -19,4 +19,11 @@ public class TypeInt extends Type {
         return "int";
     }
 
+    @Override
+   public boolean canConvertFrom(Type right) {  
+      if( right == Type.intType)
+         return true;
+      else
+         return false;
+   }
 }

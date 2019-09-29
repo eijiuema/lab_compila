@@ -75,4 +75,23 @@ public class TypeCianetoClass extends Type {
    public void setOpen(boolean open) {
       this.open = open;
    }
+
+   @Override
+   public boolean canConvertFrom(Type right) {
+      if(right == Type.nilType)
+         return true;
+      else if(right == Type.booleanType || right == Type.intType || right == Type.stringType || right == Type.undefinedType)
+         return false;
+      else{
+         TypeCianetoClass rightSuperClass = (TypeCianetoClass) right;
+
+         while( !(rightSuperClass.equals(this)) && rightSuperClass != null)
+            rightSuperClass = rightSuperClass.getSuperclass();
+
+         if(this.equals(rightSuperClass))
+            return true;
+         else
+            return false;
+      }
+   }
 }
