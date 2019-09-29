@@ -9,7 +9,7 @@ import comp.CompilationError;
 
 public class Program {
 
-	private String filename;
+	private String mainClassName;
 
 	public Program(ArrayList<TypeCianetoClass> classList, ArrayList<MetaobjectAnnotation> metaobjectCallList, 
 			       ArrayList<CompilationError> compilationErrorList) {
@@ -19,12 +19,17 @@ public class Program {
 	}
 
 	public void setFilename(String filename) {
-		this.filename = filename;
+		this.mainClassName = filename;
 	}
 
 	public void genJava(PW pw) {
 
-		pw.print("class " + filename + "{ public static void main(String args[]){}}");
+		pw.println("class " + mainClassName + "{");
+		pw.add();
+		pw.printlnIdent("public static void main(String args[]){");
+		pw.printlnIdent("}");
+		pw.sub();
+		pw.println("}");
 
 		for (TypeCianetoClass typeCianetoClass : classList) {
 			pw.print("class ");
@@ -32,8 +37,8 @@ public class Program {
 			pw.println("{");
 			pw.add();
 			typeCianetoClass.getFieldList().genJava(pw);
-			// typeCianetoClass.getPublicMethodList().genJava(pw);
-			// typeCianetoClass.getPrivateMethodList().genJava(pw);
+			typeCianetoClass.getPublicMethodList().genJava(pw);
+			typeCianetoClass.getPrivateMethodList().genJava(pw);
 			pw.sub();
 			pw.println("}");
 		}
@@ -67,6 +72,9 @@ public class Program {
 	private ArrayList<MetaobjectAnnotation> metaobjectCallList;
 	
 	ArrayList<CompilationError> compilationErrorList;
+
+	public void setMainJavaClassName(String className) {
+	}
 
 	
 }

@@ -37,7 +37,7 @@ public class MethodDec extends Member {
     }
 
     public void genJava(PW pw) {
-        // ...
+        
     }
 
 }

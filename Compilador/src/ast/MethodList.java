@@ -28,5 +28,14 @@ public class MethodList {
         this.methodList = methodList;
     }
 
+	public void genJava(PW pw) {
+
+        for( AbstractMap.SimpleEntry<String,MethodDec> method : this.methodList ){
+            pw.printIdent(method.getKey());
+            pw.print(" ");
+            method.getValue().genJava(pw);
+        }
+	}
+
 
 }
