@@ -13,7 +13,9 @@ public class ReturnStat extends Stat {
     }
 
     public void genJava(PW pw){
-        //...
+        pw.printIdent("return ");
+        this.expr.genJava(pw);
+        pw.println(";");
     }
 /*
     @Override

@@ -660,6 +660,7 @@ public class Compiler {
 			factor = new BooleanValue(lexer.token == Token.TRUE);
 			lexer.nextToken();
 		} else if (lexer.token == Token.LITERALSTRING) {
+			
 			factor = new StringValue(lexer.getStringValue());
 			lexer.nextToken();
 		} else if (lexer.token == Token.LEFTPAR) {

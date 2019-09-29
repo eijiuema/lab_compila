@@ -15,7 +15,9 @@ public class ParamDec {
     }
 
     public void genJava(PW pw){
-        //...
+        pw.print(type.getJavaName());
+        pw.print(" ");
+        pw.print(id.getName());
     }
     
 }

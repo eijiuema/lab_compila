@@ -16,7 +16,15 @@ public class RepeatStat extends Stat {
     }
 
     public void genJava(PW pw){
-        //...
+        pw.printlnIdent("do{");        
+        pw.add();
+        for (Stat st : this.statList) {
+            st.genJava(pw);
+        }
+        pw.sub();
+        pw.printlnIdent("} while(");
+        expr.genJava(pw);
+        pw.println(");");
     }
 /*
     @Override

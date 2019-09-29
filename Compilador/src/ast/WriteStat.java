@@ -16,13 +16,13 @@ public class WriteStat extends Stat {
 
     public void genJava(PW pw){
 
-        pw.print("System.out.");
+        pw.printIdent("System.out.");
         pw.print(this.printName);
         pw.print("(");
 
         expr.genJava(pw);
 
-        pw.print(")");
+        pw.println(");");
         
     }
 /*

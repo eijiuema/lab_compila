@@ -8,7 +8,7 @@ import java.util.*;
 public class SemicolonStat extends Stat{
 
     public void genJava(PW pw){
-        //...
+        pw.printIdent(";");
     }
     public void genC(PW pw){
         //...
