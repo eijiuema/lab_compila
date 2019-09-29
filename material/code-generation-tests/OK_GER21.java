@@ -1,6 +1,7 @@
-class OK_GER21{ public static void main(String args[]){}}class A{
-    int n;
+class OK_GER21{
+   public static void main(String args[]){
+   }
 }
-class Program{
-    int a;
-}
+class A{
+   private int n;
+        }

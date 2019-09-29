@@ -244,6 +244,9 @@ public class Compiler {
 			}
 			methodDec = new MethodDec(id);
 		} else if (lexer.token == Token.IDCOLON) {
+			if (self.getName().equals("Program")) {
+				error("The method Program::run must be parameterless");
+			}
 			id = idColon();
 			methodDec = new MethodDec(id);
 			formalParamDec(methodDec);

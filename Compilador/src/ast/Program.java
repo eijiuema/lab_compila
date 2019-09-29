@@ -9,8 +9,6 @@ import comp.CompilationError;
 
 public class Program {
 
-	private String mainClassName;
-
 	public Program(ArrayList<TypeCianetoClass> classList, ArrayList<MetaobjectAnnotation> metaobjectCallList, 
 			       ArrayList<CompilationError> compilationErrorList) {
 		this.classList = classList;
@@ -18,13 +16,15 @@ public class Program {
 		this.compilationErrorList = compilationErrorList;
 	}
 
-	public void setFilename(String filename) {
-		this.mainClassName = filename;
-	}
+	/**
+	 * the name of the main Java class when the code is generated to Java. This name
+	 * is equal to the file name (without extension)
+	 */
+	private String mainJavaClassName;
 
 	public void genJava(PW pw) {
 
-		pw.println("class " + mainClassName + "{");
+		pw.println("class " + mainJavaClassName + "{");
 		pw.add();
 		pw.printlnIdent("public static void main(String args[]){");
 		pw.add();
@@ -51,7 +51,7 @@ public class Program {
 
 	public void genC(PW pw) {
 	}
-	
+
 	public ArrayList<TypeCianetoClass> getClassList() {
 		return classList;
 	}
@@ -63,23 +63,22 @@ public class Program {
 	public ArrayList<MetaobjectAnnotation> getMetaobjectCallList() {
 		return metaobjectCallList;
 	}
-	
+
 	public boolean hasCompilationErrors() {
-		return compilationErrorList != null && compilationErrorList.size() > 0 ;
+		return compilationErrorList != null && compilationErrorList.size() > 0;
 	}
 
 	public ArrayList<CompilationError> getCompilationErrorList() {
 		return compilationErrorList;
 	}
 
-	
 	private ArrayList<TypeCianetoClass> classList;
 	private ArrayList<MetaobjectAnnotation> metaobjectCallList;
-	
+
 	ArrayList<CompilationError> compilationErrorList;
 
 	public void setMainJavaClassName(String className) {
-		this.mainClassName = className;
+		this.mainJavaClassName = className;
 	}
 
 	

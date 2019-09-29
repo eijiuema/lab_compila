@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Relat�rio do Compilador
 
 Resumo
@@ -33,3 +34,14 @@ _________________________________________________________________________
 _________________________________________________________________________
 O compilador n�o sinalizou nenhum erro que n�o deveria ter sinalizado
 Para o caso de teste que voc� utilizou, o compilador est� correto
+=======
+
+List of Java files with compilation errors: 
+
+List of files with correct Java code: 
+   .\teste.java
+
+List of files Java code that compiles but was generated incorrectly: 
+
+The compiler could not create the following .java files:
+>>>>>>> d1d42b3654e0aba1e6153bc2ec09abba17a339fb
