@@ -35,7 +35,7 @@ _________________________________________________________________________
 ######################################################
 Erros que foram sinalizados mas n�o deveriam ter sido:
 
-./material/code-generation-tests/OK_GER01.ci, 95, ast.TypeUndefined@3d04a311 expression isn't convertible to ast.TypeUndefined@3d04a311expression.
+./material/code-generation-tests/OK_GER01.ci, 58, illegal comparision beteween boolean expression and int expression
 
 
 List of Java files with compilation errors: 

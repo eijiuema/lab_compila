@@ -422,7 +422,7 @@ public class Compiler {
 
 		next();
 		expr = expr();
-
+		//checkType(expr, returnType,"expected" + returnType.getName() + "expression");
 		return new ReturnStat(expr);
 	}
 
@@ -473,6 +473,11 @@ public class Compiler {
 
 	private void checkType(Expr expr, Type shouldBe, String msg) {
 		if(expr.getType() != shouldBe)
+			error(msg);
+	}
+
+	private void checkType(SimpleExpr simpleExpr, Type shouldBe, String msg) {
+		if(simpleExpr.getType() != shouldBe)
 			error(msg);
 	}
 
@@ -578,22 +583,34 @@ public class Compiler {
 
 	private Expr expr() {
 
-		SimpleExpr simpleExpr = simpleExpr();
+		SimpleExpr simpleExprLeft = simpleExpr();
+		SimpleExpr simpleExprRight = null;
+		String relation = null;
 		Expr expr = null;
 
 		switch (lexer.token) {
-		case EQ:
 		case LT:
 		case LE:
 		case GT:
 		case GE:
-		case NEQ:
-			String relation = lexer.token.toString();
+			checkType(simpleExprLeft,Type.intType,"expected left Int expression");
+			relation = lexer.token.toString();
 			lexer.nextToken();
-			expr = new Expr(simpleExpr, relation, simpleExpr());
+			simpleExprRight = simpleExpr();
+			checkType(simpleExprRight,Type.intType,"expected right Int expression");
+			expr = new Expr(simpleExprLeft, relation, simpleExprRight);
+			break;
+		case EQ:
+		case NEQ:
+			relation = lexer.token.toString();
+			lexer.nextToken();
+			simpleExprRight = simpleExpr();
+			if(!simpleExprLeft.getType().canConvertFrom(simpleExprRight.getType()) && !simpleExprRight.getType().canConvertFrom(simpleExprLeft.getType()))
+				error("illegal comparision beteween " + simpleExprLeft.getType().getName() + " expression and " + simpleExprRight.getType().getName() + " expression");
+			expr = new Expr(simpleExprLeft, relation, simpleExprRight);
 			break;
 		default:
-			expr = new Expr(simpleExpr);
+			expr = new Expr(simpleExprLeft);
 			break;
 		}
 
