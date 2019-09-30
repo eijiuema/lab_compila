@@ -28,6 +28,7 @@ public class LocalDec extends Stat {
         }
 
         if(this.expr != null){
+            pw.print(" = ");
             this.expr.genJava(pw);
         }
 
