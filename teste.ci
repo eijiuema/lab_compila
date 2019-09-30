@@ -1,3 +1,7 @@
+class A
+
+end
+
 class Program
 
     var A a;
@@ -5,7 +9,19 @@ class Program
 
     public func run {
         var A a;
-        var Int b;
+        var Int b, c;
+
+        b = c = 0;
+
+        b = c + 1;
+    }
+
+    public func test {
+
+    }
+
+    public func test2 -> Int {
+        return 0;
     }
 
 end

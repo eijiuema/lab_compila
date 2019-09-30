@@ -5,6 +5,7 @@
 package comp;
 
 import java.io.PrintWriter;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +46,7 @@ public class Compiler {
 					metaobjectAnnotation(metaobjectCallList);
 				}
 
+				symbolTable.clearIds();
 				TypeCianetoClass typeCianetoClass = classDec();
 
 				program.addClass(typeCianetoClass);
@@ -168,21 +170,27 @@ public class Compiler {
 
 		check(Token.ID, "'Identifier' expected");
 
-		Id id = id(Type.undefinedType);
+		Id id = id();
+
+		if (symbolTable.getClass(id) != null) {
+			error("There's already a class named " + id.getName());
+		}
 
 		typeCianetoClass = new TypeCianetoClass(id.getName(), open);
-
+		
 		self = typeCianetoClass;
 
-		symbolTable.classTable.put(id, typeCianetoClass);
+		symbolTable.putClass(typeCianetoClass);
 
 		if (lexer.token == Token.EXTENDS) {
 			lexer.nextToken();
 			check(Token.ID, "'identifier' expected");
 			Id idSuper = id();
-			TypeCianetoClass superTypeCianetoClass = symbolTable.classTable.get(idSuper);
+			TypeCianetoClass superTypeCianetoClass = symbolTable.getClass(idSuper);
 			if (null == superTypeCianetoClass) {
 				error("There's no class named " + idSuper.getName());
+			} else if (!superTypeCianetoClass.getOpen()) {
+				error("The class " + superTypeCianetoClass.getName() + " isn't open and thus cannot be extended");
 			} else {
 				self.setSuperclass(superTypeCianetoClass);
 			}
@@ -239,15 +247,18 @@ public class Compiler {
 		lexer.nextToken();
 		if (lexer.token == Token.ID) {
 			id = id();
-			if (symbolTable.localTable.contains(id)) {
+			for (AbstractMap.SimpleEntry<String, MethodDec> a : self.getPrivateMethodList().getMethodList()) {
+				System.out.println(a);
+			}
+			if (symbolTable.hasId(id)) {
 				error("There's already a method named " + id.getName());
 			}
 			methodDec = new MethodDec(id);
 		} else if (lexer.token == Token.IDCOLON) {
-			if (self.getName().equals("Program")) {
-				error("The method Program::run must be parameterless");
-			}
 			id = idColon();
+			if (self.getName().equals("Program") && id.getName().equals("run")) {
+				error("The method Program.run must be parameterless");
+			}
 			methodDec = new MethodDec(id);
 			formalParamDec(methodDec);
 		} else {
@@ -255,13 +266,16 @@ public class Compiler {
 		}
 
 		if (lexer.token == Token.MINUS_GT) {
+			if (self.getName().equals("Program") && id.getName().equals("run")) {
+				error("The method Program.run must return nothing");
+			}
 			lexer.nextToken();
 			methodDec.setType(type());
 		}
 
 		check(Token.LEFTCURBRACKET, "'{' expected");
 		next();
-		
+
 		statementList(methodDec);
 
 		check(Token.RIGHTCURBRACKET, "'}' expected");
@@ -289,7 +303,7 @@ public class Compiler {
 		Type t = type();
 		Id id = id(t);
 
-		if (symbolTable.localTable.contains(id)) {
+		if (symbolTable.hasId(id)) {
 			error("There's already a param named " + id.getName());
 		}
 
@@ -359,8 +373,9 @@ public class Compiler {
 			next();
 			rightExpr = expr();
 
-			if( ! (leftExpr.getType().canConvertFrom(rightExpr.getType())))
-				error(rightExpr.getType().getName() + " expression isn't convertible to " + leftExpr.getType().getName() + " expression");
+			if (!(leftExpr.getType().canConvertFrom(rightExpr.getType())))
+				error(rightExpr.getType().getName() + " expression isn't convertible to " + leftExpr.getType().getName()
+						+ " expression");
 
 			return new AssignExpr(leftExpr, rightExpr);
 		} else {
@@ -377,11 +392,24 @@ public class Compiler {
 		type = type();
 		check(Token.ID, "A variable name was expected");
 
-		idList.add(id());
+		Id id = id(type);
+
+		if (symbolTable.hasId(id)) {
+			error("There's already a local var called " + id.getName());
+		}
+
+		symbolTable.putId(id);
+
+		idList.add(id);
 
 		while (lexer.token == Token.COMMA) {
 			next();
-			idList.add(id());
+			id = id(type);
+			if (symbolTable.hasId(id)) {
+				error("There's already a local var called " + id.getName());
+			}
+			symbolTable.putId(id);
+			idList.add(id);
 		}
 
 		if (lexer.token == Token.ASSIGN) {
@@ -390,10 +418,11 @@ public class Compiler {
 				error("Only a single variable should follow the type");
 			expr = expr();
 
-			if(!(type.canConvertFrom(expr.getType()))){
+			if (!(type.canConvertFrom(expr.getType()))) {
 				error(expr.getType().getName() + " expression isn't convertible to " + type.getName() + " expression");
 			}
 		}
+
 		return new LocalDec(type, idList, expr);
 
 	}
@@ -410,8 +439,8 @@ public class Compiler {
 		check(Token.UNTIL, "missing keyword 'until'");
 		next();
 		expr = expr();
-		checkType(expr,Type.booleanType,"expected Boolean expression");
-		
+		checkType(expr, Type.booleanType, "expected Boolean expression");
+
 		return new RepeatStat(statList, expr);
 	}
 
@@ -426,7 +455,7 @@ public class Compiler {
 
 		next();
 		expr = expr();
-		//checkType(expr, returnType,"expected" + returnType.getName() + "expression");
+		// checkType(expr, returnType,"expected" + returnType.getName() + "expression");
 		return new ReturnStat(expr);
 	}
 
@@ -435,8 +464,8 @@ public class Compiler {
 		Expr expr = null;
 		next();
 		expr = expr();
-		checkType(expr,Type.booleanType,"expected Boolean expression");
-		
+		checkType(expr, Type.booleanType, "expected Boolean expression");
+
 		check(Token.LEFTCURBRACKET, "missing '{' after the 'while' expression");
 		next();
 		while (lexer.token != Token.RIGHTCURBRACKET && lexer.token != Token.END) {
@@ -453,8 +482,8 @@ public class Compiler {
 		List<Stat> elseStList = new ArrayList<Stat>();
 		next();
 		expr = expr();
-		checkType(expr,Type.booleanType,"expected Boolean expression");
-		
+		checkType(expr, Type.booleanType, "expected Boolean expression");
+
 		check(Token.LEFTCURBRACKET, "'{' expected after the 'if' expression");
 		next();
 		while (lexer.token != Token.RIGHTCURBRACKET && lexer.token != Token.END && lexer.token != Token.ELSE) {
@@ -476,12 +505,12 @@ public class Compiler {
 	}
 
 	private void checkType(Expr expr, Type shouldBe, String msg) {
-		if(expr.getType() != shouldBe)
+		if (expr.getType() != shouldBe)
 			error(msg);
 	}
 
 	private void checkType(SimpleExpr simpleExpr, Type shouldBe, String msg) {
-		if(simpleExpr.getType() != shouldBe)
+		if (simpleExpr.getType() != shouldBe)
 			error(msg);
 	}
 
@@ -489,8 +518,11 @@ public class Compiler {
 		Type t = Type.undefinedType;
 		List<Id> idList = new ArrayList<Id>();
 
+		check(Token.VAR, "'var' was expected");
 		lexer.nextToken();
 		t = type();
+
+		System.out.println(t);
 
 		check(Token.ID, "A field name was expected");
 
@@ -521,9 +553,13 @@ public class Compiler {
 				t = Type.stringType;
 			next();
 		} else if (lexer.token == Token.ID) {
-			// TODO pesquisar tipo na classTable
-			t = Type.undefinedType;
-			next();
+			TypeCianetoClass typeCianetoClass;
+			Id id = id();
+			typeCianetoClass = symbolTable.getClass(id);
+			if (typeCianetoClass == null)  {
+				error("There's no class named " + id.getName());
+			}
+			t = typeCianetoClass;
 		} else {
 			this.error("A type was expected");
 		}
@@ -575,7 +611,7 @@ public class Compiler {
 
 		lexer.nextToken();
 		Expr expr = expr();
-		checkType(expr,Type.booleanType,"expected Boolean expression");
+		checkType(expr, Type.booleanType, "expected Boolean expression");
 		check(Token.COMMA, "',' expected after the expression of the 'assert' statement");
 		next();
 		check(Token.LITERALSTRING, "A literal string expected after the ',' of the 'assert' statement");
@@ -597,11 +633,11 @@ public class Compiler {
 		case LE:
 		case GT:
 		case GE:
-			checkType(simpleExprLeft,Type.intType,"expected left Int expression");
+			checkType(simpleExprLeft, Type.intType, "expected left Int expression");
 			relation = lexer.token.toString();
 			lexer.nextToken();
 			simpleExprRight = simpleExpr();
-			checkType(simpleExprRight,Type.intType,"expected right Int expression");
+			checkType(simpleExprRight, Type.intType, "expected right Int expression");
 			expr = new Expr(simpleExprLeft, relation, simpleExprRight);
 			break;
 		case EQ:
@@ -609,8 +645,10 @@ public class Compiler {
 			relation = lexer.token.toString();
 			lexer.nextToken();
 			simpleExprRight = simpleExpr();
-			if(!simpleExprLeft.getType().canConvertFrom(simpleExprRight.getType()) && !simpleExprRight.getType().canConvertFrom(simpleExprLeft.getType()))
-				error("illegal comparision beteween " + simpleExprLeft.getType().getName() + " expression and " + simpleExprRight.getType().getName() + " expression");
+			if (!simpleExprLeft.getType().canConvertFrom(simpleExprRight.getType())
+					&& !simpleExprRight.getType().canConvertFrom(simpleExprLeft.getType()))
+				error("illegal comparision beteween " + simpleExprLeft.getType().getName() + " expression and "
+						+ simpleExprRight.getType().getName() + " expression");
 			expr = new Expr(simpleExprLeft, relation, simpleExprRight);
 			break;
 		default:
@@ -628,7 +666,7 @@ public class Compiler {
 		SimpleExpr simpleExpr = new SimpleExpr(sumSubExpr);
 
 		while (lexer.token == Token.PLUSPLUS) {
-			if(sumSubExpr.getType() != Type.stringType && sumSubExpr.getType() != Type.intType )
+			if (sumSubExpr.getType() != Type.stringType && sumSubExpr.getType() != Type.intType)
 				error("expected String expression or Int expression");
 			lexer.nextToken();
 			sumSubExpr = sumSubExpr();
@@ -644,11 +682,12 @@ public class Compiler {
 		SumSubExpr sumSubExpr = new SumSubExpr(term);
 
 		if (lexer.token == Token.PLUS || lexer.token == Token.MINUS || lexer.token == Token.OR) {
-			if(lexer.token == Token.OR && term.getType() != Type.booleanType){
+			if (lexer.token == Token.OR && term.getType() != Type.booleanType) {
 				error("\"" + lexer.token.toString() + "\" operands must be " + Type.booleanType.getName());
-			}else if(!(lexer.token == Token.OR) && term.getType() != Type.intType){
+			} else if (!(lexer.token == Token.OR) && term.getType() != Type.intType) {
+				error(term.getType() + " - " + Type.intType);
 				error("\"" + lexer.token.toString() + "\" operands must be " + Type.intType.getName());
-			}	
+			}
 		}
 
 		while (lexer.token == Token.PLUS || lexer.token == Token.MINUS || lexer.token == Token.OR) {
@@ -656,9 +695,9 @@ public class Compiler {
 			lexer.nextToken();
 			term = term();
 
-			if(lowOp.equals(Token.OR.toString()) && term.getType() != Type.booleanType){
+			if (lowOp.equals(Token.OR.toString()) && term.getType() != Type.booleanType) {
 				error("\"" + lowOp + "\" operands must be " + Type.booleanType.getName());
-			}else if(!(lowOp.equals(Token.OR.toString())) && term.getType() != Type.intType){
+			} else if (!(lowOp.equals(Token.OR.toString())) && term.getType() != Type.intType) {
 				error("\"" + lowOp + "\" operands must be " + Type.intType.getName());
 			}
 
@@ -673,10 +712,10 @@ public class Compiler {
 		SignalFactor signalFactor = signalFactor();
 		Term term = new Term(signalFactor);
 
-		if (lexer.token == Token.MULT || lexer.token == Token.DIV || lexer.token == Token.AND){
-			if(lexer.token == Token.AND && signalFactor.getType() != Type.booleanType){
+		if (lexer.token == Token.MULT || lexer.token == Token.DIV || lexer.token == Token.AND) {
+			if (lexer.token == Token.AND && signalFactor.getType() != Type.booleanType) {
 				error("\"" + lexer.token.toString() + "\" operands must be " + Type.booleanType.getName());
-			}else if(lexer.token != Token.AND && signalFactor.getType() != Type.intType){
+			} else if (lexer.token != Token.AND && signalFactor.getType() != Type.intType) {
 				error("\"" + lexer.token.toString() + "\" operands must be " + Type.intType.getName());
 			}
 		}
@@ -687,9 +726,9 @@ public class Compiler {
 
 			signalFactor = signalFactor();
 
-			if(highOp.equals(Token.AND.toString()) && signalFactor.getType() != Type.booleanType){
+			if (highOp.equals(Token.AND.toString()) && signalFactor.getType() != Type.booleanType) {
 				error("\"" + highOp + "\" operands must be " + Type.booleanType.getName());
-			}else if(!(highOp.equals(Token.AND.toString())) && signalFactor.getType() != Type.intType){
+			} else if (!(highOp.equals(Token.AND.toString())) && signalFactor.getType() != Type.intType) {
 				error("\"" + highOp + "\" operands must be " + Type.intType.getName());
 			}
 
@@ -732,7 +771,6 @@ public class Compiler {
 			factor = new BooleanValue(lexer.token == Token.TRUE);
 			lexer.nextToken();
 		} else if (lexer.token == Token.LITERALSTRING) {
-			
 			factor = new StringValue(lexer.getLiteralStringValue());
 			lexer.nextToken();
 		} else if (lexer.token == Token.LEFTPAR) {
@@ -758,12 +796,24 @@ public class Compiler {
 
 				if (lexer.token == Token.NEW) {
 					lexer.nextToken();
+					TypeCianetoClass typeCianetoClass = symbolTable.getClass(id);
+					if (typeCianetoClass == null) {
+						error("There's no class named " + id.getName());
+					}
+					id.setType(typeCianetoClass);
 					factor = new ObjectCreation(id);
 				} else {
+					if (!symbolTable.hasId(id)) {
+						error("There's no id named " + id.getName());
+					}
+					id = symbolTable.getId(id);
 					factor = primaryExpr(id, true);
 				}
-
 			} else {
+				if (!symbolTable.hasId(id)) {
+					error("There's no id named " + id.getName());
+				}
+				id = symbolTable.getId(id);
 				factor = primaryExpr(id, false);
 			}
 
@@ -775,7 +825,7 @@ public class Compiler {
 	}
 
 	private void checkType(Factor factor, Type shouldBe, String msg) {
-		if(factor.getType() != shouldBe)
+		if (factor.getType() != shouldBe)
 			error(msg);
 	}
 

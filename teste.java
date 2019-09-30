@@ -1,4 +1,9 @@
-class teste{ public static void main(String args[]){}}class Program{
-   private int a;
-   private int b;
+class teste{
+    public static void main(String args[]){
+        new Program().run();
+    }
 }
+
+class A{
+}
+

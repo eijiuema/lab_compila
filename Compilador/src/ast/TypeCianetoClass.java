@@ -21,7 +21,6 @@ public class TypeCianetoClass extends Type {
       return super.getName();
    }
 
-   private String name;
    private TypeCianetoClass superclass;
    private FieldList fieldList;
    private MethodList publicMethodList, privateMethodList;
@@ -29,7 +28,7 @@ public class TypeCianetoClass extends Type {
    
    @Override
    public String getJavaName() {
-      return null;
+      return super.getName();
    }
 
    public String getName() {

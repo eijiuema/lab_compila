@@ -38,7 +38,11 @@ public class MethodDec extends Member {
 
     public void genJava(PW pw) {
         //gen java Type
-        pw.print(this.type.getJavaName() + " ");
+        if (this.type == Type.undefinedType) {
+            pw.print("void ");
+        } else {
+            pw.print(this.type.getJavaName() + " ");
+        }
         //gen java id
         pw.print(this.id.getName());
         //gen java formalParamDec

@@ -18,31 +18,16 @@ public class Id {
         return this.type;
     }
 
+    public void setType(Type type) {
+        this.type = type;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public int hashCode() {
-        return this.name.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Id other = (Id) obj;
-        if (name != other.name)
-            return false;
-        return true;
     }
 
 }
