@@ -326,7 +326,9 @@ public class Compiler {
 			checkSemiColon = false;
 			break;
 		case WHILE:
+			nestedLoops++;
 			st = whileStat();
+			nestedLoops--;
 			checkSemiColon = false;
 			break;
 		case RETURN:
@@ -339,7 +341,9 @@ public class Compiler {
 			st = new SemicolonStat();
 			break;
 		case REPEAT:
+			nestedLoops++;
 			st = repeatStat();
+			nestedLoops--;
 			break;
 		case VAR:
 			st = localDec();
@@ -446,6 +450,9 @@ public class Compiler {
 
 	private Break breakStat() {
 		next();
+
+		if(nestedLoops < 1)
+			error("break cannot be used outside of a loop");
 
 		return new Break();
 	}
@@ -937,6 +944,7 @@ public class Compiler {
 
 	private SymbolTable symbolTable = new SymbolTable();
 	private TypeCianetoClass self = null;
+	private long nestedLoops = 0;
 	private Lexer lexer;
 	private ErrorSignaller signalError;
 }
