@@ -7,7 +7,7 @@ package ast;
 public class TypeInt extends Type {
     
     public TypeInt() {
-        super("int");
+        super("Int");
     }
     
    public String getCname() {

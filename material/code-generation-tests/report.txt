@@ -35,7 +35,7 @@ _________________________________________________________________________
 ######################################################
 Erros que foram sinalizados mas n�o deveriam ter sido:
 
-./material/code-generation-tests/OK_GER01.ci, 89, 0a
+./material/code-generation-tests/OK_GER01.ci, 93, int expression isn't convertible to String expression
 
 
 List of Java files with compilation errors: 
