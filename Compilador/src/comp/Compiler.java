@@ -360,7 +360,7 @@ public class Compiler {
 			rightExpr = expr();
 
 			if( ! (leftExpr.getType().canConvertFrom(rightExpr.getType())))
-				error(rightExpr.getType().getName() + " expression isn't convertible to " + leftExpr.getType().getName() + " expression.");
+				error(rightExpr.getType().getName() + " expression isn't convertible to " + leftExpr.getType().getName() + " expression");
 
 			return new AssignExpr(leftExpr, rightExpr);
 		} else {
@@ -389,6 +389,10 @@ public class Compiler {
 			if (idList.size() > 1)
 				error("Only a single variable should follow the type");
 			expr = expr();
+
+			if(!(type.canConvertFrom(expr.getType()))){
+				error(expr.getType().getName() + " expression isn't convertible to " + type.getName() + " expression");
+			}
 		}
 		return new LocalDec(type, idList, expr);
 

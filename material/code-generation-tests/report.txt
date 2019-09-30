@@ -35,7 +35,7 @@ _________________________________________________________________________
 ######################################################
 Erros que foram sinalizados mas n�o deveriam ter sido:
 
-./material/code-generation-tests/OK_GER01.ci, 94, "!" operand must be Boolean
+./material/code-generation-tests/OK_GER01.ci, 89, 0a
 
 
 List of Java files with compilation errors: 
