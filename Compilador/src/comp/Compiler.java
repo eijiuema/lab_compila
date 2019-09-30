@@ -775,7 +775,7 @@ public class Compiler {
 			lexer.nextToken();
 		} else if (lexer.token == Token.LEFTPAR) {
 			lexer.nextToken();
-			factor = expr();
+			factor = new ExprFactor(expr());
 			check(Token.RIGHTPAR, "')' was expected");
 			lexer.nextToken();
 		} else if (lexer.token == Token.NOT) {
