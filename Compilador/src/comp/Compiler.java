@@ -360,7 +360,7 @@ public class Compiler {
 			rightExpr = expr();
 
 			if( ! (leftExpr.getType().canConvertFrom(rightExpr.getType())))
-				error(rightExpr.getType().toString() + " expression isn't convertible to " + leftExpr.getType().toString() + "expression.");
+				error(rightExpr.getType().getName() + " expression isn't convertible to " + leftExpr.getType().getName() + " expression.");
 
 			return new AssignExpr(leftExpr, rightExpr);
 		} else {
