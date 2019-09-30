@@ -15,8 +15,7 @@ public class Term {
         this.leftSignalFactor = leftSignalFactor;
         this.highOpSignalFactorList = signalFactorList; 
     }
-
-    public Term(SignalFactor leftSignalFactor) {
+    public Term(SignalFactor leftSignalFactor){
         this.leftSignalFactor = leftSignalFactor;
         this.highOpSignalFactorList = new ArrayList<>();  
     }

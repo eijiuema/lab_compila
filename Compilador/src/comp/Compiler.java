@@ -636,13 +636,29 @@ public class Compiler {
 	}
 
 	private SumSubExpr sumSubExpr() {
+		Term term = term();
+		SumSubExpr sumSubExpr = new SumSubExpr(term);
 
-		SumSubExpr sumSubExpr = new SumSubExpr(term());
+		if (lexer.token == Token.PLUS || lexer.token == Token.MINUS || lexer.token == Token.OR) {
+			if(lexer.token == Token.OR && term.getType() != Type.booleanType){
+				error("\"" + lexer.token.toString() + "\" operands must be " + Type.booleanType.getName());
+			}else if(!(lexer.token == Token.OR) && term.getType() != Type.intType){
+				error("\"" + lexer.token.toString() + "\" operands must be " + Type.intType.getName());
+			}	
+		}
 
 		while (lexer.token == Token.PLUS || lexer.token == Token.MINUS || lexer.token == Token.OR) {
 			String lowOp = lexer.token.toString();
 			lexer.nextToken();
-			sumSubExpr.addLowOpTerm(lowOp, term());
+			term = term();
+
+			if(lowOp.equals(Token.OR.toString()) && term.getType() != Type.booleanType){
+				error("\"" + lowOp + "\" operands must be " + Type.booleanType.getName());
+			}else if(!(lowOp.equals(Token.OR.toString())) && term.getType() != Type.intType){
+				error("\"" + lowOp + "\" operands must be " + Type.intType.getName());
+			}
+
+			sumSubExpr.addLowOpTerm(lowOp, term);
 		}
 
 		return sumSubExpr;
@@ -650,13 +666,30 @@ public class Compiler {
 	}
 
 	private Term term() {
+		SignalFactor signalFactor = signalFactor();
+		Term term = new Term(signalFactor);
 
-		Term term = new Term(signalFactor());
+		if (lexer.token == Token.MULT || lexer.token == Token.DIV || lexer.token == Token.AND){
+			if(lexer.token == Token.AND && signalFactor.getType() != Type.booleanType){
+				error("\"" + lexer.token.toString() + "\" operands must be " + Type.booleanType.getName());
+			}else if(lexer.token != Token.AND && signalFactor.getType() != Type.intType){
+				error("\"" + lexer.token.toString() + "\" operands must be " + Type.intType.getName());
+			}
+		}
 
 		while (lexer.token == Token.MULT || lexer.token == Token.DIV || lexer.token == Token.AND) {
 			String highOp = lexer.token.toString();
 			lexer.nextToken();
-			term.addHighOpSignalFactor(highOp, signalFactor());
+
+			signalFactor = signalFactor();
+
+			if(highOp.equals(Token.AND.toString()) && signalFactor.getType() != Type.booleanType){
+				error("\"" + highOp + "\" operands must be " + Type.booleanType.getName());
+			}else if(!(highOp.equals(Token.AND.toString())) && signalFactor.getType() != Type.intType){
+				error("\"" + highOp + "\" operands must be " + Type.intType.getName());
+			}
+
+			term.addHighOpSignalFactor(highOp, signalFactor);
 		}
 
 		return term;
@@ -705,7 +738,9 @@ public class Compiler {
 			lexer.nextToken();
 		} else if (lexer.token == Token.NOT) {
 			lexer.nextToken();
-			factor = new NegationFactor(factor());
+			factor = factor();
+			checkType(factor, Type.booleanType, "\"!\" operand must be Boolean");
+			factor = new NegationFactor(factor);
 		} else if (lexer.token == Token.NIL) {
 			factor = new NilFactor();
 			next();
@@ -733,6 +768,11 @@ public class Compiler {
 		}
 
 		return factor;
+	}
+
+	private void checkType(Factor factor, Type shouldBe, String msg) {
+		if(factor.getType() != shouldBe)
+			error(msg);
 	}
 
 	private PrimaryExpr primaryExpr(Id id, boolean hasDot) {

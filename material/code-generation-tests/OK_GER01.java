@@ -52,13 +52,3 @@ class A{
     }
 }
 
-class Program{
-    public long run(){
-        long a;
-        String s;
-        0 + "a" + 0;
-        Out.println("7 0 1 2 3 4 5 6 7");
-        a.m;
-    }
-}
-
