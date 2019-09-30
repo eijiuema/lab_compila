@@ -28,6 +28,9 @@ public class SimpleExpr{
     }
 
     public Type getType() {
-        return this.sumSubExprList.get(0).getType();
+        if(sumSubExprList.size() == 1)
+            return this.sumSubExprList.get(0).getType();
+        else
+            return Type.stringType;
     }
 }

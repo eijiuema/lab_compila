@@ -620,11 +620,15 @@ public class Compiler {
 
 	private SimpleExpr simpleExpr() {
 
-		SimpleExpr simpleExpr = new SimpleExpr(sumSubExpr());
+		SumSubExpr sumSubExpr = sumSubExpr();
+		SimpleExpr simpleExpr = new SimpleExpr(sumSubExpr);
 
 		while (lexer.token == Token.PLUSPLUS) {
+			if(sumSubExpr.getType() != Type.stringType && sumSubExpr.getType() != Type.intType )
+				error("expected String expression or Int expression");
 			lexer.nextToken();
-			simpleExpr.addSumSubExpr(sumSubExpr());
+			sumSubExpr = sumSubExpr();
+			simpleExpr.addSumSubExpr(sumSubExpr);
 		}
 
 		return simpleExpr;
