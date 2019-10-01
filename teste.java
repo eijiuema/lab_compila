@@ -1,3 +1,4 @@
+import java.util.Scanner;
 public class teste {
     public static void main(String args[]) {
         new Program().run();
@@ -6,11 +7,9 @@ public class teste {
 
 class Store {
     private int n;
-
     int get() {
         return this.n;
     }
-
     void set(int n) {
         this.n = n;
     }
@@ -21,8 +20,9 @@ class Program {
         Store s;
         int a;
         s = new Store();
-        a = In.nextInt();
+        a = (new Scanner(System.in)).nextInt();
         s.set(a);
         System.out.println(s.get);
     }
 }
+

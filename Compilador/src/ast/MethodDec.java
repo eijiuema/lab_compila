@@ -37,31 +37,31 @@ public class MethodDec extends Member {
     }
 
     public void genJava(PW pw) {
-        //gen java Type
+        // gen java Type
         if (this.type == Type.undefinedType) {
             pw.print("void ");
         } else {
             pw.print(this.type.getJavaName() + " ");
         }
-        //gen java id
+        // gen java id
         pw.print(this.id.getName());
-        //gen java formalParamDec
+        // gen java formalParamDec
         pw.print("(");
-        for( ParamDec paramDec : this.formalParamDec ){
+        for (ParamDec paramDec : this.formalParamDec) {
             paramDec.genJava(pw);
-            if( !paramDec.equals(formalParamDec.get(formalParamDec.size()-1)) ){
+            if (!paramDec.equals(formalParamDec.get(formalParamDec.size() - 1))) {
                 pw.print(", ");
             }
         }
-        pw.println("){");
+        pw.println(") {");
         pw.add();
-        //gen java statList
-        for( Stat stat : this.statList){
+        // gen java statList
+        for (Stat stat : this.statList) {
             stat.genJava(pw);
         }
         pw.sub();
         pw.printlnIdent("}");
-        
+
     }
 
 }
