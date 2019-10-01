@@ -212,11 +212,7 @@ public class Compiler {
 				}
 				self.addField(qualifier, fieldDec());
 			} else if (lexer.token == Token.FUNC) {
-				if (qualifier.equals("private")) {
-					self.addPrivateMethodList(qualifier, methodDec());
-				} else {
-					self.addPublicMethodList(qualifier, methodDec());
-				}
+				methodDec(qualifier);
 			} else {
 				break;
 			}
@@ -238,7 +234,7 @@ public class Compiler {
 		}
 	}
 
-	private MethodDec methodDec() {
+	private void methodDec(String qualifier) {
 		Id id = null;
 		MethodDec methodDec = null;
 		this.currentMethod = null;
@@ -255,7 +251,6 @@ public class Compiler {
 				error("There's already a method named " + id.getName());
 			}
 			methodDec = new MethodDec(id);
-			this.currentMethod = methodDec;
 		} else if (lexer.token == Token.IDCOLON) {
 			id = idColon();
 			if (self.getName().equals("Program") && id.getName().equals("run")) {
@@ -278,15 +273,21 @@ public class Compiler {
 		check(Token.LEFTCURBRACKET, "'{' expected");
 		next();
 
-		statementList(methodDec);
+		this.currentMethod = methodDec;
 
-		check(Token.RIGHTCURBRACKET, "'}' expected");
-		next();
+		if (qualifier.equals("private")) {
+			self.addPrivateMethodList(qualifier, methodDec);
+		} else {
+			self.addPublicMethodList(qualifier, methodDec);
+		}
+
+		statementList(methodDec);
 
 		if (methodDec.getType() != Type.undefinedType && !methodReturned)
 			error("this method must return a result of type " + methodDec.getType().getName());
 
-		return methodDec;
+		check(Token.RIGHTCURBRACKET, "'}' expected");
+		next();
 
 	}
 

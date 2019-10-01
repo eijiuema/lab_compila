@@ -1,26 +1,45 @@
-class OK_GER13{
-    public static void main(String args[]){
+import java.util.Scanner;
+public class OK_GER13 {
+    public static void main(String args[]) {
         new Program().run();
     }
 }
 
-class A{
+class A {
     private int n;
-     long set(int pn){
-        Out.print(1, " ");
+    void set(int pn) {
+        System.out.print(1);
+        System.out.print(" ");
         this.n = pn;
     }
-     int get(){
+    int get() {
         return this.n;
     }
-     long print(){
-        Out.print("A ");
+    void print() {
+        System.out.print("A ");
     }
-    private long p1(){
-        Out.print("999 ");
+    private void p1() {
+        System.out.print("999 ");
     }
-    private long p2(){
-        Out.print("888 ");
+    private void p2() {
+        System.out.print("888 ");
+    }
+}
+
+class B {
+    override void set(int pn) {
+        System.out.print(pn);
+        System.out.print(" ");
+        super.set(pn);
+    }
+    void p1() {
+        System.out.print(2);
+        System.out.print(" ");
+    }
+    override void print() {
+        System.out.print("B ");
+    }
+    private void p2() {
     }
 }
 

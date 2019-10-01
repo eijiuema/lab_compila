@@ -1,12 +1,13 @@
-class OK_GER22{
-    public static void main(String args[]){
+import java.util.Scanner;
+public class OK_GER22 {
+    public static void main(String args[]) {
         new Program().run();
     }
 }
 
-class Program{
-    public long run(){
-        Out.println("100");
+class Program {
+    public void run() {
+        System.out.println("100");
         int i, j, n;
         i = 0;
         j = 0;
@@ -16,7 +17,7 @@ class Program{
         do{
             n = n + 1;
         } while(
-false);
+(false));
         assert n == 11 : "n";
         n = 10;
         int sum;
@@ -31,7 +32,7 @@ i < n);
             j = j + 1;
         } while(
 j < n);
-        Out.println(sum);
+        System.out.println(sum);
         assert sum == 100 : "sum";
     }
 }

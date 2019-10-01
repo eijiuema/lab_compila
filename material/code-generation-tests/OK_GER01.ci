@@ -37,11 +37,7 @@
   */
 
 class A
-
- 	public func m -> Int {
- 	}
-
-   /*
+   
    public func m {
       Out.print:  7, " " ;
       if (1 > 0) {
@@ -87,18 +83,17 @@ class A
          Out.print:  14, " " ;
       }
    }   
-	*/
+
 end
 
 class Program
    
    public func run {
-      //var A a;
-      var String s = "a";
-      //!"AA";
-      //Out.println: "7 0 1 2 3 4 5 6 7";
-      /*a = A.new;*/
-      //a.m;
+      var A a;
+      
+      Out.println: "7 0 1 2 3 4 5 6 7";
+      a = A.new;
+      a.m;
    }   
 
 end

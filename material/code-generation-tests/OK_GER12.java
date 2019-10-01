@@ -1,15 +1,26 @@
-class OK_GER12{
-    public static void main(String args[]){
+import java.util.Scanner;
+public class OK_GER12 {
+    public static void main(String args[]) {
         new Program().run();
     }
 }
 
-class A{
-     long m1(){
-        Out.print(1, " ");
+class A {
+    void m1() {
+        System.out.print(1);
+        System.out.print(" ");
     }
-     long m2(int n){
-        Out.print(n, " ");
+    void m2(int n) {
+        System.out.print(n);
+        System.out.print(" ");
+    }
+}
+
+class B {
+    override void m2(int n) {
+        System.out.print(n);
+        System.out.print(" ");
+        super.m2(n + 1);
     }
 }
 

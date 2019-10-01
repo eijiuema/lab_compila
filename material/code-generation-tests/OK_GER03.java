@@ -1,54 +1,67 @@
-class OK_GER03{
-    public static void main(String args[]){
+import java.util.Scanner;
+public class OK_GER03 {
+    public static void main(String args[]) {
         new Program().run();
     }
 }
 
-class A{
-     long m(){
-        Out.print(6, " " );
+class A {
+    void m() {
+        System.out.print(6+ " ");
+        System.out.print(" "+ " ");
         if(true && true) {
-            Out.print(1, " " );
+            System.out.print(1+ " ");
+            System.out.print(" "+ " ");
         }
-        if(false && true) {
-            Out.print(1000, " " );
+        if((false && true)) {
+            System.out.print(1000+ " ");
+            System.out.print(" "+ " ");
         }
         if(true && false) {
-            Out.print(1000, " " );
+            System.out.print(1000+ " ");
+            System.out.print(" "+ " ");
         }
-        if(false && false) {
-            Out.print(1000, " " );
+        if((false && false)) {
+            System.out.print(1000+ " ");
+            System.out.print(" "+ " ");
         }
         if(true || true) {
-            Out.print(2, " " );
+            System.out.print(2+ " ");
+            System.out.print(" "+ " ");
         }
-        if(true || false) {
-            Out.print(3, " " );
+        if((true || false)) {
+            System.out.print(3+ " ");
+            System.out.print(" "+ " ");
         }
         if(false || true) {
-            Out.print(4, " " );
+            System.out.print(4+ " ");
+            System.out.print(" "+ " ");
         }
-        if(false || false) {
-            Out.print(1000, " " );
+        if((false || false)) {
+            System.out.print(1000+ " ");
+            System.out.print(" "+ " ");
         }
-        if(! false) {
-            Out.print(5, " " );
+        if((! false)) {
+            System.out.print(5+ " ");
+            System.out.print(" "+ " ");
         }
         if(! true) {
-            Out.print(1000, " " );
+            System.out.print(1000+ " ");
+            System.out.print(" "+ " ");
         }
-        if(true || true && false) {
-            Out.print(6, " " );
+        if((true || (true && false))) {
+            System.out.print(6+ " ");
+            System.out.print(" "+ " ");
         }
     }
 }
 
-class Program{
-    public long run(){
-        long a;
-        Out.println("6 1 2 3 4 5 6" );
+class Program {
+    public void run() {
+        A a;
+        System.out.println("6 1 2 3 4 5 6"+ " ");
         a = new A();
-        a.m;
+        a.m();
     }
 }
 

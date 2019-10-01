@@ -1,5 +1,5 @@
 @annot("check", "missingReturn")
-@cep(16, "Método com tipo de retorno deve ter pelo menos um comando return",
+@cep(16, "Mï¿½todo com tipo de retorno deve ter pelo menos um comando return",
   "Missing 'return' statement in method 'm'", 
   "comp.Compiler.methodDec()" )
  
