@@ -7,7 +7,7 @@ package ast;
 public class Break extends Stat{
     
     public void genJava(PW pw){
-        pw.printIdent("break;");
+        pw.printlnIdent("break;");
     }
 /*
     @Override
