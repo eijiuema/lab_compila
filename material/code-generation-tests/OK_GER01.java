@@ -4,15 +4,3 @@ class OK_GER01{
     }
 }
 
-class A{
-}
-
-class Program{
-    public void run(){
-        String s = "a";
-        while(false) {
-            break;
-        }
-    }
-}
-

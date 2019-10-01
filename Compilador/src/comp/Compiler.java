@@ -243,6 +243,8 @@ public class Compiler {
 	private MethodDec methodDec() {
 		Id id = null;
 		MethodDec methodDec = null;
+		this.currentMethod = null;
+		this.methodReturned = false;
 
 		lexer.nextToken();
 		if (lexer.token == Token.ID) {
@@ -254,6 +256,7 @@ public class Compiler {
 				error("There's already a method named " + id.getName());
 			}
 			methodDec = new MethodDec(id);
+			this.currentMethod = methodDec;
 		} else if (lexer.token == Token.IDCOLON) {
 			id = idColon();
 			if (self.getName().equals("Program") && id.getName().equals("run")) {
@@ -280,6 +283,9 @@ public class Compiler {
 
 		check(Token.RIGHTCURBRACKET, "'}' expected");
 		next();
+
+		if(methodDec.getType() != Type.undefinedType && ! methodReturned)
+			error("this method must return a result of type " + methodDec.getType().getName());
 
 		return methodDec;
 
@@ -462,7 +468,14 @@ public class Compiler {
 
 		next();
 		expr = expr();
-		// checkType(expr, returnType,"expected" + returnType.getName() + "expression");
+
+		if(this.currentMethod.getType() == Type.undefinedType){
+			error("this method cannot have a return statement");
+		}else if(! this.currentMethod.getType().canConvertFrom(expr.getType()) ){
+			error("cannot convert from " + expr.getType().getName() + " to " + this.currentMethod.getType().getName());
+		}else{
+			this.methodReturned = true;
+		}
 		return new ReturnStat(expr);
 	}
 
@@ -944,6 +957,8 @@ public class Compiler {
 
 	private SymbolTable symbolTable = new SymbolTable();
 	private TypeCianetoClass self = null;
+	private MethodDec currentMethod = null;
+	private boolean methodReturned = false; 
 	private long nestedLoops = 0;
 	private Lexer lexer;
 	private ErrorSignaller signalError;
