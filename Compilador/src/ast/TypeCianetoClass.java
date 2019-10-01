@@ -93,4 +93,12 @@ public class TypeCianetoClass extends Type {
             return false;
       }
    }
+
+   public boolean hasField(String field) {
+      return this.fieldList.hasField(field);
+   }
+
+   public Id getField(String field) {
+      return this.fieldList.getField(field);
+   }
 }

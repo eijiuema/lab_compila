@@ -24,7 +24,7 @@ public class Program {
 
 	public void genJava(PW pw) {
 
-		pw.println("class " + mainJavaClassName + "{");
+		pw.println("public class " + mainJavaClassName + " {");
 		pw.add();
 		pw.printlnIdent("public static void main(String args[]){");
 		pw.add();

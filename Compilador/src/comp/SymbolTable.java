@@ -50,4 +50,9 @@ public class SymbolTable {
         return localTable.containsKey(id.getName());
     }
 
+    @Override
+    public String toString() {
+        return classTable.toString() + "\n" + localTable.toString();
+    }
+
 }

@@ -39,6 +39,7 @@ public class Compiler {
 		ArrayList<TypeCianetoClass> CianetoClassList = new ArrayList<>();
 		Program program = new Program(CianetoClassList, metaobjectCallList, compilationErrorList);
 		boolean thereWasAnError = false;
+
 		while (lexer.token == Token.CLASS || (lexer.token == Token.ID && lexer.getStringValue().equals("open"))
 				|| lexer.token == Token.ANNOT) {
 			try {
@@ -177,7 +178,7 @@ public class Compiler {
 		}
 
 		typeCianetoClass = new TypeCianetoClass(id.getName(), open);
-		
+
 		self = typeCianetoClass;
 
 		symbolTable.putClass(typeCianetoClass);
@@ -249,9 +250,8 @@ public class Compiler {
 		lexer.nextToken();
 		if (lexer.token == Token.ID) {
 			id = id();
-			for (AbstractMap.SimpleEntry<String, MethodDec> a : self.getPrivateMethodList().getMethodList()) {
-				System.out.println(a);
-			}
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ methodDec()");
+			System.out.println("Falta verificar se os métodos existem na classe ou nas superclasses");
 			if (symbolTable.hasId(id)) {
 				error("There's already a method named " + id.getName());
 			}
@@ -313,6 +313,8 @@ public class Compiler {
 			error("There's already a param named " + id.getName());
 		}
 
+		symbolTable.putId(id);
+
 		return new ParamDec(t, id);
 	}
 
@@ -357,13 +359,15 @@ public class Compiler {
 		case ASSERT:
 			st = assertStat();
 			break;
-		default:/*
-				 * if (lexer.token == Token.ID && lexer.getStringValue().equals("Out")) { st =
-				 * writeStat(); } else {
-				 */
+		case ID:
+			if (lexer.getStringValue().equals("Out")) {
+				st = printStat();
+			} else {
+				st = assignExpr();
+			}
+			break;
+		default:
 			st = assignExpr();
-			// }
-
 		}
 
 		if (checkSemiColon) {
@@ -372,6 +376,31 @@ public class Compiler {
 		}
 
 		return st;
+	}
+
+	private Stat printStat() {
+		next();
+		check(Token.DOT, "'.' was expected");
+		next();
+		check(Token.IDCOLON, "an Id was expected");
+
+		boolean ln = false;
+
+		switch (lexer.getStringValue()) {
+		case "print:":
+			ln = false;
+			break;
+		case "println:":
+			ln = true;
+			break;
+		default:
+			error("There's no method called " + lexer.getStringValue() + " on Out");
+			break;
+		}
+
+		next();
+
+		return new PrintStat(ln, exprList());
 	}
 
 	private AssignExpr assignExpr() {
@@ -542,8 +571,6 @@ public class Compiler {
 		lexer.nextToken();
 		t = type();
 
-		System.out.println(t);
-
 		check(Token.ID, "A field name was expected");
 
 		idList.add(id(t));
@@ -557,7 +584,7 @@ public class Compiler {
 			next();
 		}
 
-		return new FieldDec(t, idList);
+		return new FieldDec(idList);
 
 	}
 
@@ -576,7 +603,7 @@ public class Compiler {
 			TypeCianetoClass typeCianetoClass;
 			Id id = id();
 			typeCianetoClass = symbolTable.getClass(id);
-			if (typeCianetoClass == null)  {
+			if (typeCianetoClass == null) {
 				error("There's no class named " + id.getName());
 			}
 			t = typeCianetoClass;
@@ -823,11 +850,15 @@ public class Compiler {
 					id.setType(typeCianetoClass);
 					factor = new ObjectCreation(id);
 				} else {
-					if (!symbolTable.hasId(id)) {
-						error("There's no id named " + id.getName());
+					if (id.getName().equals("In")) {
+						factor = readExpr();
+					} else {
+						if (!symbolTable.hasId(id)) {
+							error("There's no id named " + id.getName());
+						}
+						id = symbolTable.getId(id);
+						factor = primaryExpr(id, true);
 					}
-					id = symbolTable.getId(id);
-					factor = primaryExpr(id, true);
 				}
 			} else {
 				if (!symbolTable.hasId(id)) {
@@ -842,6 +873,29 @@ public class Compiler {
 		}
 
 		return factor;
+	}
+
+	private Factor readExpr() {
+		check(Token.ID, "an Id was expected");
+
+		ReadExpr readExpr = null;
+
+		switch (lexer.getStringValue()) {
+		case "readInt":
+			readExpr = new ReadExpr(Type.intType);
+			break;
+		case "readString":
+			readExpr = new ReadExpr(Type.stringType);
+			break;
+		default:
+			error("There's no method named " + lexer.getStringValue() + " on In");
+			break;
+		}
+
+		next();
+
+		return readExpr;
+
 	}
 
 	private void checkType(Factor factor, Type shouldBe, String msg) {
@@ -892,7 +946,6 @@ public class Compiler {
 			lexer.nextToken();
 			if (lexer.token == Token.DOT) {
 				lexer.nextToken();
-
 				if (lexer.token == Token.ID) {
 					Id id = id();
 					if (lexer.token == Token.DOT) {
@@ -905,7 +958,12 @@ public class Compiler {
 							error("'Id' was expected");
 						}
 					} else {
-						primaryExpr = new PrimaryExprSelfField(null, id);
+
+						if (!self.hasField(id.getName())) {
+							error("There's no field named " + id.getName() + " in class " + self.getName());
+						}
+						id = self.getField(id.getName());
+						primaryExpr = new  PrimaryExprSelfField(null,id);
 					}
 				} else {
 					primaryExpr = new PrimaryExprSelfMethod(null, idColon(), exprList());
