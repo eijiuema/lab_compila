@@ -4,10 +4,24 @@
 */
 package ast;
 
-public abstract class ReadExpr extends PrimaryExpr {
+public class ReadExpr extends PrimaryExpr {
 
-    public abstract void genJava(PW pw);    
+    private Type type;
 
-    public abstract Type getType();
+    public ReadExpr(Type type) {
+        this.type = type;
+    }
+
+    public void genJava(PW pw) {
+
+        if (type == Type.intType)
+            pw.print("In.nextInt()");
+        else if (type == Type.stringType)
+            pw.print("In.nextLine()");
+    }
+
+    public Type getType() {
+        return type;
+    }
 
 }

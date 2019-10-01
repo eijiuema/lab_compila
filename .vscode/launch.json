@@ -9,6 +9,13 @@
         },
         {
             "type": "java",
+            "name": "Teste",
+            "request": "launch",
+            "mainClass": "comp.Comp",
+            "args": "${command:SpecifyProgramArgs}"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Comp",
             "request": "launch",
             "mainClass": "comp.Comp",

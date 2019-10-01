@@ -3,7 +3,6 @@
 *	Gabriel Eiji Uema Martin
 */
 package ast;
-import java.util.*;
 
 public class PrimaryExprSelf extends PrimaryExpr{
 
@@ -11,10 +10,6 @@ public class PrimaryExprSelf extends PrimaryExpr{
 
     public PrimaryExprSelf() {
         
-    }
-    
-    public PrimaryExprSelf(Id selfId){
-        this.selfId = selfId;
     }
 
     public void genJava(PW pw){

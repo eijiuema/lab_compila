@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FieldList {
+
     private List<AbstractMap.SimpleEntry<String, FieldDec>> fieldList;
 
     public FieldList() {
@@ -35,8 +36,25 @@ public class FieldList {
             fd.getValue().genJava(pw);
             pw.print(";\n");
         }
-	}
+    }
     
-    
+    public boolean hasField(String field) {
+        for (AbstractMap.SimpleEntry<String, FieldDec> fd : fieldList) {
+            if (fd.getValue().hasField(field)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Id getField(String field) {
+        for (AbstractMap.SimpleEntry<String, FieldDec> fd : fieldList) {
+            Id id = fd.getValue().getField(field);
+            if (id != null) {
+                return id;
+            }
+        }
+        return null;
+    }
     
 }

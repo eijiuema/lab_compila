@@ -1,27 +1,26 @@
-class A
+class Store
+
+    var Int n
+
+    func get -> Int {
+        return self.n;
+    }
+
+    func set: Int n {
+        self.n = n;
+    }
 
 end
 
 class Program
 
-    var A a;
-    var Int b;
-
-    public func run {
-        var A a;
-        var Int b, c;
-
-        b = c = 0;
-
-        b = c + 1;
-    }
-
-    public func test {
-
-    }
-
-    public func test2 -> Int {
-        return 0;
+    func run {
+        var Store s;
+        var Int a;
+        s = Store.new;
+        a = In.readInt;
+        s.set: a;
+        Out.println: s.get;
     }
 
 end
