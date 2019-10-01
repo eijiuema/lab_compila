@@ -3,7 +3,6 @@
 *	Gabriel Eiji Uema Martin
 */
 package ast;
-import java.util.*;
 
 public class PrimaryExprIdField extends PrimaryExpr{
 

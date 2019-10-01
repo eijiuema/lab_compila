@@ -3,12 +3,15 @@
 *	Gabriel Eiji Uema Martin
 */
 package ast;
+
+import java.util.List;
+
 /*
  * Krakatoa Class
  */
 public class TypeCianetoClass extends Type {
 
-   public TypeCianetoClass( String name, boolean open ) {
+   public TypeCianetoClass(String name, boolean open) {
       super(name);
       this.publicMethodList = new MethodList();
       this.privateMethodList = new MethodList();
@@ -25,7 +28,7 @@ public class TypeCianetoClass extends Type {
    private FieldList fieldList;
    private MethodList publicMethodList, privateMethodList;
    private boolean open;
-   
+
    @Override
    public String getJavaName() {
       return super.getName();
@@ -77,17 +80,18 @@ public class TypeCianetoClass extends Type {
 
    @Override
    public boolean canConvertFrom(Type right) {
-      if(right == Type.nilType)
+      if (right == Type.nilType)
          return true;
-      else if(right == Type.booleanType || right == Type.intType || right == Type.stringType || right == Type.undefinedType)
+      else if (right == Type.booleanType || right == Type.intType || right == Type.stringType
+            || right == Type.undefinedType)
          return false;
-      else{
+      else {
          TypeCianetoClass rightSuperClass = (TypeCianetoClass) right;
 
-         while( !(rightSuperClass.equals(this)) && rightSuperClass != null)
+         while (!(rightSuperClass.equals(this)) && rightSuperClass != null)
             rightSuperClass = rightSuperClass.getSuperclass();
 
-         if(this.equals(rightSuperClass))
+         if (this.equals(rightSuperClass))
             return true;
          else
             return false;
@@ -101,4 +105,26 @@ public class TypeCianetoClass extends Type {
    public Id getField(String field) {
       return this.fieldList.getField(field);
    }
+
+   public boolean hasPrivateMethod(String method, List<Expr> exprList) {
+      return this.privateMethodList.hasMethod(method, exprList);
+   }
+
+   public boolean hasPublicMethod(String method, List<Expr> exprList) {
+      return this.publicMethodList.hasMethod(method, exprList);
+   }
+
+   public boolean hasMethod(String method, List<Expr> exprList) {
+      return hasPrivateMethod(method, exprList) || hasPublicMethod(method, exprList);
+   }
+
+   public Id getMethod(String method, List<Expr> exprList) {
+      Id id = this.privateMethodList.getMethod(method, exprList);
+      if (id != null) {
+         return id;
+      } else {
+         return this.publicMethodList.getMethod(method, exprList);
+      }
+   }
+
 }

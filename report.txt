@@ -1,9 +1,0 @@
-
-List of Java files with compilation errors: 
-   .\teste.java
-
-List of files with correct Java code: 
-
-List of files Java code that compiles but was generated incorrectly: 
-
-The compiler could not create the following .java files:
