@@ -10,32 +10,33 @@ import java.util.List;
 
 public class MethodList {
 
-    private List<AbstractMap.SimpleEntry<String,MethodDec>> methodList;
+    private List<AbstractMap.SimpleEntry<String, MethodDec>> methodList;
 
     public MethodList() {
-        this.methodList = new ArrayList<AbstractMap.SimpleEntry<String,MethodDec>>();
-    }
-    
-    public void addMethod( String qualifier, MethodDec method){
-        this.methodList.add( new AbstractMap.SimpleEntry<String, MethodDec>(qualifier,method));
+        this.methodList = new ArrayList<AbstractMap.SimpleEntry<String, MethodDec>>();
     }
 
-    public List<AbstractMap.SimpleEntry<String,MethodDec>> getMethodList() {
+    public void addMethod(String qualifier, MethodDec method) {
+        this.methodList.add(new AbstractMap.SimpleEntry<String, MethodDec>(qualifier, method));
+    }
+
+    public List<AbstractMap.SimpleEntry<String, MethodDec>> getMethodList() {
         return methodList;
     }
 
-    public void setMethodList(List<AbstractMap.SimpleEntry<String,MethodDec>> methodList) {
+    public void setMethodList(List<AbstractMap.SimpleEntry<String, MethodDec>> methodList) {
         this.methodList = methodList;
     }
 
-	public void genJava(PW pw) {
+    public void genJava(PW pw) {
 
-        for( AbstractMap.SimpleEntry<String,MethodDec> method : this.methodList ){
+        for (AbstractMap.SimpleEntry<String, MethodDec> method : this.methodList) {
             pw.printIdent(method.getKey());
-            pw.print(" ");
+            if (!method.getKey().equals("")) {
+                pw.print(" ");
+            }
             method.getValue().genJava(pw);
         }
-	}
-
+    }
 
 }

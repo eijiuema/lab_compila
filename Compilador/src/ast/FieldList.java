@@ -34,7 +34,7 @@ public class FieldList {
             pw.print(fd.getKey());
             pw.print(" ");
             fd.getValue().genJava(pw);
-            pw.print(";\n");
+            pw.println(";");
         }
     }
     

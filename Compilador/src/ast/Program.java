@@ -9,8 +9,8 @@ import comp.CompilationError;
 
 public class Program {
 
-	public Program(ArrayList<TypeCianetoClass> classList, ArrayList<MetaobjectAnnotation> metaobjectCallList, 
-			       ArrayList<CompilationError> compilationErrorList) {
+	public Program(ArrayList<TypeCianetoClass> classList, ArrayList<MetaobjectAnnotation> metaobjectCallList,
+			ArrayList<CompilationError> compilationErrorList) {
 		this.classList = classList;
 		this.metaobjectCallList = metaobjectCallList;
 		this.compilationErrorList = compilationErrorList;
@@ -24,9 +24,10 @@ public class Program {
 
 	public void genJava(PW pw) {
 
+		pw.println("import java.util.Scanner;");
 		pw.println("public class " + mainJavaClassName + " {");
 		pw.add();
-		pw.printlnIdent("public static void main(String args[]){");
+		pw.printlnIdent("public static void main(String args[]) {");
 		pw.add();
 		pw.printlnIdent("new Program().run();");
 		pw.sub();
@@ -34,17 +35,16 @@ public class Program {
 		pw.sub();
 		pw.println("}");
 		pw.println();
-
 		for (TypeCianetoClass typeCianetoClass : classList) {
-			pw.print("class ");
+			pw.printIdent("class ");
 			pw.print(typeCianetoClass.getName());
-			pw.println("{");
+			pw.println(" {");
 			pw.add();
 			typeCianetoClass.getFieldList().genJava(pw);
 			typeCianetoClass.getPublicMethodList().genJava(pw);
 			typeCianetoClass.getPrivateMethodList().genJava(pw);
 			pw.sub();
-			pw.println("}");
+			pw.printlnIdent("}");
 			pw.println();
 		}
 	}
@@ -81,5 +81,4 @@ public class Program {
 		this.mainJavaClassName = className;
 	}
 
-	
 }
