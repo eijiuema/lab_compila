@@ -100,11 +100,18 @@ public class TypeCianetoClass extends Type {
    }
 
    public boolean hasField(String field) {
-      return this.fieldList.getField(field) != null;
+      return this.fieldList.getField(field) != null || this.superclass.getField(field) != null || (this.superclass != null && this.superclass.hasField(field));
    }
 
    public Id getField(String field) {
-      return this.fieldList.getField(field);
+      Id id = this.fieldList.getField(field);
+      if (id != null) {
+         return id;
+      }
+      if (this.superclass == null) {
+         return null;
+      }
+      return this.superclass.fieldList.getField(field);
    }
 
    public boolean hasPrivateMethod(String method, List<Expr> exprList) {
@@ -124,7 +131,7 @@ public class TypeCianetoClass extends Type {
    }
 
    public boolean hasMethod(String method, List<Expr> exprList) {
-      return hasPrivateMethod(method, exprList) || hasPublicMethod(method, exprList);
+      return hasPrivateMethod(method, exprList) || hasPublicMethod(method, exprList) || (this.superclass != null && this.superclass.hasMethod(method, exprList));
    }
 
    public Id getMethod(String method) {
@@ -132,12 +139,21 @@ public class TypeCianetoClass extends Type {
    }
 
    public Id getMethod(String method, List<Expr> exprList) {
-      Id id = this.privateMethodList.getMethod(method, exprList);
-      if (id != null) {
+      Id id;
+
+      if ((id = this.privateMethodList.getMethod(method, exprList)) != null) {
          return id;
-      } else {
-         return this.publicMethodList.getMethod(method, exprList);
       }
+
+      if ((id = this.publicMethodList.getMethod(method, exprList)) != null) {
+         return id;
+      }
+
+      if (this.superclass == null) {
+         return null;
+      }
+
+      return this.superclass.getMethod(method, exprList);
    }
 
 }
