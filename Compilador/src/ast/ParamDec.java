@@ -3,7 +3,6 @@
 *	Gabriel Eiji Uema Martin
 */
 package ast;
-import java.util.*;
 
 public class ParamDec {
     private Id id;
@@ -18,6 +17,14 @@ public class ParamDec {
         pw.print(type.getJavaName());
         pw.print(" ");
         pw.print(id.getName());
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
     
 }

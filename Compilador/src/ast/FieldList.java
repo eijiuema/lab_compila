@@ -37,15 +37,6 @@ public class FieldList {
             pw.println(";");
         }
     }
-    
-    public boolean hasField(String field) {
-        for (AbstractMap.SimpleEntry<String, FieldDec> fd : fieldList) {
-            if (fd.getValue().hasField(field)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     public Id getField(String field) {
         for (AbstractMap.SimpleEntry<String, FieldDec> fd : fieldList) {

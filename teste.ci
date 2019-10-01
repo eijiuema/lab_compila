@@ -10,6 +10,11 @@ class Store
         self.n = n;
     }
 
+    func set: Int n, Int m {
+        self.n = n;
+        Out.print: m;
+    }
+
 end
 
 class Program
@@ -20,6 +25,8 @@ class Program
         s = Store.new;
         a = In.readInt;
         s.set: a;
+        s.set: a, a;
+        //s = s.get;
         Out.println: s.get;
     }
 

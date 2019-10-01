@@ -5,7 +5,6 @@
 package comp;
 
 import java.io.PrintWriter;
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,11 +46,9 @@ public class Compiler {
 					metaobjectAnnotation(metaobjectCallList);
 				}
 
-				symbolTable.clearIds();
 				TypeCianetoClass typeCianetoClass = classDec();
 
 				program.addClass(typeCianetoClass);
-				// program.addClass(new TypeCianetoClass("test"));
 			} catch (CompilerError e) {
 				// if there was an exception, there is a compilation error
 				e.printStackTrace();
@@ -247,6 +244,8 @@ public class Compiler {
 		this.currentMethod = null;
 		this.methodReturned = false;
 
+		symbolTable.clearIds();
+
 		lexer.nextToken();
 		if (lexer.token == Token.ID) {
 			id = id();
@@ -284,7 +283,7 @@ public class Compiler {
 		check(Token.RIGHTCURBRACKET, "'}' expected");
 		next();
 
-		if(methodDec.getType() != Type.undefinedType && ! methodReturned)
+		if (methodDec.getType() != Type.undefinedType && !methodReturned)
 			error("this method must return a result of type " + methodDec.getType().getName());
 
 		return methodDec;
@@ -394,7 +393,7 @@ public class Compiler {
 			ln = true;
 			break;
 		default:
-			error("There's no method called " + lexer.getStringValue() + " on Out");
+			error("There's no method called " + lexer.getStringValue() + " in class Out");
 			break;
 		}
 
@@ -486,7 +485,7 @@ public class Compiler {
 	private Break breakStat() {
 		next();
 
-		if(nestedLoops < 1)
+		if (nestedLoops < 1)
 			error("break cannot be used outside of a loop");
 
 		return new Break();
@@ -498,11 +497,11 @@ public class Compiler {
 		next();
 		expr = expr();
 
-		if(this.currentMethod.getType() == Type.undefinedType){
+		if (this.currentMethod.getType() == Type.undefinedType) {
 			error("this method cannot have a return statement");
-		}else if(! this.currentMethod.getType().canConvertFrom(expr.getType()) ){
+		} else if (!this.currentMethod.getType().canConvertFrom(expr.getType())) {
 			error("cannot convert from " + expr.getType().getName() + " to " + this.currentMethod.getType().getName());
-		}else{
+		} else {
 			this.methodReturned = true;
 		}
 		return new ReturnStat(expr);
@@ -837,6 +836,10 @@ public class Compiler {
 
 			Id id = id();
 
+			if (id.getName().equals("In")) {
+				return readExpr();
+			}
+
 			if (lexer.token == Token.DOT) {
 
 				lexer.nextToken();
@@ -850,15 +853,11 @@ public class Compiler {
 					id.setType(typeCianetoClass);
 					factor = new ObjectCreation(id);
 				} else {
-					if (id.getName().equals("In")) {
-						factor = readExpr();
-					} else {
-						if (!symbolTable.hasId(id)) {
-							error("There's no id named " + id.getName());
-						}
-						id = symbolTable.getId(id);
-						factor = primaryExpr(id, true);
+					if (!symbolTable.hasId(id)) {
+						error("There's no id named " + id.getName());
 					}
+					id = symbolTable.getId(id);
+					factor = primaryExpr(id, true);
 				}
 			} else {
 				if (!symbolTable.hasId(id)) {
@@ -876,6 +875,8 @@ public class Compiler {
 	}
 
 	private Factor readExpr() {
+		check(Token.DOT, "an '.' was expected");
+		next();
 		check(Token.ID, "an Id was expected");
 
 		ReadExpr readExpr = null;
@@ -888,7 +889,7 @@ public class Compiler {
 			readExpr = new ReadExpr(Type.stringType);
 			break;
 		default:
-			error("There's no method named " + lexer.getStringValue() + " on In");
+			error("There's no method named " + lexer.getStringValue() + " in class In");
 			break;
 		}
 
@@ -914,13 +915,45 @@ public class Compiler {
 
 		if (hasDot) {
 			if (lexer.token == Token.ID) {
-				primaryExpr = new PrimaryExprIdField(id, id());
+				if (!symbolTable.hasId(id)) {
+					error("There's no id named " + id.getName());
+				}
+				id = symbolTable.getId(id);
+				if (id.getType().getClass() != TypeCianetoClass.class) {
+					error("The id " + id.getName() + "isn't an instance of a class");
+				}
+				Id id2 = id();
+				TypeCianetoClass typeCianetoClass = (TypeCianetoClass) id.getType();
+				if (!typeCianetoClass.hasPublicMethod(id2.getName())) {
+					error("Method not found in class " + typeCianetoClass.getName());
+				}
+				id2 = typeCianetoClass.getMethod(id2.getName());
+				primaryExpr = new PrimaryExprIdMethod(id, id2);
 			} else if (lexer.token == Token.IDCOLON) {
-				primaryExpr = new PrimaryExprIdMethod(id, idColon(), exprList());
+				if (!symbolTable.hasId(id)) {
+					error("There's no id named " + id.getName());
+				}
+				id = symbolTable.getId(id);
+				if (id.getType().getClass() != TypeCianetoClass.class) {
+					error(id.getName() + " is not an instance of a class");
+				}
+				TypeCianetoClass typeCianetoClass = (TypeCianetoClass) id.getType();
+				Id id2 = idColon();
+				List<Expr> exprList = exprList();
+				if (typeCianetoClass.hasPublicMethod(id2.getName(), exprList)) {
+					id2 = typeCianetoClass.getMethod(id2.getName(), exprList);
+					primaryExpr = new PrimaryExprIdMethod(id, id2, exprList);
+				} else {
+					error("There's no field nor method in " + typeCianetoClass.getName() + " named " + id2.getName());
+				}
 			} else {
 				error("'Id' was expected");
 			}
 		} else {
+			if (!symbolTable.hasId(id)) {
+				error("There1s no id named " + id.getName());
+			}
+			id = symbolTable.getId(id);
 			primaryExpr = new PrimaryExprId(id);
 		}
 
@@ -963,7 +996,7 @@ public class Compiler {
 							error("There's no field named " + id.getName() + " in class " + self.getName());
 						}
 						id = self.getField(id.getName());
-						primaryExpr = new  PrimaryExprSelfField(null,id);
+						primaryExpr = new PrimaryExprSelfField(null, id);
 					}
 				} else {
 					primaryExpr = new PrimaryExprSelfMethod(null, idColon(), exprList());
@@ -1016,7 +1049,7 @@ public class Compiler {
 	private SymbolTable symbolTable = new SymbolTable();
 	private TypeCianetoClass self = null;
 	private MethodDec currentMethod = null;
-	private boolean methodReturned = false; 
+	private boolean methodReturned = false;
 	private long nestedLoops = 0;
 	private Lexer lexer;
 	private ErrorSignaller signalError;

@@ -12,16 +12,7 @@ public class FieldDec extends Member {
     public FieldDec(List<Id> idList){
         this.idList = idList;
     }
-
-    public boolean hasField(String field) {
-        for (Id id : idList) {
-            if (id.getName().equals(field)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    
     public Id getField(String field) {
         for (Id id : idList) {
             if (id.getName().equals(field)) {

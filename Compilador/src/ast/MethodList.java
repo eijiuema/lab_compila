@@ -39,4 +39,15 @@ public class MethodList {
         }
     }
 
+    public Id getMethod(String method, List<Expr> exprList) {
+        for (AbstractMap.SimpleEntry<String, MethodDec> smd : methodList) {
+            MethodDec md = smd.getValue();
+            Id id = md.getId();
+            if (id.getName().equals(method) && md.checkParamList(exprList)) {
+                return id;
+            }
+        }
+        return null;
+    }
+
 }

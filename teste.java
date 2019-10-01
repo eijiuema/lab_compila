@@ -13,6 +13,10 @@ class Store {
     void set(int n) {
         this.n = n;
     }
+    void set(int n, int m) {
+        this.n = n;
+        System.out.print(m);
+    }
 }
 
 class Program {
@@ -22,7 +26,8 @@ class Program {
         s = new Store();
         a = (new Scanner(System.in)).nextInt();
         s.set(a);
-        System.out.println(s.get);
+        s.set(a, a);
+        System.out.println(s.get());
     }
 }
 

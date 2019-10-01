@@ -4,6 +4,7 @@
 */
 package ast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -99,7 +100,7 @@ public class TypeCianetoClass extends Type {
    }
 
    public boolean hasField(String field) {
-      return this.fieldList.hasField(field);
+      return this.fieldList.getField(field) != null;
    }
 
    public Id getField(String field) {
@@ -107,15 +108,27 @@ public class TypeCianetoClass extends Type {
    }
 
    public boolean hasPrivateMethod(String method, List<Expr> exprList) {
-      return this.privateMethodList.hasMethod(method, exprList);
+      return this.privateMethodList.getMethod(method, exprList) != null;
+   }
+
+   public boolean hasPrivateMethod(String method) {
+      return this.hasPrivateMethod(method, new ArrayList<>());
+   }
+
+   public boolean hasPublicMethod(String method) {
+      return this.hasPublicMethod(method, new ArrayList<>());
    }
 
    public boolean hasPublicMethod(String method, List<Expr> exprList) {
-      return this.publicMethodList.hasMethod(method, exprList);
+      return this.publicMethodList.getMethod(method, exprList) != null;
    }
 
    public boolean hasMethod(String method, List<Expr> exprList) {
       return hasPrivateMethod(method, exprList) || hasPublicMethod(method, exprList);
+   }
+
+   public Id getMethod(String method) {
+      return getMethod(method, new ArrayList<>());
    }
 
    public Id getMethod(String method, List<Expr> exprList) {
