@@ -5,15 +5,15 @@
 package ast;
 import java.util.*;
 
-public class PrimaryExprSelfIdIdColon extends PrimaryExpr{
+public class PrimaryExprSelfIdMethod extends PrimaryExpr{
 
-    private Id selfId, id, idColon;
+    private Id selfId, id, method;
     List<Expr> exprList;
 
-    public PrimaryExprSelfIdIdColon(Id selfId, Id id, Id idColon, List<Expr> exprList){
+    public PrimaryExprSelfIdMethod(Id selfId, Id id, Id method, List<Expr> exprList){
         this.selfId = selfId;
         this.id = id;
-        this.idColon = idColon;
+        this.method = method;
         this.exprList = exprList;
     }
 
@@ -22,7 +22,7 @@ public class PrimaryExprSelfIdIdColon extends PrimaryExpr{
         pw.print(".");
         pw.print(this.id.getName());
         pw.print(".");
-        pw.print(this.idColon.getName());
+        pw.print(this.method.getName());
         pw.print("(");
         for(Expr expr: this.exprList){
             expr.genJava(pw);
@@ -34,6 +34,6 @@ public class PrimaryExprSelfIdIdColon extends PrimaryExpr{
     }
 
     public Type getType() {
-        return idColon.getType();
+        return method.getType();
     }
 }

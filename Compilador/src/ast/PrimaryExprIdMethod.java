@@ -3,25 +3,24 @@
 *	Gabriel Eiji Uema Martin
 */
 package ast;
-
 import java.util.*;
 
-public class PrimaryExprSuperIdColon extends PrimaryExpr {
+public class PrimaryExprIdMethod extends PrimaryExpr{
 
-    private Id superId;
-    private Id id;
-    List<Expr> exprList;
+    private Id id, method;
+    private List<Expr> exprList;
 
-    public PrimaryExprSuperIdColon(Id superId, Id id, List<Expr> exprList) {
-        this.superId = superId;
+    public PrimaryExprIdMethod(Id id, Id method, List<Expr> exprList){
         this.id = id;
+        this.method = method;
         this.exprList = exprList;
     }
 
-    public void genJava(PW pw) {
-        pw.print("super");
-        pw.print(".");
+    public void genJava(PW pw){
+        
         pw.print(this.id.getName());
+        pw.print(".");
+        pw.print(this.method.getName());
         pw.print("(");
         for(Expr expr: this.exprList){
             expr.genJava(pw);
@@ -34,6 +33,6 @@ public class PrimaryExprSuperIdColon extends PrimaryExpr {
     }
 
     public Type getType() {
-        return id.getType();
+        return method.getType();
     }
 }

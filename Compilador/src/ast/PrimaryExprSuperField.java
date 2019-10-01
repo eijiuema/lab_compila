@@ -4,23 +4,23 @@
 */
 package ast;
 
-public class PrimaryExprSuperId extends PrimaryExpr{
+public class PrimaryExprSuperField extends PrimaryExpr{
 
-    private Id superId, id;
+    private Id superId, field;
     
-    public PrimaryExprSuperId(Id superId, Id id){
+    public PrimaryExprSuperField(Id superId, Id field){
         this.superId = superId;
-        this.id = id;
+        this.field = field;
     }
 
     public void genJava(PW pw){
         pw.print("super");
         pw.print(".");
-        pw.print(this.id.getName());
+        pw.print(this.field.getName());
         
     }
 
     public Type getType() {
-        return id.getType();
+        return field.getType();
     }
 }

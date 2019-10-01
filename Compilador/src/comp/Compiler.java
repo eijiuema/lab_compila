@@ -847,9 +847,9 @@ public class Compiler {
 
 		if (hasDot) {
 			if (lexer.token == Token.ID) {
-				primaryExpr = new PrimaryExprIdId(id, id());
+				primaryExpr = new PrimaryExprIdField(id, id());
 			} else if (lexer.token == Token.IDCOLON) {
-				primaryExpr = new PrimaryExprIdIdColon(id, idColon(), exprList());
+				primaryExpr = new PrimaryExprIdMethod(id, idColon(), exprList());
 			} else {
 				error("'Id' was expected");
 			}
@@ -869,9 +869,9 @@ public class Compiler {
 			check(Token.DOT, "'.' was expected");
 			lexer.nextToken();
 			if (lexer.token == Token.ID) {
-				primaryExpr = new PrimaryExprSuperId(null, id());
+				primaryExpr = new PrimaryExprSuperField(null, id());
 			} else if (lexer.token == Token.IDCOLON) {
-				primaryExpr = new PrimaryExprSuperIdColon(null, idColon(), exprList());
+				primaryExpr = new PrimaryExprSuperMethod(null, idColon(), exprList());
 			} else {
 				error("'Id' was expected");
 			}
@@ -885,17 +885,17 @@ public class Compiler {
 					if (lexer.token == Token.DOT) {
 						lexer.nextToken();
 						if (lexer.token == Token.ID) {
-							primaryExpr = new PrimaryExprSelfIdId(null, id, id());
+							primaryExpr = new PrimaryExprSelfIdField(null, id, id());
 						} else if (lexer.token == Token.IDCOLON) {
-							primaryExpr = new PrimaryExprSelfIdIdColon(null, id, idColon(), exprList());
+							primaryExpr = new PrimaryExprSelfIdMethod(null, id, idColon(), exprList());
 						} else {
 							error("'Id' was expected");
 						}
 					} else {
-						primaryExpr = new PrimaryExprSelfId(null, id);
+						primaryExpr = new PrimaryExprSelfField(null, id);
 					}
 				} else {
-					primaryExpr = new PrimaryExprSelfIdColon(null, idColon(), exprList());
+					primaryExpr = new PrimaryExprSelfMethod(null, idColon(), exprList());
 				}
 			} else {
 				primaryExpr = new PrimaryExprSelf();

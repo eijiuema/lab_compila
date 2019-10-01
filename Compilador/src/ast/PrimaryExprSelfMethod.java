@@ -5,23 +5,23 @@
 package ast;
 import java.util.*;
 
-public class PrimaryExprSelfIdColon extends PrimaryExpr{
+public class PrimaryExprSelfMethod extends PrimaryExpr{
 
-    private Id selfId, idColon;
+    private Id selfId, method;
     List<Expr> exprList;
-    public PrimaryExprSelfIdColon(Id selfId, Id idColon, List<Expr> exprList){
+    public PrimaryExprSelfMethod(Id selfId, Id method, List<Expr> exprList){
         this.selfId = selfId;
-        this.idColon = idColon;
+        this.method = method;
         this.exprList = exprList;
     }
 
     public void genJava(PW pw){
         pw.print("this");
         pw.print(".");
-        pw.print(this.idColon.getName());
+        pw.print(this.method.getName());
     }
 
     public Type getType() {
-        return idColon.getType();
+        return method.getType();
     }
 }
