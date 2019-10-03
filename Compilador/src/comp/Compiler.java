@@ -275,9 +275,39 @@ public class Compiler {
 
 		this.currentMethod = methodDec;
 
+		if (qualifier.contains("override")){
+
+			if(this.self.getSuperclass() == null || !this.self.getSuperclass().hasPublicMethodEquals(methodDec)){
+				error("The method " + methodDec.getId().getName() + " of type " + this.self.getName() + " must override or implement a supertype method");
+			} else {
+
+				//Verificando os qualificadores do metodo sobrecarregado
+				String superclassMethodQualifier = this.self.getSuperclass().getQualifierFromPublicMethodDecEquals(methodDec); 
+				if( superclassMethodQualifier.contains("final")){
+					error("Cannot override the final method from " + self.getSuperclass().getName());
+				}
+				if( superclassMethodQualifier.contains("shared")){
+					error("Cannot override the shared method from " + self.getSuperclass().getName());
+				}
+
+				//Verificando os qualificadores do metodo que esta sobrecarregando
+				if(qualifier.contains("private")){
+					error("Cannot reduce the visibility of the inherited method from " + self.getSuperclass().getName());
+				}
+				if(qualifier.contains("shared")){
+					error("This shared method cannot hide the instance method from " + self.getSuperclass().getName());
+				}
+			}
+		}
+
+
 		if (qualifier.equals("private")) {
 			self.addPrivateMethodList(qualifier, methodDec);
 		} else {
+			if(this.self.getSuperclass() != null && this.self.getSuperclass().hasPublicMethodEquals(methodDec) && !qualifier.contains("override")){
+				error("The method " + methodDec.getId().getName() + " of type " + this.self.getName() + " must have the \"override\" qualifier");
+			}
+
 			self.addPublicMethodList(qualifier, methodDec);
 		}
 

@@ -43,11 +43,34 @@ public class MethodList {
         for (AbstractMap.SimpleEntry<String, MethodDec> smd : methodList) {
             MethodDec md = smd.getValue();
             Id id = md.getId();
-            if (id.getName().equals(method) && md.checkParamList(exprList)) {
+            if (id.getName().equals(method) && md.checkParamListCompatible(exprList)) {
                 return id;
             }
         }
         return null;
     }
+
+	public Id getMethodEquals(String method, List<ParamDec> list) {
+		for (AbstractMap.SimpleEntry<String, MethodDec> smd : methodList) {
+            MethodDec md = smd.getValue();
+            Id id = md.getId();
+            if (id.getName().equals(method) && md.checkParamListEquals(list)) {
+                return id;
+            }
+        }
+        return null;
+	}
+
+	public String getQualifierFromMethodDecEquals(MethodDec methodDec) {
+		for (AbstractMap.SimpleEntry<String, MethodDec> smd : methodList) {
+            MethodDec md = smd.getValue();
+            String qualif = smd.getKey();
+
+            if (md.getId().getName().equals(methodDec.getId().getName()) && md.checkParamListEquals(methodDec.getParamList())) {
+                return qualif;
+            }
+        }
+		return null;
+	}
 
 }

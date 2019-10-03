@@ -66,18 +66,38 @@ public class MethodDec extends Member {
 
     }
 
-    public boolean checkParamList(List<Expr> exprList) {
-        if (formalParamDec.size() != exprList.size()) {
+    public boolean checkParamListEquals(List<ParamDec> list) {
+        if (formalParamDec.size() != list.size()) {
             return false;
         }
 
         for (int i = 0; i < formalParamDec.size(); i++) {
-            if (formalParamDec.get(i).getType() != exprList.get(i).getType()) {
+            if (formalParamDec.get(i).getType() != list.get(i).getType()) {
                 return false;
             }
         }
 
         return true;
     }
+
+	public boolean checkParamListCompatible(List<Expr> exprList) {
+		
+        if (formalParamDec.size() != exprList.size()) {
+            return false;
+        }
+
+        for (int i = 0; i < formalParamDec.size(); i++) {
+            if (!formalParamDec.get(i).getType().canConvertFrom(exprList.get(i).getType())) {
+                return false;
+            }
+        }
+
+        return true;
+	}
+
+	public List<ParamDec> getParamList() {
+		return this.formalParamDec;
+	}
+
 
 }

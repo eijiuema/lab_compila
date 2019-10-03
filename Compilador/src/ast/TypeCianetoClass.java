@@ -18,6 +18,7 @@ public class TypeCianetoClass extends Type {
       this.privateMethodList = new MethodList();
       this.fieldList = new FieldList();
       this.open = open;
+      this.superclass = null;
    }
 
    @Override
@@ -130,6 +131,10 @@ public class TypeCianetoClass extends Type {
       return this.publicMethodList.getMethod(method, exprList) != null;
    }
 
+   public boolean hasPublicMethodEquals(MethodDec methodDec) {
+      return this.publicMethodList.getMethodEquals(methodDec.getId().getName(), methodDec.getParamList()) != null;
+   }
+
    public boolean hasMethod(String method, List<Expr> exprList) {
       return hasPrivateMethod(method, exprList) || hasPublicMethod(method, exprList) || (this.superclass != null && this.superclass.hasMethod(method, exprList));
    }
@@ -156,4 +161,21 @@ public class TypeCianetoClass extends Type {
       return this.superclass.getMethod(method, exprList);
    }
 
+   
+   public String getQualifierFromPublicMethodDecEquals(MethodDec methodDec) {
+      String qualif;
+
+      if ((qualif = this.publicMethodList.getQualifierFromMethodDecEquals(methodDec)) != null) {
+         return qualif;
+      }
+
+      if (this.superclass == null) {
+         return null;
+      }
+
+      return this.superclass.getQualifierFromPublicMethodDecEquals(methodDec);
+   }
+
 }
+
+
