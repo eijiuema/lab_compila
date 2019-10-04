@@ -100,7 +100,8 @@ public class TypeCianetoClass extends Type {
    }
 
    public boolean hasField(String field) {
-      return this.fieldList.getField(field) != null || this.superclass.getField(field) != null || (this.superclass != null && this.superclass.hasField(field));
+      return this.fieldList.getField(field) != null || this.superclass.getField(field) != null
+            || (this.superclass != null && this.superclass.hasField(field));
    }
 
    public Id getField(String field) {
@@ -131,7 +132,12 @@ public class TypeCianetoClass extends Type {
    }
 
    public boolean hasMethod(String method, List<Expr> exprList) {
-      return hasPrivateMethod(method, exprList) || hasPublicMethod(method, exprList) || (this.superclass != null && this.superclass.hasMethod(method, exprList));
+      return hasPrivateMethod(method, exprList) || hasPublicMethod(method, exprList)
+            || (this.superclass != null && this.superclass.hasMethod(method, exprList));
+   }
+
+   public boolean hasMethod(String method) {
+      return hasMethod(method, new ArrayList<>());
    }
 
    public Id getMethod(String method) {
@@ -154,6 +160,22 @@ public class TypeCianetoClass extends Type {
       }
 
       return this.superclass.getMethod(method, exprList);
+   }
+
+   public void genJava(PW pw) {
+      pw.printIdent("class ");
+      pw.print(getJavaName());
+      if (superclass != null) {
+         pw.print(" extends " + superclass.getJavaName());
+      }
+      pw.println(" {");
+      pw.add();
+      fieldList.genJava(pw);
+      publicMethodList.genJava(pw);
+      privateMethodList.genJava(pw);
+      pw.sub();
+      pw.printlnIdent("}");
+      pw.println();
    }
 
 }

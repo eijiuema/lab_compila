@@ -36,16 +36,7 @@ public class Program {
 		pw.println("}");
 		pw.println();
 		for (TypeCianetoClass typeCianetoClass : classList) {
-			pw.printIdent("class ");
-			pw.print(typeCianetoClass.getName());
-			pw.println(" {");
-			pw.add();
-			typeCianetoClass.getFieldList().genJava(pw);
-			typeCianetoClass.getPublicMethodList().genJava(pw);
-			typeCianetoClass.getPrivateMethodList().genJava(pw);
-			pw.sub();
-			pw.printlnIdent("}");
-			pw.println();
+			typeCianetoClass.genJava(pw);
 		}
 	}
 

@@ -7,11 +7,16 @@ import java.util.*;
 
 public class PrimaryExprSelfIdMethod extends PrimaryExpr{
 
-    private Id selfId, id, method;
+    private Id id, method;
     List<Expr> exprList;
 
-    public PrimaryExprSelfIdMethod(Id selfId, Id id, Id method, List<Expr> exprList){
-        this.selfId = selfId;
+    public PrimaryExprSelfIdMethod(Id id, Id method) {
+        this.id = id;
+        this.method = method;
+        this.exprList = new ArrayList<>();
+    }
+
+    public PrimaryExprSelfIdMethod(Id id, Id method, List<Expr> exprList){
         this.id = id;
         this.method = method;
         this.exprList = exprList;

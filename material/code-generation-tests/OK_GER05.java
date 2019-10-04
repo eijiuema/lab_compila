@@ -14,22 +14,22 @@ class A {
         d = (new Scanner(System.in)).nextInt();
         e = (new Scanner(System.in)).nextInt();
         f = (new Scanner(System.in)).nextInt();
-        System.out.print(a+ " ");
-        System.out.print(b+ " ");
-        System.out.print(c+ " ");
-        System.out.print(d+ " ");
-        System.out.print(e+ " ");
-        System.out.print(f+ " ");
+        System.out.print(a);
+        System.out.print(b);
+        System.out.print(c);
+        System.out.print(d);
+        System.out.print(e);
+        System.out.print(f);
     }
 }
 
 class Program {
     void run() {
         A a;
-        System.out.println(""+ " ");
-        System.out.println("Ok-ger05"+ " ");
-        System.out.println("The output should be what you give as input."+ " ");
-        System.out.println("Type in six numbers"+ " ");
+        System.out.println("");
+        System.out.println("Ok-ger05");
+        System.out.println("The output should be what you give as input.");
+        System.out.println("Type in six numbers");
         a = new A();
         a.m();
     }
