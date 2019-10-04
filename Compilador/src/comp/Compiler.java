@@ -245,8 +245,6 @@ public class Compiler {
 		lexer.nextToken();
 		if (lexer.token == Token.ID) {
 			id = id();
-			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ methodDec()");
-			System.out.println("Falta verificar se os métodos existem na classe ou nas superclasses");
 			if (symbolTable.hasId(id)) {
 				error("There's already a method named " + id.getName());
 			}

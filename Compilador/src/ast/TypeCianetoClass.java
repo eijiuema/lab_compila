@@ -100,8 +100,7 @@ public class TypeCianetoClass extends Type {
    }
 
    public boolean hasField(String field) {
-      return this.fieldList.getField(field) != null || this.superclass.getField(field) != null
-            || (this.superclass != null && this.superclass.hasField(field));
+      return this.fieldList.getField(field) != null || (this.superclass != null && this.superclass.hasField(field));
    }
 
    public Id getField(String field) {
