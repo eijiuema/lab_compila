@@ -18,6 +18,7 @@ public class TypeCianetoClass extends Type {
       this.privateMethodList = new MethodList();
       this.fieldList = new FieldList();
       this.open = open;
+      this.superclass = null;
    }
 
    @Override
@@ -127,8 +128,21 @@ public class TypeCianetoClass extends Type {
       return this.hasPublicMethod(method, new ArrayList<>());
    }
 
+   public boolean hasPublicMethod(String method, boolean checkSuper) {
+      return this.hasPublicMethod(method, new ArrayList<>(), checkSuper);
+   }
+
    public boolean hasPublicMethod(String method, List<Expr> exprList) {
       return this.publicMethodList.getMethod(method, exprList) != null;
+   }
+
+   public boolean hasPublicMethod(String method, List<Expr> exprList, boolean checkSuper) {
+      return this.publicMethodList.getMethod(method, exprList) != null
+            || checkSuper && superclass != null && superclass.hasPublicMethod(method, exprList, true);
+   }
+
+   public boolean hasPublicMethodEquals(MethodDec methodDec) {
+      return this.publicMethodList.getMethodEquals(methodDec) != null;
    }
 
    public boolean hasMethod(String method, List<Expr> exprList) {
@@ -160,6 +174,32 @@ public class TypeCianetoClass extends Type {
       }
 
       return this.superclass.getMethod(method, exprList);
+   }
+
+   public TypeCianetoClass getSuperContainsMethod(MethodDec methodDec) {
+
+      if (hasPublicMethodEquals(methodDec)) {
+         return this;
+      } else if (superclass != null) {
+         return superclass.getSuperContainsMethod(methodDec);
+      } else {
+         return null;
+      }
+
+   }
+
+   public String getQualifierFromPublicMethodDecEquals(MethodDec methodDec) {
+      String qualif;
+
+      if ((qualif = this.publicMethodList.getQualifierFromMethodDecEquals(methodDec)) != null) {
+         return qualif;
+      }
+
+      if (this.superclass == null) {
+         return null;
+      }
+
+      return this.superclass.getQualifierFromPublicMethodDecEquals(methodDec);
    }
 
    public void genJava(PW pw) {

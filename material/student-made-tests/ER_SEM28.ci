@@ -4,7 +4,7 @@
  * ----------------------- */
 
 @annot("check", "localVarRedeclared")
-@cep(9, "Variável 'i' declarada duas vezes, mas não em sequência", 
+@cep(9, "Variï¿½vel 'i' declarada duas vezes, mas nï¿½o em sequï¿½ncia", 
     "Variable 'i' is being redeclared",
     "comp.Compiler.localDec()")
   

@@ -66,14 +66,14 @@ public class MethodDec extends Member {
 
     }
 
-    public boolean checkParamList(List<Expr> exprList) {
-        if (formalParamDec.size() != exprList.size()) {
+    public boolean checkParamListEquals(List<ParamDec> list) {
+        if (formalParamDec.size() != list.size()) {
             return false;
         }
 
         for (int i = 0; i < formalParamDec.size(); i++) {
             Type paramType = formalParamDec.get(i).getType();
-            Type exprType = exprList.get(i).getType();
+            Type exprType = list.get(i).getType();
             if (!paramType.canConvertFrom(exprType)) {
                 return false;
             }
@@ -81,5 +81,25 @@ public class MethodDec extends Member {
 
         return true;
     }
+
+	public boolean checkParamListCompatible(List<Expr> exprList) {
+		
+        if (formalParamDec.size() != exprList.size()) {
+            return false;
+        }
+
+        for (int i = 0; i < formalParamDec.size(); i++) {
+            if (!formalParamDec.get(i).getType().canConvertFrom(exprList.get(i).getType())) {
+                return false;
+            }
+        }
+
+        return true;
+	}
+
+	public List<ParamDec> getParamList() {
+		return this.formalParamDec;
+	}
+
 
 }

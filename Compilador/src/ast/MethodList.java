@@ -31,7 +31,10 @@ public class MethodList {
     public void genJava(PW pw) {
 
         for (AbstractMap.SimpleEntry<String, MethodDec> method : this.methodList) {
-            pw.printIdent(method.getKey());
+            if (method.getKey().contains("override")) {
+                pw.printlnIdent("@Override");
+            }
+            pw.printIdent(method.getKey().replace("override", ""));
             if (!method.getKey().equals("")) {
                 pw.print(" ");
             }
@@ -43,8 +46,33 @@ public class MethodList {
         for (AbstractMap.SimpleEntry<String, MethodDec> smd : methodList) {
             MethodDec md = smd.getValue();
             Id id = md.getId();
-            if (id.getName().equals(method) && md.checkParamList(exprList)) {
+            if (id.getName().equals(method) && md.checkParamListCompatible(exprList)) {
                 return id;
+            }
+        }
+        return null;
+    }
+
+    public Id getMethodEquals(MethodDec methodDec) {
+        for (AbstractMap.SimpleEntry<String, MethodDec> smd : methodList) {
+            MethodDec md = smd.getValue();
+            Id id = md.getId();
+            if (id.getName().equals(methodDec.getId().getName()) && md.checkParamListEquals(methodDec.getParamList())
+                    && md.getType() == methodDec.getType()) {
+                return id;
+            }
+        }
+        return null;
+    }
+
+    public String getQualifierFromMethodDecEquals(MethodDec methodDec) {
+        for (AbstractMap.SimpleEntry<String, MethodDec> smd : methodList) {
+            MethodDec md = smd.getValue();
+            String qualif = smd.getKey();
+
+            if (md.getId().getName().equals(methodDec.getId().getName())
+                    && md.checkParamListEquals(methodDec.getParamList())) {
+                return qualif;
             }
         }
         return null;

@@ -1,5 +1,5 @@
 @annot("check", "typeErrorSearchMethodSuper")
-@cep(24, "Chamada a método inexistente utilizando 'super'",
+@cep(24, "Chamada a mï¿½todo inexistente utilizando 'super'",
       "Method 'm' was not found in superclass 'B' or its superclasses",
       "comp.Compiler.factor()")
 open

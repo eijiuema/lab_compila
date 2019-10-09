@@ -11,7 +11,7 @@
 open
 class A 
    
-   func first: Int pn {
+   public func first: Int pn {
    }   
 
 end
@@ -19,7 +19,7 @@ end
 open
 class B extends A 
    
-   func second {
+   public func second {
    }   
 
 end
@@ -27,7 +27,7 @@ end
 
 class C extends B 
    
-   func third {
+   public func third {
    }   
 
 end

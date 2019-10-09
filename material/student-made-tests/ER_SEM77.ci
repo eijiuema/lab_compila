@@ -4,7 +4,7 @@ edapd12@gmail.com
 */
 
 @annot("check", "missingRunMethodInProgram")
-@cep(9, "Classe 'Program' sem método 'run'", 
+@cep(9, "Classe 'Program' sem mï¿½todo 'run'", 
     "Method 'run' was not found in class 'Program'",
     "comp.Compiler.classDec()")
 

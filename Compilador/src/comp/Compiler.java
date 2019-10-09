@@ -59,6 +59,9 @@ public class Compiler {
 			}
 
 		}
+		if (symbolTable.getClass("Program") == null) {
+			error("Source code is missing the Program class");
+		}
 		if (!thereWasAnError && lexer.token != Token.EOF) {
 			try {
 				error("End of file expected");
@@ -196,6 +199,10 @@ public class Compiler {
 
 		memberList();
 
+		if (typeCianetoClass.getName().equals("Program") && !typeCianetoClass.hasMethod("run")) {
+			error("The Program class must have a run method");
+		}
+
 		check(Token.END, "'end' was expected");
 		lexer.nextToken();
 
@@ -245,13 +252,10 @@ public class Compiler {
 		lexer.nextToken();
 		if (lexer.token == Token.ID) {
 			id = id();
+			methodDec = new MethodDec(id);
 			if (self.hasField(id.getName())) {
 				error("There's already a field named " + id.getName());
 			}
-			if (self.hasMethod(id.getName())) {
-				error("There's already a method named " + id.getName());
-			}
-			methodDec = new MethodDec(id);
 		} else if (lexer.token == Token.IDCOLON) {
 			id = idColon();
 			if (self.getName().equals("Program") && id.getName().equals("run")) {
@@ -259,9 +263,6 @@ public class Compiler {
 			}
 			methodDec = new MethodDec(id);
 			formalParamDec(methodDec);
-			if (self.hasMethod(methodDec)) {
-				error("There's already a method named " + methodDec.getId().getName() + " with the specified params");
-			}
 		} else {
 			error("An identifier or identifer: was expected after 'func'");
 		}
@@ -274,16 +275,52 @@ public class Compiler {
 			methodDec.setType(type());
 		}
 
-		check(Token.LEFTCURBRACKET, "'{' expected");
-		next();
+		if (qualifier.contains("override")) {
+			if (this.self.getSuperclass() == null || !this.self.getSuperclass().hasPublicMethodEquals(methodDec)) {
+				error("The method " + methodDec.getId().getName() + " of type " + this.self.getName()
+						+ " must override or implement a supertype method");
+			} else {
 
-		this.currentMethod = methodDec;
+				// Verificando os qualificadores do metodo sobrecarregado
+				TypeCianetoClass superContainsMethod = self.getSuperContainsMethod(methodDec);
+				String superclassMethodQualifier = superContainsMethod.getQualifierFromPublicMethodDecEquals(methodDec);
+				if (superclassMethodQualifier.contains("final")) {
+					error("Cannot override the final method from " + superContainsMethod.getName());
+				}
+				if (superclassMethodQualifier.contains("shared")) {
+					error("Cannot override the shared method from " + superContainsMethod.getName());
+				}
+
+				// Verificando os qualificadores do metodo que esta sobrecarregando
+				if (qualifier.contains("private")) {
+					error("Cannot reduce the visibility of the inherited method from " + superContainsMethod.getName());
+				}
+				if (qualifier.contains("shared")) {
+					error("This shared method cannot hide the instance method from " + superContainsMethod.getName());
+				}
+			}
+		} else {
+			if (self.hasPublicMethodEquals(methodDec)) {
+				error("There's already a method named " + id.getName() + " with the specified params");
+			}
+		}
 
 		if (qualifier.equals("private")) {
 			self.addPrivateMethodList(qualifier, methodDec);
 		} else {
+			if (this.self.getSuperclass() != null && this.self.getSuperclass().hasPublicMethodEquals(methodDec)
+					&& !qualifier.contains("override")) {
+				error("The method " + methodDec.getId().getName() + " of type " + this.self.getName()
+						+ " must have the \"override\" qualifier");
+			}
+
 			self.addPublicMethodList(qualifier, methodDec);
 		}
+
+		check(Token.LEFTCURBRACKET, "'{' expected");
+		next();
+
+		this.currentMethod = methodDec;
 
 		statementList(methodDec);
 
@@ -292,7 +329,6 @@ public class Compiler {
 
 		check(Token.RIGHTCURBRACKET, "'}' expected");
 		next();
-
 	}
 
 	private void formalParamDec(MethodDec methodDec) {
@@ -588,7 +624,13 @@ public class Compiler {
 
 		check(Token.ID, "A field name was expected");
 
-		idList.add(id(t));
+		Id id = id(t);
+
+		if (self.hasField(id.getName())) {
+			error("There's already a field named " + id.getName() + " on " + self.getName());
+		}
+
+		idList.add(id);
 
 		while (lexer.token == Token.COMMA) {
 			next();
@@ -732,6 +774,8 @@ public class Compiler {
 				error("expected String expression or Int expression");
 			lexer.nextToken();
 			sumSubExpr = sumSubExpr();
+			if (sumSubExpr.getType() != Type.stringType && sumSubExpr.getType() != Type.intType)
+				error("expected String expression or Int expression");
 			simpleExpr.addSumSubExpr(sumSubExpr);
 		}
 
@@ -940,7 +984,7 @@ public class Compiler {
 				}
 				Id id2 = id();
 				TypeCianetoClass typeCianetoClass = (TypeCianetoClass) id.getType();
-				if (!typeCianetoClass.hasPublicMethod(id2.getName())) {
+				if (!typeCianetoClass.hasPublicMethod(id2.getName(), true)) {
 					error("Method not found in class " + typeCianetoClass.getName());
 				}
 				id2 = typeCianetoClass.getMethod(id2.getName());
@@ -956,11 +1000,11 @@ public class Compiler {
 				TypeCianetoClass typeCianetoClass = (TypeCianetoClass) id.getType();
 				Id id2 = idColon();
 				List<Expr> exprList = exprList();
-				if (typeCianetoClass.hasPublicMethod(id2.getName(), exprList)) {
+				if (typeCianetoClass.hasPublicMethod(id2.getName(), exprList, true)) {
 					id2 = typeCianetoClass.getMethod(id2.getName(), exprList);
 					primaryExpr = new PrimaryExprIdMethod(id, id2, exprList);
 				} else {
-					error("There's no field nor method in " + typeCianetoClass.getName() + " named " + id2.getName());
+					error("There's no method in " + typeCianetoClass.getName() + " named " + id2.getName());
 				}
 			} else {
 				error("'Id' was expected");
