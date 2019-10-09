@@ -16,7 +16,7 @@ class A {
     }
 }
 
-class B {
+class B extends A {
     private int k;
     void m2(int n) {
         this.k = 2;
@@ -28,13 +28,13 @@ class B {
     }
 }
 
-class C {
+class C extends B {
     void m3(int n) {
         super.m2(2);
         System.out.print("3 " + n + " ");
     }
     void m4(int n) {
-        this.m3;
+        this.m3(3);
         System.out.print("4 " + n);
         System.out.print(" ");
     }

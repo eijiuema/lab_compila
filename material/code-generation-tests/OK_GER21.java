@@ -18,7 +18,7 @@ class A {
 class Program {
     private A a;
     public void print() {
-        System.out.print(this.a.get);
+        System.out.print(this.a.get());
     }
     public A get() {
         return this.a;

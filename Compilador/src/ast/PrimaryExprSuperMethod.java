@@ -8,12 +8,15 @@ import java.util.*;
 
 public class PrimaryExprSuperMethod extends PrimaryExpr {
 
-    private Id superId;
     private Id method;
     List<Expr> exprList;
 
-    public PrimaryExprSuperMethod(Id superId, Id method, List<Expr> exprList) {
-        this.superId = superId;
+    public PrimaryExprSuperMethod(Id method) {
+        this.method = method;
+        this.exprList = new ArrayList<>();
+    }
+
+    public PrimaryExprSuperMethod(Id method, List<Expr> exprList) {
         this.method = method;
         this.exprList = exprList;
     }

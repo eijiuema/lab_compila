@@ -3,14 +3,12 @@
 *	Gabriel Eiji Uema Martin
 */
 package ast;
-import java.util.*;
 
 public class PrimaryExprSelfIdField extends PrimaryExpr{
 
-    private Id selfId, id, field;
+    private Id id, field;
     
-    public PrimaryExprSelfIdField(Id selfId, Id id, Id field){
-        this.selfId = selfId;
+    public PrimaryExprSelfIdField(Id id, Id field){
         this.id = id;
         this.field = field;
     }

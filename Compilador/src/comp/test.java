@@ -1,7 +1,10 @@
 package comp;
 
 abstract class A {
-   public abstract void b();
+   private void b(){}
+    final private void t(){
+
+    }
 }
 
 class B extends A{
