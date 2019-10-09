@@ -4,7 +4,7 @@
 */
 
 @annot("check", "methodFieldEqualNames")
-@cep(9, "Método com nome igual a de variável de instância", 
+@cep(9, "Mï¿½todo com nome igual a de variï¿½vel de instï¿½ncia", 
    "Method 'i' has name equal to an instance variable",
    "comp.Compiler.methodDec()")
   

@@ -245,7 +245,10 @@ public class Compiler {
 		lexer.nextToken();
 		if (lexer.token == Token.ID) {
 			id = id();
-			if (symbolTable.hasId(id)) {
+			if (self.hasField(id.getName())) {
+				error("There's already a field named " + id.getName());
+			}
+			if (self.hasMethod(id.getName())) {
 				error("There's already a method named " + id.getName());
 			}
 			methodDec = new MethodDec(id);
@@ -256,6 +259,9 @@ public class Compiler {
 			}
 			methodDec = new MethodDec(id);
 			formalParamDec(methodDec);
+			if (self.hasMethod(methodDec)) {
+				error("There's already a method named " + methodDec.getId().getName() + " with the specified params");
+			}
 		} else {
 			error("An identifier or identifer: was expected after 'func'");
 		}
@@ -392,13 +398,21 @@ public class Compiler {
 			ln = true;
 			break;
 		default:
-			error("There's no method called " + lexer.getStringValue() + " in class Out");
+			error("There's no method named " + lexer.getStringValue() + " in class Out" + " with the specified params");
 			break;
 		}
 
 		next();
 
-		return new PrintStat(ln, exprList());
+		List<Expr> exprList = exprList();
+
+		for (Expr expr : exprList) {
+			if (expr.getType() != Type.stringType && expr.getType() != Type.intType) {
+				error("Attempt to print a " + expr.getType().getName() + " expression");
+			}
+		}
+
+		return new PrintStat(ln, exprList);
 	}
 
 	private AssignExpr assignExpr() {
@@ -407,6 +421,9 @@ public class Compiler {
 		leftExpr = expr();
 
 		if (lexer.token == Token.ASSIGN) {
+			if (!leftExpr.isAssignable()) {
+				error("Left expression isn't assignable");
+			}
 			next();
 			rightExpr = expr();
 
@@ -432,7 +449,7 @@ public class Compiler {
 		Id id = id(type);
 
 		if (symbolTable.hasId(id)) {
-			error("There's already a local var called " + id.getName());
+			error("There's already a local var named " + id.getName());
 		}
 
 		symbolTable.putId(id);
@@ -443,7 +460,7 @@ public class Compiler {
 			next();
 			id = id(type);
 			if (symbolTable.hasId(id)) {
-				error("There's already a local var called " + id.getName());
+				error("There's already a local var named " + id.getName());
 			}
 			symbolTable.putId(id);
 			idList.add(id);
@@ -888,7 +905,7 @@ public class Compiler {
 			readExpr = new ReadExpr(Type.stringType);
 			break;
 		default:
-			error("There's no method named " + lexer.getStringValue() + " in class In");
+			error("There's no method named " + lexer.getStringValue() + " in class In" + " with the specified params");
 			break;
 		}
 
@@ -950,7 +967,7 @@ public class Compiler {
 			}
 		} else {
 			if (!symbolTable.hasId(id)) {
-				error("There1s no id named " + id.getName());
+				error("There's no id named " + id.getName());
 			}
 			id = symbolTable.getId(id);
 			primaryExpr = new PrimaryExprId(id);
@@ -982,7 +999,8 @@ public class Compiler {
 				Id method = idColon();
 				List<Expr> exprList = exprList();
 				if (!self.getSuperclass().hasPublicMethod(method.getName(), exprList)) {
-					error("There's no method named " + method.getName() + "in " + self.getSuperclass().getName());
+					error("There's no method named " + method.getName() + "in " + self.getSuperclass().getName()
+							+ " with the specified params");
 				}
 				method = self.getSuperclass().getMethod(method.getName(), exprList);
 				primaryExpr = new PrimaryExprSuperMethod(method, exprList);
@@ -1020,7 +1038,8 @@ public class Compiler {
 								id2 = classType.getMethod(id2.getName());
 								primaryExpr = new PrimaryExprSelfIdMethod(id, id2);
 							} else {
-								error("There's no field nor unary method named " + id2.getName() + " on class" + classType.getName());
+								error("There's no field nor unary method named " + id2.getName() + " on class"
+										+ classType.getName());
 							}
 						} else if (lexer.token == Token.IDCOLON) {
 							Id method = idColon();
@@ -1038,7 +1057,8 @@ public class Compiler {
 					Id method = idColon();
 					List<Expr> exprList = exprList();
 					if (!self.hasMethod(method.getName(), exprList)) {
-						error("There's no method named " + method.getName() + " on class " + self.getName());
+						error("There's no method named " + method.getName() + " on class " + self.getName()
+								+ " with the specified params");
 					}
 					method = self.getMethod(method.getName(), exprList);
 					primaryExpr = new PrimaryExprSelfMethod(method, exprList);

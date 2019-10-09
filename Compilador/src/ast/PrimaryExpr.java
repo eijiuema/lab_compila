@@ -4,9 +4,9 @@
 */
 package ast;
 
-public abstract class PrimaryExpr extends Factor{
+public abstract class PrimaryExpr extends Factor {
 
-    public abstract void genJava(PW pw);    
+    public abstract void genJava(PW pw);
 
     public abstract Type getType();
 }

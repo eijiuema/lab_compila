@@ -13,18 +13,19 @@ public class Term {
 
     public Term(SignalFactor leftSignalFactor, List<Pair<String, SignalFactor>> signalFactorList) {
         this.leftSignalFactor = leftSignalFactor;
-        this.highOpSignalFactorList = signalFactorList; 
+        this.highOpSignalFactorList = signalFactorList;
     }
-    public Term(SignalFactor leftSignalFactor){
+
+    public Term(SignalFactor leftSignalFactor) {
         this.leftSignalFactor = leftSignalFactor;
-        this.highOpSignalFactorList = new ArrayList<>();  
+        this.highOpSignalFactorList = new ArrayList<>();
     }
 
     public boolean addHighOpSignalFactor(String highOp, SignalFactor signalFactor) {
-        return this.highOpSignalFactorList.add(new Pair<String,SignalFactor>(highOp, signalFactor));
+        return this.highOpSignalFactorList.add(new Pair<String, SignalFactor>(highOp, signalFactor));
     }
-    
-    public void genJava(PW pw){
+
+    public void genJava(PW pw) {
 
         leftSignalFactor.genJava(pw);
 
@@ -32,10 +33,17 @@ public class Term {
             pw.print(" " + pair.getFirst() + " ");
             pair.getSecond().genJava(pw);
         }
-        
+
     }
 
     public Type getType() {
         return this.leftSignalFactor.getType();
+    }
+
+    public boolean isAssignable() {
+        if (highOpSignalFactorList.size() > 0) {
+            return false;
+        }
+        return leftSignalFactor.isAssignable();
     }
 }

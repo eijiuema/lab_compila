@@ -16,7 +16,7 @@ class A {
     }
 }
 
-class B {
+class B extends A {
     override void m2(int n) {
         System.out.print(n);
         System.out.print(" ");

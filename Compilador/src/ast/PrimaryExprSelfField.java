@@ -4,14 +4,15 @@
 */
 package ast;
 
-public class PrimaryExprSelfField extends PrimaryExpr{
+public class PrimaryExprSelfField extends PrimaryExpr {
 
     private Id field;
-    public PrimaryExprSelfField(Id field){
+
+    public PrimaryExprSelfField(Id field) {
         this.field = field;
     }
 
-    public void genJava(PW pw){
+    public void genJava(PW pw) {
         pw.print("this");
         pw.print(".");
         pw.print(this.field.getName());
@@ -19,5 +20,10 @@ public class PrimaryExprSelfField extends PrimaryExpr{
 
     public Type getType() {
         return field.getType();
+    }
+
+    @Override
+    public boolean isAssignable() {
+        return true;
     }
 }

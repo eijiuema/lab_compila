@@ -74,7 +74,7 @@ public class MethodDec extends Member {
         for (int i = 0; i < formalParamDec.size(); i++) {
             Type paramType = formalParamDec.get(i).getType();
             Type exprType = exprList.get(i).getType();
-            if (paramType != exprType && !exprType.canConvertFrom(paramType)) {
+            if (!paramType.canConvertFrom(exprType)) {
                 return false;
             }
         }

@@ -8,12 +8,12 @@ public class OK_GER05 {
 class A {
     void m() {
         int a, b, c, d, e, f;
-        a = (new Scanner(System.in)).nextInt();
-        b = (new Scanner(System.in)).nextInt();
-        c = (new Scanner(System.in)).nextInt();
-        d = (new Scanner(System.in)).nextInt();
-        e = (new Scanner(System.in)).nextInt();
-        f = (new Scanner(System.in)).nextInt();
+        a = ;
+        b = ;
+        c = ;
+        d = ;
+        e = ;
+        f = ;
         System.out.print(a);
         System.out.print(b);
         System.out.print(c);

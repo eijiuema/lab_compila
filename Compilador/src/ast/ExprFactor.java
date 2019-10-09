@@ -4,20 +4,20 @@
 */
 package ast;
 
-public class ExprFactor extends Factor{
-    
+public class ExprFactor extends Factor {
+
     Expr expr;
 
-    public ExprFactor( Expr expr){
+    public ExprFactor(Expr expr) {
         this.expr = expr;
     }
 
-    public void genJava(PW pw){
+    public void genJava(PW pw) {
         pw.print("(");
         expr.genJava(pw);
         pw.print(")");
     }
-    
+
     public Type getType() {
         return this.expr.getType();
     }

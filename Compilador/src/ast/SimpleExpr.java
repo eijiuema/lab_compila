@@ -3,10 +3,11 @@
 *	Gabriel Eiji Uema Martin
 */
 package ast;
+
 import java.util.*;
 
-public class SimpleExpr{
-    
+public class SimpleExpr {
+
     private List<SumSubExpr> sumSubExprList;
 
     public SimpleExpr(SumSubExpr sumSubExpr) {
@@ -18,19 +19,26 @@ public class SimpleExpr{
         return this.sumSubExprList.add(sumSubExpr);
     }
 
-    public void genJava(PW pw){
-        for(SumSubExpr sse : this.sumSubExprList ){
+    public void genJava(PW pw) {
+        for (SumSubExpr sse : this.sumSubExprList) {
             sse.genJava(pw);
-            if( !sse.equals(this.sumSubExprList.get(this.sumSubExprList.size()-1)) ){
+            if (!sse.equals(this.sumSubExprList.get(this.sumSubExprList.size() - 1))) {
                 pw.print(" + ");
             }
         }
     }
 
     public Type getType() {
-        if(sumSubExprList.size() == 1)
+        if (sumSubExprList.size() == 1)
             return this.sumSubExprList.get(0).getType();
         else
             return Type.stringType;
+    }
+
+    public boolean isAssignable() {
+        if (sumSubExprList.size() != 1) {
+            return false;
+        }
+        return sumSubExprList.get(0).isAssignable();
     }
 }

@@ -26,7 +26,7 @@ class A {
     }
 }
 
-class B {
+class B extends A {
     override void set(int pn) {
         System.out.print(pn);
         System.out.print(" ");

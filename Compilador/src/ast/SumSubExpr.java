@@ -7,7 +7,7 @@ package ast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SumSubExpr{
+public class SumSubExpr {
     private Term leftTerm;
     private List<Pair<String, Term>> lowOpTermList;
 
@@ -20,7 +20,7 @@ public class SumSubExpr{
         return this.lowOpTermList.add(new Pair<String, Term>(lowOp, term));
     }
 
-    public void genJava(PW pw){
+    public void genJava(PW pw) {
         leftTerm.genJava(pw);
 
         for (Pair<String, Term> lowOpTerm : lowOpTermList) {
@@ -32,5 +32,12 @@ public class SumSubExpr{
 
     public Type getType() {
         return this.leftTerm.getType();
+    }
+
+    public boolean isAssignable() {
+        if (lowOpTermList.size() > 0) {
+            return false;
+        }
+        return leftTerm.isAssignable();
     }
 }

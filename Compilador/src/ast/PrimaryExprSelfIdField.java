@@ -24,4 +24,9 @@ public class PrimaryExprSelfIdField extends PrimaryExpr{
     public Type getType() {
         return field.getType();
     }
+
+    @Override
+    public boolean isAssignable() {
+        return true;
+    }
 }

@@ -15,35 +15,35 @@ class A {
     }
 }
 
-class B {
+class B extends A {
     private int k;
     int get_B() {
         return this.k;
     }
     override void init() {
-        super.init;
+        super.init();
         this.k = 2;
     }
 }
 
-class C {
+class C extends B {
     private int k;
     int get_C() {
         return this.k;
     }
     override void init() {
-        super.init;
+        super.init();
         this.k = 3;
     }
 }
 
-class D {
+class D extends C {
     private int k;
     int get_D() {
         return this.k;
     }
     override void init() {
-        super.init;
+        super.init();
         this.k = 4;
     }
 }

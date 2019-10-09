@@ -4,7 +4,7 @@
 */
 package ast;
 
-public class SignalFactor{
+public class SignalFactor {
     private String signal;
     private Factor factor;
 
@@ -18,14 +18,21 @@ public class SignalFactor{
         this.factor = factor;
     }
 
-    public void genJava(PW pw){
-        if(signal != null)
+    public void genJava(PW pw) {
+        if (signal != null)
             pw.print(signal);
-        
+
         factor.genJava(pw);
     }
-     
+
     public Type getType() {
         return this.factor.getType();
+    }
+
+    public boolean isAssignable() {
+        if (signal != null) {
+            return false;
+        }
+        return factor.isAssignable();
     }
 }

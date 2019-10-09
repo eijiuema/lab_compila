@@ -3,7 +3,6 @@
 *	Gabriel Eiji Uema Martin
 */
 package ast;
-import java.util.*;
 
 public class PrimaryExprId extends PrimaryExpr{
 
@@ -18,5 +17,10 @@ public class PrimaryExprId extends PrimaryExpr{
 
     public Type getType() {
         return id.getType();
+    }
+
+    @Override
+    public boolean isAssignable() {
+        return true;
     }
 }

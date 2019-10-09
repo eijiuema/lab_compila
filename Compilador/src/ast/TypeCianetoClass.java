@@ -89,8 +89,9 @@ public class TypeCianetoClass extends Type {
       else {
          TypeCianetoClass rightSuperClass = (TypeCianetoClass) right;
 
-         while (!(rightSuperClass.equals(this)) && rightSuperClass != null)
+         while (!(rightSuperClass.equals(this)) && rightSuperClass.getSuperclass() != null) {
             rightSuperClass = rightSuperClass.getSuperclass();
+         }
 
          if (this.equals(rightSuperClass))
             return true;

@@ -20,8 +20,8 @@ Os nomes de arquivos listados s?o aqueles que testam 'aspecto' e nos quais o com
 Os testes s?o categorizados por import?ncia: 'Muito importante', 'Importante', 'pouco importante'
 
 Testes 'pouco importantes' em que o compilador falhou:
-    runNotFirstMethodOfProgram
-        .\material\code-generation-tests\OK_GER21.ci
+    repeatUntil
+        .\material\code-generation-tests\OK_GER22.ci
 
 
 _________________________________________________________________________
@@ -34,7 +34,7 @@ Para o caso de teste que voc? utilizou, o compilador est? correto
 List of Java files with compilation errors: 
 
 List of files with correct Java code: 
-   .\material\code-generation-tests\OK_GER21.java
+   .\material\code-generation-tests\OK_GER22.java
 
 List of files Java code that compiles but was generated incorrectly: 
 
