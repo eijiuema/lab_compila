@@ -145,6 +145,10 @@ public class TypeCianetoClass extends Type {
       return this.publicMethodList.getMethodEquals(methodDec) != null;
    }
 
+   public boolean hasMethodEquals(MethodDec methodDec) {
+      return this.privateMethodList.getMethodEquals(methodDec) != null || this.publicMethodList.getMethodEquals(methodDec) != null;
+   }
+
    public boolean hasMethod(String method, List<Expr> exprList) {
       return hasPrivateMethod(method, exprList) || hasPublicMethod(method, exprList)
             || (this.superclass != null && this.superclass.hasMethod(method, exprList));

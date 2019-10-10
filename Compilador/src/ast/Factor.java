@@ -14,4 +14,8 @@ public abstract class Factor {
         return false;
     }
 
+    public boolean hasMethodCallWithReturn() {
+        return false;
+    }
+
 }

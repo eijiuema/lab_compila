@@ -41,4 +41,13 @@ public class SimpleExpr {
         }
         return sumSubExprList.get(0).isAssignable();
     }
+
+    public boolean hasMethodCallWithReturn() {
+        for (SumSubExpr sse : sumSubExprList) {
+            if (sse.hasMethodCallWithReturn()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

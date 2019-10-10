@@ -4,7 +4,7 @@
 */
 
 @annot("check", "methodsEqualNames")
-@cep(11, "Método público e privado com mesmos nomes",  
+@cep(11, "Mï¿½todo pï¿½blico e privado com mesmos nomes",  
   "Method 'm' is being redeclared", 
   "comp.Compiler.methodDec()")
   

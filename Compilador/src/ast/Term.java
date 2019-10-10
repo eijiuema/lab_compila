@@ -46,4 +46,17 @@ public class Term {
         }
         return leftSignalFactor.isAssignable();
     }
+
+    public boolean hasMethodCallWithReturn() {
+        if (leftSignalFactor.hasMethodCallWithReturn()) {
+            return true;
+        }
+
+        for (Pair<String, SignalFactor> hosfPair : highOpSignalFactorList) {
+            if(hosfPair.getSecond().hasMethodCallWithReturn()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

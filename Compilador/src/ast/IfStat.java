@@ -17,7 +17,7 @@ public class IfStat extends Stat {
     }
 
     public void genJava(PW pw) {
-        pw.printIdent("if(");
+        pw.printIdent("if (");
         expr.genJava(pw);
         pw.println(") {");
         pw.add();
@@ -26,8 +26,7 @@ public class IfStat extends Stat {
         }
         if (elseStList != null && elseStList.size() > 0) {
             pw.sub();
-            pw.println("}");
-            pw.printIdent("else {");
+            pw.printlnIdent("} else {");
             pw.add();
             for (Stat st : this.elseStList) {
                 st.genJava(pw);

@@ -8,8 +8,8 @@ public class PrimaryExprSelf extends PrimaryExpr{
 
     private Id selfId;
 
-    public PrimaryExprSelf() {
-        
+    public PrimaryExprSelf(Id selfId) {
+        this.selfId = selfId;
     }
 
     public void genJava(PW pw){

@@ -4,7 +4,7 @@
 */
 
 @annot("check", "methodReturnValueNotUsed")
-@cep(17, "Envio de mensagem 'a.m()' retorna um valor mas está sendo utilizado como uma instrução",
+@cep(17, "Envio de mensagem 'a.m()' retorna um valor mas estï¿½ sendo utilizado como uma instruï¿½ï¿½o",
         "Message send 'a.m()' returns a value that is not used",
         "comp.Compiler.statement()")
 

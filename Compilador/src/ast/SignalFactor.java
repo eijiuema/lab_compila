@@ -35,4 +35,8 @@ public class SignalFactor {
         }
         return factor.isAssignable();
     }
+
+    public boolean hasMethodCallWithReturn() {
+        return factor.hasMethodCallWithReturn();
+    }
 }

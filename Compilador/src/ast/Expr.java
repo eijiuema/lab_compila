@@ -43,4 +43,8 @@ public class Expr extends Factor {
         return this.leftSimpleExpr.isAssignable();
     }
 
+    public boolean hasMethodCallWithReturn() {
+        return leftSimpleExpr.hasMethodCallWithReturn() || rightSimpleExpr != null && rightSimpleExpr.hasMethodCallWithReturn();
+    }
+
 }

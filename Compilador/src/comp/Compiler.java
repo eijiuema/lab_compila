@@ -199,8 +199,8 @@ public class Compiler {
 
 		memberList();
 
-		if (typeCianetoClass.getName().equals("Program") && !typeCianetoClass.hasMethod("run")) {
-			error("The Program class must have a run method");
+		if (typeCianetoClass.getName().equals("Program") && !typeCianetoClass.hasPublicMethod("run")) {
+			error("The Program class must have a public run method");
 		}
 
 		check(Token.END, "'end' was expected");
@@ -300,12 +300,15 @@ public class Compiler {
 				}
 			}
 		} else {
-			if (self.hasPublicMethodEquals(methodDec)) {
+			if (self.hasMethodEquals(methodDec)) {
 				error("There's already a method named " + id.getName() + " with the specified params");
 			}
 		}
 
 		if (qualifier.equals("private")) {
+			if (self.getName().equals("Program") && id.getName().equals("run")) {
+				error("The method run of Program should be public");
+			}
 			self.addPrivateMethodList(qualifier, methodDec);
 		} else {
 			if (this.self.getSuperclass() != null && this.self.getSuperclass().hasPublicMethodEquals(methodDec)
@@ -455,6 +458,10 @@ public class Compiler {
 		Expr leftExpr = null, rightExpr = null;
 
 		leftExpr = expr();
+
+		if (leftExpr.hasMethodCallWithReturn()) {
+			error("Return value of method call not used");
+		}
 
 		if (lexer.token == Token.ASSIGN) {
 			if (!leftExpr.isAssignable()) {
@@ -708,9 +715,6 @@ public class Compiler {
 
 	}
 
-	/**
-	 * change this method to 'private'. uncomment it implement the methods it calls
-	 */
 	private Stat assertStat() {
 
 		lexer.nextToken();
@@ -935,25 +939,30 @@ public class Compiler {
 	}
 
 	private Factor readExpr() {
-		check(Token.DOT, "an '.' was expected");
-		next();
-		check(Token.ID, "an Id was expected");
-
 		ReadExpr readExpr = null;
 
-		switch (lexer.getStringValue()) {
-		case "readInt":
-			readExpr = new ReadExpr(Type.intType);
-			break;
-		case "readString":
-			readExpr = new ReadExpr(Type.stringType);
-			break;
-		default:
-			error("There's no method named " + lexer.getStringValue() + " in class In" + " with the specified params");
-			break;
-		}
-
+		check(Token.DOT, "an '.' was expected");
 		next();
+
+		if (lexer.token == Token.ID) {
+			Id id = id();
+			switch (id.getName()) {
+			case "readInt":
+				readExpr = new ReadExpr(Type.intType);
+				break;
+			case "readString":
+				readExpr = new ReadExpr(Type.stringType);
+				break;
+			default:
+				error("There's no method named " + id.getName() + " in class In" + " with the specified params");
+				break;
+			}
+		} else if (lexer.token == Token.IDCOLON) {
+			Id id = idColon();
+			error("There's no method named " + id.getName() + " in class In with the specified params");
+		} else {
+			error("'Id' was expected");
+		}
 
 		return readExpr;
 
@@ -1091,7 +1100,7 @@ public class Compiler {
 							if (!classType.hasPublicMethod(method.getName(), exprList)) {
 								error("Method not found in class " + classType.getName());
 							}
-							method = classType.getMethod(method.getName());
+							method = classType.getMethod(method.getName(), exprList);
 							primaryExpr = new PrimaryExprSelfIdMethod(id, method, exprList);
 						} else {
 							error("'Id' was expected");
@@ -1110,7 +1119,7 @@ public class Compiler {
 					error("':' was expected");
 				}
 			} else {
-				primaryExpr = new PrimaryExprSelf();
+				primaryExpr = new PrimaryExprSelf(new Id(self.getName(), self));
 			}
 		} else {
 			error("'super', 'Id' or 'self' was expected");

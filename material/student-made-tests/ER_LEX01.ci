@@ -2,6 +2,7 @@
 Vitor Mesquita Fogaça
 vitor.fogaca@outlook.com
 */
+@cep(4, "type 'Integer' not recognized");
 
 class Teste
     var Int n;
@@ -15,7 +16,6 @@ class Teste
     }
 end
 
-@cep(4, "type 'Integer' not recognized");
 class Program
     func run {
         var Teste t;

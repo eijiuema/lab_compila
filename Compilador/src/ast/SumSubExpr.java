@@ -40,4 +40,18 @@ public class SumSubExpr {
         }
         return leftTerm.isAssignable();
     }
+
+    public boolean hasMethodCallWithReturn() {
+        if (leftTerm.hasMethodCallWithReturn()) {
+            return true;
+        }
+
+        for (Pair<String, Term> term : lowOpTermList) {
+            if (term.getSecond().hasMethodCallWithReturn()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

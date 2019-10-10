@@ -39,4 +39,9 @@ public class PrimaryExprSuperMethod extends PrimaryExpr {
     public Type getType() {
         return method.getType();
     }
+    
+    @Override
+    public boolean hasMethodCallWithReturn() {
+        return method.getType() != Type.undefinedType;
+    }
 }
