@@ -51,10 +51,10 @@ public class Compiler {
 				program.addClass(typeCianetoClass);
 			} catch (CompilerError e) {
 				// if there was an exception, there is a compilation error
-				e.printStackTrace();
+				//e.printStackTrace();
 				thereWasAnError = true;
 			} catch (RuntimeException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 				thereWasAnError = true;
 			}
 
@@ -414,11 +414,21 @@ public class Compiler {
 		}
 
 		if (checkSemiColon) {
-			check(Token.SEMICOLON, "';' expected");
+			check(Token.SEMICOLON, "';' expected",true);
 			next();
 		}
 
 		return st;
+	}
+
+	private void check(Token shouldBe, String msg, boolean b) {
+		if (lexer.token != shouldBe) {
+			error(msg,b);
+		}
+	}
+
+	private void error(String msg, boolean b) {
+		this.signalError.showError(msg,b);
 	}
 
 	private Stat printStat() {

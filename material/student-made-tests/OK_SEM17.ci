@@ -8,8 +8,8 @@ class Program
    
     func run {
         
-        var Int num = In.readInt;
-
+        var Int num = 10;
+        
         if num < 15 { 
             Out.println: "pequeno"; 
             assert num < 15, "num < 15";

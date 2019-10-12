@@ -28,8 +28,8 @@ class B extends A
     public func m {
         var Int i;
 
-        i = In.readInt;
-        self.k = In.readInt;
+        i = 1;
+        self.k = 2;
         super.set: 0;
         Out.println: super.get;
         Out.println: self.get;

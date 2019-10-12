@@ -52,8 +52,8 @@ class Program
       a = A.new;
       Out.println: "Ok-math";
       
-      n1 = In.readInt;
-      n2 = In.readInt;
+      n1 = 1;
+      n2 = 2;
       
       Out.println: a.sum: n1,n2;
       Out.println: a.sub: n1,n2;

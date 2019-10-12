@@ -23,8 +23,8 @@ public class Lexer {
       }
 
 
-    private static final int MaxValueInteger = 2147483647;
-    private static final int MinValueInteger = 0;
+    private static final long MaxValueInteger = 2147483647;
+    private static final long MinValueInteger = 0;
       // contains the keywords
     static private Hashtable<String, Token> keywordsTable;
 
@@ -342,7 +342,7 @@ public class Lexer {
     }
 
     public int getNumberValue() {
-       return numberValue;
+       return numberValue ;
     }
 
     public String getLiteralStringValue() {
