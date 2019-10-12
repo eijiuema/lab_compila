@@ -1,0 +1,61 @@
+@cep(1, "Override incorreto",
+"override",
+"comp.Compiler.methodDec()")
+
+open
+class PAI
+
+   public func pub {
+
+   }
+
+   private func priv {
+
+   }
+
+   final public func finpub {
+
+   }
+
+   final private func finpriv {
+
+   }
+
+   shared public func shapub {
+
+   }
+
+   shared private func shapri {
+
+   }
+
+   shared final public func shafinpub{
+
+   }
+
+   
+   shared final private func shafinpri{
+
+   }
+
+   public func pubInt -> Int {
+      return 1;
+   }
+    
+end
+
+class FILHA extends PAI
+
+end
+
+class Program
+   
+   public func run {
+      var FILHA a;
+      
+      Out.println: "7 0 1 2 3 4 5 6 7";
+      a = A.new;
+      a.pub;
+   }   
+
+end

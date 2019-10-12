@@ -102,7 +102,7 @@ public class TypeCianetoClass extends Type {
    }
 
    public boolean hasField(String field) {
-      return this.fieldList.getField(field) != null || (this.superclass != null && this.superclass.hasField(field));
+      return this.fieldList.getField(field) != null;
    }
 
    public Id getField(String field) {
@@ -128,21 +128,12 @@ public class TypeCianetoClass extends Type {
       return this.hasPublicMethod(method, new ArrayList<>());
    }
 
-   public boolean hasPublicMethod(String method, boolean checkSuper) {
-      return this.hasPublicMethod(method, new ArrayList<>(), checkSuper);
-   }
-
    public boolean hasPublicMethod(String method, List<Expr> exprList) {
-      return this.publicMethodList.getMethod(method, exprList) != null;
-   }
-
-   public boolean hasPublicMethod(String method, List<Expr> exprList, boolean checkSuper) {
-      return this.publicMethodList.getMethod(method, exprList) != null
-            || checkSuper && superclass != null && superclass.hasPublicMethod(method, exprList, true);
+      return this.publicMethodList.getMethod(method, exprList) != null || superclass != null && superclass.hasPublicMethod(method, exprList) ;
    }
 
    public boolean hasPublicMethodEquals(MethodDec methodDec) {
-      return this.publicMethodList.getMethodEquals(methodDec) != null;
+      return this.publicMethodList.getMethodEquals(methodDec) != null || superclass != null && this.superclass.hasPublicMethodEquals(methodDec);
    }
 
    public boolean hasMethodEquals(MethodDec methodDec) {

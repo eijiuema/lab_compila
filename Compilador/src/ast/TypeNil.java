@@ -5,7 +5,7 @@
 package ast;
 
 public class TypeNil extends Type {
-
+	
 	public TypeNil() {
 		super("NilType");
 	}

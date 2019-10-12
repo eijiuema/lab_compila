@@ -23,7 +23,8 @@ class B extends A {
         super.m1(1);
         System.out.print(this.k + " " + n + " ");
     }
-    override int getK() {
+    @Override
+     int getK() {
         return this.k;
     }
 }

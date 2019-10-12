@@ -29,10 +29,10 @@ class A {
         System.out.print(" ");
         System.out.print(r);
         System.out.print(" ");
-        if(falseBool) {
+        if (falseBool) {
             System.out.print(8 + " ");
-}
-        else {            System.out.print(7 + " ");
+        } else {
+            System.out.print(7 + " ");
         }
     }
 }

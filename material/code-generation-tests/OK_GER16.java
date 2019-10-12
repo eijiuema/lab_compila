@@ -27,11 +27,13 @@ class B extends A {
     public int get_B() {
         return this.k;
     }
-    override public void init() {
+    @Override
+     public void init() {
         super.init();
         this.k = 2;
     }
-    override public void print() {
+    @Override
+     public void print() {
         System.out.print(this.get_B());
         System.out.print(" ");
         System.out.print(this.get_A());
@@ -41,8 +43,39 @@ class B extends A {
 }
 
 class C extends A {
-    override public int get_A() {
+    @Override
+     public int get_A() {
         return 0;
+    }
+}
+
+class Program {
+    public void run() {
+        A a;
+        B b;
+        C c;
+        System.out.println("2 2 0 0 2 0 0 0 0 0 0");
+        b = new B();
+        b.init();
+        c = new C();
+        c.init();
+        System.out.print(b.get_B());
+        System.out.print(" ");
+        a = b;
+        a.print();
+        b.print();
+        a.init();
+        b.init();
+        System.out.print(a.get_A());
+        System.out.print(" ");
+        System.out.print(b.get_A());
+        System.out.print(" ");
+        a = c;
+        System.out.print(a.get_A());
+        System.out.print(" ");
+        c = new C();
+        System.out.print(c.get_A());
+        System.out.print(" ");
     }
 }
 

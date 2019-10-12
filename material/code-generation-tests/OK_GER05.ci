@@ -14,7 +14,7 @@ matheus.jesus@dcomp.sor.ufscar.br
   */
 
 class A
-    func m {
+    func m {/*
         var Int a, b, c, d, e, f;
       
         a = In.readInt;
@@ -29,7 +29,7 @@ class A
         Out.print: c;
         Out.print: d;
         Out.print: e;
-        Out.print: f;
+        Out.print: f;*/
     }
 end
 

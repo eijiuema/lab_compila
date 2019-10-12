@@ -20,7 +20,8 @@ class B extends A {
     int get_B() {
         return this.k;
     }
-    override void init() {
+    @Override
+     void init() {
         super.init();
         this.k = 2;
     }
@@ -31,7 +32,8 @@ class C extends B {
     int get_C() {
         return this.k;
     }
-    override void init() {
+    @Override
+     void init() {
         super.init();
         this.k = 3;
     }
@@ -42,7 +44,8 @@ class D extends C {
     int get_D() {
         return this.k;
     }
-    override void init() {
+    @Override
+     void init() {
         super.init();
         this.k = 4;
     }

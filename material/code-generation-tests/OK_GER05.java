@@ -7,19 +7,6 @@ public class OK_GER05 {
 
 class A {
     void m() {
-        int a, b, c, d, e, f;
-        a = ;
-        b = ;
-        c = ;
-        d = ;
-        e = ;
-        f = ;
-        System.out.print(a);
-        System.out.print(b);
-        System.out.print(c);
-        System.out.print(d);
-        System.out.print(e);
-        System.out.print(f);
     }
 }
 

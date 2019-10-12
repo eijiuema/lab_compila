@@ -9,47 +9,47 @@ class A {
     void m() {
         System.out.print(6);
         System.out.print(" ");
-        if(true && true) {
+        if (true && true) {
             System.out.print(1);
             System.out.print(" ");
         }
-        if((false && true)) {
+        if ((false && true)) {
             System.out.print(1000);
             System.out.print(" ");
         }
-        if(true && false) {
+        if (true && false) {
             System.out.print(1000);
             System.out.print(" ");
         }
-        if((false && false)) {
+        if ((false && false)) {
             System.out.print(1000);
             System.out.print(" ");
         }
-        if(true || true) {
+        if (true || true) {
             System.out.print(2);
             System.out.print(" ");
         }
-        if((true || false)) {
+        if ((true || false)) {
             System.out.print(3);
             System.out.print(" ");
         }
-        if(false || true) {
+        if (false || true) {
             System.out.print(4);
             System.out.print(" ");
         }
-        if((false || false)) {
+        if ((false || false)) {
             System.out.print(1000);
             System.out.print(" ");
         }
-        if((! false)) {
+        if ((! false)) {
             System.out.print(5);
             System.out.print(" ");
         }
-        if(! true) {
+        if (! true) {
             System.out.print(1000);
             System.out.print(" ");
         }
-        if((true || (true && false))) {
+        if ((true || (true && false))) {
             System.out.print(6);
             System.out.print(" ");
         }

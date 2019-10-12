@@ -6,21 +6,52 @@ public class OK_GER12 {
 }
 
 class A {
-    void m1() {
+    public void m1() {
         System.out.print(1);
         System.out.print(" ");
     }
-    void m2(int n) {
+    public void m2(int n) {
         System.out.print(n);
         System.out.print(" ");
     }
 }
 
 class B extends A {
-    override void m2(int n) {
+    @Override
+     public void m2(int n) {
         System.out.print(n);
         System.out.print(" ");
         super.m2(n + 1);
+    }
+}
+
+class C extends B {
+    @Override
+     public void m1() {
+        super.m1();
+        System.out.print(2);
+        System.out.print(" ");
+    }
+    void m3() {
+        this.m1();
+        System.out.print(1);
+        System.out.print(" ");
+        System.out.print(2);
+        System.out.print(" ");
+    }
+}
+
+class Program {
+    void run() {
+        A a;
+        B b;
+        C c;
+        System.out.println("1 2 1 2 1 2 1 2");
+        b = new B();
+        b.m2(1);
+        c = new C();
+        c.m1();
+        c.m3();
     }
 }
 

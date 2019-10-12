@@ -17,7 +17,8 @@ class A {
 }
 
 class B extends A {
-    override void m1() {
+    @Override
+     void m1() {
         System.out.println(" 4 ");
     }
 }

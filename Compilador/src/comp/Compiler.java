@@ -993,7 +993,7 @@ public class Compiler {
 				}
 				Id id2 = id();
 				TypeCianetoClass typeCianetoClass = (TypeCianetoClass) id.getType();
-				if (!typeCianetoClass.hasPublicMethod(id2.getName(), true)) {
+				if (!typeCianetoClass.hasPublicMethod(id2.getName())) {
 					error("Method not found in class " + typeCianetoClass.getName());
 				}
 				id2 = typeCianetoClass.getMethod(id2.getName());
@@ -1009,7 +1009,7 @@ public class Compiler {
 				TypeCianetoClass typeCianetoClass = (TypeCianetoClass) id.getType();
 				Id id2 = idColon();
 				List<Expr> exprList = exprList();
-				if (typeCianetoClass.hasPublicMethod(id2.getName(), exprList, true)) {
+				if (typeCianetoClass.hasPublicMethod(id2.getName(), exprList)) {
 					id2 = typeCianetoClass.getMethod(id2.getName(), exprList);
 					primaryExpr = new PrimaryExprIdMethod(id, id2, exprList);
 				} else {
