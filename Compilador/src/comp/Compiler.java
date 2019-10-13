@@ -194,7 +194,11 @@ public class Compiler {
 		if (lexer.token == Token.EXTENDS) {
 			lexer.nextToken();
 			check(Token.ID, "'identifier' expected");
+
 			Id idSuper = id();
+			if(idSuper.getName().equals(self.getName()))
+				error("The class " + idSuper.getName() + "  cannot inherith from itself");
+
 			TypeCianetoClass superTypeCianetoClass = symbolTable.getClass(idSuper);
 			if (null == superTypeCianetoClass) {
 				error("There's no class named " + idSuper.getName());
