@@ -2,8 +2,8 @@ Relat�rio do Compilador
 
 Resumo
 _________________________________________________________________________
-MI:  0             I: 0              PI: 2             Exc: 0
-Dev: 0/133/0%      LE: 2/133/1%      SSE: 0/50/0%      
+MI:  0             I: 0              PI: 0             Exc: 0
+Dev: 0/133/0%      LE: 0/133/0%      SSE: 0/50/0%      
 
 MI = muito importante, I = importante, PI = pouco importante, Exc = exce��es
 Dev = deveria ter sinalizado, LE = sinalizou linha errada, SSE = sinalizado sem erro
@@ -11,21 +11,7 @@ _________________________________________________________________________
 
 N�mero de testes 'Muito importantes' em que o compilador falhou: 0
 N�mero de testes 'Importantes' em que o compilador falhou: 0
-N�mero de testes 'Pouco importantes' em que o compilador falhou: 2
-
-O compilador falhou em testar alguns aspectos (constru��es) de Cianeto. A lista abaixo consiste de entradas da forma 
-    aspecto
-        lista de nomes de arquivos
-Os nomes de arquivos listados s�o aqueles que testam 'aspecto' mas em que o compilador falhou em apontar um erro, apontou um erro inexistente ou gerou c�digo errado (se op��o -genjava ou -genc foi usada).
-Os testes s�o categorizados por import�ncia: 'Muito importante', 'Importante', 'pouco importante'
-
-Testes 'pouco importantes' em que o compilador falhou
-    missingClassProgram
-        ER_SEM78.ci
-
-    classExtendsItself
-        ER_SEM27.ci
-
+N�mero de testes 'Pouco importantes' em que o compilador falhou: 0
 
 O compilador obteve sucesso em testar alguns aspectos (constru��es) de Cianeto. A lista abaixo consiste de entradas da forma 
     aspecto
@@ -79,9 +65,6 @@ Testes 'Muito importantes' em que o compilador acertou:
         ER_SEM33.ci
         ER_SEM32.ci
 
-    methodSearchSuperclass
-        OK_SEM10.ci
-
     missingClassInNew
         ER_SEM86.ci
 
@@ -93,12 +76,23 @@ Testes 'Muito importantes' em que o compilador acertou:
         ER_SEM29.ci
         ER_SEM30.ci
 
+    methodRedefinition
+        ER_SEM70.ci
+
+    missingOverride
+        ER_SEM53.ci
+        ER_SEM54.ci
+        ER_SEM52.ci
+
+    nilAssign
+        OK_SEM14.ci
+
+    methodSearchSuperclass
+        OK_SEM10.ci
+
     typeNotFound
         ER_SEM18.ci
         ER_SEM19.ci
-
-    methodRedefinition
-        ER_SEM70.ci
 
     typeErrorEqualEqualNotEqual
         ER_SEM57.ci
@@ -112,21 +106,13 @@ Testes 'Muito importantes' em que o compilador acertou:
     nilEqualEqualNotEqual
         OK_SEM14.ci
 
-    missingOverride
-        ER_SEM53.ci
-        ER_SEM54.ci
-        ER_SEM52.ci
-
-    nilAssign
-        OK_SEM14.ci
-
 
 Testes 'importantes' em que o compilador acertou:
-    superWithoutSuperclass
-        ER_SEM46.ci
-
     expressionExpected
         ER_SEM36.ci
+
+    superWithoutSuperclass
+        ER_SEM46.ci
 
     scopeLocalVarField
         OK_SEM06.ci
@@ -147,15 +133,45 @@ Testes 'importantes' em que o compilador acertou:
 
 
 Testes 'pouco importantes' em que o compilador acertou
-    booleanExprRepeatUntil
-        ER_SEM88.ci
-        ER_SEM89.ci
-
     arithmeticOperators
         OK_MATH.ci
 
     while
         ER_SEM11.ci
+
+    if
+        OK_QUEUE.ci
+
+    exprRightHandSideAssignment
+        ER_SEM06.ci
+
+    repeatUntil
+        OK_SEM18.ci
+
+    illegalTypeOrIdentifier
+        ER_SEM20.ci
+        ER_SEM21.ci
+        ER_SEM22.ci
+        ER_SEM23.ci
+        ER_SEM24.ci
+        ER_SEM45.ci
+        ER_SEM25.ci
+
+    methodOverridingSameSignature
+        OK_SEM08.ci
+
+    repeatUntilBreak
+        OK_SEM16.ci
+
+    missingReturn
+        ER_SEM01.ci
+
+    missingClassProgram
+        ER_SEM78.ci
+
+    booleanExprRepeatUntil
+        ER_SEM88.ci
+        ER_SEM89.ci
 
     typeErrorOutPrint
         ER_SEM44.ci
@@ -182,9 +198,6 @@ Testes 'pouco importantes' em que o compilador acertou
     openAsIdentifier
         OK_SEM11.ci
 
-    if
-        OK_QUEUE.ci
-
     parametersInMethodRunOfClassProgram
         ER_SEM82.ci
         ER_SEM79.ci
@@ -192,55 +205,24 @@ Testes 'pouco importantes' em que o compilador acertou
     missingRunMethodInProgram
         ER_SEM77.ci
 
-    exprRightHandSideAssignment
-        ER_SEM06.ci
+    classExtendsItself
+        ER_SEM27.ci
 
     returnTypeInMethodRunOfClassProgram
         ER_SEM80.ci
 
-    repeatUntil
-        OK_SEM18.ci
-
-    illegalTypeOrIdentifier
-        ER_SEM20.ci
-        ER_SEM21.ci
-        ER_SEM22.ci
-        ER_SEM23.ci
-        ER_SEM24.ci
-        ER_SEM45.ci
-        ER_SEM25.ci
-
-    methodOverridingSameSignature
-        OK_SEM08.ci
-
-    repeatUntilBreak
-        OK_SEM16.ci
-
     methodReturnValueNotUsed
         ER_SEM34.ci
-
-    missingReturn
-        ER_SEM01.ci
 
 
 _________________________________________________________________________
 
 0 de um total de 133 erros que deveriam ser sinalizados n�o o foram (0%)
-2 erros foram sinalizados na linha errada (1%)
+0 erros foram sinalizados na linha errada (0%)
 0 erros foram sinalizados em 50 arquivos sem erro (0%)
 _________________________________________________________________________
 Todos os erros que deveriam ter sido sinalizados o foram
-######################################################
-Erros que foram sinalizados na linha errada:
-
-ER_SEM78.ci
-    correto:    15, Source code without a class 'Program' (comp.Compiler.program())
-    sinalizado: 16, Source code is missing the Program class
-
-ER_SEM27.ci
-    correto:    11, Class 'A' is inheriting from itself (comp.Compiler.classDec())
-    sinalizado: 12, The class A  cannot inherith from itself
-
+Um ou mais arquivos de teste tinham erros, mas estes foram sinalizados nos n�meros de linhas corretos
 O compilador n�o sinalizou nenhum erro que n�o deveria ter sinalizado
 ######################################################
 Em todos os testes abaixo, o compilador sinalizou o erro na linha correta (quando o teste tinha erros) ou n�o sinalizou o erro (quando o teste N�O tinha erros). Mas � necess�rio conferir se as mensagens emitidas pelo compilador s�o compat�veis com as mensagens de erro sugeridas pelas chamadas aos metaobjetos dos testes. 
@@ -563,7 +545,7 @@ The 'cep' message is:      "Message send to a non-object receiver"
 
 
 ER_SEM08.ci
-The compiler message was: "ast.TypeBoolean@43a25848 - ast.TypeInt@3ac3fd8b"
+The compiler message was: "ast.TypeBoolean@3ac3fd8b - ast.TypeInt@5594a1b5"
 The 'cep' message is:      "type boolean does not support operation '+'"
 
 
@@ -680,6 +662,11 @@ The 'cep' message is:      "Method 'set:' was not found in class 'A' or its supe
 ER_SEM77.ci
 The compiler message was: "The Program class must have a public run method"
 The 'cep' message is:      "Method 'run' was not found in class 'Program'"
+
+
+ER_SEM78.ci
+The compiler message was: "Source code is missing the Program class"
+The 'cep' message is:      "Source code without a class 'Program'"
 
 
 ER_SEM79.ci
@@ -852,6 +839,11 @@ The compiler message was: "break cannot be used outside of a loop"
 The 'cep' message is:      "'break' statement found outside a 'while' or 'repeat-until' statement"
 
 
+ER_SEM27.ci
+The compiler message was: "The class A  cannot inherith from itself"
+The 'cep' message is:      "Class 'A' is inheriting from itself"
+
+
 ER_SEM28.ci
 The compiler message was: "There's already a field named i on A"
 The 'cep' message is:      "Variable 'i' is being redeclared"
@@ -902,6 +894,7 @@ The compiler message was: "';' expected"
 The 'cep' message is:      "';' expected"
 
 
+Para os casos de teste que voc� utilizou, o compilador est� correto
 
 List of Java files with compilation errors: 
    ./material/student-made-tests/OK_SIN11.java

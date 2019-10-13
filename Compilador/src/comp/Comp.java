@@ -444,7 +444,7 @@ public class Comp {
 
 
 	private static boolean printReportCheckNameFilenameList(Map<String, String> checkNameFilenameList,
-			StringBuilder partialReport, boolean succeeded ) {
+			StringBuilder partialReport, boolean failed ) {
 		ArrayList<TupleCheckNameText> ta = new ArrayList<>();
 		for ( Entry<String, String> entry : checkNameFilenameList.entrySet() ) {
 			String checkName = entry.getKey();
@@ -471,16 +471,16 @@ public class Comp {
 			ta.add(new TupleCheckNameText(checkName, importance, s.toString()));
 		}
 		Collections.sort(ta);
-		//report.println("Os testes sï¿½o categorizados por importï¿½ncia: 'Muito importante', 'Importante', 'pouco importante'");
-		partialReport.append("Os testes são categorizados por importância: 'Muito importante', 'Importante', 'pouco importante'\r\n");
+		//report.println("Os testes so categorizados por importncia: 'Muito importante', 'Importante', 'pouco importante'");
+		partialReport.append("Os testes so categorizados por importncia: 'Muito importante', 'Importante', 'pouco importante'\r\n");
 		if ( ta.get(0).importance >= 5 ) {
 			//report.println("\nTestes 'Muito importantes' em que o compilador falhou:");
-			partialReport.append("\nTestes 'Muito importantes' em que o compilador " + (succeeded ? "falhou" : "acertou") + ":\r\n");
+			partialReport.append("\nTestes 'Muito importantes' em que o compilador " + (failed ? "falhou" : "acertou") + ":\r\n");
 		}
 		boolean alreadPrintMessage3 = false;
 		boolean alreadPrintMessage2 = false;
 		for ( TupleCheckNameText t : ta ) {
-			if(succeeded){
+			if(failed){
 				if ( t.importance >= 5 ) {
 					++Comp.numVeryImportantFailed;
 				}
@@ -494,12 +494,12 @@ public class Comp {
 			if ( !alreadPrintMessage3 && t.importance < 5 && t.importance > 1 ) {
 				alreadPrintMessage3 = true;
 				//report.println("\nTestes 'importantes' em que o compilador falhou:");
-				partialReport.append("\nTestes 'importantes' em que o compilador "+(succeeded ? "falhou" : "acertou")+":\r\n");
+				partialReport.append("\nTestes 'importantes' em que o compilador "+(failed ? "falhou" : "acertou")+":\r\n");
 			}
 			if ( !alreadPrintMessage2 && t.importance < 3  ) {
 				alreadPrintMessage2 = true;
 				// report.println("\nTestes 'pouco importantes' em que o compilador falhou:");
-				partialReport.append("\nTestes 'pouco importantes' em que o compilador "+(succeeded ? "falhou" : "acertou")+"\r\n");
+				partialReport.append("\nTestes 'pouco importantes' em que o compilador "+(failed ? "falhou" : "acertou")+"\r\n");
 			}
 			//report.append(t.text);
 			partialReport.append(t.text + "\r\n");

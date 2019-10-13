@@ -64,7 +64,7 @@ public class Compiler {
 		}
 		if (symbolTable.getClass("Program") == null) {
 			try {
-				error("Source code is missing the Program class");
+				error("Source code is missing the Program class",true);
 			}
 			catch (CompilerError e) {
 				thereWasAnError = true;
@@ -195,11 +195,13 @@ public class Compiler {
 			lexer.nextToken();
 			check(Token.ID, "'identifier' expected");
 
-			Id idSuper = id();
+			Id idSuper = id(false);
 			if(idSuper.getName().equals(self.getName()))
 				error("The class " + idSuper.getName() + "  cannot inherith from itself");
-
-			TypeCianetoClass superTypeCianetoClass = symbolTable.getClass(idSuper);
+			else
+				next();
+			
+				TypeCianetoClass superTypeCianetoClass = symbolTable.getClass(idSuper);
 			if (null == superTypeCianetoClass) {
 				error("There's no class named " + idSuper.getName());
 			} else if (!superTypeCianetoClass.getOpen()) {
@@ -1177,8 +1179,22 @@ public class Compiler {
 		return new Id(id, type);
 	}
 
+
+	private Id id(Type type, boolean nextToken) {
+		check(Token.ID, "a identifier was expected");
+		String id = lexer.getStringValue();
+		if(nextToken)
+			lexer.nextToken();
+		return new Id(id, type);
+	}
+
 	private Id id() {
 		return id(Type.undefinedType);
+	}
+
+
+	private Id id(boolean nextToken) {
+		return id(Type.undefinedType,nextToken);
 	}
 
 	private Id idColon() {
