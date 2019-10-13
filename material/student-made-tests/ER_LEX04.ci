@@ -2,11 +2,11 @@
     "Unknown character", "lexer.Lexer.nextToken()")
 
 
-/*   @filename  er-lex05.kra
+/*  er-lex05.kra
 */      
 
   /*
-  com erro, que 'e aquela com os caracteres #####################.
+  com erro, que eh aquela com os caracteres #####################.
   O lexico poderia estar deixando de incrementar o contador de numero
   de linha nas linhas de comentarios.
   */    // 8:
@@ -17,7 +17,7 @@ class A        // 10
     func m  { // 12
       //       13:
       // confira se, apesar dos comentarios, o compilador diz que o numero
-      // da linha com erro 'e 16
+      // da linha com erro eh 16
        #########################     //#
     }
 

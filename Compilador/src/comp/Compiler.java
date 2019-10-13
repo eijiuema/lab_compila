@@ -46,13 +46,16 @@ public class Compiler {
 					metaobjectAnnotation(metaobjectCallList);
 				}
 
+		
 				TypeCianetoClass typeCianetoClass = classDec();
-
+				
 				program.addClass(typeCianetoClass);
+				
 			} catch (CompilerError e) {
 				// if there was an exception, there is a compilation error
 				//e.printStackTrace();
 				thereWasAnError = true;
+
 			} catch (RuntimeException e) {
 				//e.printStackTrace();
 				thereWasAnError = true;
@@ -60,15 +63,20 @@ public class Compiler {
 
 		}
 		if (symbolTable.getClass("Program") == null) {
-			error("Source code is missing the Program class");
+			try {
+				error("Source code is missing the Program class");
+			}
+			catch (CompilerError e) {
+				thereWasAnError = true;
+			}
 		}
 		if (!thereWasAnError && lexer.token != Token.EOF) {
 			try {
 				error("End of file expected");
 			} catch (CompilerError e) {
-
 			}
 		}
+
 		return program;
 	}
 

@@ -26,9 +26,9 @@ Em todos os testes abaixo, o compilador sinalizou o erro na linha correta (quand
 
 A lista abaixo cont�m o nome do arquivo de teste, a mensagem que ele sinalizou e a mensagem sugerida pelo arquivo de teste
 
-./material/student-made-tests/ER_LEX03.ci
-The compiler message was: "Number out of limits"
-The 'cep' message is:      "literal int out of limits"
+./material/student-made-tests/ER_LEX04.ci
+The compiler message was: "Invalid Character: '#'"
+The 'cep' message is:      "Unknown character"
 
 
 Para o caso de teste que voc� utilizou, o compilador est� correto
@@ -36,8 +36,8 @@ Para o caso de teste que voc� utilizou, o compilador est� correto
 List of Java files with compilation errors: 
 
 List of files with correct Java code: 
+   ./material/student-made-tests/ER_LEX04.java
 
 List of files Java code that compiles but was generated incorrectly: 
-   ./material/student-made-tests/ER_LEX03.java
 
 The compiler could not create the following .java files:
