@@ -45,7 +45,7 @@ void _A_m1( _class_A* self) {
     printf("%s", " ");
 }
 
-void _A_m2( _class_A* selfint _n) {
+void _A_m2( _class_A* self, int _n) {
     printf("%d", _n);
     printf("%s", " ");
 }
@@ -70,7 +70,7 @@ typedef struct _St_B {
 
 _class_B* new_B(void);
 
-void _B_m2( _class_B* selfint _n) {
+void _B_m2( _class_B* self, int _n) {
     printf("%d", _n);
     printf("%s", " ");
     FALTAIMPLEMENTAR;

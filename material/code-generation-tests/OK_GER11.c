@@ -44,7 +44,7 @@ void _A_m1( _class_A* self) {
     printf("%s", " 2 ");
 }
 
-void _A_m2( _class_A* selfint _n) {
+void _A_m2( _class_A* self, int _n) {
     printf("%d", _n);
     printf("%s", " ");
     FALTAIMPLEMENTAR;

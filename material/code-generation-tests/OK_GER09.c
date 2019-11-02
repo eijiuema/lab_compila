@@ -40,7 +40,7 @@ typedef struct _St_A {
 
 _class_A* new_A(void);
 
-void _A_m1( _class_A* selfint _n) {
+void _A_m1( _class_A* self, int _n) {
     printf("%s",  concat( "1 ", _n));
     printf("%s", " ");
 }
@@ -64,7 +64,7 @@ typedef struct _St_B {
 
 _class_B* new_B(void);
 
-void _B_m2( _class_B* selfint _n) {
+void _B_m2( _class_B* self, int _n) {
     FALTAIMPLEMENTAR;
     printf("%s",  concat( " 2 ", _n));
     printf("%s", " ");
@@ -89,13 +89,13 @@ typedef struct _St_C {
 
 _class_C* new_C(void);
 
-void _C_m3( _class_C* selfint _n) {
+void _C_m3( _class_C* self, int _n) {
     FALTAIMPLEMENTAR;
     printf("%s",  concat( " 3 ", _n));
     printf("%s", " ");
 }
 
-void _C_m4( _class_C* selfint _n) {
+void _C_m4( _class_C* self, int _n) {
     FALTAIMPLEMENTAR;
     printf("%s\n",  concat( " 4 ", _n));
     printf("%s\n", " ");

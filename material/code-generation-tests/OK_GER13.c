@@ -41,7 +41,7 @@ typedef struct _St_A {
 
 _class_A* new_A(void);
 
-void _A_set( _class_A* selfint _pn) {
+void _A_set( _class_A* self, int _pn) {
     printf("%d", 1);
     printf("%s", " ");
     FALTAIMPLEMENTAR = _pn;
@@ -84,7 +84,7 @@ typedef struct _St_B {
 
 _class_B* new_B(void);
 
-void _B_set( _class_B* selfint _pn) {
+void _B_set( _class_B* self, int _pn) {
     printf("%d", _pn);
     printf("%s", " ");
     FALTAIMPLEMENTAR;
@@ -128,12 +128,12 @@ void _Program_print( _class_Program* self) {
     printf("%s", "P ");
 }
 
-_class_B _Program_m( _class_Program* self_class_A _a) {
+_class_B _Program_m( _class_Program* self, _class_A _a) {
     _A_set(_a, 0);
     return new_B();
 }
 
-_class_A _Program_p( _class_Program* selfint _i) {
+_class_A _Program_p( _class_Program* self, int _i) {
     if (_i > 0 ) {
         return new_A();
     } else {

@@ -45,7 +45,7 @@ int _A_get_A( _class_A* self) {
     return FALTAIMPLEMENTAR;
 }
 
-void _A_set( _class_A* selfint _k) {
+void _A_set( _class_A* self, int _k) {
     FALTAIMPLEMENTAR = _k;
 }
 

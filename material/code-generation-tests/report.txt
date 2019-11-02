@@ -98,11 +98,7 @@ Para os casos de teste que voc� utilizou, o compilador est� correto
 
 List of C files with compilation errors: 
    ./material/code-generation-tests/OK_GER13.c
-   ./material/code-generation-tests/OK_GER08.c
-   ./material/code-generation-tests/OK_GER09.c
    ./material/code-generation-tests/OK_GER10.c
-   ./material/code-generation-tests/OK_GER11.c
-   ./material/code-generation-tests/OK_GER12.c
    ./material/code-generation-tests/OK_GER14.c
    ./material/code-generation-tests/OK_GER15.c
    ./material/code-generation-tests/OK_GER16.c
@@ -115,9 +111,15 @@ List of files with correct C code:
    ./material/code-generation-tests/OK_GER03.c
    ./material/code-generation-tests/OK_GER04.c
    ./material/code-generation-tests/OK_GER07.c
+   ./material/code-generation-tests/OK_GER08.c
+   ./material/code-generation-tests/OK_GER09.c
    ./material/code-generation-tests/OK_GER22.c
 
 List of files C code that compiles but was generated incorrectly: 
    ./material/code-generation-tests/OK_GER05.c
+   ./material/code-generation-tests/OK_GER08.c
+   ./material/code-generation-tests/OK_GER09.c
+   ./material/code-generation-tests/OK_GER11.c
+   ./material/code-generation-tests/OK_GER12.c
 
 The compiler could not create the following .C files:

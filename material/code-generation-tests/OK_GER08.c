@@ -40,21 +40,21 @@ typedef struct _St_A {
 
 _class_A* new_A(void);
 
-void _A_m1( _class_A* selfint _n) {
+void _A_m1( _class_A* self, int _n) {
     printf("%d", 1);
     printf("%s", " ");
     printf("%d", _n);
     printf("%s", " ");
 }
 
-void _A_m2( _class_A* selfint _n) {
+void _A_m2( _class_A* self, int _n) {
     printf("%d", 2);
     printf("%s", " ");
     printf("%d", _n);
     printf("%s", " ");
 }
 
-void _A_m3( _class_A* self, int _n, int _p, char * _q, int _rboolean _falseBool) {
+void _A_m3( _class_A* self, int _n, int _p, char * _q, int _r, boolean _falseBool) {
     printf("%d", 3);
     printf("%s", " ");
     printf("%d", _n);

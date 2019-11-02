@@ -49,9 +49,7 @@ public class MethodDec extends Member {
         // self parameter
         pw.print( cl.getCname() + "* self");
         for (ParamDec paramDec : this.formalParamDec) {
-            if (!paramDec.equals(formalParamDec.get(formalParamDec.size() - 1))) {
-                pw.print(", ");
-            }
+            pw.print(", ");
             paramDec.genC(pw);
         }
         pw.println(") {");

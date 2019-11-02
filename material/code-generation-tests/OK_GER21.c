@@ -41,7 +41,7 @@ typedef struct _St_A {
 
 _class_A* new_A(void);
 
-void _A_set( _class_A* selfint _n) {
+void _A_set( _class_A* self, int _n) {
     FALTAIMPLEMENTAR = _n;
 }
 
@@ -83,7 +83,7 @@ void _Program_run( _class_Program* self) {
     printf("%s\n", "0");
 }
 
-void _Program_set( _class_Program* self_class_A _a) {
+void _Program_set( _class_Program* self, _class_A _a) {
     FALTAIMPLEMENTAR = _a;
 }
 
