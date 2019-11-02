@@ -16,7 +16,10 @@ public class IfStat extends Stat {
         this.elseStList = elseStList;
     }
 
-    public void genJava(PW pw) {
+    public void genC(PW pw) {
+//TODO genC
+}
+public void genJava(PW pw) {
         pw.printIdent("if (");
         expr.genJava(pw);
         pw.println(") {");

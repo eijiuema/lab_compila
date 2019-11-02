@@ -10,12 +10,12 @@ public class TypeUndefined extends Type {
    public TypeUndefined() { super("UndefinedType"); }
    
    public String getCname() {
-      return "long";      
+      return "void";      
    }
 
    @Override
    public String getJavaName() {
-      return "long";
+      return "void";
    }
 
    @Override

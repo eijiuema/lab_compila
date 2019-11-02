@@ -21,7 +21,10 @@ public class PrimaryExprSelfMethod extends PrimaryExpr {
         this.exprList = new ArrayList<>();
     }
 
-    public void genJava(PW pw) {
+    public void genC(PW pw) {
+//TODO genC
+}
+public void genJava(PW pw) {
         pw.print("this.");
         pw.print(this.method.getName());
         pw.print("(");

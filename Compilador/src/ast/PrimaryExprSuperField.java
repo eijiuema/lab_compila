@@ -12,7 +12,10 @@ public class PrimaryExprSuperField extends PrimaryExpr {
         this.field = field;
     }
 
-    public void genJava(PW pw) {
+    public void genC(PW pw) {
+//TODO genC
+}
+public void genJava(PW pw) {
         pw.print("super");
         pw.print(".");
         pw.print(this.field.getName());

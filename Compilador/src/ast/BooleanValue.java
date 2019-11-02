@@ -18,6 +18,10 @@ public class BooleanValue extends BasicValue{
 
     }
 
+    public void genC(PW pw) {
+        //TODO genC
+    }
+
     public Type getType() {
         return Type.booleanType;
     }

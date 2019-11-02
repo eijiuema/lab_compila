@@ -12,7 +12,10 @@ public class ObjectCreation extends Factor {
         this.id = id;
     }
 
-    public void genJava(PW pw) {
+    public void genC(PW pw) {
+//TODO genC
+}
+public void genJava(PW pw) {
         pw.print("new ");
         pw.print(this.id.getName());
         pw.print("()");

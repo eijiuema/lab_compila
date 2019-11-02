@@ -11,7 +11,7 @@ public class SemicolonStat extends Stat{
         pw.printIdent(";");
     }
     public void genC(PW pw){
-        //...
+        pw.printIdent(";");
     }
     
 }

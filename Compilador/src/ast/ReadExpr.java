@@ -12,6 +12,15 @@ public class ReadExpr extends PrimaryExpr {
         this.type = type;
     }
 
+
+    public void genC(PW pw) {
+        
+        if (type == Type.intType)
+            pw.print("readInt()");
+        else if (type == Type.stringType)
+            pw.print("readString()");
+    }
+
     public void genJava(PW pw) {
 
         if (type == Type.intType)

@@ -20,7 +20,10 @@ public class SumSubExpr {
         return this.lowOpTermList.add(new Pair<String, Term>(lowOp, term));
     }
 
-    public void genJava(PW pw) {
+    public void genC(PW pw) {
+//TODO genC
+}
+public void genJava(PW pw) {
         leftTerm.genJava(pw);
 
         for (Pair<String, Term> lowOpTerm : lowOpTermList) {

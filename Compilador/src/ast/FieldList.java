@@ -28,7 +28,10 @@ public class FieldList {
         this.fieldList = fieldList;
     }
 
-	public void genJava(PW pw) {
+	public void genC(PW pw) {
+//TODO genC
+}
+public void genJava(PW pw) {
         for (AbstractMap.SimpleEntry<String, FieldDec> fd : fieldList ){
             pw.printIdent("");
             if (fd.getKey().equals(""))

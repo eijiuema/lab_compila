@@ -28,7 +28,10 @@ public class MethodList {
         this.methodList = methodList;
     }
 
-    public void genJava(PW pw) {
+    public void genC(PW pw) {
+//TODO genC
+}
+public void genJava(PW pw) {
 
         for (AbstractMap.SimpleEntry<String, MethodDec> method : this.methodList) {
             if (method.getKey().contains("override")) {

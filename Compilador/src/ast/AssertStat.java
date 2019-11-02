@@ -14,7 +14,10 @@ public class AssertStat extends Stat {
         this.stringvalue = stringvalue;        
     }
 
-    public void genJava(PW pw){
+    public void genC(PW pw) {
+//TODO genC
+}
+public void genJava(PW pw){
         pw.printIdent("assert ");
         this.expr.genJava(pw);
         pw.print(" : ");

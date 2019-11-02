@@ -12,7 +12,10 @@ public class ReturnStat extends Stat {
         this.expr = expr;        
     }
 
-    public void genJava(PW pw){
+    public void genC(PW pw) {
+//TODO genC
+}
+public void genJava(PW pw){
         pw.printIdent("return ");
         this.expr.genJava(pw);
         pw.println(";");

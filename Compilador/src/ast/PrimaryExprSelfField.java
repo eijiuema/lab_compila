@@ -12,7 +12,10 @@ public class PrimaryExprSelfField extends PrimaryExpr {
         this.field = field;
     }
 
-    public void genJava(PW pw) {
+    public void genC(PW pw) {
+//TODO genC
+}
+public void genJava(PW pw) {
         pw.print("this");
         pw.print(".");
         pw.print(this.field.getName());

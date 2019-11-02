@@ -19,7 +19,10 @@ public class AssignExpr extends Stat {
         this.rightExpr = null;      
     }
 
-    public void genJava(PW pw){
+    public void genC(PW pw) {
+//TODO genC
+}
+public void genJava(PW pw){
         pw.printIdent("");
         leftExpr.genJava(pw);
         

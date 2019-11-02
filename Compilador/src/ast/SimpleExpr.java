@@ -19,7 +19,10 @@ public class SimpleExpr {
         return this.sumSubExprList.add(sumSubExpr);
     }
 
-    public void genJava(PW pw) {
+    public void genC(PW pw) {
+//TODO genC
+}
+public void genJava(PW pw) {
         for (SumSubExpr sse : this.sumSubExprList) {
             sse.genJava(pw);
             if (!sse.equals(this.sumSubExprList.get(this.sumSubExprList.size() - 1))) {

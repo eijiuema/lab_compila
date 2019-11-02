@@ -12,7 +12,10 @@ public class NegationFactor extends Factor{
         this.factor = factor;
     }
 
-    public void genJava(PW pw){
+    public void genC(PW pw) {
+//TODO genC
+}
+public void genJava(PW pw){
         pw.print("! ");
         factor.genJava(pw);
     }

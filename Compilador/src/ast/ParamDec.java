@@ -13,7 +13,10 @@ public class ParamDec {
         this.id = id;
     }
 
-    public void genJava(PW pw){
+    public void genC(PW pw) {
+//TODO genC
+}
+public void genJava(PW pw){
         pw.print(type.getJavaName());
         pw.print(" ");
         pw.print(id.getName());

@@ -15,7 +15,10 @@ public class RepeatStat extends Stat {
         this.statList = statList;        
     }
 
-    public void genJava(PW pw){
+    public void genC(PW pw) {
+//TODO genC
+}
+public void genJava(PW pw){
         pw.printlnIdent("do{");        
         pw.add();
         for (Stat st : this.statList) {

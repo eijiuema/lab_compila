@@ -6,7 +6,10 @@ package ast;
 
 public class Break extends Stat{
     
-    public void genJava(PW pw){
+    public void genC(PW pw) {
+//TODO genC
+}
+public void genJava(PW pw){
         pw.printlnIdent("break;");
     }
 /*

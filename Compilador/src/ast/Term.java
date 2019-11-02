@@ -25,6 +25,15 @@ public class Term {
         return this.highOpSignalFactorList.add(new Pair<String, SignalFactor>(highOp, signalFactor));
     }
 
+    public void genC(PW pw) {
+        leftSignalFactor.genC(pw);
+
+        for (Pair<String, SignalFactor> pair : highOpSignalFactorList) {
+            pw.print(" " + pair.getFirst() + " ");
+            pair.getSecond().genC(pw);
+        }
+    }
+    
     public void genJava(PW pw) {
 
         leftSignalFactor.genJava(pw);

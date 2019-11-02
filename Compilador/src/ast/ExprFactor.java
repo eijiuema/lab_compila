@@ -12,7 +12,10 @@ public class ExprFactor extends Factor {
         this.expr = expr;
     }
 
-    public void genJava(PW pw) {
+    public void genC(PW pw) {
+//TODO genC
+}
+public void genJava(PW pw) {
         pw.print("(");
         expr.genJava(pw);
         pw.print(")");

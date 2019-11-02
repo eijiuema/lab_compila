@@ -11,7 +11,10 @@ public class PrimaryExprId extends PrimaryExpr{
         this.id = id;
     }
 
-    public void genJava(PW pw){
+    public void genC(PW pw) {
+//TODO genC
+}
+public void genJava(PW pw){
         pw.print(this.id.getName());
     }
 

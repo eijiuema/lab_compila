@@ -14,6 +14,21 @@ public class WriteStat extends Stat {
         this.printName = printName;      
     }
 
+    public void genC(PW pw) {
+        pw.printIdent("printf(\"");
+        if(expr.getType() == Type.stringType)
+            pw.print("%s");
+        else
+            pw.print("%d");
+        if(this.printName.equals("println"))
+            pw.print("\\n");
+        pw.println("\", ");
+
+        this.expr.genC(pw);
+        
+        pw.println(");");
+    }
+
     public void genJava(PW pw){
 
         pw.printIdent("System.out.");
@@ -25,10 +40,5 @@ public class WriteStat extends Stat {
         pw.println(");");
         
     }
-/*
-    @Override
-    public void genC(PW pw) {
-        // TODO Auto-generated method stub
-    }
-*/    
+   
 }

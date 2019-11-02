@@ -12,7 +12,10 @@ public class PrimaryExprSelf extends PrimaryExpr{
         this.selfId = selfId;
     }
 
-    public void genJava(PW pw){
+    public void genC(PW pw) {
+//TODO genC
+}
+public void genJava(PW pw){
         pw.print("this");
     }
 

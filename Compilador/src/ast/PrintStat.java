@@ -13,7 +13,10 @@ public class PrintStat extends Stat {
     }
 
     @Override
-    public void genJava(PW pw) {
+    public void genC(PW pw) {
+//TODO genC
+}
+public void genJava(PW pw) {
         for (Expr expr : exprList) {
             pw.printIdent("System.out.print");
             if (ln) {

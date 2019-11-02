@@ -18,7 +18,10 @@ public class SignalFactor {
         this.factor = factor;
     }
 
-    public void genJava(PW pw) {
+    public void genC(PW pw) {
+//TODO genC
+}
+public void genJava(PW pw) {
         if (signal != null)
             pw.print(signal);
 

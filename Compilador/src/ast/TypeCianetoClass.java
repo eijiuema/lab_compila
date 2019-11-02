@@ -197,6 +197,11 @@ public class TypeCianetoClass extends Type {
       return this.superclass.getQualifierFromPublicMethodDecEquals(methodDec);
    }
 
+   public void genC(PW pw) {
+      //TODO genC
+      pw.println("//Gerar codigo de " + this.getCname()  );
+   }
+
    public void genJava(PW pw) {
       pw.printIdent("class ");
       pw.print(getJavaName());

@@ -22,7 +22,10 @@ public class FieldDec extends Member {
         return null;
     }
 
-    public void genJava(PW pw){
+    public void genC(PW pw) {
+//TODO genC
+}
+public void genJava(PW pw){
         pw.print(idList.get(0).getType().getJavaName());
         pw.print(" ");
         pw.print(idList.get(0).getName());

@@ -21,6 +21,10 @@ public class Expr extends Factor {
         this.rightSimpleExpr = null;
     }
 
+    public void genC(PW pw) {
+        // TODO genC
+    }
+    
     public void genJava(PW pw) {
 
         leftSimpleExpr.genJava(pw);
