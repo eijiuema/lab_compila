@@ -15,11 +15,10 @@ public class BooleanValue extends BasicValue{
     @Override
     public void genJava(PW pw) {
         pw.print(Boolean.toString(value));
-
     }
 
     public void genC(PW pw) {
-        //TODO genC
+        pw.print(Boolean.toString(value));
     }
 
     public Type getType() {

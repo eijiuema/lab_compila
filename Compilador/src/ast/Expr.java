@@ -22,7 +22,13 @@ public class Expr extends Factor {
     }
 
     public void genC(PW pw) {
-        // TODO genC
+        leftSimpleExpr.genC(pw);
+
+        if (relation != null)
+            pw.print(" " + relation + " ");
+
+        if (rightSimpleExpr != null)
+            rightSimpleExpr.genC(pw);
     }
     
     public void genJava(PW pw) {

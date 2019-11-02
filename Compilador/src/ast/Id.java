@@ -26,6 +26,10 @@ public class Id {
         return name;
     }
 
+    public String getCName() {
+        return "_" + name;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

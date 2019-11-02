@@ -14,21 +14,21 @@ public class AssertStat extends Stat {
         this.stringvalue = stringvalue;        
     }
 
-    public void genC(PW pw) {
-//TODO genC
-}
-public void genJava(PW pw){
+    public void genC(PW pw) {      
+        pw.printIdent("if ((");
+        expr.genC(pw);
+        pw.println(") == false ) ");
+        pw.printIdent("printf(");
+        stringvalue.genC(pw);
+        pw.println(");");
+    }
+
+    public void genJava(PW pw){
         pw.printIdent("assert ");
         this.expr.genJava(pw);
         pw.print(" : ");
         this.stringvalue.genJava(pw);
         pw.println(";");
     }
-/*
-    @Override
-    public void genC(PW pw) {
-        // TODO Auto-generated method stub
-
-    }
-*/    
+ 
 }

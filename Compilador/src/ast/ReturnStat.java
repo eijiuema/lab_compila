@@ -13,17 +13,16 @@ public class ReturnStat extends Stat {
     }
 
     public void genC(PW pw) {
-//TODO genC
-}
-public void genJava(PW pw){
+        pw.printIdent("return ");
+        this.expr.genC(pw);
+        pw.println(";");
+    
+    }
+
+    public void genJava(PW pw){
         pw.printIdent("return ");
         this.expr.genJava(pw);
         pw.println(";");
     }
-/*
-    @Override
-    public void genC(PW pw) {
-        
-    }
-*/    
+ 
 }

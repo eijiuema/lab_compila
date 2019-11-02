@@ -3,7 +3,7 @@ Relat�rio do Compilador
 Resumo
 _________________________________________________________________________
 MI:  0             I: 0              PI: 0             Exc: 0
- SSE: 0/1/0%       
+ SSE: 0/18/0%      
 
 MI = muito importante, I = importante, PI = pouco importante, Exc = exce��es
 Dev = deveria ter sinalizado, LE = sinalizou linha errada, SSE = sinalizado sem erro
@@ -19,26 +19,105 @@ O compilador obteve sucesso em testar alguns aspectos (constru��es) de Ciane
 Os nomes de arquivos listados s�o aqueles que testam 'aspecto' e nos quais o compilador obteve sucesso e gerou c�digo correto (se op��o -genC ou -genc foi usada).
 Os testes s�o categorizados por import�ncia: 'Muito importante', 'Importante', 'pouco importante'
 
+Testes 'Muito importantes' em que o compilador acertou:
+    inheritance
+        OK_GER16.ci
+
+    polymorphism
+        OK_GER16.ci
+
+    messageToself
+        OK_GER11.ci
+
+    fieldAccess
+        OK_GER10.ci
+        OK_GER14.ci
+
+    messagePassingPrivateMethod
+        OK_GER15.ci
+
+    super
+        OK_GER09.ci
+        OK_GER12.ci
+
+    self
+        OK_GER09.ci
+
+
+Testes 'importantes' em que o compilador acertou:
+    parameterPassing
+        OK_GER08.ci
+
+    privateMethod
+        OK_GER15.ci
+
+    privateMethodRedefinedAsPublic
+        OK_GER13.ci
+
+    redefinedField
+        OK_GER14.ci
+
+
 Testes 'pouco importantes' em que o compilador acertou
     comparisonOperators
-        ./material/code-generation-tests/OK_GER01.ci
+        OK_GER01.ci
+
+    arithmeticOperators
+        OK_GER06.ci
+        OK_GER02.ci
+
+    runNotFirstMethodOfProgram
+        OK_GER21.ci
+
+    repeatUntil
+        OK_GER22.ci
+
+    while
+        OK_GER04.ci
+
+    logicalOperators
+        OK_GER03.ci
+
+    zero
+        OK_GER07.ci
+
+    readInt
+        OK_GER05.ci
 
     if
-        ./material/code-generation-tests/OK_GER01.ci
+        OK_GER01.ci
+        OK_GER03.ci
 
 
 _________________________________________________________________________
 
-0 erros foram sinalizados em 1 arquivos sem erro (0%)
+0 erros foram sinalizados em 18 arquivos sem erro (0%)
 _________________________________________________________________________
 O compilador n�o sinalizou nenhum erro que n�o deveria ter sinalizado
-Para o caso de teste que voc� utilizou, o compilador est� correto
+Para os casos de teste que voc� utilizou, o compilador est� correto
 
 List of C files with compilation errors: 
+   ./material/code-generation-tests/OK_GER13.c
+   ./material/code-generation-tests/OK_GER08.c
+   ./material/code-generation-tests/OK_GER09.c
+   ./material/code-generation-tests/OK_GER10.c
+   ./material/code-generation-tests/OK_GER11.c
+   ./material/code-generation-tests/OK_GER12.c
+   ./material/code-generation-tests/OK_GER14.c
+   ./material/code-generation-tests/OK_GER15.c
+   ./material/code-generation-tests/OK_GER16.c
+   ./material/code-generation-tests/OK_GER21.c
 
 List of files with correct C code: 
+   ./material/code-generation-tests/OK_GER06.c
    ./material/code-generation-tests/OK_GER01.c
+   ./material/code-generation-tests/OK_GER02.c
+   ./material/code-generation-tests/OK_GER03.c
+   ./material/code-generation-tests/OK_GER04.c
+   ./material/code-generation-tests/OK_GER07.c
+   ./material/code-generation-tests/OK_GER22.c
 
 List of files C code that compiles but was generated incorrectly: 
+   ./material/code-generation-tests/OK_GER05.c
 
 The compiler could not create the following .C files:

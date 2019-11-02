@@ -836,7 +836,6 @@ public class Comp {
 				PW pw = new PW(printWriter);
 				try {
 					program.setMainJavaClassName(className);
-					System.out.println("za");
 					program.genC(pw);
 				}
 				catch( Throwable e ) {

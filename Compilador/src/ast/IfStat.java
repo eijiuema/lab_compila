@@ -17,9 +17,28 @@ public class IfStat extends Stat {
     }
 
     public void genC(PW pw) {
-//TODO genC
-}
-public void genJava(PW pw) {
+        
+        pw.printIdent("if (");
+        expr.genC(pw);
+        pw.println(" ) {");
+        pw.add();
+        for (Stat st : this.ifStList) {
+            st.genC(pw);
+        }
+        if (elseStList != null && elseStList.size() > 0) {
+            pw.sub();
+            pw.printlnIdent("} else {");
+            pw.add();
+            for (Stat st : this.elseStList) {
+                st.genC(pw);
+            }
+        }
+        pw.sub();
+        pw.printlnIdent("}");
+
+    }
+
+    public void genJava(PW pw) {
         pw.printIdent("if (");
         expr.genJava(pw);
         pw.println(") {");

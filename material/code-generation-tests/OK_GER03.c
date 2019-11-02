@@ -41,62 +41,50 @@ typedef struct _St_A {
 _class_A* new_A(void);
 
 void _A_m( _class_A* self) {
-    printf("%d", 7);
+    printf("%d", 6);
     printf("%s", " ");
-    if (( 1 > 0 ) ) {
-        printf("%d", 0);
-        printf("%s", " ");
-    }
-    if (( 1 >= 0 ) ) {
+    if (true && true ) {
         printf("%d", 1);
         printf("%s", " ");
     }
-    if (( 1 != 0 ) ) {
+    if (( false && true ) ) {
+        printf("%d", 1000);
+        printf("%s", " ");
+    }
+    if (true && false ) {
+        printf("%d", 1000);
+        printf("%s", " ");
+    }
+    if (( false && false ) ) {
+        printf("%d", 1000);
+        printf("%s", " ");
+    }
+    if (true || true ) {
         printf("%d", 2);
         printf("%s", " ");
     }
-    if (( 0 < 1 ) ) {
+    if (( true || false ) ) {
         printf("%d", 3);
         printf("%s", " ");
     }
-    if (( 0 <= 1 ) ) {
+    if (false || true ) {
         printf("%d", 4);
         printf("%s", " ");
     }
-    if (( 0 == 0 ) ) {
+    if (( false || false ) ) {
+        printf("%d", 1000);
+        printf("%s", " ");
+    }
+    if (( ! false ) ) {
         printf("%d", 5);
         printf("%s", " ");
     }
-    if (( 0 >= 0 ) ) {
+    if (! true ) {
+        printf("%d", 1000);
+        printf("%s", " ");
+    }
+    if (( true || ( true && false ) ) ) {
         printf("%d", 6);
-        printf("%s", " ");
-    }
-    if (( 0 <= 0 ) ) {
-        printf("%d", 7);
-        printf("%s", " ");
-    }
-    if (( 1 == 0 ) ) {
-        printf("%d", 18);
-        printf("%s", " ");
-    }
-    if (( 0 > 1 ) ) {
-        printf("%d", 10);
-        printf("%s", " ");
-    }
-    if (( 0 >= 1 ) ) {
-        printf("%d", 11);
-        printf("%s", " ");
-    }
-    if (( 0 != 0 ) ) {
-        printf("%d", 12);
-        printf("%s", " ");
-    }
-    if (( 1 < 0 ) ) {
-        printf("%d", 13);
-        printf("%s", " ");
-    }
-    if (( 1 <= 0 ) ) {
-        printf("%d", 14);
         printf("%s", " ");
     }
 }
@@ -122,7 +110,7 @@ _class_Program* new_Program(void);
 
 void _Program_run( _class_Program* self) {
     _class_A* _a;
-    printf("%s\n", "7 0 1 2 3 4 5 6 7");
+    printf("%s\n", "6 1 2 3 4 5 6");
     _a = new_A();
     _A_m(_a);
 }

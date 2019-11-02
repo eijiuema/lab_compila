@@ -16,9 +16,18 @@ public class RepeatStat extends Stat {
     }
 
     public void genC(PW pw) {
-//TODO genC
-}
-public void genJava(PW pw){
+        pw.printlnIdent("do{");        
+        pw.add();
+        for (Stat st : this.statList) {
+            st.genC(pw);
+        }
+        pw.sub();
+        pw.printlnIdent("} while(");
+        expr.genC(pw);
+        pw.println(");");
+    }
+
+    public void genJava(PW pw){
         pw.printlnIdent("do{");        
         pw.add();
         for (Stat st : this.statList) {
@@ -29,11 +38,5 @@ public void genJava(PW pw){
         expr.genJava(pw);
         pw.println(");");
     }
-/*
-    @Override
-    public void genC(PW pw) {
-        // TODO Auto-generated method stub
-
-    }
-*/    
+      
 }

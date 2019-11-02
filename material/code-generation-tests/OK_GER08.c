@@ -40,69 +40,42 @@ typedef struct _St_A {
 
 _class_A* new_A(void);
 
-void _A_m( _class_A* self) {
-    printf("%d", 7);
+void _A_m1( _class_A* selfint _n) {
+    printf("%d", 1);
     printf("%s", " ");
-    if (( 1 > 0 ) ) {
-        printf("%d", 0);
-        printf("%s", " ");
-    }
-    if (( 1 >= 0 ) ) {
-        printf("%d", 1);
-        printf("%s", " ");
-    }
-    if (( 1 != 0 ) ) {
-        printf("%d", 2);
-        printf("%s", " ");
-    }
-    if (( 0 < 1 ) ) {
-        printf("%d", 3);
-        printf("%s", " ");
-    }
-    if (( 0 <= 1 ) ) {
-        printf("%d", 4);
-        printf("%s", " ");
-    }
-    if (( 0 == 0 ) ) {
-        printf("%d", 5);
-        printf("%s", " ");
-    }
-    if (( 0 >= 0 ) ) {
-        printf("%d", 6);
-        printf("%s", " ");
-    }
-    if (( 0 <= 0 ) ) {
-        printf("%d", 7);
-        printf("%s", " ");
-    }
-    if (( 1 == 0 ) ) {
-        printf("%d", 18);
-        printf("%s", " ");
-    }
-    if (( 0 > 1 ) ) {
-        printf("%d", 10);
-        printf("%s", " ");
-    }
-    if (( 0 >= 1 ) ) {
-        printf("%d", 11);
-        printf("%s", " ");
-    }
-    if (( 0 != 0 ) ) {
-        printf("%d", 12);
-        printf("%s", " ");
-    }
-    if (( 1 < 0 ) ) {
-        printf("%d", 13);
-        printf("%s", " ");
-    }
-    if (( 1 <= 0 ) ) {
-        printf("%d", 14);
-        printf("%s", " ");
+    printf("%d", _n);
+    printf("%s", " ");
+}
+
+void _A_m2( _class_A* selfint _n) {
+    printf("%d", 2);
+    printf("%s", " ");
+    printf("%d", _n);
+    printf("%s", " ");
+}
+
+void _A_m3( _class_A* self, int _n, int _p, char * _q, int _rboolean _falseBool) {
+    printf("%d", 3);
+    printf("%s", " ");
+    printf("%d", _n);
+    printf("%s", " ");
+    printf("%d", _p);
+    printf("%s", " ");
+    printf("%s", _q);
+    printf("%s", " ");
+    printf("%d", _r);
+    printf("%s", " ");
+    if (_falseBool ) {
+        printf("%s",  concat( 8, " "));
+    } else {
+        printf("%s",  concat( 7, " "));
     }
 }
 
 Func VT_class_A[] = {
-    (Func) _A_m
+    (Func) _A_m1,
+    (Func) _A_m2,
+    (Func) _A_m3
 };
 
 _class_A* new_A(){
@@ -122,9 +95,11 @@ _class_Program* new_Program(void);
 
 void _Program_run( _class_Program* self) {
     _class_A* _a;
-    printf("%s\n", "7 0 1 2 3 4 5 6 7");
+    printf("%s\n", "1 1 2 2 3 3 4 5 6 7");
     _a = new_A();
-    _A_m(_a);
+    _A_m1(_a, 1);
+    _A_m2(_a, 2);
+    _A_m3(_a, 3, 4, "5", 6, false);
 }
 
 Func VT_class_Program[] = {

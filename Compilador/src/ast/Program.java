@@ -24,7 +24,11 @@ public class Program {
 
 	public void genC(PW pw) {
 		
+		pw.println("#define FALTAIMPLEMENTAR 0");
+		pw.println();
+		
 		//Includes
+		pw.println("#include <string.h>");
 		pw.println("#include <malloc.h>");
 		pw.println("#include <stdlib.h>");
 		pw.println("#include <stdio.h>");
@@ -57,19 +61,33 @@ public class Program {
 		pw.println("}");
 		pw.println();
 
-		//TODO gerar classes()
+		//função para concatenar strings
+		pw.println("char * concat( char * str1, char * str2){");
+		pw.add();
+		pw.printlnIdent("char * newStr = malloc(strlen(str1) + strlen(str2) + 1);");
+		pw.printlnIdent("if(newStr != NULL){");
+		pw.add();
+		pw.printlnIdent("strcpy(newStr, str1);");
+		pw.printlnIdent("strcat(newStr, str2);");
+		pw.printlnIdent("}");
+		pw.sub();
+		pw.printlnIdent("return newStr;");
+		pw.sub();
+		pw.println("}");
+
+		/* define um tipo Func que é um ponteiro para função */
+		pw.println("typedef void (*Func)();");
+
 		for (TypeCianetoClass typeCianetoClass : classList) {
 			typeCianetoClass.genC(pw);
 			pw.println();
 		}
-		/* define um tipo Func que é um ponteiro para funç~
-		ao */
-		pw.println("typedef void (*Func)();");
-		pw.println("int main() {");
+
+		pw.println("int main(void) {");
 		pw.add();
-		pw.printlnIdent("//_class_Program *program;");
-		pw.printlnIdent("//program = new_Program();");
-		pw.printlnIdent("//_Program_run(program);");
+		pw.printlnIdent("_class_Program* program;");
+		pw.printlnIdent("program = new_Program();");
+		pw.printlnIdent("_Program_run(program);");
 		pw.printlnIdent("return 0;");
 		pw.sub();
 		pw.println("}");

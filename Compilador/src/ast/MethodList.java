@@ -28,10 +28,33 @@ public class MethodList {
         this.methodList = methodList;
     }
 
-    public void genC(PW pw) {
-//TODO genC
-}
-public void genJava(PW pw) {
+    public void genC(PW pw, TypeCianetoClass cl) {
+
+        for (AbstractMap.SimpleEntry<String, MethodDec> method : this.methodList) {
+            method.getValue().genC(pw, cl);
+            pw.println();
+        }
+    }
+
+    public void genCFunctionPointersArray(PW pw, TypeCianetoClass cl){
+        pw.println("{");
+        pw.add();
+        for (AbstractMap.SimpleEntry<String, MethodDec> method : this.methodList) {
+            
+            pw.printIdent("(Func) ");
+            
+            method.getValue().genCFunctionPointer(pw, cl);
+            
+            if(!method.equals( this.methodList.get(this.methodList.size()-1))){
+                pw.print(",");
+            }
+            pw.println();
+        }
+        pw.sub();
+        pw.print("}");
+    }
+
+    public void genJava(PW pw) {
 
         for (AbstractMap.SimpleEntry<String, MethodDec> method : this.methodList) {
             if (method.getKey().contains("override")) {

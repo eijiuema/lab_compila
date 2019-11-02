@@ -13,9 +13,12 @@ public class StringValue extends BasicValue{
     }
 
     public void genC(PW pw) {
-//TODO genC
-}
-public void genJava(PW pw){
+        pw.print("\"");
+        pw.print(value);
+        pw.print("\"");
+    }
+    
+    public void genJava(PW pw){
         pw.print("\"");
         pw.print(value);
         pw.print("\"");

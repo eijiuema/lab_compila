@@ -13,9 +13,13 @@ public class ExprFactor extends Factor {
     }
 
     public void genC(PW pw) {
-//TODO genC
-}
-public void genJava(PW pw) {
+        pw.print("( ");
+        expr.genC(pw);
+        pw.print(" )");
+    
+    }
+
+    public void genJava(PW pw) {
         pw.print("(");
         expr.genJava(pw);
         pw.print(")");

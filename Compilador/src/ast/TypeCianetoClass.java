@@ -23,7 +23,7 @@ public class TypeCianetoClass extends Type {
 
    @Override
    public String getCname() {
-      return super.getName();
+      return "_class_" + super.getName();
    }
 
    private TypeCianetoClass superclass;
@@ -198,8 +198,44 @@ public class TypeCianetoClass extends Type {
    }
 
    public void genC(PW pw) {
-      //TODO genC
-      pw.println("//Gerar codigo de " + this.getCname()  );
+      pw.println("// Codigo da classe " + this.getCname()  );
+      
+      //Struct com campos
+      pw.println("typedef struct _St_" + this.getName() + " {");
+      pw.add();
+      fieldList.genJava(pw);
+      pw.printlnIdent("Func* vt;");
+      pw.sub();
+      pw.println("}" + this.getCname() + ";");
+      pw.println();
+
+      //Assinatura do construtor
+      pw.println(this.getCname() + "* new_" + this.getName() + "(void);");
+      pw.println();
+
+      publicMethodList.genC(pw, this);
+      privateMethodList.genC(pw, this);
+
+      //Métodos públicos
+      pw.print("Func VT"+ this.getCname() +"[] = ");
+      this.publicMethodList.genCFunctionPointersArray(pw, this);
+      pw.println(";");
+      pw.println();
+
+
+      //Construtor da classe
+      pw.println(this.getCname() + "* new_" + this.getName() + "(){");
+      pw.add();
+      pw.printlnIdent(this.getCname() + "* t;");
+      pw.printlnIdent("if ( (t = malloc(sizeof(" + this.getCname() + "))) != NULL )");
+      pw.add();
+      pw.printlnIdent("t->vt = VT" + this.getCname() + ";");
+      pw.sub();
+      pw.printlnIdent("return t;");
+      pw.sub();
+      pw.println("}");
+      pw.println();
+
    }
 
    public void genJava(PW pw) {

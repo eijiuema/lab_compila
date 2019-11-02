@@ -8,6 +8,8 @@ public abstract class Factor {
 
     public abstract void genJava(PW pw);
 
+    public abstract void genC(PW pw);
+
     public abstract Type getType();
 
     public boolean isAssignable() {

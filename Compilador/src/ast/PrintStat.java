@@ -14,9 +14,25 @@ public class PrintStat extends Stat {
 
     @Override
     public void genC(PW pw) {
-//TODO genC
-}
-public void genJava(PW pw) {
+        for (Expr expr : exprList) {
+            pw.printIdent("printf(\"");
+
+            if(expr.getType() == Type.stringType)
+                pw.print("%s");
+            else
+                pw.print("%d");
+            
+            if(ln)
+                pw.print("\\n");
+                
+            pw.print("\", ");
+            expr.genC(pw);
+
+            pw.println(");");
+        }
+    }
+    
+    public void genJava(PW pw) {
         for (Expr expr : exprList) {
             pw.printIdent("System.out.print");
             if (ln) {

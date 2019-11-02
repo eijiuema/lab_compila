@@ -19,9 +19,14 @@ public class SignalFactor {
     }
 
     public void genC(PW pw) {
-//TODO genC
-}
-public void genJava(PW pw) {
+        if (signal != null)
+            pw.print(signal);
+
+        factor.genC(pw);
+    
+    }
+    
+    public void genJava(PW pw) {
         if (signal != null)
             pw.print(signal);
 

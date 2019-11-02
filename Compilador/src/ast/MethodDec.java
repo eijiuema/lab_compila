@@ -38,10 +38,33 @@ public class MethodDec extends Member {
         this.formalParamDec.add(paramDec);
     }
 
-    public void genC(PW pw) {
-//TODO genC
-}
-public void genJava(PW pw) {
+    public void genC(PW pw, TypeCianetoClass cl) {
+        // gen c Type
+        pw.print(this.getType().getCname() + " ");
+        // gen c id
+        pw.print("_" + cl.getName());
+        pw.print(this.id.getCName());
+        // gen c formalParamDec
+        pw.print("( ");
+        // self parameter
+        pw.print( cl.getCname() + "* self");
+        for (ParamDec paramDec : this.formalParamDec) {
+            if (!paramDec.equals(formalParamDec.get(formalParamDec.size() - 1))) {
+                pw.print(", ");
+            }
+            paramDec.genC(pw);
+        }
+        pw.println(") {");
+        pw.add();
+        // gen c statList
+        for (Stat stat : this.statList) {
+            stat.genC(pw);
+        }
+        pw.sub();
+        pw.printlnIdent("}");
+    }
+
+    public void genJava(PW pw) {
         // gen java Type
         if (this.getType() == Type.undefinedType) {
             pw.print("void ");
@@ -66,7 +89,6 @@ public void genJava(PW pw) {
         }
         pw.sub();
         pw.printlnIdent("}");
-
     }
 
     public boolean checkParamListEquals(List<ParamDec> list) {
@@ -102,6 +124,12 @@ public void genJava(PW pw) {
 
 	public List<ParamDec> getParamList() {
 		return this.formalParamDec;
+	}
+
+	public void genCFunctionPointer(PW pw, TypeCianetoClass cl) {
+        // gen c id
+        pw.print("_" + cl.getName());
+        pw.print(this.id.getCName());
 	}
 
 

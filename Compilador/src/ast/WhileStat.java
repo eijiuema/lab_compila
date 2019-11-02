@@ -15,9 +15,9 @@ public class WhileStat extends Stat {
     }
 
     public void genC(PW pw) {
-        pw.printIdent("while(");
+        pw.printIdent("while( ");
         expr.genC(pw);
-        pw.println(") {");
+        pw.println(" ) {");
         pw.add();
         for (Stat st : this.statList) {
             st.genC(pw);

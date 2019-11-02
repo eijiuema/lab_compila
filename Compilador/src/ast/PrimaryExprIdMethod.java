@@ -24,9 +24,18 @@ public class PrimaryExprIdMethod extends PrimaryExpr {
     }
 
     public void genC(PW pw) {
-//TODO genC
-}
-public void genJava(PW pw) {
+        pw.print("_" + this.id.getType().getName());
+        pw.print("_" + this.method.getName());
+        pw.print("(");
+        pw.print(this.id.getCName());
+        for (Expr expr : this.exprList) {
+            pw.print(", ");
+            expr.genC(pw);
+        }
+        pw.print(")");
+    }
+
+    public void genJava(PW pw) {
 
         pw.print(this.id.getName());
         pw.print(".");

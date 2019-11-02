@@ -21,9 +21,14 @@ public class SumSubExpr {
     }
 
     public void genC(PW pw) {
-//TODO genC
-}
-public void genJava(PW pw) {
+        leftTerm.genC(pw);
+
+        for (Pair<String, Term> lowOpTerm : lowOpTermList) {
+            pw.print(" " + lowOpTerm.getFirst() + " ");
+            lowOpTerm.getSecond().genC(pw);
+        }
+    }
+    public void genJava(PW pw) {
         leftTerm.genJava(pw);
 
         for (Pair<String, Term> lowOpTerm : lowOpTermList) {

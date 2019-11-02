@@ -13,9 +13,9 @@ public class PrimaryExprSelf extends PrimaryExpr{
     }
 
     public void genC(PW pw) {
-//TODO genC
-}
-public void genJava(PW pw){
+        pw.print("self");
+    }
+    public void genJava(PW pw){
         pw.print("this");
     }
 

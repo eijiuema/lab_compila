@@ -4,7 +4,8 @@
 */
 package ast;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SimpleExpr {
 
@@ -20,9 +21,25 @@ public class SimpleExpr {
     }
 
     public void genC(PW pw) {
-//TODO genC
-}
-public void genJava(PW pw) {
+
+        if ( sumSubExprList.size() == 1 ) {
+            sumSubExprList.get(0).genC(pw);
+        } else {
+            for (SumSubExpr sse : this.sumSubExprList) {
+
+                if (!sse.equals(this.sumSubExprList.get(this.sumSubExprList.size() - 1)))
+                    pw.print(" concat( ");
+                sse.genC(pw);
+                if (!sse.equals(this.sumSubExprList.get(this.sumSubExprList.size() - 1))) {
+                    pw.print(", ");
+                }
+            }
+            for(int i=0; i < this.sumSubExprList.size()-1; i++)
+                pw.print(")");
+        }
+
+    }
+    public void genJava(PW pw) {
         for (SumSubExpr sse : this.sumSubExprList) {
             sse.genJava(pw);
             if (!sse.equals(this.sumSubExprList.get(this.sumSubExprList.size() - 1))) {

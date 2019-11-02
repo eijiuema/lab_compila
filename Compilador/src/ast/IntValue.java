@@ -18,6 +18,11 @@ public class IntValue extends BasicValue{
 
     }
 
+    public void genC(PW pw) {
+        pw.print(Integer.toString(value));
+
+    }
+
     public Type getType() {
         return Type.intType;
     }

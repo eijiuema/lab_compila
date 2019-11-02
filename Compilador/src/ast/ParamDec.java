@@ -14,9 +14,12 @@ public class ParamDec {
     }
 
     public void genC(PW pw) {
-//TODO genC
-}
-public void genJava(PW pw){
+        pw.print(type.getCname());
+        pw.print(" ");
+        pw.print(id.getCName());
+    }
+    
+    public void genJava(PW pw){
         pw.print(type.getJavaName());
         pw.print(" ");
         pw.print(id.getName());

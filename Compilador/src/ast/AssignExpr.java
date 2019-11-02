@@ -20,9 +20,18 @@ public class AssignExpr extends Stat {
     }
 
     public void genC(PW pw) {
-//TODO genC
-}
-public void genJava(PW pw){
+        pw.printIdent("");
+        leftExpr.genC(pw);
+        
+        if(rightExpr != null){
+            pw.print(" = ");
+            rightExpr.genC(pw);
+        }
+        
+        pw.println(";");
+    }
+
+    public void genJava(PW pw){
         pw.printIdent("");
         leftExpr.genJava(pw);
         
@@ -32,12 +41,5 @@ public void genJava(PW pw){
         }
         
         pw.println(";");
-    }
-/*
-    @Override
-    public void genC(PW pw) {
-        // TODO Auto-generated method stub
-
-    }
-*/    
+    }  
 }
