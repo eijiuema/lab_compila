@@ -12,13 +12,13 @@ typedef int boolean;
 int readInt() {
     int _n;
     char __s[512];
-    gets(__s);
+    fgets(__s,512,stdin);
     sscanf(__s, "%d", &_n);
     return _n;
 }
 char *readString() {
     char s[512];
-    gets(s);
+    fgets(s,512,stdin);
     char *ret = malloc(strlen(s) + 1);
     strcpy(ret, s);
     return ret;
@@ -32,7 +32,13 @@ char * concat( char * str1, char * str2){
         }
     return newStr;
 }
+char * intToStr(int i){
+    char * str = malloc(sizeof(char)*12);
+    sprintf(str, "%d", i);
+    return str;
+}
 typedef void (*Func)();
+
 // Codigo da classe _class_A
 typedef struct _St_A {
     Func* vt;
@@ -40,8 +46,8 @@ typedef struct _St_A {
 
 _class_A* new_A(void);
 
-void _A_m1( _class_A* self, int _n) {
-    printf("%s",  concat( "1 ", _n));
+void _A_m1( _class_A *self, int _n) {
+    printf("%s",  concat( "1 ",  intToStr(_n)));
     printf("%s", " ");
 }
 
@@ -56,7 +62,6 @@ _class_A* new_A(){
     return t;
 }
 
-
 // Codigo da classe _class_B
 typedef struct _St_B {
     Func* vt;
@@ -64,9 +69,9 @@ typedef struct _St_B {
 
 _class_B* new_B(void);
 
-void _B_m2( _class_B* self, int _n) {
+void _B_m2( _class_B *self, int _n) {
     FALTAIMPLEMENTAR;
-    printf("%s",  concat( " 2 ", _n));
+    printf("%s",  concat( " 2 ",  intToStr(_n)));
     printf("%s", " ");
 }
 
@@ -81,7 +86,6 @@ _class_B* new_B(){
     return t;
 }
 
-
 // Codigo da classe _class_C
 typedef struct _St_C {
     Func* vt;
@@ -89,15 +93,15 @@ typedef struct _St_C {
 
 _class_C* new_C(void);
 
-void _C_m3( _class_C* self, int _n) {
+void _C_m3( _class_C *self, int _n) {
     FALTAIMPLEMENTAR;
-    printf("%s",  concat( " 3 ", _n));
+    printf("%s",  concat( " 3 ",  intToStr(_n)));
     printf("%s", " ");
 }
 
-void _C_m4( _class_C* self, int _n) {
+void _C_m4( _class_C *self, int _n) {
     FALTAIMPLEMENTAR;
-    printf("%s\n",  concat( " 4 ", _n));
+    printf("%s\n",  concat( " 4 ",  intToStr(_n)));
     printf("%s\n", " ");
 }
 
@@ -113,7 +117,6 @@ _class_C* new_C(){
     return t;
 }
 
-
 // Codigo da classe _class_Program
 typedef struct _St_Program {
     Func* vt;
@@ -121,11 +124,11 @@ typedef struct _St_Program {
 
 _class_Program* new_Program(void);
 
-void _Program_run( _class_Program* self) {
-    _class_C* _c;
+void _Program_run( _class_Program *self) {
+    _class_C *_c;
     printf("%s\n", "1 1 2 2 3 3 4 4");
     _c = new_C();
-    _C_m4(_c, 4);
+    (_c->vt[3] )(_c, 4);
 }
 
 Func VT_class_Program[] = {
@@ -138,7 +141,6 @@ _class_Program* new_Program(){
         t->vt = VT_class_Program;
     return t;
 }
-
 
 int main(void) {
     _class_Program* program;

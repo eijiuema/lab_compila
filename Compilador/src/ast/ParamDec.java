@@ -16,6 +16,8 @@ public class ParamDec {
     public void genC(PW pw) {
         pw.print(type.getCname());
         pw.print(" ");
+        if(!this.getType().isBasicType())
+            pw.print("*");
         pw.print(id.getCName());
     }
     

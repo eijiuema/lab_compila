@@ -12,11 +12,6 @@ public class Break extends Stat{
     public void genJava(PW pw){
         pw.printlnIdent("break;");
     }
-/*
-    @Override
-    public void genC(PW pw) {
-        // TODO Auto-generated method stub
 
-    }
-*/    
+    
 }

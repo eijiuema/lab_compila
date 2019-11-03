@@ -12,13 +12,13 @@ typedef int boolean;
 int readInt() {
     int _n;
     char __s[512];
-    gets(__s);
+    fgets(__s,512,stdin);
     sscanf(__s, "%d", &_n);
     return _n;
 }
 char *readString() {
     char s[512];
-    gets(s);
+    fgets(s,512,stdin);
     char *ret = malloc(strlen(s) + 1);
     strcpy(ret, s);
     return ret;
@@ -32,7 +32,13 @@ char * concat( char * str1, char * str2){
         }
     return newStr;
 }
+char * intToStr(int i){
+    char * str = malloc(sizeof(char)*12);
+    sprintf(str, "%d", i);
+    return str;
+}
 typedef void (*Func)();
+
 // Codigo da classe _class_A
 typedef struct _St_A {
     Func* vt;
@@ -40,21 +46,21 @@ typedef struct _St_A {
 
 _class_A* new_A(void);
 
-void _A_m1( _class_A* self, int _n) {
+void _A_m1( _class_A *self, int _n) {
     printf("%d", 1);
     printf("%s", " ");
     printf("%d", _n);
     printf("%s", " ");
 }
 
-void _A_m2( _class_A* self, int _n) {
+void _A_m2( _class_A *self, int _n) {
     printf("%d", 2);
     printf("%s", " ");
     printf("%d", _n);
     printf("%s", " ");
 }
 
-void _A_m3( _class_A* self, int _n, int _p, char * _q, int _r, boolean _falseBool) {
+void _A_m3( _class_A *self, int _n, int _p, char * _q, int _r, boolean _falseBool) {
     printf("%d", 3);
     printf("%s", " ");
     printf("%d", _n);
@@ -66,9 +72,9 @@ void _A_m3( _class_A* self, int _n, int _p, char * _q, int _r, boolean _falseBoo
     printf("%d", _r);
     printf("%s", " ");
     if (_falseBool ) {
-        printf("%s",  concat( 8, " "));
+        printf("%s",  concat(  intToStr(8), " "));
     } else {
-        printf("%s",  concat( 7, " "));
+        printf("%s",  concat(  intToStr(7), " "));
     }
 }
 
@@ -85,7 +91,6 @@ _class_A* new_A(){
     return t;
 }
 
-
 // Codigo da classe _class_Program
 typedef struct _St_Program {
     Func* vt;
@@ -93,13 +98,13 @@ typedef struct _St_Program {
 
 _class_Program* new_Program(void);
 
-void _Program_run( _class_Program* self) {
-    _class_A* _a;
+void _Program_run( _class_Program *self) {
+    _class_A *_a;
     printf("%s\n", "1 1 2 2 3 3 4 5 6 7");
     _a = new_A();
-    _A_m1(_a, 1);
-    _A_m2(_a, 2);
-    _A_m3(_a, 3, 4, "5", 6, false);
+    (_a->vt[0] )(_a, 1);
+    (_a->vt[1] )(_a, 2);
+    (_a->vt[2] )(_a, 3, 4, "5", 6, false);
 }
 
 Func VT_class_Program[] = {
@@ -112,7 +117,6 @@ _class_Program* new_Program(){
         t->vt = VT_class_Program;
     return t;
 }
-
 
 int main(void) {
     _class_Program* program;

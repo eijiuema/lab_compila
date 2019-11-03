@@ -12,13 +12,13 @@ typedef int boolean;
 int readInt() {
     int _n;
     char __s[512];
-    gets(__s);
+    fgets(__s,512,stdin);
     sscanf(__s, "%d", &_n);
     return _n;
 }
 char *readString() {
     char s[512];
-    gets(s);
+    fgets(s,512,stdin);
     char *ret = malloc(strlen(s) + 1);
     strcpy(ret, s);
     return ret;
@@ -32,7 +32,13 @@ char * concat( char * str1, char * str2){
         }
     return newStr;
 }
+char * intToStr(int i){
+    char * str = malloc(sizeof(char)*12);
+    sprintf(str, "%d", i);
+    return str;
+}
 typedef void (*Func)();
+
 // Codigo da classe _class_A
 typedef struct _St_A {
     Func* vt;
@@ -40,7 +46,7 @@ typedef struct _St_A {
 
 _class_A* new_A(void);
 
-void _A_m( _class_A* self) {
+void _A_m( _class_A *self) {
 }
 
 Func VT_class_A[] = {
@@ -54,7 +60,6 @@ _class_A* new_A(){
     return t;
 }
 
-
 // Codigo da classe _class_Program
 typedef struct _St_Program {
     Func* vt;
@@ -62,14 +67,14 @@ typedef struct _St_Program {
 
 _class_Program* new_Program(void);
 
-void _Program_run( _class_Program* self) {
-    _class_A* _a;
+void _Program_run( _class_Program *self) {
+    _class_A *_a;
     printf("%s\n", "");
     printf("%s\n", "Ok-ger05");
     printf("%s\n", "The output should be what you give as input.");
     printf("%s\n", "Type in six numbers");
     _a = new_A();
-    _A_m(_a);
+    (_a->vt[0] )(_a);
 }
 
 Func VT_class_Program[] = {
@@ -82,7 +87,6 @@ _class_Program* new_Program(){
         t->vt = VT_class_Program;
     return t;
 }
-
 
 int main(void) {
     _class_Program* program;

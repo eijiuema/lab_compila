@@ -29,7 +29,15 @@ public class SimpleExpr {
 
                 if (!sse.equals(this.sumSubExprList.get(this.sumSubExprList.size() - 1)))
                     pw.print(" concat( ");
-                sse.genC(pw);
+                
+                if(sse.getType() != Type.stringType){
+                    pw.print(" intToStr(");
+                    sse.genC(pw);
+                    pw.print(")");
+                } else {
+                    sse.genC(pw);
+                }
+                
                 if (!sse.equals(this.sumSubExprList.get(this.sumSubExprList.size() - 1))) {
                     pw.print(", ");
                 }

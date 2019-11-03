@@ -213,7 +213,7 @@ public class Compiler {
 
 		memberList();
 
-		if (typeCianetoClass.getName().equals("Program") && !typeCianetoClass.hasPublicMethod("run")) {
+		if (typeCianetoClass.getName().equals("Program") && typeCianetoClass.getPublicMethodIdx("run") == -1) {
 			error("The Program class must have a public run method");
 		}
 
@@ -587,7 +587,7 @@ public class Compiler {
 		} else {
 			this.methodReturned = true;
 		}
-		return new ReturnStat(expr);
+		return new ReturnStat(expr,this.currentMethod.getType());
 	}
 
 	private WhileStat whileStat() {
@@ -1000,8 +1000,8 @@ public class Compiler {
 	private PrimaryExpr primaryExpr(Id id, boolean hasDot) {
 
 		/*
-		 * N√£o existe um bloco de c√≥digo pro In.read{Int|String} pois a classe/objeto
-		 * ser√° adicionada √† lista no inicio do compilador, logo cair√° no caso Id.id
+		 * N„o existe um bloco de cÛdigo pro In.read{Int|String} pois a classe/objeto
+		 * ser· adicionada ‡ lista no inicio do compilador, logo cair· no caso Id.id
 		 */
 
 		PrimaryExpr primaryExpr = null;
@@ -1017,11 +1017,12 @@ public class Compiler {
 				}
 				Id id2 = id();
 				TypeCianetoClass typeCianetoClass = (TypeCianetoClass) id.getType();
-				if (!typeCianetoClass.hasPublicMethod(id2.getName())) {
+				int methodIdx = typeCianetoClass.getPublicMethodIdx(id2.getName());
+				if (methodIdx == -1) {
 					error("Method not found in class " + typeCianetoClass.getName());
 				}
 				id2 = typeCianetoClass.getMethod(id2.getName());
-				primaryExpr = new PrimaryExprIdMethod(id, id2);
+				primaryExpr = new PrimaryExprIdMethod(id, id2, methodIdx);
 			} else if (lexer.token == Token.IDCOLON) {
 				if (!symbolTable.hasId(id)) {
 					error("There's no id named " + id.getName());
@@ -1033,9 +1034,10 @@ public class Compiler {
 				TypeCianetoClass typeCianetoClass = (TypeCianetoClass) id.getType();
 				Id id2 = idColon();
 				List<Expr> exprList = exprList();
-				if (typeCianetoClass.hasPublicMethod(id2.getName(), exprList)) {
+				int methodIdx = typeCianetoClass.getPublicMethodIdx(id2.getName(), exprList);
+				if (methodIdx != -1) {
 					id2 = typeCianetoClass.getMethod(id2.getName(), exprList);
-					primaryExpr = new PrimaryExprIdMethod(id, id2, exprList);
+					primaryExpr = new PrimaryExprIdMethod(id, id2, exprList, methodIdx);
 				} else {
 					error("There's no method in " + typeCianetoClass.getName() + " named " + id2.getName());
 				}
@@ -1066,7 +1068,7 @@ public class Compiler {
 			lexer.nextToken();
 			if (lexer.token == Token.ID) {
 				Id method = id();
-				if (!self.getSuperclass().hasPublicMethod(method.getName())) {
+				if (self.getSuperclass().getPublicMethodIdx(method.getName()) == -1) {
 					error("There's no unary method named " + method.getName() + " on "
 							+ self.getSuperclass().getName());
 				}
@@ -1075,7 +1077,7 @@ public class Compiler {
 			} else if (lexer.token == Token.IDCOLON) {
 				Id method = idColon();
 				List<Expr> exprList = exprList();
-				if (!self.getSuperclass().hasPublicMethod(method.getName(), exprList)) {
+				if (self.getSuperclass().getPublicMethodIdx(method.getName(), exprList) == -1) {
 					error("There's no method named " + method.getName() + "in " + self.getSuperclass().getName()
 							+ " with the specified params");
 				}
@@ -1111,7 +1113,7 @@ public class Compiler {
 							if (classType.hasField(id2.getName())) {
 								id2 = classType.getField(id2.getName());
 								primaryExpr = new PrimaryExprSelfIdField(id, id2);
-							} else if (classType.hasPublicMethod(id2.getName())) {
+							} else if (classType.getPublicMethodIdx(id2.getName()) != -1) {
 								id2 = classType.getMethod(id2.getName());
 								primaryExpr = new PrimaryExprSelfIdMethod(id, id2);
 							} else {
@@ -1121,7 +1123,7 @@ public class Compiler {
 						} else if (lexer.token == Token.IDCOLON) {
 							Id method = idColon();
 							List<Expr> exprList = exprList();
-							if (!classType.hasPublicMethod(method.getName(), exprList)) {
+							if (classType.getPublicMethodIdx(method.getName(), exprList) == -1 ) {
 								error("Method not found in class " + classType.getName());
 							}
 							method = classType.getMethod(method.getName(), exprList);

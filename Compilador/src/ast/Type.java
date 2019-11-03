@@ -26,5 +26,7 @@ abstract public class Type {
 
     abstract public String getJavaName();
 
+    abstract public boolean isBasicType();
+
     private String name;
 }

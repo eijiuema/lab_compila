@@ -12,13 +12,13 @@ typedef int boolean;
 int readInt() {
     int _n;
     char __s[512];
-    gets(__s);
+    fgets(__s,512,stdin);
     sscanf(__s, "%d", &_n);
     return _n;
 }
 char *readString() {
     char s[512];
-    gets(s);
+    fgets(s,512,stdin);
     char *ret = malloc(strlen(s) + 1);
     strcpy(ret, s);
     return ret;
@@ -32,29 +32,35 @@ char * concat( char * str1, char * str2){
         }
     return newStr;
 }
+char * intToStr(int i){
+    char * str = malloc(sizeof(char)*12);
+    sprintf(str, "%d", i);
+    return str;
+}
 typedef void (*Func)();
+
 // Codigo da classe _class_A
 typedef struct _St_A {
-    private int k;
+    int _k;
     Func* vt;
 }_class_A;
 
 _class_A* new_A(void);
 
-int _A_get_A( _class_A* self) {
-    return FALTAIMPLEMENTAR;
+int _A_get_A( _class_A *self) {
+    return (int) FALTAIMPLEMENTAR;
 }
 
-void _A_set( _class_A* self, int _k) {
+void _A_set( _class_A *self, int _k) {
     FALTAIMPLEMENTAR = _k;
 }
 
-void _A_print( _class_A* self) {
+void _A_print( _class_A *self) {
     printf("%d", FALTAIMPLEMENTAR);
     printf("%s", " ");
 }
 
-void _A_init( _class_A* self) {
+void _A_init( _class_A *self) {
     FALTAIMPLEMENTAR;
 }
 
@@ -72,25 +78,24 @@ _class_A* new_A(){
     return t;
 }
 
-
 // Codigo da classe _class_B
 typedef struct _St_B {
-    private int k;
+    int _k;
     Func* vt;
 }_class_B;
 
 _class_B* new_B(void);
 
-int _B_get_B( _class_B* self) {
-    return FALTAIMPLEMENTAR;
+int _B_get_B( _class_B *self) {
+    return (int) FALTAIMPLEMENTAR;
 }
 
-void _B_init( _class_B* self) {
+void _B_init( _class_B *self) {
     FALTAIMPLEMENTAR;
     FALTAIMPLEMENTAR = 2;
 }
 
-void _B_print( _class_B* self) {
+void _B_print( _class_B *self) {
     printf("%d", FALTAIMPLEMENTAR);
     printf("%s", " ");
     printf("%d", FALTAIMPLEMENTAR);
@@ -111,7 +116,6 @@ _class_B* new_B(){
     return t;
 }
 
-
 // Codigo da classe _class_C
 typedef struct _St_C {
     Func* vt;
@@ -119,8 +123,8 @@ typedef struct _St_C {
 
 _class_C* new_C(void);
 
-int _C_get_A( _class_C* self) {
-    return 0;
+int _C_get_A( _class_C *self) {
+    return (int) 0;
 }
 
 Func VT_class_C[] = {
@@ -134,7 +138,6 @@ _class_C* new_C(){
     return t;
 }
 
-
 // Codigo da classe _class_Program
 typedef struct _St_Program {
     Func* vt;
@@ -142,31 +145,31 @@ typedef struct _St_Program {
 
 _class_Program* new_Program(void);
 
-void _Program_run( _class_Program* self) {
-    _class_A* _a;
-    _class_B* _b;
-    _class_C* _c;
+void _Program_run( _class_Program *self) {
+    _class_A *_a;
+    _class_B *_b;
+    _class_C *_c;
     printf("%s\n", "2 2 0 0 2 0 0 0 0 0 0");
     _b = new_B();
-    _B_init(_b);
+    //ATUALIZADO(_b->vt[8] )(_b);
     _c = new_C();
-    _C_init(_c);
-    printf("%d", _B_get_B(_b));
+    //ATUALIZADO(_c->vt[12] )(_c);
+    printf("%d", //ATUALIZADO(_b->vt[7] )(_b));
     printf("%s", " ");
-    _a = _b;
-    _A_print(_a);
-    _B_print(_b);
-    _A_init(_a);
-    _B_init(_b);
-    printf("%d", _A_get_A(_a));
+    _a = (_class_A*)_b;
+    //ATUALIZADO(_a->vt[6] )(_a);
+    //ATUALIZADO(_b->vt[9] )(_b);
+    //ATUALIZADO(_a->vt[7] )(_a);
+    //ATUALIZADO(_b->vt[8] )(_b);
+    printf("%d", //ATUALIZADO(_a->vt[4] )(_a));
     printf("%s", " ");
-    printf("%d", _B_get_A(_b));
+    printf("%d", //ATUALIZADO(_b->vt[11] )(_b));
     printf("%s", " ");
-    _a = _c;
-    printf("%d", _A_get_A(_a));
+    _a = (_class_A*)_c;
+    printf("%d", //ATUALIZADO(_a->vt[4] )(_a));
     printf("%s", " ");
     _c = new_C();
-    printf("%d", _C_get_A(_c));
+    printf("%d", //ATUALIZADO(_c->vt[5] )(_c));
     printf("%s", " ");
 }
 
@@ -180,7 +183,6 @@ _class_Program* new_Program(){
         t->vt = VT_class_Program;
     return t;
 }
-
 
 int main(void) {
     _class_Program* program;

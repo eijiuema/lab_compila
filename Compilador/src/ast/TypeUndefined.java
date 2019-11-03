@@ -22,5 +22,10 @@ public class TypeUndefined extends Type {
    public boolean canConvertFrom(Type right) {  
       return false;
    }
+
+   @Override
+   public boolean isBasicType() {
+      return true;
+   }
    
 }

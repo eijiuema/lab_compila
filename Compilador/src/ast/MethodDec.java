@@ -40,17 +40,21 @@ public class MethodDec extends Member {
 
     public void genC(PW pw, TypeCianetoClass cl) {
         // gen c Type
-        pw.print(this.getType().getCname() + " ");
+        pw.print(this.getType().getCname());
+        if(!this.getType().isBasicType())
+            pw.print("*");
+        pw.print(" ");
         // gen c id
         pw.print("_" + cl.getName());
         pw.print(this.id.getCName());
         // gen c formalParamDec
         pw.print("( ");
         // self parameter
-        pw.print( cl.getCname() + "* self");
+        pw.print( cl.getCname() + " *self");
         for (ParamDec paramDec : this.formalParamDec) {
             pw.print(", ");
             paramDec.genC(pw);
+
         }
         pw.println(") {");
         pw.add();

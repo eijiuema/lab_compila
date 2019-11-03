@@ -104,4 +104,21 @@ public class MethodList {
         return null;
     }
 
+	public int getMethodIdx(String method, List<Expr> exprList) {
+		int idx = 0;
+        for (AbstractMap.SimpleEntry<String, MethodDec> smd : methodList) {
+            MethodDec md = smd.getValue();
+            Id id = md.getId();
+            if (id.getName().equals(method) && md.checkParamListCompatible(exprList)) {
+                return idx;
+            }
+            idx++;
+        }
+        return -1;
+	}
+
+	public int size() {
+		return this.methodList.size();
+	}
+
 }

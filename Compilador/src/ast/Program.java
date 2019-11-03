@@ -45,7 +45,7 @@ public class Program {
 		pw.add();
 		pw.printlnIdent("int _n;");
 		pw.printlnIdent("char __s[512];");
-		pw.printlnIdent("gets(__s);");
+		pw.printlnIdent("fgets(__s,512,stdin);");
 		pw.printlnIdent("sscanf(__s, \"%d\", &_n);");
 		pw.printlnIdent("return _n;");
 		pw.sub();
@@ -53,7 +53,7 @@ public class Program {
 		pw.println("char *readString() {");
 		pw.add();
 		pw.printlnIdent("char s[512];");
-		pw.printlnIdent("gets(s);");
+		pw.printlnIdent("fgets(s,512,stdin);");
 		pw.printlnIdent("char *ret = malloc(strlen(s) + 1);");
 		pw.printlnIdent("strcpy(ret, s);");
 		pw.printlnIdent("return ret;");
@@ -75,8 +75,19 @@ public class Program {
 		pw.sub();
 		pw.println("}");
 
+		//função para coverter inteiro em string
+		pw.println("char * intToStr(int i){");
+		pw.add();
+		pw.printlnIdent("char * str = malloc(sizeof(char)*12);");
+		pw.printlnIdent("sprintf(str, \"%d\", i);");
+		pw.printlnIdent("return str;");
+		pw.sub();
+		pw.println("}");
+	
+
 		/* define um tipo Func que é um ponteiro para função */
 		pw.println("typedef void (*Func)();");
+		pw.println();
 
 		for (TypeCianetoClass typeCianetoClass : classList) {
 			typeCianetoClass.genC(pw);

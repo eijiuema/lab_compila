@@ -12,13 +12,13 @@ typedef int boolean;
 int readInt() {
     int _n;
     char __s[512];
-    gets(__s);
+    fgets(__s,512,stdin);
     sscanf(__s, "%d", &_n);
     return _n;
 }
 char *readString() {
     char s[512];
-    gets(s);
+    fgets(s,512,stdin);
     char *ret = malloc(strlen(s) + 1);
     strcpy(ret, s);
     return ret;
@@ -32,20 +32,26 @@ char * concat( char * str1, char * str2){
         }
     return newStr;
 }
+char * intToStr(int i){
+    char * str = malloc(sizeof(char)*12);
+    sprintf(str, "%d", i);
+    return str;
+}
 typedef void (*Func)();
+
 // Codigo da classe _class_A
 typedef struct _St_A {
-    private int k;
+    int _k;
     Func* vt;
 }_class_A;
 
 _class_A* new_A(void);
 
-int _A_get_A( _class_A* self) {
-    return FALTAIMPLEMENTAR;
+int _A_get_A( _class_A *self) {
+    return (int) FALTAIMPLEMENTAR;
 }
 
-void _A_init( _class_A* self) {
+void _A_init( _class_A *self) {
     FALTAIMPLEMENTAR = 1;
 }
 
@@ -61,20 +67,19 @@ _class_A* new_A(){
     return t;
 }
 
-
 // Codigo da classe _class_B
 typedef struct _St_B {
-    private int k;
+    int _k;
     Func* vt;
 }_class_B;
 
 _class_B* new_B(void);
 
-int _B_get_B( _class_B* self) {
-    return FALTAIMPLEMENTAR;
+int _B_get_B( _class_B *self) {
+    return (int) FALTAIMPLEMENTAR;
 }
 
-void _B_init( _class_B* self) {
+void _B_init( _class_B *self) {
     FALTAIMPLEMENTAR;
     FALTAIMPLEMENTAR = 2;
 }
@@ -91,20 +96,19 @@ _class_B* new_B(){
     return t;
 }
 
-
 // Codigo da classe _class_C
 typedef struct _St_C {
-    private int k;
+    int _k;
     Func* vt;
 }_class_C;
 
 _class_C* new_C(void);
 
-int _C_get_C( _class_C* self) {
-    return FALTAIMPLEMENTAR;
+int _C_get_C( _class_C *self) {
+    return (int) FALTAIMPLEMENTAR;
 }
 
-void _C_init( _class_C* self) {
+void _C_init( _class_C *self) {
     FALTAIMPLEMENTAR;
     FALTAIMPLEMENTAR = 3;
 }
@@ -121,20 +125,19 @@ _class_C* new_C(){
     return t;
 }
 
-
 // Codigo da classe _class_D
 typedef struct _St_D {
-    private int k;
+    int _k;
     Func* vt;
 }_class_D;
 
 _class_D* new_D(void);
 
-int _D_get_D( _class_D* self) {
-    return FALTAIMPLEMENTAR;
+int _D_get_D( _class_D *self) {
+    return (int) FALTAIMPLEMENTAR;
 }
 
-void _D_init( _class_D* self) {
+void _D_init( _class_D *self) {
     FALTAIMPLEMENTAR;
     FALTAIMPLEMENTAR = 4;
 }
@@ -151,7 +154,6 @@ _class_D* new_D(){
     return t;
 }
 
-
 // Codigo da classe _class_Program
 typedef struct _St_Program {
     Func* vt;
@@ -159,24 +161,24 @@ typedef struct _St_Program {
 
 _class_Program* new_Program(void);
 
-void _Program_run( _class_Program* self) {
-    _class_A* _a;
-    _class_B* _b;
-    _class_C* _c;
-    _class_D* _d;
+void _Program_run( _class_Program *self) {
+    _class_A *_a;
+    _class_B *_b;
+    _class_C *_c;
+    _class_D *_d;
     printf("%s\n", "4 3 2 1");
     _d = new_D();
-    _D_init(_d);
-    printf("%d", _D_get_D(_d));
+    //ATUALIZADO(_d->vt[9] )(_d);
+    printf("%d", //ATUALIZADO(_d->vt[8] )(_d));
     printf("%s", " ");
-    _c = _d;
-    printf("%d", _C_get_C(_c));
+    _c = (_class_C*)_d;
+    printf("%d", //ATUALIZADO(_c->vt[6] )(_c));
     printf("%s", " ");
-    _b = _c;
-    printf("%d", _B_get_B(_b));
+    _b = (_class_B*)_c;
+    printf("%d", //ATUALIZADO(_b->vt[4] )(_b));
     printf("%s", " ");
-    _a = _b;
-    printf("%d", _A_get_A(_a));
+    _a = (_class_A*)_b;
+    printf("%d", //ATUALIZADO(_a->vt[2] )(_a));
     printf("%s", " ");
 }
 
@@ -190,7 +192,6 @@ _class_Program* new_Program(){
         t->vt = VT_class_Program;
     return t;
 }
-
 
 int main(void) {
     _class_Program* program;

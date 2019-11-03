@@ -26,4 +26,9 @@ public class TypeString extends Type {
          return false;
    }
 
+   @Override
+   public boolean isBasicType() {
+      return true;
+   }
+
 }

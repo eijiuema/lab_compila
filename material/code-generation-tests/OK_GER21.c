@@ -12,13 +12,13 @@ typedef int boolean;
 int readInt() {
     int _n;
     char __s[512];
-    gets(__s);
+    fgets(__s,512,stdin);
     sscanf(__s, "%d", &_n);
     return _n;
 }
 char *readString() {
     char s[512];
-    gets(s);
+    fgets(s,512,stdin);
     char *ret = malloc(strlen(s) + 1);
     strcpy(ret, s);
     return ret;
@@ -32,21 +32,27 @@ char * concat( char * str1, char * str2){
         }
     return newStr;
 }
+char * intToStr(int i){
+    char * str = malloc(sizeof(char)*12);
+    sprintf(str, "%d", i);
+    return str;
+}
 typedef void (*Func)();
+
 // Codigo da classe _class_A
 typedef struct _St_A {
-    private int n;
+    int _n;
     Func* vt;
 }_class_A;
 
 _class_A* new_A(void);
 
-void _A_set( _class_A* self, int _n) {
+void _A_set( _class_A *self, int _n) {
     FALTAIMPLEMENTAR = _n;
 }
 
-int _A_get( _class_A* self) {
-    return FALTAIMPLEMENTAR;
+int _A_get( _class_A *self) {
+    return (int) FALTAIMPLEMENTAR;
 }
 
 Func VT_class_A[] = {
@@ -61,29 +67,28 @@ _class_A* new_A(){
     return t;
 }
 
-
 // Codigo da classe _class_Program
 typedef struct _St_Program {
-    private A a;
+    _class_A _a;
     Func* vt;
 }_class_Program;
 
 _class_Program* new_Program(void);
 
-void _Program_print( _class_Program* self) {
+void _Program_print( _class_Program *self) {
     printf("%d", FALTAIMPLEMENTAR);
 }
 
-_class_A _Program_get( _class_Program* self) {
-    return FALTAIMPLEMENTAR;
+_class_A* _Program_get( _class_Program *self) {
+    return (_class_A* ) FALTAIMPLEMENTAR;
 }
 
-void _Program_run( _class_Program* self) {
+void _Program_run( _class_Program *self) {
     printf("%s\n", "0");
     printf("%s\n", "0");
 }
 
-void _Program_set( _class_Program* self, _class_A _a) {
+void _Program_set( _class_Program *self, _class_A *_a) {
     FALTAIMPLEMENTAR = _a;
 }
 
@@ -99,7 +104,6 @@ _class_Program* new_Program(){
         t->vt = VT_class_Program;
     return t;
 }
-
 
 int main(void) {
     _class_Program* program;

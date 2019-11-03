@@ -26,4 +26,9 @@ public class TypeInt extends Type {
       else
          return false;
    }
+
+   @Override
+   public boolean isBasicType() {
+      return true;
+   }
 }

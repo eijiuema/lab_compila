@@ -10,22 +10,44 @@ public class PrimaryExprIdMethod extends PrimaryExpr {
 
     private Id id, method;
     private List<Expr> exprList;
+    private int methodIdx;
 
-    public PrimaryExprIdMethod(Id id, Id method) {
+    public PrimaryExprIdMethod(Id id, Id method, int methodIdx) {
         this.id = id;
         this.method = method;
         this.exprList = new ArrayList<>();
+        this.methodIdx = methodIdx;
     }
 
-    public PrimaryExprIdMethod(Id id, Id method, List<Expr> exprList) {
+    public PrimaryExprIdMethod(Id id, Id method, List<Expr> exprList, int methodIdx) {
         this.id = id;
         this.method = method;
         this.exprList = exprList;
+        this.methodIdx = methodIdx;
     }
 
     public void genC(PW pw) {
-        pw.print("_" + this.id.getType().getName());
-        pw.print("_" + this.method.getName());
+        
+        //( (int (*)(_class_A *)) _a->vt[0] )(_a);
+        //pw.print("//ATUALIZADO");
+        //Método
+        pw.print("(");
+        //Casts
+        /*
+        if(expr.getType() != methodExpr.getType()){
+            pw.print("(");
+            pw.print(leftExpr.getType().getCname() + "*");
+            pw.print(")");
+        }*/
+        
+        //Acessando o método no vetor de métodos públicos
+        pw.print(this.id.getCName() + "->vt");    
+        pw.print("[");
+        pw.print(Integer.toString(methodIdx));
+        pw.print("] ");
+        pw.print(")");
+
+        //Parâmetros
         pw.print("(");
         pw.print(this.id.getCName());
         for (Expr expr : this.exprList) {

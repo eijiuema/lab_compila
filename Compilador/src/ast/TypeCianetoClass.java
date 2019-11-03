@@ -124,12 +124,28 @@ public class TypeCianetoClass extends Type {
       return this.hasPrivateMethod(method, new ArrayList<>());
    }
 
-   public boolean hasPublicMethod(String method) {
-      return this.hasPublicMethod(method, new ArrayList<>());
+   public int getPublicMethodIdx(String method) {
+      return this.getPublicMethodIdx(method, new ArrayList<>());
    }
 
-   public boolean hasPublicMethod(String method, List<Expr> exprList) {
-      return this.publicMethodList.getMethod(method, exprList) != null || superclass != null && superclass.hasPublicMethod(method, exprList) ;
+   public int getPublicMethodIdx(String method, List<Expr> exprList) {
+      
+      int idx = this.publicMethodList.getMethodIdx(method, exprList);
+
+      if(idx == -1 && superclass != null)
+         idx = superclass.getPublicMethodIdx(method, exprList);
+      
+      if(idx != -1&& superclass != null)
+         idx += superclass.publicInheritedMethodsSize();
+      
+         return idx;
+   }
+
+   private int publicInheritedMethodsSize() {
+      if(superclass == null)
+         return this.publicMethodList.size();
+      else
+         return this.publicMethodList.size() + superclass.publicInheritedMethodsSize();
    }
 
    public boolean hasPublicMethodEquals(MethodDec methodDec) {
@@ -141,7 +157,7 @@ public class TypeCianetoClass extends Type {
    }
 
    public boolean hasMethod(String method, List<Expr> exprList) {
-      return hasPrivateMethod(method, exprList) || hasPublicMethod(method, exprList)
+      return hasPrivateMethod(method, exprList) || getPublicMethodIdx(method, exprList) != -1
             || (this.superclass != null && this.superclass.hasMethod(method, exprList));
    }
 
@@ -198,12 +214,12 @@ public class TypeCianetoClass extends Type {
    }
 
    public void genC(PW pw) {
-      pw.println("// Codigo da classe " + this.getCname()  );
+      pw.println("// Codigo da classe " + this.getCname() );
       
       //Struct com campos
       pw.println("typedef struct _St_" + this.getName() + " {");
       pw.add();
-      fieldList.genJava(pw);
+      fieldList.genC(pw);
       pw.printlnIdent("Func* vt;");
       pw.sub();
       pw.println("}" + this.getCname() + ";");
@@ -222,7 +238,6 @@ public class TypeCianetoClass extends Type {
       pw.println(";");
       pw.println();
 
-
       //Construtor da classe
       pw.println(this.getCname() + "* new_" + this.getName() + "(){");
       pw.add();
@@ -234,8 +249,6 @@ public class TypeCianetoClass extends Type {
       pw.printlnIdent("return t;");
       pw.sub();
       pw.println("}");
-      pw.println();
-
    }
 
    public void genJava(PW pw) {
@@ -252,6 +265,11 @@ public class TypeCianetoClass extends Type {
       pw.sub();
       pw.printlnIdent("}");
       pw.println();
+   }
+
+   @Override
+   public boolean isBasicType() {
+      return false;
    }
 
 }

@@ -31,7 +31,7 @@ public class FieldList {
 	public void genC(PW pw) {
         for (AbstractMap.SimpleEntry<String, FieldDec> fd : fieldList ){
             pw.printIdent("");
-            fd.getValue().genJava(pw);
+            fd.getValue().genC(pw);
             pw.println(";");
         }
     }
