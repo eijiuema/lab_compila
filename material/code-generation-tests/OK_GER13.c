@@ -72,8 +72,7 @@ void _A_p2( _class_A *self) {
 Func VT_class_A[] = {
     (Func) _A_set,
     (Func) _A_get,
-    (Func) _A_print
-};
+    (Func) _A_print};
 
 _class_A* new_A(){
     _class_A* t;
@@ -108,10 +107,12 @@ void _B_p2( _class_B *self) {
 }
 
 Func VT_class_B[] = {
+    (Func) _A_set,
+    (Func) _A_get,
+    (Func) _A_print,
     (Func) _B_set,
     (Func) _B_p1,
-    (Func) _B_print
-};
+    (Func) _B_print};
 
 _class_B* new_B(){
     _class_B* t;
@@ -151,23 +152,23 @@ void _Program_run( _class_Program *self) {
     printf("%s\n", "0 1 0 1 0 1 2 B A 0 1 P");
     _a = new_A();
     _b = new_B();
-    _a = (_class_A*)_b;
+    _a = (_class_A*) _b;
     (_a->vt[0] )(_a, 0);
-    _a = (_class_A*)FALTAIMPLEMENTAR;
+    _a = (_class_A*) FALTAIMPLEMENTAR;
     _b = FALTAIMPLEMENTAR;
     (_b->vt[4] )(_b);
     _a = FALTAIMPLEMENTAR;
     (_a->vt[2] )(_a);
     _a = FALTAIMPLEMENTAR;
     (_a->vt[2] )(_a);
-    _a = (_class_A*)NULL;
-    _b = (_class_B*)NULL;
+    _a = (_class_A*) NULL;
+    _b = (_class_B*) NULL;
     _a2 = new_A();
-    if (_a == _b ) {
+    if (_a == (_class_A*) _b ) {
         printf("%d", 0);
         printf("%s", " ");
     }
-    if (_b == _a ) {
+    if ((_class_A*) _b == _a ) {
         printf("%d", 1);
         printf("%s", " ");
     }
@@ -183,8 +184,7 @@ Func VT_class_Program[] = {
     (Func) _Program_print,
     (Func) _Program_m,
     (Func) _Program_p,
-    (Func) _Program_run
-};
+    (Func) _Program_run};
 
 _class_Program* new_Program(){
     _class_Program* t;

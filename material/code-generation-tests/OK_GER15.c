@@ -86,8 +86,7 @@ Func VT_class_A[] = {
     (Func) _A_call_p,
     (Func) _A_call_q,
     (Func) _A_r,
-    (Func) _A_s
-};
+    (Func) _A_s};
 
 _class_A* new_A(){
     _class_A* t;
@@ -139,12 +138,16 @@ void _B_q( _class_B *self) {
 }
 
 Func VT_class_B[] = {
+    (Func) _A_init_A,
+    (Func) _A_call_p,
+    (Func) _A_call_q,
+    (Func) _A_r,
+    (Func) _A_s,
     (Func) _B_init_B,
     (Func) _B_call_p,
     (Func) _B_call_q,
     (Func) _B_r,
-    (Func) _B_s
-};
+    (Func) _B_s};
 
 _class_B* new_B(){
     _class_B* t;
@@ -196,12 +199,16 @@ void _C_q( _class_C *self) {
 }
 
 Func VT_class_C[] = {
+    (Func) _A_init_A,
+    (Func) _A_call_p,
+    (Func) _A_call_q,
+    (Func) _A_r,
+    (Func) _A_s,
     (Func) _C_init_C,
     (Func) _C_call_p,
     (Func) _C_call_q,
     (Func) _C_r,
-    (Func) _C_s
-};
+    (Func) _C_s};
 
 _class_C* new_C(){
     _class_C* t;
@@ -223,31 +230,30 @@ void _Program_run( _class_Program *self) {
     _class_C *_c;
     printf("%s\n", "1 2 1 2 3 4 3 4 5 6 5 6");
     _a = new_A();
-    //ATUALIZADO(_a->vt[5] )(_a);
-    //ATUALIZADO(_a->vt[6] )(_a);
-    //ATUALIZADO(_a->vt[7] )(_a);
-    //ATUALIZADO(_a->vt[8] )(_a);
-    //ATUALIZADO(_a->vt[9] )(_a);
+    (_a->vt[0] )(_a);
+    (_a->vt[1] )(_a);
+    (_a->vt[2] )(_a);
+    (_a->vt[3] )(_a);
+    (_a->vt[4] )(_a);
     _b = new_B();
-    //ATUALIZADO(_b->vt[10] )(_b);
-    //ATUALIZADO(_b->vt[15] )(_b);
-    //ATUALIZADO(_b->vt[11] )(_b);
-    //ATUALIZADO(_b->vt[12] )(_b);
-    //ATUALIZADO(_b->vt[13] )(_b);
-    //ATUALIZADO(_b->vt[14] )(_b);
+    (_b->vt[5] )(_b);
+    (_b->vt[5] )(_b);
+    (_b->vt[6] )(_b);
+    (_b->vt[7] )(_b);
+    (_b->vt[8] )(_b);
+    (_b->vt[9] )(_b);
     _c = new_C();
-    //ATUALIZADO(_c->vt[10] )(_c);
-    //ATUALIZADO(_c->vt[15] )(_c);
-    //ATUALIZADO(_c->vt[10] )(_c);
-    //ATUALIZADO(_c->vt[11] )(_c);
-    //ATUALIZADO(_c->vt[12] )(_c);
-    //ATUALIZADO(_c->vt[13] )(_c);
-    //ATUALIZADO(_c->vt[14] )(_c);
+    (_c->vt[5] )(_c);
+    (_c->vt[5] )(_c);
+    (_c->vt[5] )(_c);
+    (_c->vt[6] )(_c);
+    (_c->vt[7] )(_c);
+    (_c->vt[8] )(_c);
+    (_c->vt[9] )(_c);
 }
 
 Func VT_class_Program[] = {
-    (Func) _Program_run
-};
+    (Func) _Program_run};
 
 _class_Program* new_Program(){
     _class_Program* t;

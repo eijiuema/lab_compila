@@ -89,11 +89,13 @@ public class Program {
 		pw.println("typedef void (*Func)();");
 		pw.println();
 
+		//Gera as classes
 		for (TypeCianetoClass typeCianetoClass : classList) {
 			typeCianetoClass.genC(pw);
 			pw.println();
 		}
 
+		//Gera a main
 		pw.println("int main(void) {");
 		pw.add();
 		pw.printlnIdent("_class_Program* program;");

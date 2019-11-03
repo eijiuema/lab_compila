@@ -22,13 +22,26 @@ public class Expr extends Factor {
     }
 
     public void genC(PW pw) {
+        //Cast
+        if(rightSimpleExpr != null && leftSimpleExpr.getType() != rightSimpleExpr.getType() && rightSimpleExpr.getType().canConvertFrom(leftSimpleExpr.getType())){
+            pw.print("(");
+            pw.print(rightSimpleExpr.getType().getCname() + "*");
+            pw.print(") ");
+        }
         leftSimpleExpr.genC(pw);
 
         if (relation != null)
             pw.print(" " + relation + " ");
 
-        if (rightSimpleExpr != null)
+        if (rightSimpleExpr != null){
+            //Cast
+            if(leftSimpleExpr.getType() != rightSimpleExpr.getType() && leftSimpleExpr.getType().canConvertFrom(rightSimpleExpr.getType())){
+                pw.print("(");
+                pw.print(leftSimpleExpr.getType().getCname() + "*");
+                pw.print(") ");
+            }
             rightSimpleExpr.genC(pw);
+        }
     }
     
     public void genJava(PW pw) {

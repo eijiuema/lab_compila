@@ -58,8 +58,7 @@ int _A_getK( _class_A *self) {
 
 Func VT_class_A[] = {
     (Func) _A_m1,
-    (Func) _A_getK
-};
+    (Func) _A_getK};
 
 _class_A* new_A(){
     _class_A* t;
@@ -87,9 +86,10 @@ int _B_getK( _class_B *self) {
 }
 
 Func VT_class_B[] = {
+    (Func) _A_m1,
+    (Func) _A_getK,
     (Func) _B_m2,
-    (Func) _B_getK
-};
+    (Func) _B_getK};
 
 _class_B* new_B(){
     _class_B* t;
@@ -117,9 +117,12 @@ void _C_m4( _class_C *self, int _n) {
 }
 
 Func VT_class_C[] = {
+    (Func) _A_m1,
+    (Func) _A_getK,
+    (Func) _B_m2,
+    (Func) _B_getK,
     (Func) _C_m3,
-    (Func) _C_m4
-};
+    (Func) _C_m4};
 
 _class_C* new_C(){
     _class_C* t;
@@ -143,8 +146,7 @@ void _Program_run( _class_Program *self) {
 }
 
 Func VT_class_Program[] = {
-    (Func) _Program_run
-};
+    (Func) _Program_run};
 
 _class_Program* new_Program(){
     _class_Program* t;

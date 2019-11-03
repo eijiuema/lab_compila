@@ -57,8 +57,7 @@ void _A_init( _class_A *self) {
 
 Func VT_class_A[] = {
     (Func) _A_get_A,
-    (Func) _A_init
-};
+    (Func) _A_init};
 
 _class_A* new_A(){
     _class_A* t;
@@ -85,9 +84,10 @@ void _B_init( _class_B *self) {
 }
 
 Func VT_class_B[] = {
+    (Func) _A_get_A,
+    (Func) _A_init,
     (Func) _B_get_B,
-    (Func) _B_init
-};
+    (Func) _B_init};
 
 _class_B* new_B(){
     _class_B* t;
@@ -114,9 +114,12 @@ void _C_init( _class_C *self) {
 }
 
 Func VT_class_C[] = {
+    (Func) _A_get_A,
+    (Func) _A_init,
+    (Func) _B_get_B,
+    (Func) _B_init,
     (Func) _C_get_C,
-    (Func) _C_init
-};
+    (Func) _C_init};
 
 _class_C* new_C(){
     _class_C* t;
@@ -143,9 +146,14 @@ void _D_init( _class_D *self) {
 }
 
 Func VT_class_D[] = {
+    (Func) _A_get_A,
+    (Func) _A_init,
+    (Func) _B_get_B,
+    (Func) _B_init,
+    (Func) _C_get_C,
+    (Func) _C_init,
     (Func) _D_get_D,
-    (Func) _D_init
-};
+    (Func) _D_init};
 
 _class_D* new_D(){
     _class_D* t;
@@ -168,23 +176,22 @@ void _Program_run( _class_Program *self) {
     _class_D *_d;
     printf("%s\n", "4 3 2 1");
     _d = new_D();
-    //ATUALIZADO(_d->vt[9] )(_d);
-    printf("%d", //ATUALIZADO(_d->vt[8] )(_d));
+    (_d->vt[7] )(_d);
+    printf("%d", (_d->vt[6] )(_d));
     printf("%s", " ");
-    _c = (_class_C*)_d;
-    printf("%d", //ATUALIZADO(_c->vt[6] )(_c));
+    _c = (_class_C*) _d;
+    printf("%d", (_c->vt[4] )(_c));
     printf("%s", " ");
-    _b = (_class_B*)_c;
-    printf("%d", //ATUALIZADO(_b->vt[4] )(_b));
+    _b = (_class_B*) _c;
+    printf("%d", (_b->vt[2] )(_b));
     printf("%s", " ");
-    _a = (_class_A*)_b;
-    printf("%d", //ATUALIZADO(_a->vt[2] )(_a));
+    _a = (_class_A*) _b;
+    printf("%d", (_a->vt[0] )(_a));
     printf("%s", " ");
 }
 
 Func VT_class_Program[] = {
-    (Func) _Program_run
-};
+    (Func) _Program_run};
 
 _class_Program* new_Program(){
     _class_Program* t;

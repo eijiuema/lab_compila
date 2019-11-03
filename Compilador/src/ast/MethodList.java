@@ -37,8 +37,7 @@ public class MethodList {
     }
 
     public void genCFunctionPointersArray(PW pw, TypeCianetoClass cl){
-        pw.println("{");
-        pw.add();
+ 
         for (AbstractMap.SimpleEntry<String, MethodDec> method : this.methodList) {
             
             pw.printIdent("(Func) ");
@@ -46,12 +45,9 @@ public class MethodList {
             method.getValue().genCFunctionPointer(pw, cl);
             
             if(!method.equals( this.methodList.get(this.methodList.size()-1))){
-                pw.print(",");
+                pw.println(",");
             }
-            pw.println();
         }
-        pw.sub();
-        pw.print("}");
     }
 
     public void genJava(PW pw) {

@@ -30,7 +30,7 @@ public class AssignExpr extends Stat {
             if(leftExpr.getType() != rightExpr.getType()){
                 pw.print("(");
                 pw.print(leftExpr.getType().getCname() + "*");
-                pw.print(")");
+                pw.print(") ");
             }
 
             rightExpr.genC(pw);

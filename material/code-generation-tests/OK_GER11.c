@@ -58,8 +58,7 @@ void _A_m2( _class_A *self, int _n) {
 
 Func VT_class_A[] = {
     (Func) _A_m1,
-    (Func) _A_m2
-};
+    (Func) _A_m2};
 
 _class_A* new_A(){
     _class_A* t;
@@ -80,8 +79,9 @@ void _B_m1( _class_B *self) {
 }
 
 Func VT_class_B[] = {
-    (Func) _B_m1
-};
+    (Func) _A_m1,
+    (Func) _A_m2,
+    (Func) _B_m1};
 
 _class_B* new_B(){
     _class_B* t;
@@ -104,13 +104,12 @@ void _Program_run( _class_Program *self) {
     printf("%s", "4 ");
     _a = new_A();
     (_a->vt[1] )(_a, 1);
-    _a = (_class_A*)new_B();
+    _a = (_class_A*) new_B();
     (_a->vt[1] )(_a, 3);
 }
 
 Func VT_class_Program[] = {
-    (Func) _Program_run
-};
+    (Func) _Program_run};
 
 _class_Program* new_Program(){
     _class_Program* t;

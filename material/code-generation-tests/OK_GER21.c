@@ -57,8 +57,7 @@ int _A_get( _class_A *self) {
 
 Func VT_class_A[] = {
     (Func) _A_set,
-    (Func) _A_get
-};
+    (Func) _A_get};
 
 _class_A* new_A(){
     _class_A* t;
@@ -95,8 +94,7 @@ void _Program_set( _class_Program *self, _class_A *_a) {
 Func VT_class_Program[] = {
     (Func) _Program_print,
     (Func) _Program_get,
-    (Func) _Program_run
-};
+    (Func) _Program_run};
 
 _class_Program* new_Program(){
     _class_Program* t;

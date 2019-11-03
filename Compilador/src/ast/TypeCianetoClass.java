@@ -229,13 +229,19 @@ public class TypeCianetoClass extends Type {
       pw.println(this.getCname() + "* new_" + this.getName() + "(void);");
       pw.println();
 
+      //Métodos públicos
       publicMethodList.genC(pw, this);
+      //Métodos privados
       privateMethodList.genC(pw, this);
 
-      //Métodos públicos
+      //Vetor de métodos públicos
       pw.print("Func VT"+ this.getCname() +"[] = ");
-      this.publicMethodList.genCFunctionPointersArray(pw, this);
-      pw.println(";");
+      pw.println("{");
+      pw.add();
+      this.genCFunctionPointersArray(pw);
+      pw.sub();
+		pw.println();
+      pw.println("};");
       pw.println();
 
       //Construtor da classe
@@ -249,6 +255,14 @@ public class TypeCianetoClass extends Type {
       pw.printlnIdent("return t;");
       pw.sub();
       pw.println("}");
+   }
+
+   private void genCFunctionPointersArray(PW pw) {
+      if(this.superclass != null){
+         superclass.genCFunctionPointersArray(pw);
+         pw.println(",");
+      }
+      this.publicMethodList.genCFunctionPointersArray(pw, this);
    }
 
    public void genJava(PW pw) {

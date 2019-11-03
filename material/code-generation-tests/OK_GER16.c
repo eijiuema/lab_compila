@@ -68,8 +68,7 @@ Func VT_class_A[] = {
     (Func) _A_get_A,
     (Func) _A_set,
     (Func) _A_print,
-    (Func) _A_init
-};
+    (Func) _A_init};
 
 _class_A* new_A(){
     _class_A* t;
@@ -104,10 +103,13 @@ void _B_print( _class_B *self) {
 }
 
 Func VT_class_B[] = {
+    (Func) _A_get_A,
+    (Func) _A_set,
+    (Func) _A_print,
+    (Func) _A_init,
     (Func) _B_get_B,
     (Func) _B_init,
-    (Func) _B_print
-};
+    (Func) _B_print};
 
 _class_B* new_B(){
     _class_B* t;
@@ -128,8 +130,11 @@ int _C_get_A( _class_C *self) {
 }
 
 Func VT_class_C[] = {
-    (Func) _C_get_A
-};
+    (Func) _A_get_A,
+    (Func) _A_set,
+    (Func) _A_print,
+    (Func) _A_init,
+    (Func) _C_get_A};
 
 _class_C* new_C(){
     _class_C* t;
@@ -151,31 +156,30 @@ void _Program_run( _class_Program *self) {
     _class_C *_c;
     printf("%s\n", "2 2 0 0 2 0 0 0 0 0 0");
     _b = new_B();
-    //ATUALIZADO(_b->vt[8] )(_b);
+    (_b->vt[5] )(_b);
     _c = new_C();
-    //ATUALIZADO(_c->vt[12] )(_c);
-    printf("%d", //ATUALIZADO(_b->vt[7] )(_b));
+    (_c->vt[7] )(_c);
+    printf("%d", (_b->vt[4] )(_b));
     printf("%s", " ");
-    _a = (_class_A*)_b;
-    //ATUALIZADO(_a->vt[6] )(_a);
-    //ATUALIZADO(_b->vt[9] )(_b);
-    //ATUALIZADO(_a->vt[7] )(_a);
-    //ATUALIZADO(_b->vt[8] )(_b);
-    printf("%d", //ATUALIZADO(_a->vt[4] )(_a));
+    _a = (_class_A*) _b;
+    (_a->vt[2] )(_a);
+    (_b->vt[6] )(_b);
+    (_a->vt[3] )(_a);
+    (_b->vt[5] )(_b);
+    printf("%d", (_a->vt[0] )(_a));
     printf("%s", " ");
-    printf("%d", //ATUALIZADO(_b->vt[11] )(_b));
+    printf("%d", (_b->vt[4] )(_b));
     printf("%s", " ");
-    _a = (_class_A*)_c;
-    printf("%d", //ATUALIZADO(_a->vt[4] )(_a));
+    _a = (_class_A*) _c;
+    printf("%d", (_a->vt[0] )(_a));
     printf("%s", " ");
     _c = new_C();
-    printf("%d", //ATUALIZADO(_c->vt[5] )(_c));
+    printf("%d", (_c->vt[4] )(_c));
     printf("%s", " ");
 }
 
 Func VT_class_Program[] = {
-    (Func) _Program_run
-};
+    (Func) _Program_run};
 
 _class_Program* new_Program(){
     _class_Program* t;
