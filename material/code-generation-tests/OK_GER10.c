@@ -47,13 +47,17 @@ typedef struct _St_A {
 
 _class_A* new_A(void);
 
+void _A_m1( _class_A *self, int _n);
+
+int _A_getK( _class_A *self);
+
 void _A_m1( _class_A *self, int _n) {
-    self->_k = 1;
-    printf("%s",  concat(  intToStr(self->_k),  concat( " ",  concat(  intToStr(_n), " "))));
+    ((_class_A*)self)->_k = 1;
+    printf("%s",  concat(  intToStr(((_class_A*)self)->_k),  concat( " ",  concat(  intToStr(_n), " "))));
 }
 
 int _A_getK( _class_A *self) {
-    return (int) self->_k;
+    return (int) ((_class_A*)self)->_k;
 }
 
 Func VT_class_A[] = {
@@ -76,14 +80,18 @@ typedef struct _St_B {
 
 _class_B* new_B(void);
 
+void _B_m2( _class_B *self, int _n);
+
+int _B_getK( _class_B *self);
+
 void _B_m2( _class_B *self, int _n) {
-    self->_k = 2;
+    ((_class_B*)self)->_k = 2;
     (((_class_A*)self)->vt[0] )((_class_A*) self, 1);
-    printf("%s",  concat(  intToStr(self->_k),  concat( " ",  concat(  intToStr(_n), " "))));
+    printf("%s",  concat(  intToStr(((_class_B*)self)->_k),  concat( " ",  concat(  intToStr(_n), " "))));
 }
 
 int _B_getK( _class_B *self) {
-    return (int) self->_k;
+    return (int) ((_class_B*)self)->_k;
 }
 
 Func VT_class_B[] = {
@@ -106,6 +114,10 @@ typedef struct _St_C {
 }_class_C;
 
 _class_C* new_C(void);
+
+void _C_m3( _class_C *self, int _n);
+
+void _C_m4( _class_C *self, int _n);
 
 void _C_m3( _class_C *self, int _n) {
     (((_class_B*)self)->vt[2] )((_class_B*) self, 2);
@@ -140,6 +152,8 @@ typedef struct _St_Program {
 }_class_Program;
 
 _class_Program* new_Program(void);
+
+void _Program_run( _class_Program *self);
 
 void _Program_run( _class_Program *self) {
     _class_C *_c;

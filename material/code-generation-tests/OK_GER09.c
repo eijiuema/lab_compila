@@ -46,6 +46,8 @@ typedef struct _St_A {
 
 _class_A* new_A(void);
 
+void _A_m1( _class_A *self, int _n);
+
 void _A_m1( _class_A *self, int _n) {
     printf("%s",  concat( "1 ",  intToStr(_n)));
     printf("%s", " ");
@@ -68,6 +70,8 @@ typedef struct _St_B {
 }_class_B;
 
 _class_B* new_B(void);
+
+void _B_m2( _class_B *self, int _n);
 
 void _B_m2( _class_B *self, int _n) {
     (((_class_A*)self)->vt[0] )((_class_A*) self, 1);
@@ -93,6 +97,10 @@ typedef struct _St_C {
 }_class_C;
 
 _class_C* new_C(void);
+
+void _C_m3( _class_C *self, int _n);
+
+void _C_m4( _class_C *self, int _n);
 
 void _C_m3( _class_C *self, int _n) {
     (((_class_B*)self)->vt[1] )((_class_B*) self, 2);
@@ -126,6 +134,8 @@ typedef struct _St_Program {
 }_class_Program;
 
 _class_Program* new_Program(void);
+
+void _Program_run( _class_Program *self);
 
 void _Program_run( _class_Program *self) {
     _class_C *_c;

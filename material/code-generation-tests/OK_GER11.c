@@ -46,6 +46,10 @@ typedef struct _St_A {
 
 _class_A* new_A(void);
 
+void _A_m1( _class_A *self);
+
+void _A_m2( _class_A *self, int _n);
+
 void _A_m1( _class_A *self) {
     printf("%s", " 2 ");
 }
@@ -75,6 +79,8 @@ typedef struct _St_B {
 
 _class_B* new_B(void);
 
+void _B_m1( _class_B *self);
+
 void _B_m1( _class_B *self) {
     printf("%s\n", " 4 ");
 }
@@ -98,6 +104,8 @@ typedef struct _St_Program {
 }_class_Program;
 
 _class_Program* new_Program(void);
+
+void _Program_run( _class_Program *self);
 
 void _Program_run( _class_Program *self) {
     _class_A *_a;

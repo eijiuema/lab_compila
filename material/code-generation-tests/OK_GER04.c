@@ -46,6 +46,8 @@ typedef struct _St_A {
 
 _class_A* new_A(void);
 
+void _A_m( _class_A *self);
+
 void _A_m( _class_A *self) {
     int _i;
     boolean _b;
@@ -81,6 +83,8 @@ typedef struct _St_Program {
 }_class_Program;
 
 _class_Program* new_Program(void);
+
+void _Program_run( _class_Program *self);
 
 void _Program_run( _class_Program *self) {
     _class_A *_a;

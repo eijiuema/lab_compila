@@ -7,13 +7,16 @@ package ast;
 public class PrimaryExprSelfField extends PrimaryExpr {
 
     private Id field;
+    private TypeCianetoClass self;
 
-    public PrimaryExprSelfField(Id field) {
+    public PrimaryExprSelfField(TypeCianetoClass self, Id field) {
+        this.self = self;
         this.field = field;
-    }
+	}
 
-    public void genC(PW pw) {
-        pw.print("self->" + this.field.getCName());
+	public void genC(PW pw) {
+        pw.print("((" + self.getCname() + "*)");
+        pw.print("self)->" + this.field.getCName());
     }
     
     public void genJava(PW pw) {

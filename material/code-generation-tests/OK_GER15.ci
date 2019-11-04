@@ -138,25 +138,25 @@ class Program
         Out.println: "1 2 1 2 3 4 3 4 5 6 5 6";
         a = A.new;
         a.init_A;
-        a.call_p;
-        a.call_q;
-        a.r;
-        a.s;
+        a.call_p;//1
+        a.call_q;//2
+        a.r;//1
+        a.s;//2
         b = B.new;
         b.init_B;
         b.init_A;
-        b.call_p;
-        b.call_q;
-        b.r;
-        b.s;
+        b.call_p;//3
+        b.call_q;//4
+        b.r;//3
+        b.s;//4
         c = C.new;
         c.init_C;
         c.init_A;
         c.init_C;
-        c.call_p;
-        c.call_q;
-        c.r;
-        c.s;
+        c.call_p;//5
+        c.call_q;//6
+        c.r;//5
+        c.s;//6
     }    
 end
 

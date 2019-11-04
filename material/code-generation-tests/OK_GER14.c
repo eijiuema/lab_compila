@@ -47,12 +47,16 @@ typedef struct _St_A {
 
 _class_A* new_A(void);
 
+int _A_get_A( _class_A *self);
+
+void _A_init( _class_A *self);
+
 int _A_get_A( _class_A *self) {
-    return (int) self->_k;
+    return (int) ((_class_A*)self)->_k;
 }
 
 void _A_init( _class_A *self) {
-    self->_k = 1;
+    ((_class_A*)self)->_k = 1;
 }
 
 Func VT_class_A[] = {
@@ -75,13 +79,17 @@ typedef struct _St_B {
 
 _class_B* new_B(void);
 
+int _B_get_B( _class_B *self);
+
+void _B_init( _class_B *self);
+
 int _B_get_B( _class_B *self) {
-    return (int) self->_k;
+    return (int) ((_class_B*)self)->_k;
 }
 
 void _B_init( _class_B *self) {
     (((_class_A*)self)->vt[1] )((_class_A*) self);
-    self->_k = 2;
+    ((_class_B*)self)->_k = 2;
 }
 
 Func VT_class_B[] = {
@@ -106,13 +114,17 @@ typedef struct _St_C {
 
 _class_C* new_C(void);
 
+int _C_get_C( _class_C *self);
+
+void _C_init( _class_C *self);
+
 int _C_get_C( _class_C *self) {
-    return (int) self->_k;
+    return (int) ((_class_C*)self)->_k;
 }
 
 void _C_init( _class_C *self) {
     (((_class_B*)self)->vt[3] )((_class_B*) self);
-    self->_k = 3;
+    ((_class_C*)self)->_k = 3;
 }
 
 Func VT_class_C[] = {
@@ -139,13 +151,17 @@ typedef struct _St_D {
 
 _class_D* new_D(void);
 
+int _D_get_D( _class_D *self);
+
+void _D_init( _class_D *self);
+
 int _D_get_D( _class_D *self) {
-    return (int) self->_k;
+    return (int) ((_class_D*)self)->_k;
 }
 
 void _D_init( _class_D *self) {
     (((_class_C*)self)->vt[5] )((_class_C*) self);
-    self->_k = 4;
+    ((_class_D*)self)->_k = 4;
 }
 
 Func VT_class_D[] = {
@@ -172,6 +188,8 @@ typedef struct _St_Program {
 }_class_Program;
 
 _class_Program* new_Program(void);
+
+void _Program_run( _class_Program *self);
 
 void _Program_run( _class_Program *self) {
     _class_A *_a;

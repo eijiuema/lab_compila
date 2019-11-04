@@ -47,12 +47,20 @@ typedef struct _St_A {
 
 _class_A* new_A(void);
 
+int _A_get_A( _class_A *self);
+
+void _A_set( _class_A *self, int _k);
+
+void _A_print( _class_A *self);
+
+void _A_init( _class_A *self);
+
 int _A_get_A( _class_A *self) {
-    return (int) self->_k;
+    return (int) ((_class_A*)self)->_k;
 }
 
 void _A_set( _class_A *self, int _k) {
-    self->_k = _k;
+    ((_class_A*)self)->_k = _k;
 }
 
 void _A_print( _class_A *self) {
@@ -86,13 +94,19 @@ typedef struct _St_B {
 
 _class_B* new_B(void);
 
+int _B_get_B( _class_B *self);
+
+void _B_init( _class_B *self);
+
+void _B_print( _class_B *self);
+
 int _B_get_B( _class_B *self) {
-    return (int) self->_k;
+    return (int) ((_class_B*)self)->_k;
 }
 
 void _B_init( _class_B *self) {
     (((_class_A*)self)->vt[3] )((_class_A*) self);
-    self->_k = 2;
+    ((_class_B*)self)->_k = 2;
 }
 
 void _B_print( _class_B *self) {
@@ -127,6 +141,8 @@ typedef struct _St_C {
 
 _class_C* new_C(void);
 
+int _C_get_A( _class_C *self);
+
 int _C_get_A( _class_C *self) {
     return (int) 0;
 }
@@ -152,6 +168,8 @@ typedef struct _St_Program {
 }_class_Program;
 
 _class_Program* new_Program(void);
+
+void _Program_run( _class_Program *self);
 
 void _Program_run( _class_Program *self) {
     _class_A *_a;

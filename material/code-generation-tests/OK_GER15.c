@@ -48,19 +48,33 @@ typedef struct _St_A {
 
 _class_A* new_A(void);
 
+void _A_p( _class_A *self);
+
+void _A_q( _class_A *self);
+
+void _A_init_A( _class_A *self);
+
+void _A_call_p( _class_A *self);
+
+void _A_call_q( _class_A *self);
+
+void _A_r( _class_A *self);
+
+void _A_s( _class_A *self);
+
 void _A_p( _class_A *self) {
-    printf("%d", self->_i);
+    printf("%d", ((_class_A*)self)->_i);
     printf("%s", " ");
 }
 
 void _A_q( _class_A *self) {
-    printf("%d", self->_j);
+    printf("%d", ((_class_A*)self)->_j);
     printf("%s", " ");
 }
 
 void _A_init_A( _class_A *self) {
-    self->_i = 1;
-    self->_j = 2;
+    ((_class_A*)self)->_i = 1;
+    ((_class_A*)self)->_j = 2;
 }
 
 void _A_call_p( _class_A *self) {
@@ -72,12 +86,12 @@ void _A_call_q( _class_A *self) {
 }
 
 void _A_r( _class_A *self) {
-    printf("%d", self->_i);
+    printf("%d", ((_class_A*)self)->_i);
     printf("%s", " ");
 }
 
 void _A_s( _class_A *self) {
-    printf("%d", self->_j);
+    printf("%d", ((_class_A*)self)->_j);
     printf("%s", " ");
 }
 
@@ -105,19 +119,33 @@ typedef struct _St_B {
 
 _class_B* new_B(void);
 
+void _B_p( _class_B *self);
+
+void _B_q( _class_B *self);
+
+void _B_init_B( _class_B *self);
+
+void _B_call_p( _class_B *self);
+
+void _B_call_q( _class_B *self);
+
+void _B_r( _class_B *self);
+
+void _B_s( _class_B *self);
+
 void _B_p( _class_B *self) {
-    printf("%d", self->_i);
+    printf("%d", ((_class_B*)self)->_i);
     printf("%s", " ");
 }
 
 void _B_q( _class_B *self) {
-    printf("%d", self->_j);
+    printf("%d", ((_class_B*)self)->_j);
     printf("%s", " ");
 }
 
 void _B_init_B( _class_B *self) {
-    self->_i = 3;
-    self->_j = 4;
+    ((_class_B*)self)->_i = 3;
+    ((_class_B*)self)->_j = 4;
 }
 
 void _B_call_p( _class_B *self) {
@@ -129,12 +157,12 @@ void _B_call_q( _class_B *self) {
 }
 
 void _B_r( _class_B *self) {
-    printf("%d", self->_i);
+    printf("%d", ((_class_B*)self)->_i);
     printf("%s", " ");
 }
 
 void _B_s( _class_B *self) {
-    printf("%d", self->_j);
+    printf("%d", ((_class_B*)self)->_j);
     printf("%s", " ");
 }
 
@@ -167,19 +195,33 @@ typedef struct _St_C {
 
 _class_C* new_C(void);
 
+void _C_p( _class_C *self);
+
+void _C_q( _class_C *self);
+
+void _C_init_C( _class_C *self);
+
+void _C_call_p( _class_C *self);
+
+void _C_call_q( _class_C *self);
+
+void _C_r( _class_C *self);
+
+void _C_s( _class_C *self);
+
 void _C_p( _class_C *self) {
-    printf("%d", self->_i);
+    printf("%d", ((_class_C*)self)->_i);
     printf("%s", " ");
 }
 
 void _C_q( _class_C *self) {
-    printf("%d", self->_j);
+    printf("%d", ((_class_C*)self)->_j);
     printf("%s", " ");
 }
 
 void _C_init_C( _class_C *self) {
-    self->_i = 5;
-    self->_j = 6;
+    ((_class_C*)self)->_i = 5;
+    ((_class_C*)self)->_j = 6;
 }
 
 void _C_call_p( _class_C *self) {
@@ -191,12 +233,12 @@ void _C_call_q( _class_C *self) {
 }
 
 void _C_r( _class_C *self) {
-    printf("%d", self->_i);
+    printf("%d", ((_class_C*)self)->_i);
     printf("%s", " ");
 }
 
 void _C_s( _class_C *self) {
-    printf("%d", self->_j);
+    printf("%d", ((_class_C*)self)->_j);
     printf("%s", " ");
 }
 
@@ -226,6 +268,8 @@ typedef struct _St_Program {
 }_class_Program;
 
 _class_Program* new_Program(void);
+
+void _Program_run( _class_Program *self);
 
 void _Program_run( _class_Program *self) {
     _class_A *_a;

@@ -117,4 +117,11 @@ public class MethodList {
 		return this.methodList.size();
 	}
 
+	public void genCheaders(PW pw, TypeCianetoClass cl) {
+        for (AbstractMap.SimpleEntry<String, MethodDec> method : this.methodList) {
+            method.getValue().genCheader(pw, cl);
+            pw.println();
+        }
+	}
+
 }

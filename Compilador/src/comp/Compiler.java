@@ -1096,7 +1096,7 @@ public class Compiler {
 					Id id = id();
 					if (self.hasField(id.getName())) {
 						id = self.getField(id.getName());
-						primaryExpr = new PrimaryExprSelfField(id);
+						primaryExpr = new PrimaryExprSelfField(self,id);
 					} else if (self.hasMethod(id.getName())) {
 						id = self.getMethod(id.getName());
 						primaryExpr = new PrimaryExprSelfMethod(self, id, self.getPublicMethodIdx(id.getName()) );
@@ -1114,7 +1114,7 @@ public class Compiler {
 							Id id2 = id();
 							if (classType.hasField(id2.getName())) {
 								id2 = classType.getField(id2.getName());
-								primaryExpr = new PrimaryExprSelfIdField(id, id2);
+								primaryExpr = new PrimaryExprSelfIdField(self,id, id2);
 							} else if (classType.getPublicMethodIdx(id2.getName()) != -1) {
 								id2 = classType.getMethod(id2.getName());
 								primaryExpr = new PrimaryExprSelfIdMethod(self, id, id2, self.getPublicMethodIdx(id2.getName()) );
@@ -1147,7 +1147,7 @@ public class Compiler {
 					error("':' was expected");
 				}
 			} else {
-				primaryExpr = new PrimaryExprSelf(new Id(self.getName(), self));
+				primaryExpr = new PrimaryExprSelf(self,new Id(self.getName(), self));
 			}
 		} else {
 			error("'super', 'Id' or 'self' was expected");

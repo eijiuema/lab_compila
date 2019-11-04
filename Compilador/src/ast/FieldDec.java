@@ -23,10 +23,15 @@ public class FieldDec extends Member {
     }
 
     public void genC(PW pw) {
-        pw.print(idList.get(0).getType().getCname());
-        pw.print(" ");
-        if(!idList.get(0).getType().isBasicType())
-            pw.print("*");
+        
+        if(!idList.get(0).getType().isBasicType()){
+            pw.print("struct ");
+            pw.print("_St_" + idList.get(0).getType().getName());
+            pw.print(" *");
+        } else {
+            pw.print(idList.get(0).getType().getCname());
+            pw.print(" ");
+        }
         pw.print(idList.get(0).getCName());
         idList.stream().skip(1).forEach(id -> {
             pw.print(", ");

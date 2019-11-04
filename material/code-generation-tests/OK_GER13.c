@@ -47,6 +47,16 @@ typedef struct _St_A {
 
 _class_A* new_A(void);
 
+void _A_p1( _class_A *self);
+
+void _A_p2( _class_A *self);
+
+void _A_set( _class_A *self, int _pn);
+
+int _A_get( _class_A *self);
+
+void _A_print( _class_A *self);
+
 void _A_p1( _class_A *self) {
     printf("%s", "999 ");
 }
@@ -58,11 +68,11 @@ void _A_p2( _class_A *self) {
 void _A_set( _class_A *self, int _pn) {
     printf("%d", 1);
     printf("%s", " ");
-    self->_n = _pn;
+    ((_class_A*)self)->_n = _pn;
 }
 
 int _A_get( _class_A *self) {
-    return (int) self->_n;
+    return (int) ((_class_A*)self)->_n;
 }
 
 void _A_print( _class_A *self) {
@@ -88,6 +98,14 @@ typedef struct _St_B {
 }_class_B;
 
 _class_B* new_B(void);
+
+void _B_p2( _class_B *self);
+
+void _B_set( _class_B *self, int _pn);
+
+void _B_p1( _class_B *self);
+
+void _B_print( _class_B *self);
 
 void _B_p2( _class_B *self) {
 }
@@ -125,11 +143,19 @@ _class_B* new_B(){
 
 // Codigo da classe _class_Program
 typedef struct _St_Program {
-    _class_Program *_program;
+    struct _St_Program *_program;
     Func* vt;
 }_class_Program;
 
 _class_Program* new_Program(void);
+
+void _Program_print( _class_Program *self);
+
+_class_B* _Program_m( _class_Program *self, _class_A *_a);
+
+_class_A* _Program_p( _class_Program *self, int _i);
+
+void _Program_run( _class_Program *self);
 
 void _Program_print( _class_Program *self) {
     printf("%s", "P ");
@@ -163,8 +189,8 @@ void _Program_run( _class_Program *self) {
     (_a->vt[2] )(_a);
     _a = (_Program_p)(self, 1);
     (_a->vt[2] )(_a);
-    _a = (_class_A*) NULL;
-    _b = (_class_B*) NULL;
+    _a = NULL;
+    _b = NULL;
     _a2 = new_A();
     if (_a == (_class_A*) _b ) {
         printf("%d", 0);
@@ -178,7 +204,7 @@ void _Program_run( _class_Program *self) {
         printf("%d", 2);
         printf("%s", " ");
     }
-    self->_program = new_Program();
+    ((_class_Program*)self)->_program = new_Program();
     (self->_program->vt[0] )(self->_program);
 }
 

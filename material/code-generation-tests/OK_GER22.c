@@ -46,6 +46,8 @@ typedef struct _St_Program {
 
 _class_Program* new_Program(void);
 
+void _Program_run( _class_Program *self);
+
 void _Program_run( _class_Program *self) {
     printf("%s\n", "100");
     int _i, _j, _n;

@@ -235,6 +235,12 @@ public class TypeCianetoClass extends Type {
       pw.println(this.getCname() + "* new_" + this.getName() + "(void);");
       pw.println();
 
+
+      //Métodos privados
+      privateMethodList.genCheaders(pw, this);
+      //Métodos públicos
+      publicMethodList.genCheaders(pw, this);
+
       //Métodos privados
       privateMethodList.genC(pw, this);
       //Métodos públicos
