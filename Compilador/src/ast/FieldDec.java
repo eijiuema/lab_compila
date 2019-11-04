@@ -22,7 +22,7 @@ public class FieldDec extends Member {
         return null;
     }
 
-    public void genC(PW pw) {
+    public void genC(PW pw, TypeCianetoClass cl) {
         
         if(!idList.get(0).getType().isBasicType()){
             pw.print("struct ");
@@ -32,12 +32,12 @@ public class FieldDec extends Member {
             pw.print(idList.get(0).getType().getCname());
             pw.print(" ");
         }
-        pw.print(idList.get(0).getCName());
+        pw.print( cl.getCname() + idList.get(0).getCName());
         idList.stream().skip(1).forEach(id -> {
             pw.print(", ");
             if(!idList.get(0).getType().isBasicType())
                 pw.print("*");
-            pw.print(id.getCName());
+            pw.print(cl.getCname() + id.getCName());
         });
     }
 

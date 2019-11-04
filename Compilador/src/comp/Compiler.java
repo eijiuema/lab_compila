@@ -1117,7 +1117,7 @@ public class Compiler {
 								primaryExpr = new PrimaryExprSelfIdField(self,id, id2);
 							} else if (classType.getPublicMethodIdx(id2.getName()) != -1) {
 								id2 = classType.getMethod(id2.getName());
-								primaryExpr = new PrimaryExprSelfIdMethod(self, id, id2, self.getPublicMethodIdx(id2.getName()) );
+								primaryExpr = new PrimaryExprSelfIdMethod(self, id, id2, classType.getPublicMethodIdx(id2.getName()) );
 							} else {
 								error("There's no field nor unary method named " + id2.getName() + " on class"
 										+ classType.getName());
@@ -1129,7 +1129,7 @@ public class Compiler {
 								error("Method not found in class " + classType.getName());
 							}
 							method = classType.getMethod(method.getName(), exprList);
-							primaryExpr = new PrimaryExprSelfIdMethod(self, id, method, exprList, self.getPublicMethodIdx(id.getName()) );
+							primaryExpr = new PrimaryExprSelfIdMethod(self, id, method, exprList, classType.getPublicMethodIdx(id.getName()) );
 						} else {
 							error("'Id' was expected");
 						}

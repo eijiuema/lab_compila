@@ -99,6 +99,7 @@ Para os casos de teste que voc� utilizou, o compilador est� correto
 List of C files with compilation errors: 
    ./material/code-generation-tests/OK_GER14.c
    ./material/code-generation-tests/OK_GER16.c
+   ./material/code-generation-tests/OK_GER21.c
 
 List of files with correct C code: 
    ./material/code-generation-tests/OK_GER06.c
@@ -112,7 +113,6 @@ List of files with correct C code:
    ./material/code-generation-tests/OK_GER09.c
    ./material/code-generation-tests/OK_GER10.c
    ./material/code-generation-tests/OK_GER12.c
-   ./material/code-generation-tests/OK_GER21.c
    ./material/code-generation-tests/OK_GER22.c
 
 List of files C code that compiles but was generated incorrectly: 

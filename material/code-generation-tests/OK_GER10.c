@@ -41,7 +41,7 @@ typedef void (*Func)();
 
 // Codigo da classe _class_A
 typedef struct _St_A {
-    int _k;
+    int _class_A_k;
     Func* vt;
 }_class_A;
 
@@ -52,12 +52,12 @@ void _A_m1( _class_A *self, int _n);
 int _A_getK( _class_A *self);
 
 void _A_m1( _class_A *self, int _n) {
-    ((_class_A*)self)->_k = 1;
-    printf("%s",  concat(  intToStr(((_class_A*)self)->_k),  concat( " ",  concat(  intToStr(_n), " "))));
+    ((_class_A*)self)->_class_A_k = 1;
+    printf("%s",  concat(  intToStr(((_class_A*)self)->_class_A_k),  concat( " ",  concat(  intToStr(_n), " "))));
 }
 
 int _A_getK( _class_A *self) {
-    return (int) ((_class_A*)self)->_k;
+    return (int) ((_class_A*)self)->_class_A_k;
 }
 
 Func VT_class_A[] = {
@@ -74,7 +74,7 @@ _class_A* new_A(){
 
 // Codigo da classe _class_B
 typedef struct _St_B {
-    int _k;
+    int _class_B_k;
     Func* vt;
 }_class_B;
 
@@ -85,13 +85,13 @@ void _B_m2( _class_B *self, int _n);
 int _B_getK( _class_B *self);
 
 void _B_m2( _class_B *self, int _n) {
-    ((_class_B*)self)->_k = 2;
+    ((_class_B*)self)->_class_B_k = 2;
     (((_class_A*)self)->vt[0] )((_class_A*) self, 1);
-    printf("%s",  concat(  intToStr(((_class_B*)self)->_k),  concat( " ",  concat(  intToStr(_n), " "))));
+    printf("%s",  concat(  intToStr(((_class_B*)self)->_class_B_k),  concat( " ",  concat(  intToStr(_n), " "))));
 }
 
 int _B_getK( _class_B *self) {
-    return (int) ((_class_B*)self)->_k;
+    return (int) ((_class_B*)self)->_class_B_k;
 }
 
 Func VT_class_B[] = {

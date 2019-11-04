@@ -28,10 +28,10 @@ public class FieldList {
         this.fieldList = fieldList;
     }
 
-	public void genC(PW pw) {
+	public void genC(PW pw, TypeCianetoClass cl) {
         for (AbstractMap.SimpleEntry<String, FieldDec> fd : fieldList ){
             pw.printIdent("");
-            fd.getValue().genC(pw);
+            fd.getValue().genC(pw,cl);
             pw.println(";");
         }
     }

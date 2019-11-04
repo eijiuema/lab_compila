@@ -41,7 +41,7 @@ typedef void (*Func)();
 
 // Codigo da classe _class_A
 typedef struct _St_A {
-    int _k;
+    int _class_A_k;
     Func* vt;
 }_class_A;
 
@@ -56,11 +56,11 @@ void _A_print( _class_A *self);
 void _A_init( _class_A *self);
 
 int _A_get_A( _class_A *self) {
-    return (int) ((_class_A*)self)->_k;
+    return (int) ((_class_A*)self)->_class_A_k;
 }
 
 void _A_set( _class_A *self, int _k) {
-    ((_class_A*)self)->_k = _k;
+    ((_class_A*)self)->_class_A_k = _k;
 }
 
 void _A_print( _class_A *self) {
@@ -88,7 +88,7 @@ _class_A* new_A(){
 
 // Codigo da classe _class_B
 typedef struct _St_B {
-    int _k;
+    int _class_B_k;
     Func* vt;
 }_class_B;
 
@@ -101,12 +101,12 @@ void _B_init( _class_B *self);
 void _B_print( _class_B *self);
 
 int _B_get_B( _class_B *self) {
-    return (int) ((_class_B*)self)->_k;
+    return (int) ((_class_B*)self)->_class_B_k;
 }
 
 void _B_init( _class_B *self) {
     (((_class_A*)self)->vt[3] )((_class_A*) self);
-    ((_class_B*)self)->_k = 2;
+    ((_class_B*)self)->_class_B_k = 2;
 }
 
 void _B_print( _class_B *self) {

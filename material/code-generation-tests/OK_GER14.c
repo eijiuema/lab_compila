@@ -41,7 +41,7 @@ typedef void (*Func)();
 
 // Codigo da classe _class_A
 typedef struct _St_A {
-    int _k;
+    int _class_A_k;
     Func* vt;
 }_class_A;
 
@@ -52,11 +52,11 @@ int _A_get_A( _class_A *self);
 void _A_init( _class_A *self);
 
 int _A_get_A( _class_A *self) {
-    return (int) ((_class_A*)self)->_k;
+    return (int) ((_class_A*)self)->_class_A_k;
 }
 
 void _A_init( _class_A *self) {
-    ((_class_A*)self)->_k = 1;
+    ((_class_A*)self)->_class_A_k = 1;
 }
 
 Func VT_class_A[] = {
@@ -73,7 +73,7 @@ _class_A* new_A(){
 
 // Codigo da classe _class_B
 typedef struct _St_B {
-    int _k;
+    int _class_B_k;
     Func* vt;
 }_class_B;
 
@@ -84,12 +84,12 @@ int _B_get_B( _class_B *self);
 void _B_init( _class_B *self);
 
 int _B_get_B( _class_B *self) {
-    return (int) ((_class_B*)self)->_k;
+    return (int) ((_class_B*)self)->_class_B_k;
 }
 
 void _B_init( _class_B *self) {
     (((_class_A*)self)->vt[1] )((_class_A*) self);
-    ((_class_B*)self)->_k = 2;
+    ((_class_B*)self)->_class_B_k = 2;
 }
 
 Func VT_class_B[] = {
@@ -108,7 +108,7 @@ _class_B* new_B(){
 
 // Codigo da classe _class_C
 typedef struct _St_C {
-    int _k;
+    int _class_C_k;
     Func* vt;
 }_class_C;
 
@@ -119,12 +119,12 @@ int _C_get_C( _class_C *self);
 void _C_init( _class_C *self);
 
 int _C_get_C( _class_C *self) {
-    return (int) ((_class_C*)self)->_k;
+    return (int) ((_class_C*)self)->_class_C_k;
 }
 
 void _C_init( _class_C *self) {
     (((_class_B*)self)->vt[3] )((_class_B*) self);
-    ((_class_C*)self)->_k = 3;
+    ((_class_C*)self)->_class_C_k = 3;
 }
 
 Func VT_class_C[] = {
@@ -145,7 +145,7 @@ _class_C* new_C(){
 
 // Codigo da classe _class_D
 typedef struct _St_D {
-    int _k;
+    int _class_D_k;
     Func* vt;
 }_class_D;
 
@@ -156,12 +156,12 @@ int _D_get_D( _class_D *self);
 void _D_init( _class_D *self);
 
 int _D_get_D( _class_D *self) {
-    return (int) ((_class_D*)self)->_k;
+    return (int) ((_class_D*)self)->_class_D_k;
 }
 
 void _D_init( _class_D *self) {
     (((_class_C*)self)->vt[5] )((_class_C*) self);
-    ((_class_D*)self)->_k = 4;
+    ((_class_D*)self)->_class_D_k = 4;
 }
 
 Func VT_class_D[] = {

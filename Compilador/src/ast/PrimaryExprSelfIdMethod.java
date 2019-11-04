@@ -42,12 +42,12 @@ public class PrimaryExprSelfIdMethod extends PrimaryExpr{
         }*/
         if(methodIdx == -1){
             //Acessando o método privado estaticamente
-            pw.print("_" + self.getName()); //.getCName;
+            pw.print("_" + id.getType().getName()); //.getCName;
             pw.print(method.getCName());
             pw.print(")");
         } else {
             //Acessando o método no vetor de métodos públicos
-            pw.print("self->" + this.id.getCName() + "->vt");    
+            pw.print("self->" + self.getCname() + this.id.getCName() + "->vt");    
             pw.print("[");
             pw.print(Integer.toString(methodIdx));
             pw.print("] ");
@@ -55,7 +55,7 @@ public class PrimaryExprSelfIdMethod extends PrimaryExpr{
         }
         //Parâmetros
         pw.print("(");
-        pw.print("self->" + this.id.getCName());
+        pw.print("self->" + self.getCname() + this.id.getCName());
         for (Expr expr : this.exprList) {
             pw.print(", ");
             expr.genC(pw);

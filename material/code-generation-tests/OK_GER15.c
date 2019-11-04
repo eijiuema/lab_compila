@@ -41,8 +41,8 @@ typedef void (*Func)();
 
 // Codigo da classe _class_A
 typedef struct _St_A {
-    int _i;
-    int _j;
+    int _class_A_i;
+    int _class_A_j;
     Func* vt;
 }_class_A;
 
@@ -63,18 +63,18 @@ void _A_r( _class_A *self);
 void _A_s( _class_A *self);
 
 void _A_p( _class_A *self) {
-    printf("%d", ((_class_A*)self)->_i);
+    printf("%d", ((_class_A*)self)->_class_A_i);
     printf("%s", " ");
 }
 
 void _A_q( _class_A *self) {
-    printf("%d", ((_class_A*)self)->_j);
+    printf("%d", ((_class_A*)self)->_class_A_j);
     printf("%s", " ");
 }
 
 void _A_init_A( _class_A *self) {
-    ((_class_A*)self)->_i = 1;
-    ((_class_A*)self)->_j = 2;
+    ((_class_A*)self)->_class_A_i = 1;
+    ((_class_A*)self)->_class_A_j = 2;
 }
 
 void _A_call_p( _class_A *self) {
@@ -86,12 +86,12 @@ void _A_call_q( _class_A *self) {
 }
 
 void _A_r( _class_A *self) {
-    printf("%d", ((_class_A*)self)->_i);
+    printf("%d", ((_class_A*)self)->_class_A_i);
     printf("%s", " ");
 }
 
 void _A_s( _class_A *self) {
-    printf("%d", ((_class_A*)self)->_j);
+    printf("%d", ((_class_A*)self)->_class_A_j);
     printf("%s", " ");
 }
 
@@ -112,8 +112,8 @@ _class_A* new_A(){
 
 // Codigo da classe _class_B
 typedef struct _St_B {
-    int _i;
-    int _j;
+    int _class_B_i;
+    int _class_B_j;
     Func* vt;
 }_class_B;
 
@@ -134,18 +134,18 @@ void _B_r( _class_B *self);
 void _B_s( _class_B *self);
 
 void _B_p( _class_B *self) {
-    printf("%d", ((_class_B*)self)->_i);
+    printf("%d", ((_class_B*)self)->_class_B_i);
     printf("%s", " ");
 }
 
 void _B_q( _class_B *self) {
-    printf("%d", ((_class_B*)self)->_j);
+    printf("%d", ((_class_B*)self)->_class_B_j);
     printf("%s", " ");
 }
 
 void _B_init_B( _class_B *self) {
-    ((_class_B*)self)->_i = 3;
-    ((_class_B*)self)->_j = 4;
+    ((_class_B*)self)->_class_B_i = 3;
+    ((_class_B*)self)->_class_B_j = 4;
 }
 
 void _B_call_p( _class_B *self) {
@@ -157,12 +157,12 @@ void _B_call_q( _class_B *self) {
 }
 
 void _B_r( _class_B *self) {
-    printf("%d", ((_class_B*)self)->_i);
+    printf("%d", ((_class_B*)self)->_class_B_i);
     printf("%s", " ");
 }
 
 void _B_s( _class_B *self) {
-    printf("%d", ((_class_B*)self)->_j);
+    printf("%d", ((_class_B*)self)->_class_B_j);
     printf("%s", " ");
 }
 
@@ -188,8 +188,8 @@ _class_B* new_B(){
 
 // Codigo da classe _class_C
 typedef struct _St_C {
-    int _i;
-    int _j;
+    int _class_C_i;
+    int _class_C_j;
     Func* vt;
 }_class_C;
 
@@ -210,18 +210,18 @@ void _C_r( _class_C *self);
 void _C_s( _class_C *self);
 
 void _C_p( _class_C *self) {
-    printf("%d", ((_class_C*)self)->_i);
+    printf("%d", ((_class_C*)self)->_class_C_i);
     printf("%s", " ");
 }
 
 void _C_q( _class_C *self) {
-    printf("%d", ((_class_C*)self)->_j);
+    printf("%d", ((_class_C*)self)->_class_C_j);
     printf("%s", " ");
 }
 
 void _C_init_C( _class_C *self) {
-    ((_class_C*)self)->_i = 5;
-    ((_class_C*)self)->_j = 6;
+    ((_class_C*)self)->_class_C_i = 5;
+    ((_class_C*)self)->_class_C_j = 6;
 }
 
 void _C_call_p( _class_C *self) {
@@ -233,12 +233,12 @@ void _C_call_q( _class_C *self) {
 }
 
 void _C_r( _class_C *self) {
-    printf("%d", ((_class_C*)self)->_i);
+    printf("%d", ((_class_C*)self)->_class_C_i);
     printf("%s", " ");
 }
 
 void _C_s( _class_C *self) {
-    printf("%d", ((_class_C*)self)->_j);
+    printf("%d", ((_class_C*)self)->_class_C_j);
     printf("%s", " ");
 }
 

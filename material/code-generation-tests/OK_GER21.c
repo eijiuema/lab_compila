@@ -41,7 +41,7 @@ typedef void (*Func)();
 
 // Codigo da classe _class_A
 typedef struct _St_A {
-    int _n;
+    int _class_A_n;
     Func* vt;
 }_class_A;
 
@@ -52,11 +52,11 @@ void _A_set( _class_A *self, int _n);
 int _A_get( _class_A *self);
 
 void _A_set( _class_A *self, int _n) {
-    ((_class_A*)self)->_n = _n;
+    ((_class_A*)self)->_class_A_n = _n;
 }
 
 int _A_get( _class_A *self) {
-    return (int) ((_class_A*)self)->_n;
+    return (int) ((_class_A*)self)->_class_A_n;
 }
 
 Func VT_class_A[] = {
@@ -73,7 +73,7 @@ _class_A* new_A(){
 
 // Codigo da classe _class_Program
 typedef struct _St_Program {
-    struct _St_A *_a;
+    struct _St_A *_class_Program_a;
     Func* vt;
 }_class_Program;
 
@@ -88,15 +88,15 @@ _class_A* _Program_get( _class_Program *self);
 void _Program_run( _class_Program *self);
 
 void _Program_set( _class_Program *self, _class_A *_a) {
-    ((_class_Program*)self)->_a = _a;
+    ((_class_Program*)self)->_class_Program_a = _a;
 }
 
 void _Program_print( _class_Program *self) {
-    printf("%d", (_Program_get)(self->_a));
+    printf("%d", (self->_class_Program_a->vt[1] )(self->_class_Program_a));
 }
 
 _class_A* _Program_get( _class_Program *self) {
-    return (_class_A* ) ((_class_Program*)self)->_a;
+    return (_class_A* ) ((_class_Program*)self)->_class_Program_a;
 }
 
 void _Program_run( _class_Program *self) {

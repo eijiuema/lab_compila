@@ -225,7 +225,7 @@ public class TypeCianetoClass extends Type {
       //Struct com campos
       pw.println("typedef struct _St_" + this.getName() + " {");
       pw.add();
-      fieldList.genC(pw);
+      fieldList.genC(pw,this);
       pw.printlnIdent("Func* vt;");
       pw.sub();
       pw.println("}" + this.getCname() + ";");
