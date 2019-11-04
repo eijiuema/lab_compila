@@ -747,9 +747,8 @@ public class Compiler {
 		check(Token.COMMA, "',' expected after the expression of the 'assert' statement");
 		next();
 		check(Token.LITERALSTRING, "A literal string expected after the ',' of the 'assert' statement");
-		StringValue stringValue = new StringValue(lexer.getStringValue());
+		StringValue stringValue = new StringValue(lexer.getLiteralStringValue());
 		next();
-
 		return new AssertStat(expr, stringValue);
 	}
 

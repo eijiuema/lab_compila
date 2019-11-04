@@ -22,9 +22,9 @@ public class RepeatStat extends Stat {
             st.genC(pw);
         }
         pw.sub();
-        pw.printlnIdent("} while(");
+        pw.printIdent("} while( (");
         expr.genC(pw);
-        pw.println(");");
+        pw.println(" ) == false);");
     }
 
     public void genJava(PW pw){
@@ -34,9 +34,9 @@ public class RepeatStat extends Stat {
             st.genJava(pw);
         }
         pw.sub();
-        pw.printlnIdent("} while(");
+        pw.printIdent("} while( (");
         expr.genJava(pw);
-        pw.println(");");
+        pw.println(") == false);");
     }
       
 }

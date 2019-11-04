@@ -17,7 +17,7 @@ public class AssertStat extends Stat {
     public void genC(PW pw) {      
         pw.printIdent("if ((");
         expr.genC(pw);
-        pw.println(") == false ) ");
+        pw.print(") == false ) ");
         pw.printIdent("printf(");
         stringvalue.genC(pw);
         pw.println(");");
