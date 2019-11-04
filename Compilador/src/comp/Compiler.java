@@ -1068,21 +1068,23 @@ public class Compiler {
 			lexer.nextToken();
 			if (lexer.token == Token.ID) {
 				Id method = id();
-				if (self.getSuperclass().getPublicMethodIdx(method.getName()) == -1) {
+				int idx = self.getSuperclass().getPublicMethodIdx(method.getName());
+				if (idx == -1) {
 					error("There's no unary method named " + method.getName() + " on "
 							+ self.getSuperclass().getName());
 				}
 				method = self.getSuperclass().getMethod(method.getName());
-				primaryExpr = new PrimaryExprSuperMethod(method);
+				primaryExpr = new PrimaryExprSuperMethod(self.getSuperclass(), method, idx);
 			} else if (lexer.token == Token.IDCOLON) {
 				Id method = idColon();
 				List<Expr> exprList = exprList();
-				if (self.getSuperclass().getPublicMethodIdx(method.getName(), exprList) == -1) {
+				int idx = self.getSuperclass().getPublicMethodIdx(method.getName(), exprList);
+				if (idx == -1) {
 					error("There's no method named " + method.getName() + "in " + self.getSuperclass().getName()
 							+ " with the specified params");
 				}
 				method = self.getSuperclass().getMethod(method.getName(), exprList);
-				primaryExpr = new PrimaryExprSuperMethod(method, exprList);
+				primaryExpr = new PrimaryExprSuperMethod(self.getSuperclass(), method, exprList, idx);
 			} else {
 				error("'Id' was expected");
 			}
@@ -1097,7 +1099,7 @@ public class Compiler {
 						primaryExpr = new PrimaryExprSelfField(id);
 					} else if (self.hasMethod(id.getName())) {
 						id = self.getMethod(id.getName());
-						primaryExpr = new PrimaryExprSelfMethod(id);
+						primaryExpr = new PrimaryExprSelfMethod(self, id, self.getPublicMethodIdx(id.getName()) );
 					} else {
 						error("There's no field nor unary method named " + id.getName() + " in class "
 								+ self.getName());
@@ -1115,7 +1117,7 @@ public class Compiler {
 								primaryExpr = new PrimaryExprSelfIdField(id, id2);
 							} else if (classType.getPublicMethodIdx(id2.getName()) != -1) {
 								id2 = classType.getMethod(id2.getName());
-								primaryExpr = new PrimaryExprSelfIdMethod(id, id2);
+								primaryExpr = new PrimaryExprSelfIdMethod(self, id, id2, self.getPublicMethodIdx(id2.getName()) );
 							} else {
 								error("There's no field nor unary method named " + id2.getName() + " on class"
 										+ classType.getName());
@@ -1127,7 +1129,7 @@ public class Compiler {
 								error("Method not found in class " + classType.getName());
 							}
 							method = classType.getMethod(method.getName(), exprList);
-							primaryExpr = new PrimaryExprSelfIdMethod(id, method, exprList);
+							primaryExpr = new PrimaryExprSelfIdMethod(self, id, method, exprList, self.getPublicMethodIdx(id.getName()) );
 						} else {
 							error("'Id' was expected");
 						}
@@ -1140,7 +1142,7 @@ public class Compiler {
 								+ " with the specified params");
 					}
 					method = self.getMethod(method.getName(), exprList);
-					primaryExpr = new PrimaryExprSelfMethod(method, exprList);
+					primaryExpr = new PrimaryExprSelfMethod(self, method, exprList, self.getPublicMethodIdx(method.getName()) );
 				} else {
 					error("':' was expected");
 				}

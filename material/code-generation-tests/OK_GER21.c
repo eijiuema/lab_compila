@@ -48,16 +48,17 @@ typedef struct _St_A {
 _class_A* new_A(void);
 
 void _A_set( _class_A *self, int _n) {
-    FALTAIMPLEMENTAR = _n;
+    self->_n = _n;
 }
 
 int _A_get( _class_A *self) {
-    return (int) FALTAIMPLEMENTAR;
+    return (int) self->_n;
 }
 
 Func VT_class_A[] = {
     (Func) _A_set,
-    (Func) _A_get};
+    (Func) _A_get
+};
 
 _class_A* new_A(){
     _class_A* t;
@@ -68,18 +69,22 @@ _class_A* new_A(){
 
 // Codigo da classe _class_Program
 typedef struct _St_Program {
-    _class_A _a;
+    _class_A *_a;
     Func* vt;
 }_class_Program;
 
 _class_Program* new_Program(void);
 
+void _Program_set( _class_Program *self, _class_A *_a) {
+    self->_a = _a;
+}
+
 void _Program_print( _class_Program *self) {
-    printf("%d", FALTAIMPLEMENTAR);
+    printf("%d", (_Program_get)(self->_a));
 }
 
 _class_A* _Program_get( _class_Program *self) {
-    return (_class_A* ) FALTAIMPLEMENTAR;
+    return (_class_A* ) self->_a;
 }
 
 void _Program_run( _class_Program *self) {
@@ -87,14 +92,11 @@ void _Program_run( _class_Program *self) {
     printf("%s\n", "0");
 }
 
-void _Program_set( _class_Program *self, _class_A *_a) {
-    FALTAIMPLEMENTAR = _a;
-}
-
 Func VT_class_Program[] = {
     (Func) _Program_print,
     (Func) _Program_get,
-    (Func) _Program_run};
+    (Func) _Program_run
+};
 
 _class_Program* new_Program(){
     _class_Program* t;

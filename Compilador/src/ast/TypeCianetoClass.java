@@ -129,16 +129,22 @@ public class TypeCianetoClass extends Type {
    }
 
    public int getPublicMethodIdx(String method, List<Expr> exprList) {
-      
+      //Procure na lista da classe
       int idx = this.publicMethodList.getMethodIdx(method, exprList);
 
-      if(idx == -1 && superclass != null)
-         idx = superclass.getPublicMethodIdx(method, exprList);
-      
-      if(idx != -1&& superclass != null)
-         idx += superclass.publicInheritedMethodsSize();
-      
+      //Se achou, calcule a posição no vetor e retorne
+      if(idx != -1){ 
+         if(superclass != null){
+            idx += superclass.publicInheritedMethodsSize();
+         }
          return idx;
+      }   
+      //Se não achou, procure na superclasse
+      if(idx == -1 && superclass != null)
+         return idx = superclass.getPublicMethodIdx(method, exprList);
+      
+      //Não existe mais onde procurar
+      return -1;
    }
 
    private int publicInheritedMethodsSize() {
@@ -229,11 +235,11 @@ public class TypeCianetoClass extends Type {
       pw.println(this.getCname() + "* new_" + this.getName() + "(void);");
       pw.println();
 
-      //Métodos públicos
-      publicMethodList.genC(pw, this);
       //Métodos privados
       privateMethodList.genC(pw, this);
-
+      //Métodos públicos
+      publicMethodList.genC(pw, this);
+      
       //Vetor de métodos públicos
       pw.print("Func VT"+ this.getCname() +"[] = ");
       pw.println("{");

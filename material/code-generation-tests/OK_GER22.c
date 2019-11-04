@@ -79,7 +79,8 @@ _j < _n);
 }
 
 Func VT_class_Program[] = {
-    (Func) _Program_run};
+    (Func) _Program_run
+};
 
 _class_Program* new_Program(){
     _class_Program* t;

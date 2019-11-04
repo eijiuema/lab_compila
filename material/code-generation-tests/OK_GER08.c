@@ -81,7 +81,8 @@ void _A_m3( _class_A *self, int _n, int _p, char * _q, int _r, boolean _falseBoo
 Func VT_class_A[] = {
     (Func) _A_m1,
     (Func) _A_m2,
-    (Func) _A_m3};
+    (Func) _A_m3
+};
 
 _class_A* new_A(){
     _class_A* t;
@@ -107,7 +108,8 @@ void _Program_run( _class_Program *self) {
 }
 
 Func VT_class_Program[] = {
-    (Func) _Program_run};
+    (Func) _Program_run
+};
 
 _class_Program* new_Program(){
     _class_Program* t;

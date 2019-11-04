@@ -48,27 +48,28 @@ typedef struct _St_A {
 _class_A* new_A(void);
 
 int _A_get_A( _class_A *self) {
-    return (int) FALTAIMPLEMENTAR;
+    return (int) self->_k;
 }
 
 void _A_set( _class_A *self, int _k) {
-    FALTAIMPLEMENTAR = _k;
+    self->_k = _k;
 }
 
 void _A_print( _class_A *self) {
-    printf("%d", FALTAIMPLEMENTAR);
+    printf("%d", (self->vt[0] )(self));
     printf("%s", " ");
 }
 
 void _A_init( _class_A *self) {
-    FALTAIMPLEMENTAR;
+    (_A_set)(self, 0);
 }
 
 Func VT_class_A[] = {
     (Func) _A_get_A,
     (Func) _A_set,
     (Func) _A_print,
-    (Func) _A_init};
+    (Func) _A_init
+};
 
 _class_A* new_A(){
     _class_A* t;
@@ -86,20 +87,20 @@ typedef struct _St_B {
 _class_B* new_B(void);
 
 int _B_get_B( _class_B *self) {
-    return (int) FALTAIMPLEMENTAR;
+    return (int) self->_k;
 }
 
 void _B_init( _class_B *self) {
-    FALTAIMPLEMENTAR;
-    FALTAIMPLEMENTAR = 2;
+    (((_class_A*)self)->vt[3] )((_class_A*) self);
+    self->_k = 2;
 }
 
 void _B_print( _class_B *self) {
-    printf("%d", FALTAIMPLEMENTAR);
+    printf("%d", (self->vt[4] )(self));
     printf("%s", " ");
-    printf("%d", FALTAIMPLEMENTAR);
+    printf("%d", (self->vt[0] )(self));
     printf("%s", " ");
-    FALTAIMPLEMENTAR;
+    (((_class_A*)self)->vt[2] )((_class_A*) self);
 }
 
 Func VT_class_B[] = {
@@ -109,7 +110,8 @@ Func VT_class_B[] = {
     (Func) _A_init,
     (Func) _B_get_B,
     (Func) _B_init,
-    (Func) _B_print};
+    (Func) _B_print
+};
 
 _class_B* new_B(){
     _class_B* t;
@@ -134,7 +136,8 @@ Func VT_class_C[] = {
     (Func) _A_set,
     (Func) _A_print,
     (Func) _A_init,
-    (Func) _C_get_A};
+    (Func) _C_get_A
+};
 
 _class_C* new_C(){
     _class_C* t;
@@ -158,7 +161,7 @@ void _Program_run( _class_Program *self) {
     _b = new_B();
     (_b->vt[5] )(_b);
     _c = new_C();
-    (_c->vt[7] )(_c);
+    (_c->vt[3] )(_c);
     printf("%d", (_b->vt[4] )(_b));
     printf("%s", " ");
     _a = (_class_A*) _b;
@@ -168,7 +171,7 @@ void _Program_run( _class_Program *self) {
     (_b->vt[5] )(_b);
     printf("%d", (_a->vt[0] )(_a));
     printf("%s", " ");
-    printf("%d", (_b->vt[4] )(_b));
+    printf("%d", (_b->vt[0] )(_b));
     printf("%s", " ");
     _a = (_class_A*) _c;
     printf("%d", (_a->vt[0] )(_a));
@@ -179,7 +182,8 @@ void _Program_run( _class_Program *self) {
 }
 
 Func VT_class_Program[] = {
-    (Func) _Program_run};
+    (Func) _Program_run
+};
 
 _class_Program* new_Program(){
     _class_Program* t;

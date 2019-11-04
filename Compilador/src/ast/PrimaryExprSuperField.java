@@ -7,14 +7,17 @@ package ast;
 public class PrimaryExprSuperField extends PrimaryExpr {
 
     private Id field;
+    private Id superClass;
     
-    public PrimaryExprSuperField(Id field){
+    public PrimaryExprSuperField(Id superClass, Id field){
         this.field = field;
+        this.superClass = superClass;
     }
 
     public void genC(PW pw) {
-        //TODO genc
-        pw.print("FALTAIMPLEMENTAR");
+        pw.print(this.superClass.getCName());
+        pw.print("->");
+        pw.print(this.field.getCName());
     }
     
     public void genJava(PW pw) {

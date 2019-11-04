@@ -14,8 +14,7 @@ public class PrimaryExprSelfIdField extends PrimaryExpr{
     }
 
     public void genC(PW pw) {
-        //TODO genc
-        pw.print("FALTAIMPLEMENTAR");
+        pw.print("self->" + this.id.getCName() + "->"+ this.field.getCName());
     }
     
     public void genJava(PW pw){

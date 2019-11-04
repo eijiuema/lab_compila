@@ -27,7 +27,6 @@ public class PrimaryExprIdMethod extends PrimaryExpr {
     }
 
     public void genC(PW pw) {
-        
         //( (int (*)(_class_A *)) _a->vt[0] )(_a);
         //Método
         pw.print("(");

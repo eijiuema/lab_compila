@@ -13,8 +13,7 @@ public class PrimaryExprSelfField extends PrimaryExpr {
     }
 
     public void genC(PW pw) {
-        //TODO genc
-        pw.print("FALTAIMPLEMENTAR");
+        pw.print("self->" + this.field.getCName());
     }
     
     public void genJava(PW pw) {

@@ -48,36 +48,36 @@ typedef struct _St_A {
 
 _class_A* new_A(void);
 
-void _A_init_A( _class_A *self) {
-    FALTAIMPLEMENTAR = 1;
-    FALTAIMPLEMENTAR = 2;
-}
-
-void _A_call_p( _class_A *self) {
-    FALTAIMPLEMENTAR;
-}
-
-void _A_call_q( _class_A *self) {
-    FALTAIMPLEMENTAR;
-}
-
-void _A_r( _class_A *self) {
-    printf("%d", FALTAIMPLEMENTAR);
-    printf("%s", " ");
-}
-
-void _A_s( _class_A *self) {
-    printf("%d", FALTAIMPLEMENTAR);
-    printf("%s", " ");
-}
-
 void _A_p( _class_A *self) {
-    printf("%d", FALTAIMPLEMENTAR);
+    printf("%d", self->_i);
     printf("%s", " ");
 }
 
 void _A_q( _class_A *self) {
-    printf("%d", FALTAIMPLEMENTAR);
+    printf("%d", self->_j);
+    printf("%s", " ");
+}
+
+void _A_init_A( _class_A *self) {
+    self->_i = 1;
+    self->_j = 2;
+}
+
+void _A_call_p( _class_A *self) {
+    (_A_p)(self);
+}
+
+void _A_call_q( _class_A *self) {
+    (_A_q)(self);
+}
+
+void _A_r( _class_A *self) {
+    printf("%d", self->_i);
+    printf("%s", " ");
+}
+
+void _A_s( _class_A *self) {
+    printf("%d", self->_j);
     printf("%s", " ");
 }
 
@@ -86,7 +86,8 @@ Func VT_class_A[] = {
     (Func) _A_call_p,
     (Func) _A_call_q,
     (Func) _A_r,
-    (Func) _A_s};
+    (Func) _A_s
+};
 
 _class_A* new_A(){
     _class_A* t;
@@ -104,36 +105,36 @@ typedef struct _St_B {
 
 _class_B* new_B(void);
 
-void _B_init_B( _class_B *self) {
-    FALTAIMPLEMENTAR = 3;
-    FALTAIMPLEMENTAR = 4;
-}
-
-void _B_call_p( _class_B *self) {
-    FALTAIMPLEMENTAR;
-}
-
-void _B_call_q( _class_B *self) {
-    FALTAIMPLEMENTAR;
-}
-
-void _B_r( _class_B *self) {
-    printf("%d", FALTAIMPLEMENTAR);
-    printf("%s", " ");
-}
-
-void _B_s( _class_B *self) {
-    printf("%d", FALTAIMPLEMENTAR);
-    printf("%s", " ");
-}
-
 void _B_p( _class_B *self) {
-    printf("%d", FALTAIMPLEMENTAR);
+    printf("%d", self->_i);
     printf("%s", " ");
 }
 
 void _B_q( _class_B *self) {
-    printf("%d", FALTAIMPLEMENTAR);
+    printf("%d", self->_j);
+    printf("%s", " ");
+}
+
+void _B_init_B( _class_B *self) {
+    self->_i = 3;
+    self->_j = 4;
+}
+
+void _B_call_p( _class_B *self) {
+    (_B_p)(self);
+}
+
+void _B_call_q( _class_B *self) {
+    (_B_q)(self);
+}
+
+void _B_r( _class_B *self) {
+    printf("%d", self->_i);
+    printf("%s", " ");
+}
+
+void _B_s( _class_B *self) {
+    printf("%d", self->_j);
     printf("%s", " ");
 }
 
@@ -147,7 +148,8 @@ Func VT_class_B[] = {
     (Func) _B_call_p,
     (Func) _B_call_q,
     (Func) _B_r,
-    (Func) _B_s};
+    (Func) _B_s
+};
 
 _class_B* new_B(){
     _class_B* t;
@@ -165,36 +167,36 @@ typedef struct _St_C {
 
 _class_C* new_C(void);
 
-void _C_init_C( _class_C *self) {
-    FALTAIMPLEMENTAR = 5;
-    FALTAIMPLEMENTAR = 6;
-}
-
-void _C_call_p( _class_C *self) {
-    FALTAIMPLEMENTAR;
-}
-
-void _C_call_q( _class_C *self) {
-    FALTAIMPLEMENTAR;
-}
-
-void _C_r( _class_C *self) {
-    printf("%d", FALTAIMPLEMENTAR);
-    printf("%s", " ");
-}
-
-void _C_s( _class_C *self) {
-    printf("%d", FALTAIMPLEMENTAR);
-    printf("%s", " ");
-}
-
 void _C_p( _class_C *self) {
-    printf("%d", FALTAIMPLEMENTAR);
+    printf("%d", self->_i);
     printf("%s", " ");
 }
 
 void _C_q( _class_C *self) {
-    printf("%d", FALTAIMPLEMENTAR);
+    printf("%d", self->_j);
+    printf("%s", " ");
+}
+
+void _C_init_C( _class_C *self) {
+    self->_i = 5;
+    self->_j = 6;
+}
+
+void _C_call_p( _class_C *self) {
+    (_C_p)(self);
+}
+
+void _C_call_q( _class_C *self) {
+    (_C_q)(self);
+}
+
+void _C_r( _class_C *self) {
+    printf("%d", self->_i);
+    printf("%s", " ");
+}
+
+void _C_s( _class_C *self) {
+    printf("%d", self->_j);
     printf("%s", " ");
 }
 
@@ -208,7 +210,8 @@ Func VT_class_C[] = {
     (Func) _C_call_p,
     (Func) _C_call_q,
     (Func) _C_r,
-    (Func) _C_s};
+    (Func) _C_s
+};
 
 _class_C* new_C(){
     _class_C* t;
@@ -237,14 +240,14 @@ void _Program_run( _class_Program *self) {
     (_a->vt[4] )(_a);
     _b = new_B();
     (_b->vt[5] )(_b);
-    (_b->vt[5] )(_b);
+    (_b->vt[0] )(_b);
     (_b->vt[6] )(_b);
     (_b->vt[7] )(_b);
     (_b->vt[8] )(_b);
     (_b->vt[9] )(_b);
     _c = new_C();
     (_c->vt[5] )(_c);
-    (_c->vt[5] )(_c);
+    (_c->vt[0] )(_c);
     (_c->vt[5] )(_c);
     (_c->vt[6] )(_c);
     (_c->vt[7] )(_c);
@@ -253,7 +256,8 @@ void _Program_run( _class_Program *self) {
 }
 
 Func VT_class_Program[] = {
-    (Func) _Program_run};
+    (Func) _Program_run
+};
 
 _class_Program* new_Program(){
     _class_Program* t;

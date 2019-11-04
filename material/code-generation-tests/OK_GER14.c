@@ -48,16 +48,17 @@ typedef struct _St_A {
 _class_A* new_A(void);
 
 int _A_get_A( _class_A *self) {
-    return (int) FALTAIMPLEMENTAR;
+    return (int) self->_k;
 }
 
 void _A_init( _class_A *self) {
-    FALTAIMPLEMENTAR = 1;
+    self->_k = 1;
 }
 
 Func VT_class_A[] = {
     (Func) _A_get_A,
-    (Func) _A_init};
+    (Func) _A_init
+};
 
 _class_A* new_A(){
     _class_A* t;
@@ -75,19 +76,20 @@ typedef struct _St_B {
 _class_B* new_B(void);
 
 int _B_get_B( _class_B *self) {
-    return (int) FALTAIMPLEMENTAR;
+    return (int) self->_k;
 }
 
 void _B_init( _class_B *self) {
-    FALTAIMPLEMENTAR;
-    FALTAIMPLEMENTAR = 2;
+    (((_class_A*)self)->vt[1] )((_class_A*) self);
+    self->_k = 2;
 }
 
 Func VT_class_B[] = {
     (Func) _A_get_A,
     (Func) _A_init,
     (Func) _B_get_B,
-    (Func) _B_init};
+    (Func) _B_init
+};
 
 _class_B* new_B(){
     _class_B* t;
@@ -105,12 +107,12 @@ typedef struct _St_C {
 _class_C* new_C(void);
 
 int _C_get_C( _class_C *self) {
-    return (int) FALTAIMPLEMENTAR;
+    return (int) self->_k;
 }
 
 void _C_init( _class_C *self) {
-    FALTAIMPLEMENTAR;
-    FALTAIMPLEMENTAR = 3;
+    (((_class_B*)self)->vt[3] )((_class_B*) self);
+    self->_k = 3;
 }
 
 Func VT_class_C[] = {
@@ -119,7 +121,8 @@ Func VT_class_C[] = {
     (Func) _B_get_B,
     (Func) _B_init,
     (Func) _C_get_C,
-    (Func) _C_init};
+    (Func) _C_init
+};
 
 _class_C* new_C(){
     _class_C* t;
@@ -137,12 +140,12 @@ typedef struct _St_D {
 _class_D* new_D(void);
 
 int _D_get_D( _class_D *self) {
-    return (int) FALTAIMPLEMENTAR;
+    return (int) self->_k;
 }
 
 void _D_init( _class_D *self) {
-    FALTAIMPLEMENTAR;
-    FALTAIMPLEMENTAR = 4;
+    (((_class_C*)self)->vt[5] )((_class_C*) self);
+    self->_k = 4;
 }
 
 Func VT_class_D[] = {
@@ -153,7 +156,8 @@ Func VT_class_D[] = {
     (Func) _C_get_C,
     (Func) _C_init,
     (Func) _D_get_D,
-    (Func) _D_init};
+    (Func) _D_init
+};
 
 _class_D* new_D(){
     _class_D* t;
@@ -191,7 +195,8 @@ void _Program_run( _class_Program *self) {
 }
 
 Func VT_class_Program[] = {
-    (Func) _Program_run};
+    (Func) _Program_run
+};
 
 _class_Program* new_Program(){
     _class_Program* t;
