@@ -26,6 +26,7 @@ public class PrintStat extends Stat {
                 pw.print("\\n");
                 
             pw.print("\", ");
+
             expr.genC(pw);
 
             pw.println(");");

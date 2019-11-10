@@ -32,14 +32,16 @@ public class PrimaryExprSelfIdMethod extends PrimaryExpr{
         
         //( (int (*)(_class_self *)) self->vt[0] )(self, ...);
         //Método
-        pw.print("(");
+        pw.print("( ");
+        
         //Casts
-        /*
-        if(expr.getType() != methodExpr.getType()){
-            pw.print("(");
-            pw.print(leftExpr.getType().getCname() + "*");
-            pw.print(")");
-        }*/
+        pw.print("(");
+        pw.print(this.method.getType().getCname());
+        if(!this.method.getType().isBasicType())
+            pw.print("*");
+        pw.print("(*)()");
+        pw.print(")");
+        
         if(methodIdx == -1){
             //Acessando o método privado estaticamente
             pw.print("_" + id.getType().getName()); //.getCName;

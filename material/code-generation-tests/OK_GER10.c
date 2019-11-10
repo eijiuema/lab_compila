@@ -52,17 +52,17 @@ void _A_m1( _class_A *self, int _n);
 int _A_getK( _class_A *self);
 
 void _A_m1( _class_A *self, int _n) {
-    ((_class_A*)self)->_class_A_k = 1;
-    printf("%s",  concat(  intToStr(((_class_A*)self)->_class_A_k),  concat( " ",  concat(  intToStr(_n), " "))));
+    self->_class_A_k = 1;
+    printf("%s",  concat(  intToStr(self->_class_A_k),  concat( " ",  concat(  intToStr(_n), " "))));
 }
 
 int _A_getK( _class_A *self) {
-    return (int) ((_class_A*)self)->_class_A_k;
+    return (int) self->_class_A_k;
 }
 
 Func VT_class_A[] = {
-    (Func) _A_m1,
-    (Func) _A_getK
+    (void(*)( _class_A, int )) _A_m1,
+    (int(*)( _class_A)) _A_getK
 };
 
 _class_A* new_A(){
@@ -74,6 +74,7 @@ _class_A* new_A(){
 
 // Codigo da classe _class_B
 typedef struct _St_B {
+    int _class_A_k;
     int _class_B_k;
     Func* vt;
 }_class_B;
@@ -85,20 +86,20 @@ void _B_m2( _class_B *self, int _n);
 int _B_getK( _class_B *self);
 
 void _B_m2( _class_B *self, int _n) {
-    ((_class_B*)self)->_class_B_k = 2;
-    (((_class_A*)self)->vt[0] )((_class_A*) self, 1);
-    printf("%s",  concat(  intToStr(((_class_B*)self)->_class_B_k),  concat( " ",  concat(  intToStr(_n), " "))));
+    self->_class_B_k = 2;
+    ( (void(*)())((_class_A*)self)->vt[0] )((_class_A*) self, 1);
+    printf("%s",  concat(  intToStr(self->_class_B_k),  concat( " ",  concat(  intToStr(_n), " "))));
 }
 
 int _B_getK( _class_B *self) {
-    return (int) ((_class_B*)self)->_class_B_k;
+    return (int) self->_class_B_k;
 }
 
 Func VT_class_B[] = {
-    (Func) _A_m1,
-    (Func) _A_getK,
-    (Func) _B_m2,
-    (Func) _B_getK
+    (void(*)( _class_A, int )) _A_m1,
+    (int(*)( _class_A)) _A_getK,
+    (void(*)( _class_B, int )) _B_m2,
+    (int(*)( _class_B)) _B_getK
 };
 
 _class_B* new_B(){
@@ -110,6 +111,8 @@ _class_B* new_B(){
 
 // Codigo da classe _class_C
 typedef struct _St_C {
+    int _class_A_k;
+    int _class_B_k;
     Func* vt;
 }_class_C;
 
@@ -120,23 +123,23 @@ void _C_m3( _class_C *self, int _n);
 void _C_m4( _class_C *self, int _n);
 
 void _C_m3( _class_C *self, int _n) {
-    (((_class_B*)self)->vt[2] )((_class_B*) self, 2);
+    ( (void(*)())((_class_B*)self)->vt[2] )((_class_B*) self, 2);
     printf("%s",  concat( "3 ",  concat(  intToStr(_n), " ")));
 }
 
 void _C_m4( _class_C *self, int _n) {
-    (_C_m3)(self, 3);
+    ( (void(*)())_C_m3)(self, 3);
     printf("%s",  concat( "4 ",  intToStr(_n)));
     printf("%s", " ");
 }
 
 Func VT_class_C[] = {
-    (Func) _A_m1,
-    (Func) _A_getK,
-    (Func) _B_m2,
-    (Func) _B_getK,
-    (Func) _C_m3,
-    (Func) _C_m4
+    (void(*)( _class_A, int )) _A_m1,
+    (int(*)( _class_A)) _A_getK,
+    (void(*)( _class_B, int )) _B_m2,
+    (int(*)( _class_B)) _B_getK,
+    (void(*)( _class_C, int )) _C_m3,
+    (void(*)( _class_C, int )) _C_m4
 };
 
 _class_C* new_C(){
@@ -159,11 +162,11 @@ void _Program_run( _class_Program *self) {
     _class_C *_c;
     printf("%s\n", "1 1 2 2 3 3 4 4");
     _c = new_C();
-    (_c->vt[5] )(_c, 4);
+    ( (void(*)())_c->vt[5] )(_c, 4);
 }
 
 Func VT_class_Program[] = {
-    (Func) _Program_run
+    (void(*)( _class_Program)) _Program_run
 };
 
 _class_Program* new_Program(){

@@ -40,13 +40,20 @@ public class MethodList {
  
         for (AbstractMap.SimpleEntry<String, MethodDec> method : this.methodList) {
             
-            pw.printIdent("(Func) ");
+            pw.printIdent("(");
+            pw.print(method.getValue().getType().getCname());
+            pw.print("(*)");
+
+            method.getValue().genCparameterTypes(pw, cl);
+
+            pw.print(") ");
             
             method.getValue().genCFunctionPointer(pw, cl);
             
             if(!method.equals( this.methodList.get(this.methodList.size()-1))){
                 pw.println(",");
             }
+            
         }
     }
 

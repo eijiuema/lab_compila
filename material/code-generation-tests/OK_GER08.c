@@ -46,55 +46,54 @@ typedef struct _St_A {
 
 _class_A* new_A(void);
 
-void _A_m1( _class_A *self);
+void _A_m1( _class_A *self, int _n);
 
 void _A_m2( _class_A *self, int _n);
 
-void _A_m1( _class_A *self) {
-    printf("%s", " 2 ");
+void _A_m3( _class_A *self, int _n, int _p, char * _q, int _r, boolean _falseBool);
+
+void _A_m1( _class_A *self, int _n) {
+    printf("%d", 1);
+    printf("%s", " ");
+    printf("%d", _n);
+    printf("%s", " ");
 }
 
 void _A_m2( _class_A *self, int _n) {
+    printf("%d", 2);
+    printf("%s", " ");
     printf("%d", _n);
     printf("%s", " ");
-    (self->vt[0] )(self);
+}
+
+void _A_m3( _class_A *self, int _n, int _p, char * _q, int _r, boolean _falseBool) {
+    printf("%d", 3);
+    printf("%s", " ");
+    printf("%d", _n);
+    printf("%s", " ");
+    printf("%d", _p);
+    printf("%s", " ");
+    printf("%s", _q);
+    printf("%s", " ");
+    printf("%d", _r);
+    printf("%s", " ");
+    if (_falseBool ) {
+        printf("%s",  concat(  intToStr(8), " "));
+    } else {
+        printf("%s",  concat(  intToStr(7), " "));
+    }
 }
 
 Func VT_class_A[] = {
-    (Func) _A_m1,
-    (Func) _A_m2
+    (void(*)( _class_A, int )) _A_m1,
+    (void(*)( _class_A, int )) _A_m2,
+    (void(*)( _class_A, int , int , char * , int , boolean )) _A_m3
 };
 
 _class_A* new_A(){
     _class_A* t;
     if ( (t = malloc(sizeof(_class_A))) != NULL )
         t->vt = VT_class_A;
-    return t;
-}
-
-// Codigo da classe _class_B
-typedef struct _St_B {
-    Func* vt;
-}_class_B;
-
-_class_B* new_B(void);
-
-void _B_m1( _class_B *self);
-
-void _B_m1( _class_B *self) {
-    printf("%s\n", " 4 ");
-}
-
-Func VT_class_B[] = {
-    (Func) _A_m1,
-    (Func) _A_m2,
-    (Func) _B_m1
-};
-
-_class_B* new_B(){
-    _class_B* t;
-    if ( (t = malloc(sizeof(_class_B))) != NULL )
-        t->vt = VT_class_B;
     return t;
 }
 
@@ -109,17 +108,15 @@ void _Program_run( _class_Program *self);
 
 void _Program_run( _class_Program *self) {
     _class_A *_a;
-    _class_B *_b;
-    printf("%s\n", "4 1 2 3 4");
-    printf("%s", "4 ");
+    printf("%s\n", "1 1 2 2 3 3 4 5 6 7");
     _a = new_A();
-    (_a->vt[1] )(_a, 1);
-    _a = (_class_A*) new_B();
-    (_a->vt[1] )(_a, 3);
+    ( (void(*)())_a->vt[0] )(_a, 1);
+    ( (void(*)())_a->vt[1] )(_a, 2);
+    ( (void(*)())_a->vt[2] )(_a, 3, 4, "5", 6, false);
 }
 
 Func VT_class_Program[] = {
-    (Func) _Program_run
+    (void(*)( _class_Program)) _Program_run
 };
 
 _class_Program* new_Program(){

@@ -41,31 +41,27 @@ typedef void (*Func)();
 
 // Codigo da classe _class_A
 typedef struct _St_A {
+    int _class_A_n;
     Func* vt;
 }_class_A;
 
 _class_A* new_A(void);
 
-void _A_m( _class_A *self);
+void _A_set( _class_A *self, int _n);
 
-void _A_m( _class_A *self) {
-    int _a, _b, _c, _d, _e, _f;
-    _a = 1;
-    _b = 1;
-    _c = 1;
-    _d = 1;
-    _e = 1;
-    _f = 1;
-    printf("%d", _a);
-    printf("%d", _b);
-    printf("%d", _c);
-    printf("%d", _d);
-    printf("%d", _e);
-    printf("%d", _f);
+int _A_get( _class_A *self);
+
+void _A_set( _class_A *self, int _n) {
+    self->_class_A_n = _n;
+}
+
+int _A_get( _class_A *self) {
+    return (int) self->_class_A_n;
 }
 
 Func VT_class_A[] = {
-    (Func) _A_m
+    (void(*)( _class_A, int )) _A_set,
+    (int(*)( _class_A)) _A_get
 };
 
 _class_A* new_A(){
@@ -77,25 +73,41 @@ _class_A* new_A(){
 
 // Codigo da classe _class_Program
 typedef struct _St_Program {
+    struct _St_A *_class_Program_a;
     Func* vt;
 }_class_Program;
 
 _class_Program* new_Program(void);
 
+void _Program_set( _class_Program *self, _class_A *_a);
+
+void _Program_print( _class_Program *self);
+
+_class_A* _Program_get( _class_Program *self);
+
 void _Program_run( _class_Program *self);
 
+void _Program_set( _class_Program *self, _class_A *_a) {
+    self->_class_Program_a = _a;
+}
+
+void _Program_print( _class_Program *self) {
+    printf("%d", ( (int(*)())self->_class_Program_a->vt[1] )(self->_class_Program_a));
+}
+
+_class_A* _Program_get( _class_Program *self) {
+    return (_class_A* ) self->_class_Program_a;
+}
+
 void _Program_run( _class_Program *self) {
-    _class_A *_a;
-    printf("%s\n", "");
-    printf("%s\n", "Ok-ger05");
-    printf("%s\n", "The output should be what you give as input.");
-    printf("%s\n", "Type in six numbers");
-    _a = new_A();
-    (_a->vt[0] )(_a);
+    printf("%s\n", "0");
+    printf("%s\n", "0");
 }
 
 Func VT_class_Program[] = {
-    (Func) _Program_run
+    (void(*)( _class_Program)) _Program_print,
+    (_class_A(*)( _class_Program)) _Program_get,
+    (void(*)( _class_Program)) _Program_run
 };
 
 _class_Program* new_Program(){

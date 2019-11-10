@@ -39,6 +39,52 @@ char * intToStr(int i){
 }
 typedef void (*Func)();
 
+// Codigo da classe _class_A
+typedef struct _St_A {
+    Func* vt;
+}_class_A;
+
+_class_A* new_A(void);
+
+void _A_m( _class_A *self);
+
+void _A_m( _class_A *self) {
+    int _i, _j, _k;
+    printf("%d", 7);
+    printf("%s", " ");
+    _i = 1;
+    _j = _i + 1;
+    _k = _j + 1;
+    printf("%d", _i);
+    printf("%s", " ");
+    printf("%d", _j);
+    printf("%s", " ");
+    printf("%d", _k);
+    printf("%s", " ");
+    _i = ( ( ( ( 3 + 1 ) * 3 ) / 2 ) / 2 ) + 1;
+    printf("%d", _i);
+    printf("%s", " ");
+    _i = ( ( 100 - 95 ) * 2 ) - 5;
+    printf("%d", _i);
+    printf("%s", " ");
+    _i = ( 100 - ( 45 * 2 ) ) - 4;
+    printf("%d", _i);
+    printf("%s", " ");
+    printf("%d", 7);
+    printf("%s", " ");
+}
+
+Func VT_class_A[] = {
+    (void(*)( _class_A)) _A_m
+};
+
+_class_A* new_A(){
+    _class_A* t;
+    if ( (t = malloc(sizeof(_class_A))) != NULL )
+        t->vt = VT_class_A;
+    return t;
+}
+
 // Codigo da classe _class_Program
 typedef struct _St_Program {
     Func* vt;
@@ -49,34 +95,14 @@ _class_Program* new_Program(void);
 void _Program_run( _class_Program *self);
 
 void _Program_run( _class_Program *self) {
-    printf("%s\n", "100");
-    int _i, _j, _n;
-    _i = 0;
-    _j = 0;
-    _n = 10;
-    boolean _b;
-    _b = false;
-    do{
-        _n = _n + 1;
-    } while( (true ) == false);
-    if ((_n == 11) == false )     printf("'repeat-until' statement with 'false' as expression'");
-    _n = 10;
-    int _sum;
-    _sum = 0;
-    do{
-        _i = 0;
-        do{
-            _i = _i + 1;
-            _sum = _sum + 1;
-        } while( (_i < _n ) == false);
-        _j = _j + 1;
-    } while( (_j < _n ) == false);
-    printf("%d\n", _sum);
-    if ((_sum == 100) == false )     printf("Nested 'repeat-until' statement with two indexes");
+    _class_A *_a;
+    printf("%s\n", "7 1 2 3 4 5 6 7");
+    _a = new_A();
+    ( (void(*)())_a->vt[0] )(_a);
 }
 
 Func VT_class_Program[] = {
-    (Func) _Program_run
+    (void(*)( _class_Program)) _Program_run
 };
 
 _class_Program* new_Program(){

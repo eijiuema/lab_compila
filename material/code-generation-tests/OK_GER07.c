@@ -49,24 +49,11 @@ _class_A* new_A(void);
 void _A_m( _class_A *self);
 
 void _A_m( _class_A *self) {
-    printf("%d", 6);
-    printf("%s", " ");
-    printf("%d", 1);
-    printf("%s", " ");
-    printf("%d", 1 + 1);
-    printf("%s", " ");
-    printf("%d", 4 - 1);
-    printf("%s", " ");
-    printf("%d", ( 6 - 3 ) + 1);
-    printf("%s", " ");
-    printf("%d", 10 / 2);
-    printf("%s", " ");
-    printf("%d", 2 * 3);
-    printf("%s", " ");
+    printf("%d\n", 0);
 }
 
 Func VT_class_A[] = {
-    (Func) _A_m
+    (void(*)( _class_A)) _A_m
 };
 
 _class_A* new_A(){
@@ -87,13 +74,13 @@ void _Program_run( _class_Program *self);
 
 void _Program_run( _class_Program *self) {
     _class_A *_a;
-    printf("%s\n", "6 1 2 3 4 5 6");
+    printf("%s\n", "0");
     _a = new_A();
-    (_a->vt[0] )(_a);
+    ( (void(*)())_a->vt[0] )(_a);
 }
 
 Func VT_class_Program[] = {
-    (Func) _Program_run
+    (void(*)( _class_Program)) _Program_run
 };
 
 _class_Program* new_Program(){

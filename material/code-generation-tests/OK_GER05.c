@@ -46,48 +46,26 @@ typedef struct _St_A {
 
 _class_A* new_A(void);
 
-void _A_m1( _class_A *self, int _n);
+void _A_m( _class_A *self);
 
-void _A_m2( _class_A *self, int _n);
-
-void _A_m3( _class_A *self, int _n, int _p, char * _q, int _r, boolean _falseBool);
-
-void _A_m1( _class_A *self, int _n) {
-    printf("%d", 1);
-    printf("%s", " ");
-    printf("%d", _n);
-    printf("%s", " ");
-}
-
-void _A_m2( _class_A *self, int _n) {
-    printf("%d", 2);
-    printf("%s", " ");
-    printf("%d", _n);
-    printf("%s", " ");
-}
-
-void _A_m3( _class_A *self, int _n, int _p, char * _q, int _r, boolean _falseBool) {
-    printf("%d", 3);
-    printf("%s", " ");
-    printf("%d", _n);
-    printf("%s", " ");
-    printf("%d", _p);
-    printf("%s", " ");
-    printf("%s", _q);
-    printf("%s", " ");
-    printf("%d", _r);
-    printf("%s", " ");
-    if (_falseBool ) {
-        printf("%s",  concat(  intToStr(8), " "));
-    } else {
-        printf("%s",  concat(  intToStr(7), " "));
-    }
+void _A_m( _class_A *self) {
+    int _a, _b, _c, _d, _e, _f;
+    _a = 1;
+    _b = 1;
+    _c = 1;
+    _d = 1;
+    _e = 1;
+    _f = 1;
+    printf("%d", _a);
+    printf("%d", _b);
+    printf("%d", _c);
+    printf("%d", _d);
+    printf("%d", _e);
+    printf("%d", _f);
 }
 
 Func VT_class_A[] = {
-    (Func) _A_m1,
-    (Func) _A_m2,
-    (Func) _A_m3
+    (void(*)( _class_A)) _A_m
 };
 
 _class_A* new_A(){
@@ -108,15 +86,16 @@ void _Program_run( _class_Program *self);
 
 void _Program_run( _class_Program *self) {
     _class_A *_a;
-    printf("%s\n", "1 1 2 2 3 3 4 5 6 7");
+    printf("%s\n", "");
+    printf("%s\n", "Ok-ger05");
+    printf("%s\n", "The output should be what you give as input.");
+    printf("%s\n", "Type in six numbers");
     _a = new_A();
-    (_a->vt[0] )(_a, 1);
-    (_a->vt[1] )(_a, 2);
-    (_a->vt[2] )(_a, 3, 4, "5", 6, false);
+    ( (void(*)())_a->vt[0] )(_a);
 }
 
 Func VT_class_Program[] = {
-    (Func) _Program_run
+    (void(*)( _class_Program)) _Program_run
 };
 
 _class_Program* new_Program(){

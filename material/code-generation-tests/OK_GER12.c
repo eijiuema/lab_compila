@@ -46,15 +46,23 @@ typedef struct _St_A {
 
 _class_A* new_A(void);
 
-void _A_m1( _class_A *self, int _n);
+void _A_m1( _class_A *self);
 
-void _A_m1( _class_A *self, int _n) {
-    printf("%s",  concat( "1 ",  intToStr(_n)));
+void _A_m2( _class_A *self, int _n);
+
+void _A_m1( _class_A *self) {
+    printf("%d", 1);
+    printf("%s", " ");
+}
+
+void _A_m2( _class_A *self, int _n) {
+    printf("%d", _n);
     printf("%s", " ");
 }
 
 Func VT_class_A[] = {
-    (Func) _A_m1
+    (void(*)( _class_A)) _A_m1,
+    (void(*)( _class_A, int )) _A_m2
 };
 
 _class_A* new_A(){
@@ -74,14 +82,15 @@ _class_B* new_B(void);
 void _B_m2( _class_B *self, int _n);
 
 void _B_m2( _class_B *self, int _n) {
-    (((_class_A*)self)->vt[0] )((_class_A*) self, 1);
-    printf("%s",  concat( " 2 ",  intToStr(_n)));
+    printf("%d", _n);
     printf("%s", " ");
+    ( (void(*)())((_class_A*)self)->vt[1] )((_class_A*) self, _n + 1);
 }
 
 Func VT_class_B[] = {
-    (Func) _A_m1,
-    (Func) _B_m2
+    (void(*)( _class_A)) _A_m1,
+    (void(*)( _class_A, int )) _A_m2,
+    (void(*)( _class_B, int )) _B_m2
 };
 
 _class_B* new_B(){
@@ -98,27 +107,30 @@ typedef struct _St_C {
 
 _class_C* new_C(void);
 
-void _C_m3( _class_C *self, int _n);
+void _C_m1( _class_C *self);
 
-void _C_m4( _class_C *self, int _n);
+void _C_m3( _class_C *self);
 
-void _C_m3( _class_C *self, int _n) {
-    (((_class_B*)self)->vt[1] )((_class_B*) self, 2);
-    printf("%s",  concat( " 3 ",  intToStr(_n)));
+void _C_m1( _class_C *self) {
+    ( (void(*)())((_class_B*)self)->vt[0] )((_class_B*) self);
+    printf("%d", 2);
     printf("%s", " ");
 }
 
-void _C_m4( _class_C *self, int _n) {
-    (_C_m3)(self, 3);
-    printf("%s\n",  concat( " 4 ",  intToStr(_n)));
-    printf("%s\n", " ");
+void _C_m3( _class_C *self) {
+    ( (void(*)())self->vt[3] )(self);
+    printf("%d", 1);
+    printf("%s", " ");
+    printf("%d", 2);
+    printf("%s", " ");
 }
 
 Func VT_class_C[] = {
-    (Func) _A_m1,
-    (Func) _B_m2,
-    (Func) _C_m3,
-    (Func) _C_m4
+    (void(*)( _class_A)) _A_m1,
+    (void(*)( _class_A, int )) _A_m2,
+    (void(*)( _class_B, int )) _B_m2,
+    (void(*)( _class_C)) _C_m1,
+    (void(*)( _class_C)) _C_m3
 };
 
 _class_C* new_C(){
@@ -138,14 +150,19 @@ _class_Program* new_Program(void);
 void _Program_run( _class_Program *self);
 
 void _Program_run( _class_Program *self) {
+    _class_A *_a;
+    _class_B *_b;
     _class_C *_c;
-    printf("%s\n", "1 1 2 2 3 3 4 4");
+    printf("%s\n", "1 2 1 2 1 2 1 2");
+    _b = new_B();
+    ( (void(*)())_b->vt[2] )(_b, 1);
     _c = new_C();
-    (_c->vt[3] )(_c, 4);
+    ( (void(*)())_c->vt[3] )(_c);
+    ( (void(*)())_c->vt[4] )(_c);
 }
 
 Func VT_class_Program[] = {
-    (Func) _Program_run
+    (void(*)( _class_Program)) _Program_run
 };
 
 _class_Program* new_Program(){

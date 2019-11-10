@@ -29,14 +29,15 @@ public class PrimaryExprIdMethod extends PrimaryExpr {
     public void genC(PW pw) {
         //( (int (*)(_class_A *)) _a->vt[0] )(_a);
         //Método
-        pw.print("(");
+        pw.print("( ");
+        
         //Casts
-        /*
-        if(expr.getType() != methodExpr.getType()){
-            pw.print("(");
-            pw.print(leftExpr.getType().getCname() + "*");
-            pw.print(")");
-        }*/
+        pw.print("(");
+        pw.print(this.method.getType().getCname());
+        if(!this.method.getType().isBasicType())
+            pw.print("*");
+        pw.print("(*)()");
+        pw.print(")");
         
         //Acessando o método no vetor de métodos públicos
         pw.print(this.id.getCName() + "->vt");    
@@ -44,6 +45,7 @@ public class PrimaryExprIdMethod extends PrimaryExpr {
         pw.print(Integer.toString(methodIdx));
         pw.print("] ");
         pw.print(")");
+
 
         //Parâmetros
         pw.print("(");

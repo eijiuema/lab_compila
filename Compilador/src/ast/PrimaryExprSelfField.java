@@ -15,8 +15,7 @@ public class PrimaryExprSelfField extends PrimaryExpr {
 	}
 
 	public void genC(PW pw) {
-        pw.print("((" + self.getCname() + "*)");
-        pw.print("self)->" + self.getCname() + this.field.getCName());
+        pw.print("self->" + self.getCname() + this.field.getCName());
     }
     
     public void genJava(PW pw) {

@@ -30,14 +30,15 @@ public class PrimaryExprSuperMethod extends PrimaryExpr {
     public void genC(PW pw) {
         //_A_put( (_class_A *) self, _p_i ) 
         //Método
-        pw.print("(");
+        pw.print("( ");
+        
         //Casts
-        /*
-        if(expr.getType() != methodExpr.getType()){
-            pw.print("(");
-            pw.print(leftExpr.getType().getCname() + "*");
-            pw.print(")");
-        }*/
+        pw.print("(");
+        pw.print(this.method.getType().getCname());
+        if(!this.method.getType().isBasicType())
+            pw.print("*");
+        pw.print("(*)()");
+        pw.print(")");
 
         if(methodIdx == -1){
             //Acessando o método privado estaticamente
