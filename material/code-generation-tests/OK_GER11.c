@@ -86,9 +86,8 @@ void _B_m1( _class_B *self) {
 }
 
 Func VT_class_B[] = {
-    (void(*)( _class_A)) _A_m1,
-    (void(*)( _class_A, int )) _A_m2,
-    (void(*)( _class_B)) _B_m1
+    (void(*)( _class_B)) _B_m1,
+    (void(*)( _class_A, int )) _A_m2
 };
 
 _class_B* new_B(){

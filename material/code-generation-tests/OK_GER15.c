@@ -170,15 +170,11 @@ void _B_s( _class_B *self) {
 
 Func VT_class_B[] = {
     (void(*)( _class_A)) _A_init_A,
-    (void(*)( _class_A)) _A_call_p,
-    (void(*)( _class_A)) _A_call_q,
-    (void(*)( _class_A)) _A_r,
-    (void(*)( _class_A)) _A_s,
-    (void(*)( _class_B)) _B_init_B,
     (void(*)( _class_B)) _B_call_p,
     (void(*)( _class_B)) _B_call_q,
     (void(*)( _class_B)) _B_r,
-    (void(*)( _class_B)) _B_s
+    (void(*)( _class_B)) _B_s,
+    (void(*)( _class_B)) _B_init_B
 };
 
 _class_B* new_B(){
@@ -248,15 +244,11 @@ void _C_s( _class_C *self) {
 
 Func VT_class_C[] = {
     (void(*)( _class_A)) _A_init_A,
-    (void(*)( _class_A)) _A_call_p,
-    (void(*)( _class_A)) _A_call_q,
-    (void(*)( _class_A)) _A_r,
-    (void(*)( _class_A)) _A_s,
-    (void(*)( _class_C)) _C_init_C,
     (void(*)( _class_C)) _C_call_p,
     (void(*)( _class_C)) _C_call_q,
     (void(*)( _class_C)) _C_r,
-    (void(*)( _class_C)) _C_s
+    (void(*)( _class_C)) _C_s,
+    (void(*)( _class_C)) _C_init_C
 };
 
 _class_C* new_C(){
@@ -289,18 +281,18 @@ void _Program_run( _class_Program *self) {
     _b = new_B();
     ( (void(*)())_b->vt[5] )(_b);
     ( (void(*)())_b->vt[0] )(_b);
-    ( (void(*)())_b->vt[6] )(_b);
-    ( (void(*)())_b->vt[7] )(_b);
-    ( (void(*)())_b->vt[8] )(_b);
-    ( (void(*)())_b->vt[9] )(_b);
+    ( (void(*)())_b->vt[1] )(_b);
+    ( (void(*)())_b->vt[2] )(_b);
+    ( (void(*)())_b->vt[3] )(_b);
+    ( (void(*)())_b->vt[4] )(_b);
     _c = new_C();
     ( (void(*)())_c->vt[5] )(_c);
     ( (void(*)())_c->vt[0] )(_c);
     ( (void(*)())_c->vt[5] )(_c);
-    ( (void(*)())_c->vt[6] )(_c);
-    ( (void(*)())_c->vt[7] )(_c);
-    ( (void(*)())_c->vt[8] )(_c);
-    ( (void(*)())_c->vt[9] )(_c);
+    ( (void(*)())_c->vt[1] )(_c);
+    ( (void(*)())_c->vt[2] )(_c);
+    ( (void(*)())_c->vt[3] )(_c);
+    ( (void(*)())_c->vt[4] )(_c);
 }
 
 Func VT_class_Program[] = {

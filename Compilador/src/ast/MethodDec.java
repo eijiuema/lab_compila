@@ -38,20 +38,24 @@ public class MethodDec extends Member {
         this.formalParamDec.add(paramDec);
     }
 
-    public void genCparameterTypes(PW pw, TypeCianetoClass cl) {
+    public String genCparameterTypes(TypeCianetoClass cl) {
+        
+        String str = "";
+
         // gen c Types
-        pw.print("( ");
+        str += ("( ");
         // self parameter
-        pw.print( cl.getCname());
+        str += (cl.getCname());
         for (ParamDec paramDec : this.formalParamDec) {
-            pw.print(", ");
-            pw.print(paramDec.getType().getCname());
-            pw.print(" ");
+            str += (", ");
+            str += (paramDec.getType().getCname());
+            str += (" ");
             if(!this.getType().isBasicType())
-                pw.print("*");
+                str += ("*");
 
         }
-        pw.print(")");
+        str += (")");
+        return str;
     }
 
     public void genC(PW pw, TypeCianetoClass cl) {
@@ -124,6 +128,7 @@ public class MethodDec extends Member {
 
         return true;
     }
+    
 
 	public boolean checkParamListCompatible(List<Expr> exprList) {
 		
@@ -138,16 +143,19 @@ public class MethodDec extends Member {
         }
 
         return true;
-	}
+    }
 
 	public List<ParamDec> getParamList() {
 		return this.formalParamDec;
 	}
 
-	public void genCFunctionPointer(PW pw, TypeCianetoClass cl) {
+	public String genCFunctionPointer(TypeCianetoClass cl) {
+        String str = "";
         // gen c id
-        pw.print("_" + cl.getName());
-        pw.print(this.id.getCName());
+        str += ("_" + cl.getName());
+        str += (this.id.getCName());
+
+        return str;
 	}
 
 	public void genCheader(PW pw, TypeCianetoClass cl) {
@@ -169,6 +177,11 @@ public class MethodDec extends Member {
 
         }
         pw.println(");");
+	}
+
+	public boolean equalsDec(MethodDec methodSignature) {
+        return this.id.getName().equals(methodSignature.getId().getName())
+            && this.formalParamDec.equals(methodSignature.getParamList());
 	}
 
 }

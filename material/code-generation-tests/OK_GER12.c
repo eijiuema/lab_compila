@@ -89,7 +89,6 @@ void _B_m2( _class_B *self, int _n) {
 
 Func VT_class_B[] = {
     (void(*)( _class_A)) _A_m1,
-    (void(*)( _class_A, int )) _A_m2,
     (void(*)( _class_B, int )) _B_m2
 };
 
@@ -118,7 +117,7 @@ void _C_m1( _class_C *self) {
 }
 
 void _C_m3( _class_C *self) {
-    ( (void(*)())self->vt[3] )(self);
+    ( (void(*)())self->vt[0] )(self);
     printf("%d", 1);
     printf("%s", " ");
     printf("%d", 2);
@@ -126,10 +125,8 @@ void _C_m3( _class_C *self) {
 }
 
 Func VT_class_C[] = {
-    (void(*)( _class_A)) _A_m1,
-    (void(*)( _class_A, int )) _A_m2,
-    (void(*)( _class_B, int )) _B_m2,
     (void(*)( _class_C)) _C_m1,
+    (void(*)( _class_B, int )) _B_m2,
     (void(*)( _class_C)) _C_m3
 };
 
@@ -155,10 +152,10 @@ void _Program_run( _class_Program *self) {
     _class_C *_c;
     printf("%s\n", "1 2 1 2 1 2 1 2");
     _b = new_B();
-    ( (void(*)())_b->vt[2] )(_b, 1);
+    ( (void(*)())_b->vt[1] )(_b, 1);
     _c = new_C();
+    ( (void(*)())_c->vt[0] )(_c);
     ( (void(*)())_c->vt[3] )(_c);
-    ( (void(*)())_c->vt[4] )(_c);
 }
 
 Func VT_class_Program[] = {

@@ -135,6 +135,8 @@ public class TypeCianetoClass extends Type {
       //Se achou, calcule a posição no vetor e retorne
       if(idx != -1){ 
          if(superclass != null){
+
+            System.out.println("Metodos herdados em " + this.getCname() + ":" + superclass.publicInheritedMethodsSize());
             idx += superclass.publicInheritedMethodsSize();
          }
          return idx;
@@ -142,6 +144,25 @@ public class TypeCianetoClass extends Type {
       //Se não achou, procure na superclasse
       if(idx == -1 && superclass != null)
          return idx = superclass.getPublicMethodIdx(method, exprList);
+      
+      //Não existe mais onde procurar
+      return -1;
+   }
+
+   public int getMethodIdx(MethodDec methodSignature)  {
+      //Procure na lista da classe
+      int idx = this.publicMethodList.getMethodIdx(methodSignature);
+
+      //Se achou, calcule a posição no vetor e retorne
+      if(idx != -1){ 
+         if(superclass != null){
+            idx += superclass.publicInheritedMethodsSize();
+         }
+         return idx;
+      }   
+      //Se não achou, procure na superclasse
+      if(idx == -1 && superclass != null)
+         return idx = superclass.getMethodIdx(methodSignature);
       
       //Não existe mais onde procurar
       return -1;
@@ -250,7 +271,12 @@ public class TypeCianetoClass extends Type {
       pw.print("Func VT"+ this.getCname() +"[] = ");
       pw.println("{");
       pw.add();
-      this.genCFunctionPointersArray(pw);
+      ArrayList<String> funcPtArr =  this.genCFunctionPointersArray();
+      for(String funcStr : funcPtArr ){
+         pw.printIdent(funcStr);
+         if(funcStr != funcPtArr.get(funcPtArr.size()-1))
+            pw.println(",");
+      }
       pw.sub();
 		pw.println();
       pw.println("};");
@@ -275,12 +301,14 @@ public class TypeCianetoClass extends Type {
       this.fieldList.genC(pw, this);
    }
 
-   private void genCFunctionPointersArray(PW pw) {
+   private ArrayList<String> genCFunctionPointersArray() {
+      ArrayList<String> fp = new ArrayList<String>(); 
+      
       if(this.superclass != null){
-         superclass.genCFunctionPointersArray(pw);
-         pw.println(",");
+         fp = superclass.genCFunctionPointersArray();
       }
-      this.publicMethodList.genCFunctionPointersArray(pw, this);
+      fp = this.publicMethodList.genCFunctionPointersArray(this, fp);
+      return fp;
    }
 
    public void genJava(PW pw) {

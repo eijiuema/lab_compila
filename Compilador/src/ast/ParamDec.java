@@ -34,5 +34,10 @@ public class ParamDec {
     public void setType(Type type) {
         this.type = type;
     }
+
+    @Override
+    public boolean equals(Object p){
+        return ((ParamDec) p).getType() == this.type;
+    }
     
 }
