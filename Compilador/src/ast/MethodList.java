@@ -42,6 +42,7 @@ public class MethodList {
 
         for (AbstractMap.SimpleEntry<String, MethodDec> method : this.methodList) {
             String methodStr = new String();
+
             methodStr += ("(");
             methodStr += (method.getValue().getType().getCname());
             methodStr += ("(*)");
@@ -54,7 +55,7 @@ public class MethodList {
             
             //Verifica sobrecarga
             if(method.getKey().contains("override")){
-                System.out.println( "verif sobrecarga-> " + cl.getMethodIdx(method.getValue()));
+                System.out.println("OVERRIDE" + cl.getMethodIdx(method.getValue()));
                 fp.set( cl.getMethodIdx(method.getValue()), methodStr);
             } else
                 fp.add(methodStr);
@@ -112,28 +113,48 @@ public class MethodList {
         return null;
     }
 
-	public int getMethodIdx(String method, List<Expr> exprList) {
-		int idx = 0;
-        for (AbstractMap.SimpleEntry<String, MethodDec> smd : methodList) {
+	public int getMethodIdx(String method, List<Expr> exprList, TypeCianetoClass superclass) {
+        int idx = 0;
+        for (AbstractMap.SimpleEntry<String, MethodDec> smd : this.methodList) {
             MethodDec md = smd.getValue();
             Id id = md.getId();
             if (id.getName().equals(method) && md.checkParamListCompatible(exprList) && !smd.getKey().contains("override")) {
+                
+                if(superclass != null){
+                    idx += superclass.publicInheritedMethodsSize();
+                    //System.out.println("superclass:" + superclass.getCname() + " idx:" + idx);
+                }
                 return idx;
             }
             idx++;
         }
+
+        //Se não achou, procure na superclasse
+        if(superclass != null)
+            return superclass.getPublicMethodIdx(method, exprList);
+        
+        //Não existe mais onde procurar
         return -1;
     }
     
-    public int getMethodIdx(MethodDec methodSignature) {
+    public int getMethodIdx(MethodDec methodSignature, TypeCianetoClass superclass){
 		int idx = 0;
-        for (AbstractMap.SimpleEntry<String, MethodDec> smd : methodList) {
+        for (AbstractMap.SimpleEntry<String, MethodDec> smd : this.methodList) {
             MethodDec md = smd.getValue();
             if (md.equalsDec(methodSignature) && !smd.getKey().contains("override")) {
+                if(superclass != null){
+                    idx += superclass.publicInheritedMethodsSize();
+                }
                 return idx;
             }
             idx++;
         }
+
+        //Se não achou, procure na superclasse
+        if(superclass != null)
+            return superclass.getMethodIdx(methodSignature);
+        
+        //Não existe mais onde procurar
         return -1;
 	}
 

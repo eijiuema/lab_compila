@@ -75,7 +75,8 @@ void _A_m( _class_A *self) {
 }
 
 Func VT_class_A[] = {
-    (void(*)( _class_A)) _A_m
+    //_A_m
+(void(*)( _class_A)) _A_m
 };
 
 _class_A* new_A(){
@@ -102,7 +103,8 @@ void _Program_run( _class_Program *self) {
 }
 
 Func VT_class_Program[] = {
-    (void(*)( _class_Program)) _Program_run
+    //_Program_run
+(void(*)( _class_Program)) _Program_run
 };
 
 _class_Program* new_Program(){

@@ -61,8 +61,10 @@ void _A_m2( _class_A *self, int _n) {
 }
 
 Func VT_class_A[] = {
-    (void(*)( _class_A)) _A_m1,
-    (void(*)( _class_A, int )) _A_m2
+    //_A_m1
+(void(*)( _class_A)) _A_m1,
+    //_A_m2
+(void(*)( _class_A, int )) _A_m2
 };
 
 _class_A* new_A(){
@@ -86,8 +88,10 @@ void _B_m1( _class_B *self) {
 }
 
 Func VT_class_B[] = {
-    (void(*)( _class_B)) _B_m1,
-    (void(*)( _class_A, int )) _A_m2
+    //_B_m1
+(void(*)( _class_B)) _B_m1,
+    //_A_m2
+(void(*)( _class_A, int )) _A_m2
 };
 
 _class_B* new_B(){
@@ -118,7 +122,8 @@ void _Program_run( _class_Program *self) {
 }
 
 Func VT_class_Program[] = {
-    (void(*)( _class_Program)) _Program_run
+    //_Program_run
+(void(*)( _class_Program)) _Program_run
 };
 
 _class_Program* new_Program(){

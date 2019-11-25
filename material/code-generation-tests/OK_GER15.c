@@ -41,9 +41,9 @@ typedef void (*Func)();
 
 // Codigo da classe _class_A
 typedef struct _St_A {
+    Func* vt;
     int _class_A_i;
     int _class_A_j;
-    Func* vt;
 }_class_A;
 
 _class_A* new_A(void);
@@ -112,11 +112,11 @@ _class_A* new_A(){
 
 // Codigo da classe _class_B
 typedef struct _St_B {
+    Func* vt;
     int _class_A_i;
     int _class_A_j;
     int _class_B_i;
     int _class_B_j;
-    Func* vt;
 }_class_B;
 
 _class_B* new_B(void);
@@ -186,11 +186,11 @@ _class_B* new_B(){
 
 // Codigo da classe _class_C
 typedef struct _St_C {
+    Func* vt;
     int _class_A_i;
     int _class_A_j;
     int _class_C_i;
     int _class_C_j;
-    Func* vt;
 }_class_C;
 
 _class_C* new_C(void);

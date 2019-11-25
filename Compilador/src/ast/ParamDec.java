@@ -37,7 +37,7 @@ public class ParamDec {
 
     @Override
     public boolean equals(Object p){
-        return ((ParamDec) p).getType() == this.type;
+        return ((ParamDec) p).getType().canConvertFrom(this.type);
     }
     
 }

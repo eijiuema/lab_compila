@@ -21,6 +21,7 @@ public class AssignExpr extends Stat {
 
     public void genC(PW pw) {
         pw.printIdent("");
+        
         leftExpr.genC(pw);
         
         if(rightExpr != null){

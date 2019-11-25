@@ -129,46 +129,15 @@ public class TypeCianetoClass extends Type {
    }
 
    public int getPublicMethodIdx(String method, List<Expr> exprList) {
-      //Procure na lista da classe
-      int idx = this.publicMethodList.getMethodIdx(method, exprList);
-
-      //Se achou, calcule a posição no vetor e retorne
-      if(idx != -1){ 
-         if(superclass != null){
-
-            System.out.println("Metodos herdados em " + this.getCname() + ":" + superclass.publicInheritedMethodsSize());
-            idx += superclass.publicInheritedMethodsSize();
-         }
-         return idx;
-      }   
-      //Se não achou, procure na superclasse
-      if(idx == -1 && superclass != null)
-         return idx = superclass.getPublicMethodIdx(method, exprList);
-      
-      //Não existe mais onde procurar
-      return -1;
+      return this.publicMethodList.getMethodIdx(method, exprList, this.superclass);
    }
 
    public int getMethodIdx(MethodDec methodSignature)  {
-      //Procure na lista da classe
-      int idx = this.publicMethodList.getMethodIdx(methodSignature);
-
-      //Se achou, calcule a posição no vetor e retorne
-      if(idx != -1){ 
-         if(superclass != null){
-            idx += superclass.publicInheritedMethodsSize();
-         }
-         return idx;
-      }   
-      //Se não achou, procure na superclasse
-      if(idx == -1 && superclass != null)
-         return idx = superclass.getMethodIdx(methodSignature);
-      
-      //Não existe mais onde procurar
-      return -1;
+      return this.publicMethodList.getMethodIdx(methodSignature, this.superclass);
    }
 
-   private int publicInheritedMethodsSize() {
+   public int publicInheritedMethodsSize() {
+      
       if(superclass == null)
          return this.publicMethodList.size();
       else
@@ -246,8 +215,9 @@ public class TypeCianetoClass extends Type {
       //Struct com campos
       pw.println("typedef struct _St_" + this.getName() + " {");
       pw.add();
-      this.genCfields(pw);
+
       pw.printlnIdent("Func* vt;");
+      this.genCfields(pw);
       pw.sub();
       pw.println("}" + this.getCname() + ";");
       pw.println();

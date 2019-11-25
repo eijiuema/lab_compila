@@ -1,8 +1,3 @@
-Metodos herdados em _class_B:2
-Metodos herdados em _class_C:3
-Metodos herdados em _class_C:3
-verif sobrecarga-> 1
-verif sobrecarga-> 1
 Executing the C code of file './material/code-generation-tests/OK_GER10.c'
 1 1 2 2 3 3 4 4
 1 1 2 2 3 3 4 4 
@@ -33,19 +28,12 @@ Executing the C code of file './material/code-generation-tests/OK_GER07.c'
 Executing the C code of file './material/code-generation-tests/OK_GER08.c'
 1 1 2 2 3 3 4 5 6 7
 1 1 2 2 3 3 4 5 6 7 
-Metodos herdados em _class_B:1
-Metodos herdados em _class_C:2
-Metodos herdados em _class_C:2
 Executing the C code of file './material/code-generation-tests/OK_GER09.c'
 1 1 2 2 3 3 4 4
 1 1  2 2  3 3  4 4
  
-verif sobrecarga-> 0
 Executing the C code of file './material/code-generation-tests/OK_GER11.c'
 4 1 2 3 4
-4 1  2 3  4 
-Metodos herdados em _class_C:2
-verif sobrecarga-> 1
-verif sobrecarga-> 1
-verif sobrecarga-> 0
+4 1  2  4 
 Executing the C code of file './material/code-generation-tests/OK_GER12.c'
+1 2 1 2 1 2 1 2

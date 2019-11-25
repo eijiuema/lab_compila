@@ -180,8 +180,9 @@ public class MethodDec extends Member {
 	}
 
 	public boolean equalsDec(MethodDec methodSignature) {
+        
         return this.id.getName().equals(methodSignature.getId().getName())
-            && this.formalParamDec.equals(methodSignature.getParamList());
+           && this.formalParamDec.equals(methodSignature.getParamList());
 	}
 
 }

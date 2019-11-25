@@ -41,8 +41,8 @@ typedef void (*Func)();
 
 // Codigo da classe _class_A
 typedef struct _St_A {
-    int _class_A_k;
     Func* vt;
+    int _class_A_k;
 }_class_A;
 
 _class_A* new_A(void);
@@ -61,8 +61,10 @@ int _A_getK( _class_A *self) {
 }
 
 Func VT_class_A[] = {
-    (void(*)( _class_A, int )) _A_m1,
-    (int(*)( _class_A)) _A_getK
+    //_A_m1
+(void(*)( _class_A, int )) _A_m1,
+    //_A_getK
+(int(*)( _class_A)) _A_getK
 };
 
 _class_A* new_A(){
@@ -74,9 +76,9 @@ _class_A* new_A(){
 
 // Codigo da classe _class_B
 typedef struct _St_B {
+    Func* vt;
     int _class_A_k;
     int _class_B_k;
-    Func* vt;
 }_class_B;
 
 _class_B* new_B(void);
@@ -96,9 +98,12 @@ int _B_getK( _class_B *self) {
 }
 
 Func VT_class_B[] = {
-    (void(*)( _class_A, int )) _A_m1,
-    (int(*)( _class_B)) _B_getK,
-    (void(*)( _class_B, int )) _B_m2
+    //_A_m1
+(void(*)( _class_A, int )) _A_m1,
+    //_B_getK
+(int(*)( _class_B)) _B_getK,
+    //_B_m2
+(void(*)( _class_B, int )) _B_m2
 };
 
 _class_B* new_B(){
@@ -110,9 +115,9 @@ _class_B* new_B(){
 
 // Codigo da classe _class_C
 typedef struct _St_C {
+    Func* vt;
     int _class_A_k;
     int _class_B_k;
-    Func* vt;
 }_class_C;
 
 _class_C* new_C(void);
@@ -133,11 +138,16 @@ void _C_m4( _class_C *self, int _n) {
 }
 
 Func VT_class_C[] = {
-    (void(*)( _class_A, int )) _A_m1,
-    (int(*)( _class_B)) _B_getK,
-    (void(*)( _class_B, int )) _B_m2,
-    (void(*)( _class_C, int )) _C_m3,
-    (void(*)( _class_C, int )) _C_m4
+    //_A_m1
+(void(*)( _class_A, int )) _A_m1,
+    //_B_getK
+(int(*)( _class_B)) _B_getK,
+    //_B_m2
+(void(*)( _class_B, int )) _B_m2,
+    //_C_m3
+(void(*)( _class_C, int )) _C_m3,
+    //_C_m4
+(void(*)( _class_C, int )) _C_m4
 };
 
 _class_C* new_C(){
@@ -164,7 +174,8 @@ void _Program_run( _class_Program *self) {
 }
 
 Func VT_class_Program[] = {
-    (void(*)( _class_Program)) _Program_run
+    //_Program_run
+(void(*)( _class_Program)) _Program_run
 };
 
 _class_Program* new_Program(){
