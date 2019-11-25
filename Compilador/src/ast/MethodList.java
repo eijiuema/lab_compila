@@ -55,7 +55,6 @@ public class MethodList {
             
             //Verifica sobrecarga
             if(method.getKey().contains("override")){
-                System.out.println("OVERRIDE" + cl.getMethodIdx(method.getValue()));
                 fp.set( cl.getMethodIdx(method.getValue()), methodStr);
             } else
                 fp.add(methodStr);
