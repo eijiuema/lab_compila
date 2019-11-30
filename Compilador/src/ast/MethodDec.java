@@ -11,7 +11,7 @@ public class MethodDec extends Member {
     private Id id;
     private List<ParamDec> formalParamDec;
     private List<Stat> statList;
-    private TypeCianetoClass cl;
+    public TypeCianetoClass cl;
 
     public MethodDec(Id id, TypeCianetoClass cl) {
         this.id = id;

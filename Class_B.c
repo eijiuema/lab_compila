@@ -157,7 +157,7 @@ void _Program_run( _class_Program *self);
 
 void _Program_run( _class_Program *self) {
     _class_B *_b = new_B();
-    printf("%d\n", ((int(*)( _class_A *))_b->vt[0] )(_b));
+    printf("%d\n", ((int(*)( _class_A *))_b->vt[0] )((_class_A*)_b));
     ((void(*)( _class_B *))_b->vt[3] )(_b);
     ((void(*)( _class_B *, int , boolean ))_b->vt[6] )(_b, 1, true);
 }

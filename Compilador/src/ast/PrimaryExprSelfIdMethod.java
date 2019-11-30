@@ -61,6 +61,9 @@ public class PrimaryExprSelfIdMethod extends PrimaryExpr {
 
         // Par�metros
         pw.print("(");
+        if (id.getType() != method.cl) {
+            pw.print("(" + method.cl.getCname() + "*)");
+        }
         pw.print("self->" + self.getCname() + this.id.getCName());
         for (Expr expr : this.exprList) {
             pw.print(", ");
