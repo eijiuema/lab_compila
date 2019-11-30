@@ -60,8 +60,8 @@ void _A_put( _class_A *self, int _p_i) {
 }
 
 Func VT_class_A[] = {
-    (int(*)( _class_A *)) _A_get,
-    (void(*)( _class_A *, int )) _A_put
+    (void (*) () ) _A_get,
+    (void (*) () ) _A_put
 };
 
 _class_A* new_A(){
@@ -130,13 +130,13 @@ void _B_test( _class_B *self, int _a, boolean _b) {
 }
 
 Func VT_class_B[] = {
-    (int(*)( _class_A *)) _A_get,
-    (void(*)( _class_B *, int )) _B_put,
-    (void(*)( _class_B *)) _B_print,
-    (void(*)( _class_B *)) _B_inc,
-    (int(*)( _class_B *)) _B_getLastInc,
-    (void(*)( _class_B *)) _B_atLast,
-    (void(*)( _class_B *, int , boolean )) _B_test
+    (void (*) () ) _A_get,
+    (void (*) () ) _B_put,
+    (void (*) () ) _B_print,
+    (void (*) () ) _B_inc,
+    (void (*) () ) _B_getLastInc,
+    (void (*) () ) _B_atLast,
+    (void (*) () ) _B_test
 };
 
 _class_B* new_B(){
@@ -163,7 +163,7 @@ void _Program_run( _class_Program *self) {
 }
 
 Func VT_class_Program[] = {
-    (void(*)( _class_Program *)) _Program_run
+    (void (*) () ) _Program_run
 };
 
 _class_Program* new_Program(){

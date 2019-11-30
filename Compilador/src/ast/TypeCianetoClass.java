@@ -30,7 +30,6 @@ public class TypeCianetoClass extends Type {
    private FieldList fieldList;
    private MethodList publicMethodList, privateMethodList;
    private boolean open;
-   public int overriden_methods_count = 0;
 
    @Override
    public String getJavaName() {

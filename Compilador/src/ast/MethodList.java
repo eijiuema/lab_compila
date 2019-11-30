@@ -43,15 +43,7 @@ public class MethodList {
         for (AbstractMap.SimpleEntry<String, MethodDec> method : this.methodList) {
             String methodStr = new String();
 
-            methodStr += ("(");
-            methodStr += (method.getValue().getType().getCname());
-            methodStr += ("(*)");
-
-            methodStr += (method.getValue().genCparameterTypes());
-
-            methodStr += (") ");
-
-            methodStr += (method.getValue().genCFunctionPointer());
+            methodStr += "(void (*) () ) " + method.getValue().genCFunctionPointer();
             
             //Verifica sobrecarga
             if(method.getKey().contains("override")){
