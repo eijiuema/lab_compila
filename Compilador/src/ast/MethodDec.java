@@ -11,15 +11,25 @@ public class MethodDec extends Member {
     private Id id;
     private List<ParamDec> formalParamDec;
     private List<Stat> statList;
+    private TypeCianetoClass cl;
 
-    public MethodDec(Id id) {
+    public MethodDec(Id id, TypeCianetoClass cl) {
         this.id = id;
         this.formalParamDec = new ArrayList<>();
         this.statList = new ArrayList<>();
+        this.cl = cl;
     }
 
     public Id getId() {
         return this.id;
+    }
+
+    public String getName() {
+        return this.id.getName();
+    }
+
+    public String getCName() {
+        return this.id.getCName();
     }
 
     public Type getType() {
@@ -38,20 +48,21 @@ public class MethodDec extends Member {
         this.formalParamDec.add(paramDec);
     }
 
-    public String genCparameterTypes(TypeCianetoClass cl) {
+    public String genCparameterTypes() {
         
         String str = "";
 
         // gen c Types
         str += ("( ");
         // self parameter
-        str += (cl.getCname());
+        str += (cl.getCname() + " *");
         for (ParamDec paramDec : this.formalParamDec) {
             str += (", ");
             str += (paramDec.getType().getCname());
             str += (" ");
-            if(!this.getType().isBasicType())
+            if(!paramDec.getType().isBasicType()) {
                 str += ("*");
+            }
 
         }
         str += (")");
@@ -149,7 +160,7 @@ public class MethodDec extends Member {
 		return this.formalParamDec;
 	}
 
-	public String genCFunctionPointer(TypeCianetoClass cl) {
+	public String genCFunctionPointer() {
         String str = "";
         // gen c id
         str += ("_" + cl.getName());
@@ -158,7 +169,7 @@ public class MethodDec extends Member {
         return str;
 	}
 
-	public void genCheader(PW pw, TypeCianetoClass cl) {
+	public void genCheader(PW pw) {
         // gen c Type
         pw.print(this.getType().getCname());
         if(!this.getType().isBasicType())

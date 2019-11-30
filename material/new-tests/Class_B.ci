@@ -1,0 +1,53 @@
+open
+class A
+    var Int i
+    func get -> Int {
+        return self.i;
+    }
+    func put: Int p_i {
+        self.i = p_i;
+    }
+end
+
+class B extends A
+    var Int lastInc
+    private func add: Int n {
+        self.lastInc = n;
+        super.put: super.get + n;
+    }
+    func print {
+        Out.print: self.get;
+    }
+    override
+    public func put: Int p_i {
+        if p_i > 0 {
+            super.put: p_i;
+        }
+    }
+    func inc {
+        self.add: 1;
+    }
+    func getLastInc -> Int {
+        return self.lastInc;
+    }
+    final func atLast {
+        
+    }
+    public func test: Int a, Boolean b {
+        Out.println: a;
+        if b {
+            Out.println: "True";
+        } else {
+            Out.println: "False";
+        }
+    }
+end
+
+class Program
+    func run {
+        var B b = B.new;
+        Out.println: b.get;
+        b.inc;
+        b.test: 1, true;
+    }
+end

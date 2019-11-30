@@ -30,6 +30,7 @@ public class TypeCianetoClass extends Type {
    private FieldList fieldList;
    private MethodList publicMethodList, privateMethodList;
    private boolean open;
+   public int overriden_methods_count = 0;
 
    @Override
    public String getJavaName() {
@@ -161,19 +162,19 @@ public class TypeCianetoClass extends Type {
       return hasMethod(method, new ArrayList<>());
    }
 
-   public Id getMethod(String method) {
+   public MethodDec getMethod(String method) {
       return getMethod(method, new ArrayList<>());
    }
 
-   public Id getMethod(String method, List<Expr> exprList) {
-      Id id;
+   public MethodDec getMethod(String method, List<Expr> exprList) {
+      MethodDec methodDec;
 
-      if ((id = this.privateMethodList.getMethod(method, exprList)) != null) {
-         return id;
+      if ((methodDec = this.privateMethodList.getMethod(method, exprList)) != null) {
+         return methodDec;
       }
 
-      if ((id = this.publicMethodList.getMethod(method, exprList)) != null) {
-         return id;
+      if ((methodDec = this.publicMethodList.getMethod(method, exprList)) != null) {
+         return methodDec;
       }
 
       if (this.superclass == null) {
@@ -227,17 +228,17 @@ public class TypeCianetoClass extends Type {
       pw.println();
 
 
-      //Métodos privados
-      privateMethodList.genCheaders(pw, this);
-      //Métodos públicos
-      publicMethodList.genCheaders(pw, this);
+      //Mï¿½todos privados
+      privateMethodList.genCheaders(pw);
+      //Mï¿½todos pï¿½blicos
+      publicMethodList.genCheaders(pw);
 
-      //Métodos privados
+      //Mï¿½todos privados
       privateMethodList.genC(pw, this);
-      //Métodos públicos
+      //Mï¿½todos pï¿½blicos
       publicMethodList.genC(pw, this);
       
-      //Vetor de métodos públicos
+      //Vetor de mï¿½todos pï¿½blicos
       pw.print("Func VT"+ this.getCname() +"[] = ");
       pw.println("{");
       pw.add();

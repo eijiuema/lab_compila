@@ -47,11 +47,11 @@ public class MethodList {
             methodStr += (method.getValue().getType().getCname());
             methodStr += ("(*)");
 
-            methodStr += (method.getValue().genCparameterTypes(cl));
+            methodStr += (method.getValue().genCparameterTypes());
 
             methodStr += (") ");
 
-            methodStr += (method.getValue().genCFunctionPointer(cl));
+            methodStr += (method.getValue().genCFunctionPointer());
             
             //Verifica sobrecarga
             if(method.getKey().contains("override")){
@@ -76,24 +76,22 @@ public class MethodList {
         }
     }
 
-    public Id getMethod(String method, List<Expr> exprList) {
+    public MethodDec getMethod(String method, List<Expr> exprList) {
         for (AbstractMap.SimpleEntry<String, MethodDec> smd : methodList) {
             MethodDec md = smd.getValue();
-            Id id = md.getId();
-            if (id.getName().equals(method) && md.checkParamListCompatible(exprList)) {
-                return id;
+            if (md.getId().getName().equals(method) && md.checkParamListCompatible(exprList)) {
+                return md;
             }
         }
         return null;
     }
 
-    public Id getMethodEquals(MethodDec methodDec) {
+    public MethodDec getMethodEquals(MethodDec methodDec) {
         for (AbstractMap.SimpleEntry<String, MethodDec> smd : methodList) {
             MethodDec md = smd.getValue();
-            Id id = md.getId();
-            if (id.getName().equals(methodDec.getId().getName()) && md.checkParamListEquals(methodDec.getParamList())
+            if (md.getId().getName().equals(methodDec.getId().getName()) && md.checkParamListEquals(methodDec.getParamList())
                     && md.getType() == methodDec.getType()) {
-                return id;
+                return md;
             }
         }
         return null;
@@ -116,6 +114,9 @@ public class MethodList {
         int idx = 0;
         for (AbstractMap.SimpleEntry<String, MethodDec> smd : this.methodList) {
             MethodDec md = smd.getValue();
+            if (smd.getKey().contains("override")) {
+                idx--;
+            }
             Id id = md.getId();
             if (id.getName().equals(method) && md.checkParamListCompatible(exprList) && !smd.getKey().contains("override")) {
                 
@@ -128,11 +129,11 @@ public class MethodList {
             idx++;
         }
 
-        //Se não achou, procure na superclasse
+        //Se nï¿½o achou, procure na superclasse
         if(superclass != null)
             return superclass.getPublicMethodIdx(method, exprList);
         
-        //Não existe mais onde procurar
+        //Nï¿½o existe mais onde procurar
         return -1;
     }
     
@@ -140,6 +141,9 @@ public class MethodList {
 		int idx = 0;
         for (AbstractMap.SimpleEntry<String, MethodDec> smd : this.methodList) {
             MethodDec md = smd.getValue();
+            if (smd.getKey().contains("override")) {
+                idx--;
+            }
             if (md.equalsDec(methodSignature) && !smd.getKey().contains("override")) {
                 if(superclass != null){
                     idx += superclass.publicInheritedMethodsSize();
@@ -149,11 +153,11 @@ public class MethodList {
             idx++;
         }
 
-        //Se não achou, procure na superclasse
+        //Se nï¿½o achou, procure na superclasse
         if(superclass != null)
             return superclass.getMethodIdx(methodSignature);
         
-        //Não existe mais onde procurar
+        //Nï¿½o existe mais onde procurar
         return -1;
 	}
 
@@ -166,9 +170,9 @@ public class MethodList {
 		return count;
 	}
 
-	public void genCheaders(PW pw, TypeCianetoClass cl) {
+	public void genCheaders(PW pw) {
         for (AbstractMap.SimpleEntry<String, MethodDec> method : this.methodList) {
-            method.getValue().genCheader(pw, cl);
+            method.getValue().genCheader(pw);
             pw.println();
         }
 	}

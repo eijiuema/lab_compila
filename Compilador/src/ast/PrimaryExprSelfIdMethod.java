@@ -3,16 +3,18 @@
 *	Gabriel Eiji Uema Martin
 */
 package ast;
+
 import java.util.*;
 
-public class PrimaryExprSelfIdMethod extends PrimaryExpr{
+public class PrimaryExprSelfIdMethod extends PrimaryExpr {
 
-    private Id id, method;
+    private Id id;
+    private MethodDec method;
     List<Expr> exprList;
     private int methodIdx;
     private TypeCianetoClass self;
 
-    public PrimaryExprSelfIdMethod(TypeCianetoClass self, Id id, Id method, int methodIdx) {
+    public PrimaryExprSelfIdMethod(TypeCianetoClass self, Id id, MethodDec method, int methodIdx) {
         this.id = id;
         this.method = method;
         this.exprList = new ArrayList<>();
@@ -20,7 +22,7 @@ public class PrimaryExprSelfIdMethod extends PrimaryExpr{
         this.self = self;
     }
 
-    public PrimaryExprSelfIdMethod(TypeCianetoClass self, Id id, Id method, List<Expr> exprList, int methodIdx){
+    public PrimaryExprSelfIdMethod(TypeCianetoClass self, Id id, MethodDec method, List<Expr> exprList, int methodIdx) {
         this.id = id;
         this.method = method;
         this.exprList = exprList;
@@ -29,33 +31,35 @@ public class PrimaryExprSelfIdMethod extends PrimaryExpr{
     }
 
     public void genC(PW pw) {
-        
-        //( (int (*)(_class_self *)) self->vt[0] )(self, ...);
-        //Método
-        pw.print("( ");
-        
-        //Casts
-        pw.print("(");
-        pw.print(this.method.getType().getCname());
-        if(!this.method.getType().isBasicType())
-            pw.print("*");
-        pw.print("(*)()");
-        pw.print(")");
-        
-        if(methodIdx == -1){
-            //Acessando o método privado estaticamente
-            pw.print("_" + id.getType().getName()); //.getCName;
-            pw.print(method.getCName());
+
+        if (methodIdx != -1) {
+
+            // ( (int (*)(_class_self *)) self->vt[0] )(self, ...);
+            // Mï¿½todo
+            pw.print("( ");
+
+            // Casts
+            pw.print("(");
+            pw.print(this.method.getType().getCname());
+            if(!this.method.getType().isBasicType())
+                pw.print("*");
+            pw.print("(*)");
+            pw.print(method.genCparameterTypes());
             pw.print(")");
-        } else {
-            //Acessando o método no vetor de métodos públicos
-            pw.print("self->" + self.getCname() + this.id.getCName() + "->vt");    
+
+            // Acessando o mï¿½todo no vetor de mï¿½todos pï¿½blicos
+            pw.print("self->" + self.getCname() + this.id.getCName() + "->vt");
             pw.print("[");
             pw.print(Integer.toString(methodIdx));
             pw.print("] ");
             pw.print(")");
+        } else {
+            // Acessando o mï¿½todo privado estaticamente
+            pw.print("_" + id.getType().getName()); // .getCName;
+            pw.print(method.getCName());
         }
-        //Parâmetros
+
+        // Parï¿½metros
         pw.print("(");
         pw.print("self->" + self.getCname() + this.id.getCName());
         for (Expr expr : this.exprList) {
@@ -64,16 +68,17 @@ public class PrimaryExprSelfIdMethod extends PrimaryExpr{
         }
         pw.print(")");
     }
-    public void genJava(PW pw){
+
+    public void genJava(PW pw) {
         pw.print("this");
         pw.print(".");
         pw.print(this.id.getName());
         pw.print(".");
         pw.print(this.method.getName());
         pw.print("(");
-        for(Expr expr: this.exprList){
+        for (Expr expr : this.exprList) {
             expr.genJava(pw);
-            if( !expr.equals(this.exprList.get(this.exprList.size()-1)) ){
+            if (!expr.equals(this.exprList.get(this.exprList.size() - 1))) {
                 pw.print(", ");
             }
         }

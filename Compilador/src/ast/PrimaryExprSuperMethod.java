@@ -8,19 +8,19 @@ import java.util.*;
 
 public class PrimaryExprSuperMethod extends PrimaryExpr {
 
-    private Id method;
+    private MethodDec method;
     private TypeCianetoClass superClass;
     List<Expr> exprList;
     private int methodIdx;
 
-    public PrimaryExprSuperMethod(TypeCianetoClass superClass, Id method, int methodIdx) {
+    public PrimaryExprSuperMethod(TypeCianetoClass superClass, MethodDec method, int methodIdx) {
         this.method = method;
         this.exprList = new ArrayList<>();
         this.superClass = superClass;
         this.methodIdx = methodIdx;
     }
 
-    public PrimaryExprSuperMethod(TypeCianetoClass superClass, Id method, List<Expr> exprList, int methodIdx) {
+    public PrimaryExprSuperMethod(TypeCianetoClass superClass, MethodDec method, List<Expr> exprList, int methodIdx) {
         this.method = method;
         this.exprList = exprList;
         this.superClass = superClass;
@@ -28,38 +28,38 @@ public class PrimaryExprSuperMethod extends PrimaryExpr {
     }
 
     public void genC(PW pw) {
-        //_A_put( (_class_A *) self, _p_i ) 
-        //Método
-        pw.print("( ");
-        
-        //Casts
-        pw.print("(");
-        pw.print(this.method.getType().getCname());
-        if(!this.method.getType().isBasicType())
-            pw.print("*");
-        pw.print("(*)()");
-        pw.print(")");
+        if (methodIdx != -1) {
+            // _A_put( (_class_A *) self, _p_i )
+            // Mï¿½todo
+            pw.print("(");
 
-        if(methodIdx == -1){
-            //Acessando o método privado estaticamente
-            pw.print("_" + this.superClass.getName()); //.getCName;
-            pw.print(method.getCName());
+            // Casts
+            pw.print("(");
+            pw.print(this.method.getType().getCname());
+            if(!this.method.getType().isBasicType())
+                pw.print("*");
+            pw.print("(*)");
+            pw.print(method.genCparameterTypes());
             pw.print(")");
-        } else {
-            //Acessando o método no vetor de métodos públicos
-            //Cast para superclasse
+
+            // Acessando o mï¿½todo no vetor de mï¿½todos pï¿½blicos
+            // Cast para superclasse
             pw.print("(");
             pw.print("(" + this.superClass.getCname() + "*)");
-            pw.print("self)->vt");    
+            pw.print("self)->vt");
             pw.print("[");
             pw.print(Integer.toString(methodIdx));
             pw.print("] ");
             pw.print(")");
+        } else {
+            // Acessando o mï¿½todo privado estaticamente
+            pw.print("_" + this.superClass.getName()); // .getCName;
+            pw.print("_" + method.getName());
         }
-        
-        //Parâmetros
+
+        // Parï¿½metros
         pw.print("(");
-        //Cast
+        // Cast
         pw.print("(" + this.superClass.getCname() + "*) ");
         pw.print("self");
         for (Expr expr : this.exprList) {
@@ -74,9 +74,9 @@ public class PrimaryExprSuperMethod extends PrimaryExpr {
         pw.print(".");
         pw.print(this.method.getName());
         pw.print("(");
-        for(Expr expr: this.exprList){
+        for (Expr expr : this.exprList) {
             expr.genJava(pw);
-            if( !expr.equals(this.exprList.get(this.exprList.size()-1)) ){
+            if (!expr.equals(this.exprList.get(this.exprList.size() - 1))) {
                 pw.print(", ");
             }
 
@@ -87,7 +87,7 @@ public class PrimaryExprSuperMethod extends PrimaryExpr {
     public Type getType() {
         return method.getType();
     }
-    
+
     @Override
     public boolean hasMethodCallWithReturn() {
         return method.getType() != Type.undefinedType;

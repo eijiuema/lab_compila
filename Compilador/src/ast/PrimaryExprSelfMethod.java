@@ -8,19 +8,19 @@ import java.util.*;
 
 public class PrimaryExprSelfMethod extends PrimaryExpr {
 
-    private Id method;
+    private MethodDec method;
     List<Expr> exprList;
     private int methodIdx;
     private TypeCianetoClass self;
 
-    public PrimaryExprSelfMethod(TypeCianetoClass self, Id method, List<Expr> exprList, int methodIdx) {
+    public PrimaryExprSelfMethod(TypeCianetoClass self, MethodDec method, List<Expr> exprList, int methodIdx) {
         this.method = method;
         this.exprList = exprList;
         this.methodIdx = methodIdx;
         this.self = self;
     }
 
-    public PrimaryExprSelfMethod(TypeCianetoClass self, Id method, int methodIdx) {
+    public PrimaryExprSelfMethod(TypeCianetoClass self, MethodDec method, int methodIdx) {
         this.method = method;
         this.exprList = new ArrayList<>();
         this.methodIdx = methodIdx;
@@ -28,41 +28,44 @@ public class PrimaryExprSelfMethod extends PrimaryExpr {
     }
 
     public void genC(PW pw) {
-        //( (int (*)(_class_self *)) self->vt[0] )(self, ...);
-        //Método
-        pw.print("( ");
-        
-        //Casts
-        pw.print("(");
-        pw.print(this.method.getType().getCname());
-        if(!this.method.getType().isBasicType())
-            pw.print("*");
-        pw.print("(*)()");
-        pw.print(")");
-        
-        if(methodIdx == -1){
-            //Acessando o método privado estaticamente
-            pw.print("_" + self.getName());
-            pw.print(method.getCName());
+
+        if (methodIdx != -1) {
+            // ( (int (*)(_class_self *)) self->vt[0] )(self, ...);
+            // Mï¿½todo
+            pw.print("(");
+
+            // Casts
+            pw.print("(");
+            pw.print(this.method.getType().getCname());
+            if(!this.method.getType().isBasicType())
+                pw.print("*");
+            pw.print("(*)");
+            pw.print(method.genCparameterTypes());
             pw.print(")");
-        } else {
-            //Acessando o método no vetor de métodos públicos
-            pw.print("self->vt");    
+            
+            // Acessando o mï¿½todo no vetor de mï¿½todos pï¿½blicos
+            pw.print("self->vt");
             pw.print("[");
             pw.print(Integer.toString(methodIdx));
             pw.print("] ");
             pw.print(")");
+
+        } else {
+            // Acessando o mï¿½todo privado estaticamente
+            pw.print("_" + self.getName());
+            pw.print(method.getCName());
         }
-        //Parâmetros
-        pw.print("(");
-        pw.print("self");
+
+        // Parï¿½metros
+        pw.print("((void*) self");
         for (Expr expr : this.exprList) {
             pw.print(", ");
             expr.genC(pw);
         }
         pw.print(")");
+
     }
-    
+
     public void genJava(PW pw) {
         pw.print("this.");
         pw.print(this.method.getName());
@@ -80,7 +83,7 @@ public class PrimaryExprSelfMethod extends PrimaryExpr {
     public Type getType() {
         return method.getType();
     }
-    
+
     @Override
     public boolean hasMethodCallWithReturn() {
         return method.getType() != Type.undefinedType;

@@ -8,18 +8,19 @@ import java.util.*;
 
 public class PrimaryExprIdMethod extends PrimaryExpr {
 
-    private Id id, method;
+    private Id id;
+    private MethodDec method;
     private List<Expr> exprList;
     private int methodIdx;
 
-    public PrimaryExprIdMethod(Id id, Id method, int methodIdx) {
+    public PrimaryExprIdMethod(Id id, MethodDec method, int methodIdx) {
         this.id = id;
         this.method = method;
         this.exprList = new ArrayList<>();
         this.methodIdx = methodIdx;
     }
 
-    public PrimaryExprIdMethod(Id id, Id method, List<Expr> exprList, int methodIdx) {
+    public PrimaryExprIdMethod(Id id, MethodDec method, List<Expr> exprList, int methodIdx) {
         this.id = id;
         this.method = method;
         this.exprList = exprList;
@@ -28,18 +29,19 @@ public class PrimaryExprIdMethod extends PrimaryExpr {
 
     public void genC(PW pw) {
         //( (int (*)(_class_A *)) _a->vt[0] )(_a);
-        //Método
-        pw.print("( ");
+        //Mï¿½todo
+        pw.print("(");
         
         //Casts
         pw.print("(");
         pw.print(this.method.getType().getCname());
         if(!this.method.getType().isBasicType())
             pw.print("*");
-        pw.print("(*)()");
+        pw.print("(*)");
+        pw.print(method.genCparameterTypes());
         pw.print(")");
         
-        //Acessando o método no vetor de métodos públicos
+        //Acessando o mï¿½todo no vetor de mï¿½todos pï¿½blicos
         pw.print(this.id.getCName() + "->vt");    
         pw.print("[");
         pw.print(Integer.toString(methodIdx));
@@ -47,7 +49,7 @@ public class PrimaryExprIdMethod extends PrimaryExpr {
         pw.print(")");
 
 
-        //Parâmetros
+        //Parï¿½metros
         pw.print("(");
         pw.print(this.id.getCName());
         for (Expr expr : this.exprList) {
