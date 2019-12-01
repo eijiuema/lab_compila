@@ -28,38 +28,16 @@ public class PrimaryExprSuperMethod extends PrimaryExpr {
     }
 
     public void genC(PW pw) {
-        // if (methodIdx != -1) {
-        //     // _A_put( (_class_A *) self, _p_i )
-        //     // M�todo
-        //     pw.print("(");
-
-        //     // Casts
-        //     pw.print("(");
-        //     pw.print(this.method.getType().getCname());
-        //     if(!this.method.getType().isBasicType())
-        //         pw.print("*");
-        //     pw.print("(*)");
-        //     pw.print(method.genCparameterTypes());
-        //     pw.print(")");
-
-        //     // Acessando o m�todo no vetor de m�todos p�blicos
-        //     // Cast para superclasse
-        //     pw.print("(");
-        //     pw.print("(" + this.superClass.getCname() + "*)");
-        //     pw.print("self)->vt");
-        //     pw.print("[");
-        //     pw.print(Integer.toString(methodIdx));
-        //     pw.print("] ");
-        //     pw.print(")");
-        // } else {
-            // Acessando o m�todo privado estaticamente
-            pw.print(method.getCName());
-        //}
+        
+        
+        // Acessando o m�todo estaticamente
+        pw.print(method.getCName());
 
         // Par�metros
         pw.print("(");
         // Cast
-        pw.print("(" + this.superClass.getCname() + "*) ");
+        pw.print("(" + method.cl.getCname() + " *) ");
+        
         pw.print("self");
         for (Expr expr : this.exprList) {
             pw.print(", ");

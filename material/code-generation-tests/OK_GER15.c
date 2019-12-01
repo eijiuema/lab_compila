@@ -1,5 +1,3 @@
-#define FALTAIMPLEMENTAR 0
-
 #include <string.h>
 #include <malloc.h>
 #include <stdlib.h>
@@ -78,11 +76,11 @@ void _A_init_A( _class_A *self) {
 }
 
 void _A_call_p( _class_A *self) {
-    _A_p((void*) self);
+    _A_p(self);
 }
 
 void _A_call_q( _class_A *self) {
-    _A_q((void*) self);
+    _A_q(self);
 }
 
 void _A_r( _class_A *self) {
@@ -151,11 +149,11 @@ void _B_init_B( _class_B *self) {
 }
 
 void _B_call_p( _class_B *self) {
-    _B_p((void*) self);
+    _B_p(self);
 }
 
 void _B_call_q( _class_B *self) {
-    _B_q((void*) self);
+    _B_q(self);
 }
 
 void _B_r( _class_B *self) {
@@ -225,11 +223,11 @@ void _C_init_C( _class_C *self) {
 }
 
 void _C_call_p( _class_C *self) {
-    _C_p((void*) self);
+    _C_p(self);
 }
 
 void _C_call_q( _class_C *self) {
-    _C_q((void*) self);
+    _C_q(self);
 }
 
 void _C_r( _class_C *self) {

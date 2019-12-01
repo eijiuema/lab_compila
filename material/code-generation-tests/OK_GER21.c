@@ -1,5 +1,3 @@
-#define FALTAIMPLEMENTAR 0
-
 #include <string.h>
 #include <malloc.h>
 #include <stdlib.h>
@@ -92,7 +90,7 @@ void _Program_set( _class_Program *self, _class_A *_a) {
 }
 
 void _Program_print( _class_Program *self) {
-    printf("%d", ( (int(*)( _class_A *))self->_class_Program_a->vt[1] )(self->_class_Program_a));
+    printf("%d", ( (int(*)( _class_A *))self->_class_Program_a->vt[1] )((_class_A*)self->_class_Program_a));
 }
 
 _class_A* _Program_get( _class_Program *self) {

@@ -1,5 +1,3 @@
-#define FALTAIMPLEMENTAR 0
-
 #include <string.h>
 #include <malloc.h>
 #include <stdlib.h>
@@ -64,12 +62,12 @@ void _A_set( _class_A *self, int _k) {
 }
 
 void _A_print( _class_A *self) {
-    printf("%d", ((int(*)( _class_A *))self->vt[0] )((void*) self));
+    printf("%d", ((int(*)( _class_A *))self->vt[0] )(self));
     printf("%s", " ");
 }
 
 void _A_init( _class_A *self) {
-    _A_set((void*) self, 0);
+    _A_set(self, 0);
 }
 
 Func VT_class_A[] = {
@@ -106,16 +104,16 @@ int _B_get_B( _class_B *self) {
 }
 
 void _B_init( _class_B *self) {
-    _A_init((_class_A*) self);
+    _A_init((_class_A*)self);
     self->_class_B_k = 2;
 }
 
 void _B_print( _class_B *self) {
-    printf("%d", ((int(*)( _class_B *))self->vt[4] )((void*) self));
+    printf("%d", ((int(*)( _class_B *))self->vt[4] )(self));
     printf("%s", " ");
-    printf("%d", ((int(*)( _class_A *))self->vt[0] )((void*) self));
+    printf("%d", ((int(*)( _class_A *))self->vt[0] )((_class_A*)self));
     printf("%s", " ");
-    _A_print((_class_A*) self);
+    _A_print((_class_A*)self);
 }
 
 Func VT_class_B[] = {

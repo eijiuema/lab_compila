@@ -1,5 +1,3 @@
-#define FALTAIMPLEMENTAR 0
-
 #include <string.h>
 #include <malloc.h>
 #include <stdlib.h>
@@ -87,7 +85,7 @@ int _B_getK( _class_B *self);
 
 void _B_m2( _class_B *self, int _n) {
     self->_class_B_k = 2;
-    _A_m1((_class_A*) self, 1);
+    _A_m1((_class_A*)self, 1);
     printf("%s",  concat(  intToStr(self->_class_B_k),  concat( " ",  concat(  intToStr(_n), " "))));
 }
 
@@ -122,12 +120,12 @@ void _C_m3( _class_C *self, int _n);
 void _C_m4( _class_C *self, int _n);
 
 void _C_m3( _class_C *self, int _n) {
-    _B_m2((_class_B*) self, 2);
+    _B_m2((_class_B*)self, 2);
     printf("%s",  concat( "3 ",  concat(  intToStr(_n), " ")));
 }
 
 void _C_m4( _class_C *self, int _n) {
-    _C_m3((void*) self, 3);
+    _C_m3(self, 3);
     printf("%s",  concat( "4 ",  intToStr(_n)));
     printf("%s", " ");
 }

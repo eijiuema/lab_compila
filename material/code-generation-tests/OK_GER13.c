@@ -1,5 +1,3 @@
-#define FALTAIMPLEMENTAR 0
-
 #include <string.h>
 #include <malloc.h>
 #include <stdlib.h>
@@ -114,7 +112,7 @@ void _B_p2( _class_B *self) {
 void _B_set( _class_B *self, int _pn) {
     printf("%d", _pn);
     printf("%s", " ");
-    _A_set((_class_A*) self, _pn);
+    _A_set((_class_A*)self, _pn);
 }
 
 void _B_p1( _class_B *self) {
@@ -181,12 +179,12 @@ void _Program_run( _class_Program *self) {
     _b = new_B();
     _a = (_class_A*) _b;
     ((void(*)( _class_A *, int ))_a->vt[0] )(_a, 0);
-    _a = (_class_A*) _Program_m((void*) self, _a);
-    _b = _Program_m((void*) self, _b);
+    _a = (_class_A*) _Program_m(self, _a);
+    _b = _Program_m(self, _b);
     ((void(*)( _class_B *))_b->vt[3] )(_b);
-    _a = _Program_p((void*) self, 0);
+    _a = _Program_p(self, 0);
     ((void(*)( _class_A *))_a->vt[2] )(_a);
-    _a = _Program_p((void*) self, 1);
+    _a = _Program_p(self, 1);
     ((void(*)( _class_A *))_a->vt[2] )(_a);
     _a = NULL;
     _b = NULL;

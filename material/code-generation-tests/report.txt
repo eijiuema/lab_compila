@@ -37,8 +37,8 @@ Testes 'Muito importantes' em que o compilador acertou:
         OK_GER15.ci
 
     super
-        OK_GER09.ci
         OK_GER12.ci
+        OK_GER09.ci
 
     self
         OK_GER09.ci
@@ -99,25 +99,25 @@ Para os casos de teste que voc� utilizou, o compilador est� correto
 List of Java or C files with compilation errors: 
 
 List of files with correct Java or C code: 
-   ./material/code-generation-tests/OK_GER01.java
-   ./material/code-generation-tests/OK_GER02.java
-   ./material/code-generation-tests/OK_GER03.java
-   ./material/code-generation-tests/OK_GER04.java
-   ./material/code-generation-tests/OK_GER06.java
-   ./material/code-generation-tests/OK_GER07.java
-   ./material/code-generation-tests/OK_GER08.java
-   ./material/code-generation-tests/OK_GER09.java
-   ./material/code-generation-tests/OK_GER10.java
-   ./material/code-generation-tests/OK_GER11.java
-   ./material/code-generation-tests/OK_GER12.java
-   ./material/code-generation-tests/OK_GER13.java
-   ./material/code-generation-tests/OK_GER14.java
-   ./material/code-generation-tests/OK_GER15.java
-   ./material/code-generation-tests/OK_GER16.java
-   ./material/code-generation-tests/OK_GER21.java
+   ./material/code-generation-tests/OK_GER10.c
+   ./material/code-generation-tests/OK_GER01.c
+   ./material/code-generation-tests/OK_GER02.c
+   ./material/code-generation-tests/OK_GER03.c
+   ./material/code-generation-tests/OK_GER04.c
+   ./material/code-generation-tests/OK_GER11.c
+   ./material/code-generation-tests/OK_GER12.c
+   ./material/code-generation-tests/OK_GER13.c
+   ./material/code-generation-tests/OK_GER14.c
+   ./material/code-generation-tests/OK_GER15.c
+   ./material/code-generation-tests/OK_GER16.c
+   ./material/code-generation-tests/OK_GER21.c
+   ./material/code-generation-tests/OK_GER06.c
+   ./material/code-generation-tests/OK_GER07.c
+   ./material/code-generation-tests/OK_GER08.c
+   ./material/code-generation-tests/OK_GER09.c
 
 List of files with Java or C code that compiles but was generated incorrectly: 
-   ./material/code-generation-tests/OK_GER05.java
-   ./material/code-generation-tests/OK_GER22.java
+   ./material/code-generation-tests/OK_GER05.c
+   ./material/code-generation-tests/OK_GER22.c
 
 The compiler could not create the following .java or .c files:

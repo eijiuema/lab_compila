@@ -1111,7 +1111,7 @@ public class Comp {
 				System.out.println("Executing the Java code of file '" + sourceFilename + "'");
 				Process p = null;
 				try {
-					p = Runtime.getRuntime().exec("./"+sourceWithoutExtension);
+					p = Runtime.getRuntime().exec("./" + sourceWithoutExtension);
 				}
 				catch ( final Exception e ) {
 					System.out.println("Error when calling the C compile file '"
