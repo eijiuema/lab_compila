@@ -24,9 +24,6 @@ public class Program {
 
 	public void genC(PW pw) {
 		
-		pw.println("#define FALTAIMPLEMENTAR 0");
-		pw.println();
-		
 		//Includes
 		pw.println("#include <string.h>");
 		pw.println("#include <malloc.h>");

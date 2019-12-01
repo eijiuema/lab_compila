@@ -76,7 +76,7 @@ void _Program_run( _class_Program *self) {
 }
 
 Func VT_class_Program[] = {
-    (void(*)( _class_Program)) _Program_run
+    (void (*) () ) _Program_run
 };
 
 _class_Program* new_Program(){

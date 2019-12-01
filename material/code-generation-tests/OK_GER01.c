@@ -110,7 +110,7 @@ void _A_m( _class_A *self) {
 }
 
 Func VT_class_A[] = {
-    (void(*)( _class_A)) _A_m
+    (void (*) () ) _A_m
 };
 
 _class_A* new_A(){
@@ -133,11 +133,11 @@ void _Program_run( _class_Program *self) {
     _class_A *_a;
     printf("%s\n", "7 0 1 2 3 4 5 6 7");
     _a = new_A();
-    ( (void(*)())_a->vt[0] )(_a);
+    ((void(*)( _class_A *))_a->vt[0] )(_a);
 }
 
 Func VT_class_Program[] = {
-    (void(*)( _class_Program)) _Program_run
+    (void (*) () ) _Program_run
 };
 
 _class_Program* new_Program(){

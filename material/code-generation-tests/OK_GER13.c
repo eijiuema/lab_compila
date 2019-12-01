@@ -80,9 +80,9 @@ void _A_print( _class_A *self) {
 }
 
 Func VT_class_A[] = {
-    (void(*)( _class_A, int )) _A_set,
-    (int(*)( _class_A)) _A_get,
-    (void(*)( _class_A)) _A_print
+    (void (*) () ) _A_set,
+    (void (*) () ) _A_get,
+    (void (*) () ) _A_print
 };
 
 _class_A* new_A(){
@@ -114,7 +114,7 @@ void _B_p2( _class_B *self) {
 void _B_set( _class_B *self, int _pn) {
     printf("%d", _pn);
     printf("%s", " ");
-    ( (void(*)())((_class_A*)self)->vt[0] )((_class_A*) self, _pn);
+    _A_set((_class_A*) self, _pn);
 }
 
 void _B_p1( _class_B *self) {
@@ -127,10 +127,10 @@ void _B_print( _class_B *self) {
 }
 
 Func VT_class_B[] = {
-    (void(*)( _class_B, int )) _B_set,
-    (int(*)( _class_A)) _A_get,
-    (void(*)( _class_B)) _B_print,
-    (void(*)( _class_B)) _B_p1
+    (void (*) () ) _B_set,
+    (void (*) () ) _A_get,
+    (void (*) () ) _B_print,
+    (void (*) () ) _B_p1
 };
 
 _class_B* new_B(){
@@ -161,7 +161,7 @@ void _Program_print( _class_Program *self) {
 }
 
 _class_B* _Program_m( _class_Program *self, _class_A *_a) {
-    ( (void(*)())_a->vt[0] )(_a, 0);
+    ((void(*)( _class_A *, int ))_a->vt[0] )(_a, 0);
     return (_class_B* ) new_B();
 }
 
@@ -180,14 +180,14 @@ void _Program_run( _class_Program *self) {
     _a = new_A();
     _b = new_B();
     _a = (_class_A*) _b;
-    ( (void(*)())_a->vt[0] )(_a, 0);
-    _a = (_class_A*) ( (_class_B*(*)())_Program_m)(self, _a);
-    _b = ( (_class_B*(*)())_Program_m)(self, _b);
-    ( (void(*)())_b->vt[4] )(_b);
-    _a = ( (_class_A*(*)())_Program_p)(self, 0);
-    ( (void(*)())_a->vt[2] )(_a);
-    _a = ( (_class_A*(*)())_Program_p)(self, 1);
-    ( (void(*)())_a->vt[2] )(_a);
+    ((void(*)( _class_A *, int ))_a->vt[0] )(_a, 0);
+    _a = (_class_A*) _Program_m((void*) self, _a);
+    _b = _Program_m((void*) self, _b);
+    ((void(*)( _class_B *))_b->vt[3] )(_b);
+    _a = _Program_p((void*) self, 0);
+    ((void(*)( _class_A *))_a->vt[2] )(_a);
+    _a = _Program_p((void*) self, 1);
+    ((void(*)( _class_A *))_a->vt[2] )(_a);
     _a = NULL;
     _b = NULL;
     _a2 = new_A();
@@ -204,14 +204,14 @@ void _Program_run( _class_Program *self) {
         printf("%s", " ");
     }
     self->_class_Program_program = new_Program();
-    ( (void(*)())self->_class_Program_program->vt[0] )(self->_class_Program_program);
+    ( (void(*)( _class_Program *))self->_class_Program_program->vt[0] )(self->_class_Program_program);
 }
 
 Func VT_class_Program[] = {
-    (void(*)( _class_Program)) _Program_print,
-    (_class_B(*)( _class_Program, _class_A *)) _Program_m,
-    (_class_A(*)( _class_Program, int *)) _Program_p,
-    (void(*)( _class_Program)) _Program_run
+    (void (*) () ) _Program_print,
+    (void (*) () ) _Program_m,
+    (void (*) () ) _Program_p,
+    (void (*) () ) _Program_run
 };
 
 _class_Program* new_Program(){

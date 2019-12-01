@@ -52,7 +52,6 @@ public class PrimaryExprSelfMethod extends PrimaryExpr {
 
         } else {
             // Acessando o m�todo privado estaticamente
-            pw.print("_" + self.getName());
             pw.print(method.getCName());
         }
 

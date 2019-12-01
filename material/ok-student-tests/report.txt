@@ -1,0 +1,89 @@
+Relat�rio do Compilador
+
+Resumo
+_________________________________________________________________________
+MI:  0             I: 0              PI: 0             Exc: 0
+ SSE: 0/27/0%      
+SwithE: 1
+
+MI = muito importante, I = importante, PI = pouco importante, Exc = exce��es
+Dev = deveria ter sinalizado, LE = sinalizou linha errada, SSE = sinalizado sem erro
+ SwithE = number of generated files with compilation errors
+_________________________________________________________________________
+
+N�mero de testes 'Muito importantes' em que o compilador falhou: 0
+N�mero de testes 'Importantes' em que o compilador falhou: 0
+N�mero de testes 'Pouco importantes' em que o compilador falhou: 0
+
+O compilador obteve sucesso em testar alguns aspectos (constru��es) de Cianeto. A lista abaixo consiste de entradas da forma 
+    aspecto
+        listas de nomes de arquivos
+Os nomes de arquivos listados s�o aqueles que testam 'aspecto' e nos quais o compilador obteve sucesso e gerou c�digo correto (se op��o -genjava ou -genc foi usada).
+Os testes s�o categorizados por import�ncia: 'Muito importante', 'Importante', 'pouco importante'
+
+Testes 'Muito importantes' em que o compilador acertou:
+    typeErrorEqualEqualNotEqual
+        OK_SEM03.ci
+
+    nilAssign
+        OK_SEM14.ci
+
+    supertypeAssignSelf
+        OK_SEM15.ci
+
+    nilEqualEqualNotEqual
+        OK_SEM14.ci
+
+
+Testes 'pouco importantes' em que o compilador acertou
+    assert
+        OK_SEM17.ci
+
+    arithmeticOperators
+        OK_MATH.ci
+
+    if
+        OK_QUEUE.ci
+
+
+_________________________________________________________________________
+
+0 erros foram sinalizados em 27 arquivos sem erro (0%)
+_________________________________________________________________________
+O compilador n�o sinalizou nenhum erro que n�o deveria ter sinalizado
+Para os casos de teste que voc� utilizou, o compilador est� correto
+
+List of Java or C files with compilation errors: 
+   ./material/ok-student-tests/OK_SIN11.java
+
+List of files with correct Java or C code: 
+   ./material/ok-student-tests/OK_SIN03.java
+   ./material/ok-student-tests/OK_SIN04.java
+   ./material/ok-student-tests/OK_LEX10.java
+   ./material/ok-student-tests/OK_SEM03.java
+   ./material/ok-student-tests/OK_LEX03.java
+   ./material/ok-student-tests/OK_LEX06.java
+   ./material/ok-student-tests/OK_LEX08.java
+   ./material/ok-student-tests/OK_SIN14.java
+
+List of files with Java or C code that compiles but was generated incorrectly: 
+   ./material/ok-student-tests/OK_CALC.java
+   ./material/ok-student-tests/OK_FACT.java
+   ./material/ok-student-tests/OK_FIB.java
+   ./material/ok-student-tests/OK_FIELDDEC.java
+   ./material/ok-student-tests/OK_SEM15.java
+   ./material/ok-student-tests/OK_SEM17.java
+   ./material/ok-student-tests/OK_SIN02.java
+   ./material/ok-student-tests/OK_MATH.java
+   ./material/ok-student-tests/OK_QUEUE.java
+   ./material/ok-student-tests/OK_LEX02.java
+   ./material/ok-student-tests/OK_LEX04.java
+   ./material/ok-student-tests/OK_LEX05.java
+   ./material/ok-student-tests/OK_SEM14.java
+   ./material/ok-student-tests/OK_SIN08.java
+   ./material/ok-student-tests/OK_SIN09.java
+   ./material/ok-student-tests/OK_SIN10.java
+   ./material/ok-student-tests/OK_SIN12.java
+   ./material/ok-student-tests/OK_SIN13.java
+
+The compiler could not create the following .java or .c files:

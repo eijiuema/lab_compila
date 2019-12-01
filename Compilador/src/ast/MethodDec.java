@@ -29,7 +29,7 @@ public class MethodDec extends Member {
     }
 
     public String getCName() {
-        return this.id.getCName();
+        return "_" + this.cl.getName() + this.id.getCName();
     }
 
     public Type getType() {
@@ -110,7 +110,7 @@ public class MethodDec extends Member {
         pw.print("(");
         for (ParamDec paramDec : this.formalParamDec) {
             paramDec.genJava(pw);
-            if (!paramDec.equals(formalParamDec.get(formalParamDec.size() - 1))) {
+            if (!(paramDec == formalParamDec.get(formalParamDec.size() - 1))) {
                 pw.print(", ");
             }
         }

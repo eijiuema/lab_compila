@@ -60,10 +60,8 @@ int _A_get( _class_A *self) {
 }
 
 Func VT_class_A[] = {
-    //_A_set
-(void(*)( _class_A, int )) _A_set,
-    //_A_get
-(int(*)( _class_A)) _A_get
+    (void (*) () ) _A_set,
+    (void (*) () ) _A_get
 };
 
 _class_A* new_A(){
@@ -94,7 +92,7 @@ void _Program_set( _class_Program *self, _class_A *_a) {
 }
 
 void _Program_print( _class_Program *self) {
-    printf("%d", ( (int(*)())self->_class_Program_a->vt[1] )(self->_class_Program_a));
+    printf("%d", ( (int(*)( _class_A *))self->_class_Program_a->vt[1] )(self->_class_Program_a));
 }
 
 _class_A* _Program_get( _class_Program *self) {
@@ -107,12 +105,9 @@ void _Program_run( _class_Program *self) {
 }
 
 Func VT_class_Program[] = {
-    //_Program_print
-(void(*)( _class_Program)) _Program_print,
-    //_Program_get
-(_class_A(*)( _class_Program)) _Program_get,
-    //_Program_run
-(void(*)( _class_Program)) _Program_run
+    (void (*) () ) _Program_print,
+    (void (*) () ) _Program_get,
+    (void (*) () ) _Program_run
 };
 
 _class_Program* new_Program(){

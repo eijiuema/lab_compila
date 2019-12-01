@@ -85,12 +85,9 @@ void _A_m3( _class_A *self, int _n, int _p, char * _q, int _r, boolean _falseBoo
 }
 
 Func VT_class_A[] = {
-    //_A_m1
-(void(*)( _class_A, int )) _A_m1,
-    //_A_m2
-(void(*)( _class_A, int )) _A_m2,
-    //_A_m3
-(void(*)( _class_A, int , int , char * , int , boolean )) _A_m3
+    (void (*) () ) _A_m1,
+    (void (*) () ) _A_m2,
+    (void (*) () ) _A_m3
 };
 
 _class_A* new_A(){
@@ -113,14 +110,13 @@ void _Program_run( _class_Program *self) {
     _class_A *_a;
     printf("%s\n", "1 1 2 2 3 3 4 5 6 7");
     _a = new_A();
-    ( (void(*)())_a->vt[0] )(_a, 1);
-    ( (void(*)())_a->vt[1] )(_a, 2);
-    ( (void(*)())_a->vt[2] )(_a, 3, 4, "5", 6, false);
+    ((void(*)( _class_A *, int ))_a->vt[0] )(_a, 1);
+    ((void(*)( _class_A *, int ))_a->vt[1] )(_a, 2);
+    ((void(*)( _class_A *, int , int , char * , int , boolean ))_a->vt[2] )(_a, 3, 4, "5", 6, false);
 }
 
 Func VT_class_Program[] = {
-    //_Program_run
-(void(*)( _class_Program)) _Program_run
+    (void (*) () ) _Program_run
 };
 
 _class_Program* new_Program(){
