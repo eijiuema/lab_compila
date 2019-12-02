@@ -114,7 +114,6 @@ public class MethodList {
                 
                 if(superclass != null){
                     idx += superclass.publicInheritedMethodsSize();
-                    //System.out.println("superclass:" + superclass.getCname() + " idx:" + idx);
                 }
                 return idx;
             }
@@ -124,7 +123,6 @@ public class MethodList {
         //Se n�o achou, procure na superclasse
         if(superclass != null)
             return superclass.getPublicMethodIdx(method, exprList);
-        
         //N�o existe mais onde procurar
         return -1;
     }

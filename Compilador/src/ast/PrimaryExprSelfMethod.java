@@ -28,7 +28,7 @@ public class PrimaryExprSelfMethod extends PrimaryExpr {
     }
 
     public void genC(PW pw) {
-
+        
         if (methodIdx != -1) {
             // ( (int (*)(_class_self *)) self->vt[0] )(self, ...);
             // M�todo

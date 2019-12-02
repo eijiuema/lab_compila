@@ -1141,7 +1141,7 @@ public class Compiler {
 								+ " with the specified params");
 					}
 					MethodDec md = self.getMethod(methodId.getName(), exprList);
-					primaryExpr = new PrimaryExprSelfMethod(self, md, exprList, self.getPublicMethodIdx(methodId.getName()) );
+					primaryExpr = new PrimaryExprSelfMethod(self, md, exprList, self.getPublicMethodIdx(methodId.getName(),exprList) );
 				} else {
 					error("':' was expected");
 				}
